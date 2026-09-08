@@ -147,7 +147,10 @@ protobuf/covesa/vss/annotations/v1/        the unit and provenance vocabulary
 protobuf/covesa/vss/interior/seat/v1/      Seat, addressable per instance
 protobuf/covesa/vss/motion/chassis/v1/     Chassis, a singleton per vehicle
 protobuf/covesa/vdm/charging_session/v1/   the cross-domain resource
-sync/                                      the generator, and the revision pin
+sync/cmd/sync/                             regenerates the schema
+sync/cmd/docs/                             regenerates this reference
+sync/internal/                             the generator, one package per stage
+sync/spec.yaml                             the pinned specification revision
 buf/<language>.yaml                        one template per language
 ```
 
@@ -489,12 +492,12 @@ flowchart LR
 
 | Change | Where it goes |
 |---|---|
-| a field name a linter rejects | `fieldRenames` in `sync/renames.go` |
-| a message name a linter rejects | `typeRenames`, same file |
-| a plural English gets wrong | `irregularPlurals` in `sync/naming.go` |
-| which area a branch belongs to | `domains` in `sync/domains.go` |
-| an enum better modelled as a scalar | `scalarEnums` in `sync/renames.go` |
-| a value type shared across packages | `sharedValueTypes` in `sync/domains.go` |
+| a field name a linter rejects | `FieldRenames` in `sync/internal/catalog` |
+| a message name a linter rejects | `TypeRenames`, same package |
+| a plural English gets wrong | `irregularPlurals` in `sync/internal/naming` |
+| which functional area a branch belongs to | `domains` in `sync/internal/model` |
+| an enum better modelled as a scalar | `ScalarEnums` in `sync/internal/catalog` |
+| a value type shared across packages | `sharedValueTypes` in `sync/internal/model` |
 | which specification revision to read | `sync/spec.yaml`, then `just sync` |
 
 ## The gates
@@ -550,6 +553,8 @@ flowchart TD
 ```sh
 just              # list every recipe
 just sync         # regenerate protobuf/ from the pinned spec revision
+just docs         # regenerate the Markdown reference beside the protos
+just test         # build, vet and test the generator
 just spec         # check the pin against the vdm checkout
 just lint         # buf format, buf lint, buf build, api-linter
 just schema       # emit .fbs and .capnp, then compile both
@@ -567,6 +572,7 @@ additionally need `flatc`, `capnp` and
 - [`CLAUDE.md`](CLAUDE.md) — the working rules, all of them hard
 - [`docs/conventions.md`](docs/conventions.md) — what goes inside a file, and the full rename catalogue
 - [`docs/decisions.md`](docs/decisions.md) — what was deliberately not done
+- [`docs/generator.md`](docs/generator.md) — how `sync/` is laid out, and why
 - [`docs/spec.md`](docs/spec.md) — which specification revision, and how to bump it
 - [`docs/references.md`](docs/references.md) — a link-checked index
 

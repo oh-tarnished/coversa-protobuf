@@ -31,6 +31,10 @@ design, and every rule in each selected category is enforced.
 
 ## 2. Nothing under `protobuf/` is written by hand
 
+Both the `.proto` files and the `README.md` beside them are generated -- the
+schema by `sync`, the reference by `docs`, from the same model rather than by
+parsing the emitted protos back in.
+
 Every `.proto` in this repository is emitted by `sync` from the GraphQL SDL at
 the revision pinned in `sync/spec.yaml`. Every one carries a `DO NOT EDIT`
 banner naming that revision. Editing
@@ -41,12 +45,19 @@ A fix belongs in the generator, and usually in a named table there:
 
 | Change | Where |
 |---|---|
-| a field name a linter rejects | `fieldRenames` in `sync/renames.go` |
-| a message name a linter rejects | `typeRenames`, same file |
-| a plural English gets wrong | `irregularPlurals` in `naming.go` |
-| which functional area a branch belongs to | `domains` in `model.go` |
-| an enum better modelled as a scalar | `scalarEnums` in `types.go` |
-| a value type shared across packages | `sharedValueTypes` in `model.go` |
+| a field name a linter rejects | `FieldRenames` in `sync/internal/catalog` |
+| a message name a linter rejects | `TypeRenames`, same package |
+| a plural English gets wrong | `irregularPlurals` in `sync/internal/naming` |
+| which functional area a branch belongs to | `domains` in `sync/internal/model` |
+| an enum better modelled as a scalar | `ScalarEnums` in `sync/internal/catalog` |
+| a value type shared across packages | `sharedValueTypes` in `sync/internal/model` |
+| which specification revision to read | `sync/spec.yaml`, then `just sync` |
+
+How the generator itself is laid out -- one package per stage, the 200-line
+cap, and why there is a `go.work` -- is in `docs/generator.md`.
+
+@docs/generator.md
+
 
 This replaces protobuf-rfc's rule 2, the 250-line cap. That cap asks a file
 to be *split*, and the remedy is unavailable here twice over: protobuf cannot
