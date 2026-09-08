@@ -1,0 +1,38 @@
+name: Breaking
+
+# Compares the schema against the pull request's base commit.
+#
+# Pull requests only. On a push to main there is nothing meaningful to compare
+# against: the BSR module may not exist yet, and comparing main to itself is
+# vacuous.
+#
+# A specification bump is exactly when this fires, and a failure here is not
+# automatically wrong -- it is the signal that docs/spec.md needs a history
+# entry describing what consumers must react to.
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  Breaking:
+    name: Breaking Change
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Buf
+        uses: bufbuild/buf-action@v1
+        with:
+          setup_only: true
+
+      # Against the local checkout by commit SHA. Cloning the remote over
+      # https needs credentials the job does not have on a private repository,
+      # and a SHA resolves where a branch name may never have been fetched.
+      - name: Compare Against Base Commit
+        run: buf breaking --against ".git#ref=${{ github.event.pull_request.base.sha }}"

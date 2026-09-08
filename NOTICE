@@ -1,0 +1,9 @@
+vdm-protobuf
+Copyright 2026 The Protobuf Project authors.
+
+This product includes software developed at The Protobuf Project.
+
+The schemas in protobuf/ are generated from the COVESA Vehicle Data Model
+(https://github.com/COVESA/vdm), which incorporates the COVESA Vehicle Signal
+Specification (https://github.com/COVESA/vehicle_signal_specification). Those
+specifications are the property of COVESA and are subject to their own terms.

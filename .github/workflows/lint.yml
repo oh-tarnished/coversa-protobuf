@@ -1,0 +1,106 @@
+name: Lint
+
+# Everything that reads the schema without building anything from it: the
+# spec pin, the two linters, and the house rules. Split from the other
+# workflows so a formatting slip reports as a formatting failure rather than
+# somewhere inside a language matrix.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  Lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+
+      - name: Setup Buf
+        uses: bufbuild/buf-action@v1
+        with:
+          setup_only: true
+
+      # Every generated banner claims a spec revision. If the checkout has
+      # moved and the pin has not, all 276 files name a revision they were not
+      # generated from -- which no linter and no compiler can see is false.
+      - name: Check Spec Pin
+        run: ./scripts/check-spec.sh
+
+      # Formatting is a gate, not a convenience: without it whichever editor
+      # last opened a file decides how it wraps, and patches break underneath
+      # whoever edits next.
+      - name: Check Formatting
+        run: buf format --diff --exit-code
+
+      - name: Lint Protos
+        run: buf lint
+
+      - name: Build Descriptor Set
+        run: buf build
+
+      - name: Check Go Formatting
+        run: |
+          test -z "$(gofmt -l sync)" || { gofmt -l sync; exit 1; }
+
+      # Resolves buf.yaml deps itself, so googleapis and protovalidate are
+      # available without a hand-built descriptor set. ignore-comment-disables
+      # enforces CLAUDE.md rule 1: no rule may be disabled, including by an
+      # inline comment inside a proto.
+      - name: Lint API Design
+        uses: the-protobuf-project/setup-google-api-linter@v1.0.0
+        with:
+          paths: protobuf/**/*.proto
+          buf: true
+          ignore-comment-disables: true
+          output-format: github
+          fail-on-error: true
+
+      # Apache-2.0 requires no per-file notice, but a file that quietly loses
+      # one is how a repository ends up ambiguously licensed.
+      - name: Check License Headers
+        run: |
+          missing=0
+          while IFS= read -r file; do
+            if ! head -3 "$file" | grep -q 'SPDX-License-Identifier: Apache-2.0'; then
+              echo "::error file=$file::missing SPDX-License-Identifier header"
+              missing=1
+            fi
+          done < <(find protobuf sync -name '*.proto' -o -name '*.go')
+          [ "$missing" -eq 0 ] || { echo "Add the two-line Apache-2.0 header."; exit 1; }
+          echo "All files carry an SPDX header."
+
+      # The 250-line cap, on files a person writes.
+      #
+      # Two exemptions, both because the cap's remedy is to *split* and
+      # splitting is unavailable rather than merely inconvenient: generated
+      # protos, because protobuf cannot continue a message across files; and
+      # README.md, whose length is diagrams that belong where a reader starts.
+      # See CLAUDE.md rule 2.
+      - name: Check File Length Cap
+        run: |
+          over=0
+          while IFS= read -r file; do
+            lines=$(wc -l <"$file")
+            if [ "$lines" -gt 250 ]; then
+              echo "::error file=$file::$lines lines, over the 250-line cap"
+              over=1
+            fi
+          done < <(find . -path ./gen -prune -o -path ./build -prune \
+                     -o -path ./schema -prune -o -path ./vdm -prune -o -path ./.git -prune \
+                     -o -name 'README.md' -prune \
+                     -o \( -name '*.md' -o -name '*.go' \) -print)
+          [ "$over" -eq 0 ] || { echo "Split the files above; do not compress them."; exit 1; }
+          echo "All hand-written files within the cap."

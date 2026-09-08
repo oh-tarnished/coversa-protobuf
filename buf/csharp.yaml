@@ -1,0 +1,33 @@
+# C#, with gRPC service stubs.
+#
+# `base_namespace` is not optional here. protoc-gen-csharp names its output
+# after the .proto file rather than the package, so the 46 `messages.proto`
+# files in this schema would all be written as `Messages.cs` into one flat
+# directory and buf rejects the second one. Setting it makes the generator
+# mirror the namespace as directories, which is what keeps them apart. Empty
+# means "strip no prefix" -- the full namespace becomes the path.
+version: v2
+# No .proto here carries a `go_package`: the right value depends on where the
+# code lands, and api-linter requires java_package but not go_package, so rule
+# 1 forbids committing one to close the asymmetry. Managed mode supplies it,
+# and a consumer generating into their own tree overrides it the same way.
+managed:
+  enabled: true
+  disable:
+    - file_option: java_package
+    - file_option: java_outer_classname
+    - file_option: java_multiple_files
+    - file_option: go_package
+      module: buf.build/googleapis/googleapis
+    - file_option: go_package
+      module: buf.build/bufbuild/protovalidate
+  override:
+    - file_option: go_package_prefix
+      value: github.com/the-protobuf-project/vdm/gen/go
+plugins:
+  - remote: buf.build/protocolbuffers/csharp
+    out: gen/csharp
+    opt: base_namespace=
+  - remote: buf.build/grpc/csharp
+    out: gen/csharp
+    opt: base_namespace=

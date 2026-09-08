@@ -1,0 +1,11 @@
+# Generated language code. Nothing here is committed; CI regenerates it.
+gen/
+
+# Schema emitted by buffers, and the exported proto trees it compiles
+# against. The ordinal ledger buffers.lock is NOT ignored -- it is the record
+# that field slots have not moved, and it must be committed.
+schema/
+build/
+
+# Descriptor sets, built on demand by the lint and schema steps.
+*.binpb

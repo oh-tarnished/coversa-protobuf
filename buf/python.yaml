@@ -1,0 +1,29 @@
+# Python, with type stubs.
+#
+# Needs --include-imports, for a different reason than TypeScript: the
+# generated modules do `from buf.validate import validate_pb2`, and no PyPI
+# package exposes that path -- protovalidate vendors it privately under
+# protovalidate/_gen. The justfile passes the flag.
+version: v2
+# No .proto here carries a `go_package`: the right value depends on where the
+# code lands, and api-linter requires java_package but not go_package, so rule
+# 1 forbids committing one to close the asymmetry. Managed mode supplies it,
+# and a consumer generating into their own tree overrides it the same way.
+managed:
+  enabled: true
+  disable:
+    - file_option: java_package
+    - file_option: java_outer_classname
+    - file_option: java_multiple_files
+    - file_option: go_package
+      module: buf.build/googleapis/googleapis
+    - file_option: go_package
+      module: buf.build/bufbuild/protovalidate
+  override:
+    - file_option: go_package_prefix
+      value: github.com/the-protobuf-project/vdm/gen/go
+plugins:
+  - remote: buf.build/protocolbuffers/python
+    out: gen/python
+  - remote: buf.build/protocolbuffers/pyi
+    out: gen/python

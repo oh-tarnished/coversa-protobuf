@@ -1,0 +1,19 @@
+# The specification revision this schema is generated from.
+#
+# Dated rather than numbered, the way the Model Context Protocol versions its
+# specification. The upstream model publishes no release numbers -- COVESA's
+# vdm repository carries one placeholder tag and nothing else -- so a version
+# invented here would mean nothing to a reader. A date does: it is directly
+# comparable against the commit history at the source below, and it sorts.
+#
+# `commit` is the authority and `version` is the date of that commit. The
+# version is what every generated file's banner carries, because a date is
+# what a person can place; the commit is what `just spec` checks against the
+# working tree, so this file cannot quietly drift from what was actually read.
+#
+# Bumping it is a deliberate act: update the vdm checkout, run `just sync`,
+# and record what moved in docs/spec.md.
+version: 2026-07-24
+commit: 36bc93936eab097647b52eea377a3374bcf926f5
+source: https://github.com/COVESA/vdm
+path: vdm/spec

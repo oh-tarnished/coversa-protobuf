@@ -1,0 +1,28 @@
+# TypeScript, via protoc-gen-es.
+#
+# Needs --include-imports: protoc-gen-es emits a relative import for every
+# dependency, so a tree without google/type and buf/validate beside it does
+# not typecheck. The justfile passes the flag; `buf generate --template
+# buf/typescript.yaml` alone will produce a tree that fails tsc.
+version: v2
+# No .proto here carries a `go_package`: the right value depends on where the
+# code lands, and api-linter requires java_package but not go_package, so rule
+# 1 forbids committing one to close the asymmetry. Managed mode supplies it,
+# and a consumer generating into their own tree overrides it the same way.
+managed:
+  enabled: true
+  disable:
+    - file_option: java_package
+    - file_option: java_outer_classname
+    - file_option: java_multiple_files
+    - file_option: go_package
+      module: buf.build/googleapis/googleapis
+    - file_option: go_package
+      module: buf.build/bufbuild/protovalidate
+  override:
+    - file_option: go_package_prefix
+      value: github.com/the-protobuf-project/vdm/gen/go
+plugins:
+  - remote: buf.build/bufbuild/es
+    out: gen/typescript
+    opt: target=ts

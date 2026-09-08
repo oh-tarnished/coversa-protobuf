@@ -1,0 +1,9 @@
+# The ordinal ledger records which target slot every field was assigned. A
+# conflict in it means two branches each assigned a slot, and deciding which
+# wins is a compatibility decision -- so git must not guess by merging lines.
+buffers.lock -merge
+
+# Generated trees are excluded from language statistics and collapsed in
+# diffs. They are still reviewed; they are just not what the repository is.
+protobuf/** linguist-generated=true
+schema/** linguist-generated=true

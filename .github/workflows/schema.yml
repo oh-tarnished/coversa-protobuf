@@ -1,0 +1,69 @@
+name: Schema
+
+# The FlatBuffers and Cap'n Proto layers, and the ordinal ledger that keeps
+# their field slots stable.
+#
+# Its own workflow because it needs toolchains nothing else does -- flatc and
+# capnp -- and because what it catches is invisible to every protobuf tool: a
+# schema can be structurally perfect as protobuf and still fail to compile as
+# either target.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  Schema:
+    name: Serialization Schema
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+
+      - name: Setup Buf
+        uses: bufbuild/buf-action@v1
+        with:
+          setup_only: true
+
+      - name: Install Schema Compilers
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends flatbuffers-compiler capnproto
+          flatc --version
+          capnp --version
+
+      - name: Install buffers
+        run: go install github.com/the-protobuf-project/buffers/plugin/cmd/buffers@latest
+
+      - name: Emit FlatBuffers And Cap'n Proto
+        run: ./scripts/schema.sh
+
+      # The real gate. A dangling include and a declaration name the target
+      # reserves have both shipped past buf lint here; neither is visible
+      # until the target's own compiler reads the file.
+      - name: Compile Emitted Schema
+        run: ./scripts/compile-schema.sh
+
+      # A field's slot is a wire format, and the numbering schemes do not
+      # match protobuf's. A slot that moves is a silent data corruption that
+      # nothing else -- not protoc, not flatc, not capnp, not the consumer --
+      # reports.
+      - name: Verify Ordinal Ledger
+        run: |
+          git diff --exit-code -- buffers.lock || {
+            echo "::error::buffers.lock changed: a field's target slot moved."
+            echo "A field was probably removed without a 'reserved' in its place."
+            exit 1
+          }
+          echo "Every field slot is where the ledger says it is."
