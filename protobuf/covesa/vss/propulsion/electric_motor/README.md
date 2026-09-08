@@ -33,17 +33,17 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
 | `engine_code` | `string` | `OUTPUT_ONLY` | — | Engine code designation, as specified by vehicle manufacturer. |
-| `max_power` | `int32` | `OUTPUT_ONLY` | `KILOWATT` | Peak power, in kilowatts, that motor(s) can generate. |
-| `max_regen_power` | `int32` | `OUTPUT_ONLY` | `KILOWATT` | Peak regen/brake power, in kilowatts, that motor(s) can generate. |
-| `max_regen_torque` | `int32` | `OUTPUT_ONLY` | `NEWTON_METER` | Peak regen/brake torque, in newton meter, that the motor(s) can generate. |
-| `max_torque` | `int32` | `OUTPUT_ONLY` | `NEWTON_METER` | Peak power, in newton meter, that the motor(s) can generate. |
-| `power` | `int32` | `OUTPUT_ONLY` | `KILOWATT` | Current motor power output. Negative values indicate regen mode. |
-| `speed` | `double` | `OUTPUT_ONLY` | `REVOLUTIONS_PER_MINUTE` | Motor rotational speed measured as rotations per minute. Negative values indicate reverse driving mode. |
-| `temperature` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Motor temperature. |
+| `max_power` | `int32` | `OUTPUT_ONLY` | `kW` | Peak power, in kilowatts, that motor(s) can generate. |
+| `max_regen_power` | `int32` | `OUTPUT_ONLY` | `kW` | Peak regen/brake power, in kilowatts, that motor(s) can generate. |
+| `max_regen_torque` | `int32` | `OUTPUT_ONLY` | `Nm` | Peak regen/brake torque, in newton meter, that the motor(s) can generate. |
+| `max_torque` | `int32` | `OUTPUT_ONLY` | `Nm` | Peak power, in newton meter, that the motor(s) can generate. |
+| `power` | `int32` | `OUTPUT_ONLY` | `kW` | Current motor power output. Negative values indicate regen mode. |
+| `speed` | `double` | `OUTPUT_ONLY` | `rpm` | Motor rotational speed measured as rotations per minute. Negative values indicate reverse driving mode. |
+| `temperature` | `double` | `OUTPUT_ONLY` | `degC` | Motor temperature. |
 | `usage_duration` | `google.protobuf.Duration` | `OUTPUT_ONLY` | — | Accumulated time during engine lifetime when the vehicule state's is 'READY'. |
-| `torque` | `int32` | `OUTPUT_ONLY` | `NEWTON_METER` | Current motor torque. Negative values indicate regen mode. |
-| `engine_coolant` | `ElectricMotorEngineCoolant` | `OPTIONAL` | — | — |
-| `instance_tag` | `ElectricMotorInstanceTag` | `OPTIONAL` | — | — |
+| `torque` | `int32` | `OUTPUT_ONLY` | `Nm` | Current motor torque. Negative values indicate regen mode. |
+| `engine_coolant` | `ElectricMotorEngineCoolant` | `OPTIONAL` | — | Engine coolant. |
+| `instance_tag` | `ElectricMotorInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `ElectricMotorEngineCoolant`
 
@@ -51,39 +51,41 @@ Signals related to the engine coolant (if applicable).
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `capacity` | `double` | `OUTPUT_ONLY` | `LITER` | Engine coolant capacity in liters. |
-| `level` | `PowertrainElectricMotorEngineCoolantLevel` | `OUTPUT_ONLY` | — | Engine coolant level. |
-| `life_remaining` | `int32` | `OUTPUT_ONLY` | `SECOND` | Remaining engine coolant life in seconds. Negative values can be used to indicate that lifetime has been exceeded. |
-| `temperature` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Engine coolant temperature. |
+| `capacity` | `double` | `OUTPUT_ONLY` | `l` | Engine coolant capacity in liters. |
+| `level` | `Level` | `OUTPUT_ONLY` | — | Engine coolant level. |
+| `life_remaining` | `int32` | `OUTPUT_ONLY` | `s` | Remaining engine coolant life in seconds. Negative values can be used to indicate that lifetime has been exceeded. |
+| `temperature` | `double` | `OUTPUT_ONLY` | `degC` | Engine coolant temperature. |
 
 ### `ElectricMotorInstanceTag`
 
+ElectricMotorInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `ElectricMotorInstanceTagDimension1` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `PowertrainElectricMotorEngineCoolantLevel`
+### `Level`
 
 Allowed values for Vehicle.Powertrain.ElectricMotor.EngineCoolant.Level.
 
 | Value | Description |
 | --- | --- |
-| `CRITICALLY_LOW` | — |
-| `LOW` | — |
-| `NORMAL` | — |
+| `LEVEL_CRITICALLY_LOW` | Critically low. |
+| `LEVEL_LOW` | Low. |
+| `LEVEL_NORMAL` | Normal. |
 
-### `ElectricMotorInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `FRONT` | — |
-| `REAR` | — |
-| `FRONT_LEFT` | — |
-| `FRONT_RIGHT` | — |
-| `REAR_LEFT` | — |
-| `REAR_RIGHT` | — |
+| `DIMENSION1_FRONT` | Front. |
+| `DIMENSION1_REAR` | Rear. |
+| `DIMENSION1_FRONT_LEFT` | Front left. |
+| `DIMENSION1_FRONT_RIGHT` | Front right. |
+| `DIMENSION1_REAR_LEFT` | Rear left. |
+| `DIMENSION1_REAR_RIGHT` | Rear right. |
 

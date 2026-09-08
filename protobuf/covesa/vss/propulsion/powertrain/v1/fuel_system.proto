@@ -136,7 +136,7 @@ message FuelSystem {
   // Defines the hybrid type of the vehicle.
   //
   // VSS: Vehicle.Powertrain.FuelSystem.HybridType (attribute).
-  PowertrainFuelSystemHybridType hybrid_type = 8 [
+  FuelSystemHybridType hybrid_type = 8 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -241,7 +241,7 @@ message FuelSystem {
   // part relative position on that side.
   //
   // VSS: Vehicle.Powertrain.FuelSystem.RefuelPortPosition (attribute).
-  PowertrainFuelSystemRefuelPortPosition refuel_port_position = 16 [
+  FuelSystemRefuelPortPosition refuel_port_position = 16 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -273,7 +273,7 @@ message FuelSystem {
   // suffix for octane (RON) where relevant.
   //
   // VSS: Vehicle.Powertrain.FuelSystem.SupportedFuel (attribute).
-  PowertrainFuelSystemSupportedFuel supported_fuel = 18 [
+  FuelSystemSupportedFuel supported_fuel = 18 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -285,7 +285,7 @@ message FuelSystem {
   // High level information of fuel types supported
   //
   // VSS: Vehicle.Powertrain.FuelSystem.SupportedFuelTypes (attribute).
-  PowertrainFuelSystemSupportedFuelTypes supported_fuel_types = 19 [
+  FuelSystemSupportedFuelTypes supported_fuel_types = 19 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {

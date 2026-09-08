@@ -37,45 +37,45 @@ message AmbientLightInstanceTag {
 
   // Instance axis 1. VSS expands a branch across each axis in turn, so the
   // axes together name one instance.
-  AmbientLightInstanceTagDimension1 dimension1 = 1 [
+  Dimension1 dimension1 = 1 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true
   ];
 
   // Instance axis 2. VSS expands a branch across each axis in turn, so the
   // axes together name one instance.
-  AmbientLightInstanceTagDimension2 dimension2 = 2 [
+  Dimension2 dimension2 = 2 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true
   ];
 }
 // Dimensional enum for VSS instance dimension 1.
-enum AmbientLightInstanceTagDimension1 {
+enum Dimension1 {
   // Not specified.
-  AMBIENT_LIGHT_INSTANCE_TAG_DIMENSION1_UNSPECIFIED = 0;
+  DIMENSION1_UNSPECIFIED = 0;
 
   // Row1.
   //
   // The source model spells this "Row1".
-  AMBIENT_LIGHT_INSTANCE_TAG_DIMENSION1_ROW1 = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row1"}];
+  DIMENSION1_ROW1 = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row1"}];
 
   // Row2.
   //
   // The source model spells this "Row2".
-  AMBIENT_LIGHT_INSTANCE_TAG_DIMENSION1_ROW2 = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row2"}];
+  DIMENSION1_ROW2 = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row2"}];
 }
 // Dimensional enum for VSS instance dimension 2.
-enum AmbientLightInstanceTagDimension2 {
+enum Dimension2 {
   // Not specified.
-  AMBIENT_LIGHT_INSTANCE_TAG_DIMENSION2_UNSPECIFIED = 0;
+  DIMENSION2_UNSPECIFIED = 0;
 
   // Driver side.
   //
   // The source model spells this "DriverSide".
-  AMBIENT_LIGHT_INSTANCE_TAG_DIMENSION2_DRIVER_SIDE = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "DriverSide"}];
+  DIMENSION2_DRIVER_SIDE = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "DriverSide"}];
 
   // Passenger side.
   //
   // The source model spells this "PassengerSide".
-  AMBIENT_LIGHT_INSTANCE_TAG_DIMENSION2_PASSENGER_SIDE = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "PassengerSide"}];
+  DIMENSION2_PASSENGER_SIDE = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "PassengerSide"}];
 }

@@ -28,8 +28,8 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `current_current` | `double` | `OUTPUT_ONLY` | `AMPERE` | Current current flowing in/out of the low voltage battery. Positive = Current flowing in to battery, e.g. during charging or driving. Negative = Current flowing out of battery, e.g. when using the battery to start a combustion engine. |
-| `current_voltage` | `double` | `OUTPUT_ONLY` | `VOLT` | Current Voltage of the low voltage battery. |
-| `nominal_capacity` | `int32` | `OUTPUT_ONLY` | `AMPERE_HOURS` | Nominal capacity of the low voltage battery. |
-| `nominal_voltage` | `int32` | `OUTPUT_ONLY` | `VOLT` | Nominal Voltage of the battery. |
+| `current_current` | `double` | `OUTPUT_ONLY` | `A` | Current current flowing in/out of the low voltage battery. Positive = Current flowing in to battery, e.g. during charging or driving. Negative = Current flowing out of battery, e.g. when using the battery to start a combustion engine. |
+| `current_voltage` | `double` | `OUTPUT_ONLY` | `V` | Current Voltage of the low voltage battery. |
+| `nominal_capacity` | `int32` | `OUTPUT_ONLY` | `Ah` | Nominal capacity of the low voltage battery. |
+| `nominal_voltage` | `int32` | `OUTPUT_ONLY` | `V` | Nominal Voltage of the battery. |
 

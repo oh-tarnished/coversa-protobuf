@@ -32,28 +32,30 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `omega_lower` | `int32` | `OPTIONAL` | `RADIANS_PER_SECOND` | Lower wheel speed limit request controlled by friction brake. ISO 8855 wheel-spin velocity. |
-| `omega_upper` | `int32` | `OPTIONAL` | `RADIANS_PER_SECOND` | Upper wheel speed limit request controlled by friction brake. ISO 8855 wheel-spin velocity. |
-| `torque` | `int32` | `OUTPUT_ONLY` | `NEWTON_METER` | Estimated friction brake torque. Brake Torque < 0Nm. |
-| `torque_arbitrated` | `int32` | `OUTPUT_ONLY` | `NEWTON_METER` | Brake system internally calculated friction brake torque target. Brake Torque < 0Nm. |
-| `torque_friction_maximum` | `int32` | `OPTIONAL` | `NEWTON_METER` | Maximum wheel torque request for friction brake. Brake Torque < 0Nm. |
-| `torque_friction_minimum` | `int32` | `OPTIONAL` | `NEWTON_METER` | Minimum wheel torque request for friction brake. Brake Torque < 0Nm. |
-| `instance_tag` | `BrakeAxleWheelInstanceTag` | `OPTIONAL` | — | — |
+| `omega_lower` | `int32` | `OPTIONAL` | `rad/s` | Lower wheel speed limit request controlled by friction brake. ISO 8855 wheel-spin velocity. |
+| `omega_upper` | `int32` | `OPTIONAL` | `rad/s` | Upper wheel speed limit request controlled by friction brake. ISO 8855 wheel-spin velocity. |
+| `torque` | `int32` | `OUTPUT_ONLY` | `Nm` | Estimated friction brake torque. Brake Torque < 0Nm. |
+| `torque_arbitrated` | `int32` | `OUTPUT_ONLY` | `Nm` | Brake system internally calculated friction brake torque target. Brake Torque < 0Nm. |
+| `torque_friction_maximum` | `int32` | `OPTIONAL` | `Nm` | Maximum wheel torque request for friction brake. Brake Torque < 0Nm. |
+| `torque_friction_minimum` | `int32` | `OPTIONAL` | `Nm` | Minimum wheel torque request for friction brake. Brake Torque < 0Nm. |
+| `instance_tag` | `BrakeAxleWheelInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `BrakeAxleWheelInstanceTag`
 
+BrakeAxleWheelInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `BrakeAxleWheelInstanceTagDimension1` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `BrakeAxleWheelInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `LEFT` | — |
-| `RIGHT` | — |
+| `DIMENSION1_LEFT` | Left. |
+| `DIMENSION1_RIGHT` | Right. |
 

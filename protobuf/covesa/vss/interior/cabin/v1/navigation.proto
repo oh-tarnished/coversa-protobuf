@@ -36,7 +36,7 @@ message Navigation {
   // Navigation guidance state that was selected.
   //
   // VSS: Vehicle.Cabin.Infotainment.Navigation.GuidanceVoice (actuator).
-  CabinInfotainmentNavigationGuidanceVoice guidance_voice = 1 [
+  InfotainmentNavigationGuidanceVoice guidance_voice = 1 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -48,7 +48,7 @@ message Navigation {
   // Navigation mute state that was selected.
   //
   // VSS: Vehicle.Cabin.Infotainment.Navigation.Mute (actuator).
-  CabinInfotainmentNavigationMute mute = 2 [
+  InfotainmentNavigationMute mute = 2 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -100,32 +100,32 @@ message Navigation {
 // Allowed values for Vehicle.Cabin.Infotainment.Navigation.GuidanceVoice.
 //
 // VSS: Vehicle.Cabin.Infotainment.Navigation.GuidanceVoice.
-enum CabinInfotainmentNavigationGuidanceVoice {
+enum InfotainmentNavigationGuidanceVoice {
   // Not specified.
-  CABIN_INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_UNSPECIFIED = 0;
+  INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_UNSPECIFIED = 0;
 
   // Standard male.
-  CABIN_INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_STANDARD_MALE = 1;
+  INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_STANDARD_MALE = 1;
 
   // Standard female.
-  CABIN_INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_STANDARD_FEMALE = 2;
+  INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_STANDARD_FEMALE = 2;
 
   // Etc.
-  CABIN_INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_ETC = 3;
+  INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_ETC = 3;
 }
 // Allowed values for Vehicle.Cabin.Infotainment.Navigation.Mute.
 //
 // VSS: Vehicle.Cabin.Infotainment.Navigation.Mute.
-enum CabinInfotainmentNavigationMute {
+enum InfotainmentNavigationMute {
   // Not specified.
-  CABIN_INFOTAINMENT_NAVIGATION_MUTE_UNSPECIFIED = 0;
+  INFOTAINMENT_NAVIGATION_MUTE_UNSPECIFIED = 0;
 
   // Muted.
-  CABIN_INFOTAINMENT_NAVIGATION_MUTE_MUTED = 1;
+  INFOTAINMENT_NAVIGATION_MUTE_MUTED = 1;
 
   // Alert only.
-  CABIN_INFOTAINMENT_NAVIGATION_MUTE_ALERT_ONLY = 2;
+  INFOTAINMENT_NAVIGATION_MUTE_ALERT_ONLY = 2;
 
   // Unmuted.
-  CABIN_INFOTAINMENT_NAVIGATION_MUTE_UNMUTED = 3;
+  INFOTAINMENT_NAVIGATION_MUTE_UNMUTED = 3;
 }

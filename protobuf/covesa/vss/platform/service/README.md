@@ -28,7 +28,7 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `service_distance` | `double` | `OUTPUT_ONLY` | `KILOMETER` | Remaining distance to service (of any kind). Negative values indicate service overdue. |
+| `service_distance` | `double` | `OUTPUT_ONLY` | `km` | Remaining distance to service (of any kind). Negative values indicate service overdue. |
 | `is_service_due` | `bool` | `OUTPUT_ONLY` | — | Indicates if vehicle needs service (of any kind). True = Service needed now or in the near future. False = No known need for service. |
 | `service_duration` | `google.protobuf.Duration` | `OUTPUT_ONLY` | — | Remaining time to service (of any kind). Negative values indicate service overdue. |
 

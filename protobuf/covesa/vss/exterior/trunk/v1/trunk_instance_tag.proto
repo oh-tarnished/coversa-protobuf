@@ -36,23 +36,23 @@ message TrunkInstanceTag {
 
   // Instance axis 1. VSS expands a branch across each axis in turn, so the
   // axes together name one instance.
-  TrunkInstanceTagDimension1 dimension1 = 1 [
+  Dimension1 dimension1 = 1 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true
   ];
 }
 // Dimensional enum for VSS instance dimension 1.
-enum TrunkInstanceTagDimension1 {
+enum Dimension1 {
   // Not specified.
-  TRUNK_INSTANCE_TAG_DIMENSION1_UNSPECIFIED = 0;
+  DIMENSION1_UNSPECIFIED = 0;
 
   // Front.
   //
   // The source model spells this "Front".
-  TRUNK_INSTANCE_TAG_DIMENSION1_FRONT = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Front"}];
+  DIMENSION1_FRONT = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Front"}];
 
   // Rear.
   //
   // The source model spells this "Rear".
-  TRUNK_INSTANCE_TAG_DIMENSION1_REAR = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Rear"}];
+  DIMENSION1_REAR = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Rear"}];
 }

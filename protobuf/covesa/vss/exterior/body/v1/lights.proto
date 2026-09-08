@@ -52,7 +52,7 @@ message Lights {
   // Status of the vehicle main light switch.
   //
   // VSS: Vehicle.Body.Lights.LightSwitch (actuator).
-  BodyLightsLightSwitch light_switch = 2 [
+  LightSwitch light_switch = 2 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -130,22 +130,22 @@ message Lights {
 // Allowed values for Vehicle.Body.Lights.LightSwitch.
 //
 // VSS: Vehicle.Body.Lights.LightSwitch.
-enum BodyLightsLightSwitch {
+enum LightSwitch {
   // Not specified.
-  BODY_LIGHTS_LIGHT_SWITCH_UNSPECIFIED = 0;
+  LIGHT_SWITCH_UNSPECIFIED = 0;
 
   // Off.
-  BODY_LIGHTS_LIGHT_SWITCH_OFF = 1;
+  LIGHT_SWITCH_OFF = 1;
 
   // Position.
-  BODY_LIGHTS_LIGHT_SWITCH_POSITION = 2;
+  LIGHT_SWITCH_POSITION = 2;
 
   // Daytime running lights.
-  BODY_LIGHTS_LIGHT_SWITCH_DAYTIME_RUNNING_LIGHTS = 3;
+  LIGHT_SWITCH_DAYTIME_RUNNING_LIGHTS = 3;
 
   // Auto.
-  BODY_LIGHTS_LIGHT_SWITCH_AUTO = 4;
+  LIGHT_SWITCH_AUTO = 4;
 
   // Beam.
-  BODY_LIGHTS_LIGHT_SWITCH_BEAM = 5;
+  LIGHT_SWITCH_BEAM = 5;
 }

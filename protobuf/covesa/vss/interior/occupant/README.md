@@ -32,10 +32,10 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `head_position` | `HeadPosition` | `OPTIONAL` | — | — |
-| `identity` | `Identity` | `OPTIONAL` | — | — |
-| `mid_eye_gaze` | `MidEyeGaze` | `OPTIONAL` | — | — |
-| `instance_tag` | `OccupantInstanceTag` | `OPTIONAL` | — | — |
+| `head_position` | `HeadPosition` | `OPTIONAL` | — | Head position. |
+| `identity` | `Identity` | `OPTIONAL` | — | Identity. |
+| `mid_eye_gaze` | `MidEyeGaze` | `OPTIONAL` | — | Mid eye gaze. |
+| `instance_tag` | `OccupantInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `HeadPosition`
 
@@ -43,12 +43,12 @@ The current position of the driver head on vehicle axis according to ISO 23150:2
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `pitch` | `double` | `OUTPUT_ONLY` | `DEGREE` | Head pitch angle, measured as angle from vehicle sprung mass XY-plane as defined by ISO 23150:2023 to the head X-axis. 0 = Head in normal position. Positive values = Head leaning up. Negative values = Head leaning down. @range(min: -90, max: 90) |
-| `roll` | `double` | `OUTPUT_ONLY` | `DEGREE` | Head roll angle about the head X-axis (right-hand rule). 0 = Head in normal position. Positive values = Head leaning to the right. Negative values = Head leaning to the left. |
-| `x` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | Longitudinal position of head center measured as mid eye position on X-axis of the vehicle rear-axle coordinate system as defined by ISO 23150:2023 section 3.7.12 Mid eye position refers to the center of a line drawn between the center of the drivers eyes. Positive values = forward of (first) rear-axle. Negative values = backward of (first) rear-axle. |
-| `y` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | Lateral position of head center measured as mid eye position on X-axis of the vehicle rear-axle coordinate system as defined by ISO 23150:2023 section 3.7.12 Mid eye position refers to the center of a line drawn between the center of the drivers eyes. Positive values = left of rear-axle center. Negative values = right of rear-axle center. |
-| `yaw` | `double` | `OUTPUT_ONLY` | `DEGREE` | Head yaw angle, measured from the vehicle sprung mass X-axis as defined by ISO 23150:2023 to the head X-axis, around the vehicle Z-axis (right-hand rule). 0 = Head in normal position. Positive values = Head turned left. Negative values = Head turned right. @range(min: -180, max: 180) |
-| `z` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | Height position of head center measured as mid eye position on X-axis of the vehicle rear-axle coordinate system as defined by ISO 23150:2023 section 3.7.12 Mid eye position refers to the center of a line drawn between the center of the drivers eyes. Positive values = above center of rear-axle reference point. Negative values = below center of rear-axle reference point. |
+| `pitch` | `double` | `OUTPUT_ONLY` | `deg` | Head pitch angle, measured as angle from vehicle sprung mass XY-plane as defined by ISO 23150:2023 to the head X-axis. 0 = Head in normal position. Positive values = Head leaning up. Negative values = Head leaning down. @range(min: -90, max: 90) |
+| `roll` | `double` | `OUTPUT_ONLY` | `deg` | Head roll angle about the head X-axis (right-hand rule). 0 = Head in normal position. Positive values = Head leaning to the right. Negative values = Head leaning to the left. |
+| `x` | `int32` | `OUTPUT_ONLY` | `mm` | Longitudinal position of head center measured as mid eye position on X-axis of the vehicle rear-axle coordinate system as defined by ISO 23150:2023 section 3.7.12 Mid eye position refers to the center of a line drawn between the center of the drivers eyes. Positive values = forward of (first) rear-axle. Negative values = backward of (first) rear-axle. |
+| `y` | `int32` | `OUTPUT_ONLY` | `mm` | Lateral position of head center measured as mid eye position on X-axis of the vehicle rear-axle coordinate system as defined by ISO 23150:2023 section 3.7.12 Mid eye position refers to the center of a line drawn between the center of the drivers eyes. Positive values = left of rear-axle center. Negative values = right of rear-axle center. |
+| `yaw` | `double` | `OUTPUT_ONLY` | `deg` | Head yaw angle, measured from the vehicle sprung mass X-axis as defined by ISO 23150:2023 to the head X-axis, around the vehicle Z-axis (right-hand rule). 0 = Head in normal position. Positive values = Head turned left. Negative values = Head turned right. @range(min: -180, max: 180) |
+| `z` | `int32` | `OUTPUT_ONLY` | `mm` | Height position of head center measured as mid eye position on X-axis of the vehicle rear-axle coordinate system as defined by ISO 23150:2023 section 3.7.12 Mid eye position refers to the center of a line drawn between the center of the drivers eyes. Positive values = above center of rear-axle reference point. Negative values = below center of rear-axle reference point. |
 
 ### `Identity`
 
@@ -65,34 +65,36 @@ Direction from mid eye position to object driver is looking at.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `azimuth` | `double` | `OUTPUT_ONLY` | `DEGREE` | Mid eye azimuth gaze (right-hand rule) on vehicle sprung mass Z-axis as defined by ISO 23150:2023 0 = Driver looking forward. Positive values = Driver looking at something on the left side of driver. Negative values = Driver looking at something on the right side of driver. @range(min: -180, max: 180) |
-| `elevation` | `double` | `OUTPUT_ONLY` | `DEGREE` | Elevation to observed object measured as angle between vehicle sprung mass XY-plane as defined by ISO 23150:2023 at driver mid eye position and object. 0 = Driver looking at something at same height as mid eye position. Positive values = Driver looking at something above mid eye position. Negative values = Driver looking at something below mid eye position. |
+| `azimuth` | `double` | `OUTPUT_ONLY` | `deg` | Mid eye azimuth gaze (right-hand rule) on vehicle sprung mass Z-axis as defined by ISO 23150:2023 0 = Driver looking forward. Positive values = Driver looking at something on the left side of driver. Negative values = Driver looking at something on the right side of driver. @range(min: -180, max: 180) |
+| `elevation` | `double` | `OUTPUT_ONLY` | `deg` | Elevation to observed object measured as angle between vehicle sprung mass XY-plane as defined by ISO 23150:2023 at driver mid eye position and object. 0 = Driver looking at something at same height as mid eye position. Positive values = Driver looking at something above mid eye position. Negative values = Driver looking at something below mid eye position. |
 
 ### `OccupantInstanceTag`
 
+OccupantInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `OccupantInstanceTagDimension1` | `OPTIONAL` | — | — |
-| `dimension2` | `OccupantInstanceTagDimension2` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
+| `dimension2` | `Dimension2` | `OPTIONAL` | — | Instance axis 2. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `OccupantInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `ROW1` | — |
-| `ROW2` | — |
+| `DIMENSION1_ROW1` | Row1. |
+| `DIMENSION1_ROW2` | Row2. |
 
-### `OccupantInstanceTagDimension2`
+### `Dimension2`
 
 Dimensional enum for VSS instance dimension 2.
 
 | Value | Description |
 | --- | --- |
-| `DRIVER_SIDE` | — |
-| `MIDDLE` | — |
-| `PASSENGER_SIDE` | — |
+| `DIMENSION2_DRIVER_SIDE` | Driver side. |
+| `DIMENSION2_MIDDLE` | Middle. |
+| `DIMENSION2_PASSENGER_SIDE` | Passenger side. |
 

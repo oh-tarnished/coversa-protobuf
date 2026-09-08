@@ -18,79 +18,79 @@ option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.propulsi
 // Allowed values for Vehicle.Powertrain.Transmission.DriveType.
 //
 // VSS: Vehicle.Powertrain.Transmission.DriveType.
-enum PowertrainTransmissionDriveType {
+enum TransmissionDriveType {
   // Not specified.
-  POWERTRAIN_TRANSMISSION_DRIVE_TYPE_UNSPECIFIED = 0;
+  TRANSMISSION_DRIVE_TYPE_UNSPECIFIED = 0;
 
   // Unknown.
-  POWERTRAIN_TRANSMISSION_DRIVE_TYPE_UNKNOWN = 1;
+  TRANSMISSION_DRIVE_TYPE_UNKNOWN = 1;
 
   // Forward wheel drive.
-  POWERTRAIN_TRANSMISSION_DRIVE_TYPE_FORWARD_WHEEL_DRIVE = 2;
+  TRANSMISSION_DRIVE_TYPE_FORWARD_WHEEL_DRIVE = 2;
 
   // Rear wheel drive.
-  POWERTRAIN_TRANSMISSION_DRIVE_TYPE_REAR_WHEEL_DRIVE = 3;
+  TRANSMISSION_DRIVE_TYPE_REAR_WHEEL_DRIVE = 3;
 
   // All wheel drive.
-  POWERTRAIN_TRANSMISSION_DRIVE_TYPE_ALL_WHEEL_DRIVE = 4;
+  TRANSMISSION_DRIVE_TYPE_ALL_WHEEL_DRIVE = 4;
 }
 // Allowed values for Vehicle.Powertrain.Transmission.GearChangeMode.
 //
 // VSS: Vehicle.Powertrain.Transmission.GearChangeMode.
-enum PowertrainTransmissionGearChangeMode {
+enum TransmissionGearChangeMode {
   // Not specified.
-  POWERTRAIN_TRANSMISSION_GEAR_CHANGE_MODE_UNSPECIFIED = 0;
+  TRANSMISSION_GEAR_CHANGE_MODE_UNSPECIFIED = 0;
 
   // Manual.
-  POWERTRAIN_TRANSMISSION_GEAR_CHANGE_MODE_MANUAL = 1;
+  TRANSMISSION_GEAR_CHANGE_MODE_MANUAL = 1;
 
   // Automatic.
-  POWERTRAIN_TRANSMISSION_GEAR_CHANGE_MODE_AUTOMATIC = 2;
+  TRANSMISSION_GEAR_CHANGE_MODE_AUTOMATIC = 2;
 }
 // Allowed values for Vehicle.Powertrain.Transmission.PerformanceMode.
 //
 // VSS: Vehicle.Powertrain.Transmission.PerformanceMode.
-enum PowertrainTransmissionPerformanceMode {
+enum TransmissionPerformanceMode {
   // Not specified.
-  POWERTRAIN_TRANSMISSION_PERFORMANCE_MODE_UNSPECIFIED = 0;
+  TRANSMISSION_PERFORMANCE_MODE_UNSPECIFIED = 0;
 
   // Normal.
-  POWERTRAIN_TRANSMISSION_PERFORMANCE_MODE_NORMAL = 1;
+  TRANSMISSION_PERFORMANCE_MODE_NORMAL = 1;
 
   // Sport.
-  POWERTRAIN_TRANSMISSION_PERFORMANCE_MODE_SPORT = 2;
+  TRANSMISSION_PERFORMANCE_MODE_SPORT = 2;
 
   // Economy.
-  POWERTRAIN_TRANSMISSION_PERFORMANCE_MODE_ECONOMY = 3;
+  TRANSMISSION_PERFORMANCE_MODE_ECONOMY = 3;
 
   // Snow.
-  POWERTRAIN_TRANSMISSION_PERFORMANCE_MODE_SNOW = 4;
+  TRANSMISSION_PERFORMANCE_MODE_SNOW = 4;
 
   // Rain.
-  POWERTRAIN_TRANSMISSION_PERFORMANCE_MODE_RAIN = 5;
+  TRANSMISSION_PERFORMANCE_MODE_RAIN = 5;
 }
 // Allowed values for Vehicle.Powertrain.Transmission.Type.
 //
 // VSS: Vehicle.Powertrain.Transmission.Type.
-enum PowertrainTransmissionType {
+enum TransmissionType {
   // Not specified.
-  POWERTRAIN_TRANSMISSION_TYPE_UNSPECIFIED = 0;
+  TRANSMISSION_TYPE_UNSPECIFIED = 0;
 
   // Unknown.
-  POWERTRAIN_TRANSMISSION_TYPE_UNKNOWN = 1;
+  TRANSMISSION_TYPE_UNKNOWN = 1;
 
   // Sequential.
-  POWERTRAIN_TRANSMISSION_TYPE_SEQUENTIAL = 2;
+  TRANSMISSION_TYPE_SEQUENTIAL = 2;
 
   // H.
-  POWERTRAIN_TRANSMISSION_TYPE_H = 3;
+  TRANSMISSION_TYPE_H = 3;
 
   // Automatic.
-  POWERTRAIN_TRANSMISSION_TYPE_AUTOMATIC = 4;
+  TRANSMISSION_TYPE_AUTOMATIC = 4;
 
   // Dsg.
-  POWERTRAIN_TRANSMISSION_TYPE_DSG = 5;
+  TRANSMISSION_TYPE_DSG = 5;
 
   // Cvt.
-  POWERTRAIN_TRANSMISSION_TYPE_CVT = 6;
+  TRANSMISSION_TYPE_CVT = 6;
 }

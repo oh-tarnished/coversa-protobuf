@@ -37,50 +37,50 @@ message ObstacleDetectionInstanceTag {
 
   // Instance axis 1. VSS expands a branch across each axis in turn, so the
   // axes together name one instance.
-  ObstacleDetectionInstanceTagDimension1 dimension1 = 1 [
+  Dimension1 dimension1 = 1 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true
   ];
 
   // Instance axis 2. VSS expands a branch across each axis in turn, so the
   // axes together name one instance.
-  ObstacleDetectionInstanceTagDimension2 dimension2 = 2 [
+  Dimension2 dimension2 = 2 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true
   ];
 }
 // Dimensional enum for VSS instance dimension 1.
-enum ObstacleDetectionInstanceTagDimension1 {
+enum Dimension1 {
   // Not specified.
-  OBSTACLE_DETECTION_INSTANCE_TAG_DIMENSION1_UNSPECIFIED = 0;
+  DIMENSION1_UNSPECIFIED = 0;
 
   // Front.
   //
   // The source model spells this "Front".
-  OBSTACLE_DETECTION_INSTANCE_TAG_DIMENSION1_FRONT = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Front"}];
+  DIMENSION1_FRONT = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Front"}];
 
   // Rear.
   //
   // The source model spells this "Rear".
-  OBSTACLE_DETECTION_INSTANCE_TAG_DIMENSION1_REAR = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Rear"}];
+  DIMENSION1_REAR = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Rear"}];
 }
 // Dimensional enum for VSS instance dimension 2.
-enum ObstacleDetectionInstanceTagDimension2 {
+enum Dimension2 {
   // Not specified.
-  OBSTACLE_DETECTION_INSTANCE_TAG_DIMENSION2_UNSPECIFIED = 0;
+  DIMENSION2_UNSPECIFIED = 0;
 
   // Left.
   //
   // The source model spells this "Left".
-  OBSTACLE_DETECTION_INSTANCE_TAG_DIMENSION2_LEFT = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Left"}];
+  DIMENSION2_LEFT = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Left"}];
 
   // Center.
   //
   // The source model spells this "Center".
-  OBSTACLE_DETECTION_INSTANCE_TAG_DIMENSION2_CENTER = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Center"}];
+  DIMENSION2_CENTER = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Center"}];
 
   // Right.
   //
   // The source model spells this "Right".
-  OBSTACLE_DETECTION_INSTANCE_TAG_DIMENSION2_RIGHT = 3 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Right"}];
+  DIMENSION2_RIGHT = 3 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Right"}];
 }

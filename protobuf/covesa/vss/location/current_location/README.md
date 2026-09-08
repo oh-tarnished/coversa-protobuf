@@ -28,14 +28,14 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `altitude` | `double` | `OUTPUT_ONLY` | `METER` | Current altitude relative to WGS 84 reference ellipsoid, as measured at the position of GNSS receiver antenna. |
-| `heading` | `double` | `OUTPUT_ONLY` | `DEGREE` | Current heading relative to geographic north. 0 = North, 90 = East, 180 = South, 270 = West. |
-| `horizontal_accuracy` | `double` | `OUTPUT_ONLY` | `METER` | Accuracy of the latitude and longitude coordinates. |
-| `latitude` | `double` | `OUTPUT_ONLY` | `DEGREE` | Current latitude of vehicle in WGS 84 geodetic coordinates, as measured at the position of GNSS receiver antenna. |
-| `longitude` | `double` | `OUTPUT_ONLY` | `DEGREE` | Current longitude of vehicle in WGS 84 geodetic coordinates, as measured at the position of GNSS receiver antenna. |
+| `altitude` | `double` | `OUTPUT_ONLY` | `m` | Current altitude relative to WGS 84 reference ellipsoid, as measured at the position of GNSS receiver antenna. |
+| `heading` | `double` | `OUTPUT_ONLY` | `deg` | Current heading relative to geographic north. 0 = North, 90 = East, 180 = South, 270 = West. |
+| `horizontal_accuracy` | `double` | `OUTPUT_ONLY` | `m` | Accuracy of the latitude and longitude coordinates. |
+| `latitude` | `double` | `OUTPUT_ONLY` | `deg` | Current latitude of vehicle in WGS 84 geodetic coordinates, as measured at the position of GNSS receiver antenna. |
+| `longitude` | `double` | `OUTPUT_ONLY` | `deg` | Current longitude of vehicle in WGS 84 geodetic coordinates, as measured at the position of GNSS receiver antenna. |
 | `observation_time` | `google.protobuf.Timestamp` | `OUTPUT_ONLY` | — | Timestamp from GNSS system for current location, formatted according to ISO 8601 with UTC time zone. |
-| `vertical_accuracy` | `double` | `OUTPUT_ONLY` | `METER` | Accuracy of altitude. |
-| `gnssreceiver` | `GnssReceiver` | `OPTIONAL` | — | — |
+| `vertical_accuracy` | `double` | `OUTPUT_ONLY` | `m` | Accuracy of altitude. |
+| `gnssreceiver` | `GnssReceiver` | `OPTIONAL` | — | Gnssreceiver. |
 
 ### `GnssReceiver`
 
@@ -43,8 +43,8 @@ Information on the GNSS receiver used for determining current location.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `fix_type` | `CurrentLocationGnSsReceiverFixType` | `OUTPUT_ONLY` | — | Fix status of GNSS receiver. |
-| `mounting_position` | `MountingPosition` | `OPTIONAL` | — | — |
+| `fix_type` | `FixType` | `OUTPUT_ONLY` | — | Fix status of GNSS receiver. |
+| `mounting_position` | `MountingPosition` | `OPTIONAL` | — | Mounting position. |
 
 ### `MountingPosition`
 
@@ -52,25 +52,25 @@ Mounting position of GNSS receiver antenna relative to vehicle coordinate system
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `x` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | Mounting position of GNSS receiver antenna relative to vehicle coordinate system. Axis definitions according to ISO 8855. Origin at center of (first) rear axle. Positive values = forward of rear axle. Negative values = backward of rear axle. |
-| `y` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | Mounting position of GNSS receiver antenna relative to vehicle coordinate system. Axis definitions according to ISO 8855. Origin at center of (first) rear axle. Positive values = left of origin. Negative values = right of origin. Left/Right is as seen from driver perspective, i.e. by a person looking forward. |
-| `z` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | Mounting position of GNSS receiver on Z-axis. Axis definitions according to ISO 8855. Origin at center of (first) rear axle. Positive values = above center of rear axle. Negative values = below center of rear axle. |
+| `x` | `int32` | `OUTPUT_ONLY` | `mm` | Mounting position of GNSS receiver antenna relative to vehicle coordinate system. Axis definitions according to ISO 8855. Origin at center of (first) rear axle. Positive values = forward of rear axle. Negative values = backward of rear axle. |
+| `y` | `int32` | `OUTPUT_ONLY` | `mm` | Mounting position of GNSS receiver antenna relative to vehicle coordinate system. Axis definitions according to ISO 8855. Origin at center of (first) rear axle. Positive values = left of origin. Negative values = right of origin. Left/Right is as seen from driver perspective, i.e. by a person looking forward. |
+| `z` | `int32` | `OUTPUT_ONLY` | `mm` | Mounting position of GNSS receiver on Z-axis. Axis definitions according to ISO 8855. Origin at center of (first) rear axle. Positive values = above center of rear axle. Negative values = below center of rear axle. |
 
 ## Enums
 
-### `CurrentLocationGnSsReceiverFixType`
+### `FixType`
 
 Allowed values for Vehicle.CurrentLocation.GNSSReceiver.FixType.
 
 | Value | Description |
 | --- | --- |
-| `NONE` | — |
-| `TWO_D` | — |
-| `TWO_D_SATELLITE_BASED_AUGMENTATION` | — |
-| `TWO_D_GROUND_BASED_AUGMENTATION` | — |
-| `TWO_D_SATELLITE_AND_GROUND_BASED_AUGMENTATION` | — |
-| `THREE_D` | — |
-| `THREE_D_SATELLITE_BASED_AUGMENTATION` | — |
-| `THREE_D_GROUND_BASED_AUGMENTATION` | — |
-| `THREE_D_SATELLITE_AND_GROUND_BASED_AUGMENTATION` | — |
+| `FIX_TYPE_NONE` | None. |
+| `FIX_TYPE_TWO_D` | Two d. |
+| `FIX_TYPE_TWO_D_SATELLITE_BASED_AUGMENTATION` | Two d satellite based augmentation. |
+| `FIX_TYPE_TWO_D_GROUND_BASED_AUGMENTATION` | Two d ground based augmentation. |
+| `FIX_TYPE_TWO_D_SATELLITE_AND_GROUND_BASED_AUGMENTATION` | Two d satellite and ground based augmentation. |
+| `FIX_TYPE_THREE_D` | Three d. |
+| `FIX_TYPE_THREE_D_SATELLITE_BASED_AUGMENTATION` | Three d satellite based augmentation. |
+| `FIX_TYPE_THREE_D_GROUND_BASED_AUGMENTATION` | Three d ground based augmentation. |
+| `FIX_TYPE_THREE_D_SATELLITE_AND_GROUND_BASED_AUGMENTATION` | Three d satellite and ground based augmentation. |
 

@@ -48,7 +48,7 @@ message EngineOil {
   // Engine oil level.
   //
   // VSS: Vehicle.Powertrain.CombustionEngine.EngineOil.Level (sensor).
-  PowertrainCombustionEngineEngineOilLevel level = 2 [
+  EngineOilLevel level = 2 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -89,22 +89,22 @@ message EngineOil {
 // Allowed values for Vehicle.Powertrain.CombustionEngine.EngineOil.Level.
 //
 // VSS: Vehicle.Powertrain.CombustionEngine.EngineOil.Level.
-enum PowertrainCombustionEngineEngineOilLevel {
+enum EngineOilLevel {
   // Not specified.
-  POWERTRAIN_COMBUSTION_ENGINE_ENGINE_OIL_LEVEL_UNSPECIFIED = 0;
+  ENGINE_OIL_LEVEL_UNSPECIFIED = 0;
 
   // Critically low.
-  POWERTRAIN_COMBUSTION_ENGINE_ENGINE_OIL_LEVEL_CRITICALLY_LOW = 1;
+  ENGINE_OIL_LEVEL_CRITICALLY_LOW = 1;
 
   // Low.
-  POWERTRAIN_COMBUSTION_ENGINE_ENGINE_OIL_LEVEL_LOW = 2;
+  ENGINE_OIL_LEVEL_LOW = 2;
 
   // Normal.
-  POWERTRAIN_COMBUSTION_ENGINE_ENGINE_OIL_LEVEL_NORMAL = 3;
+  ENGINE_OIL_LEVEL_NORMAL = 3;
 
   // High.
-  POWERTRAIN_COMBUSTION_ENGINE_ENGINE_OIL_LEVEL_HIGH = 4;
+  ENGINE_OIL_LEVEL_HIGH = 4;
 
   // Critically high.
-  POWERTRAIN_COMBUSTION_ENGINE_ENGINE_OIL_LEVEL_CRITICALLY_HIGH = 5;
+  ENGINE_OIL_LEVEL_CRITICALLY_HIGH = 5;
 }

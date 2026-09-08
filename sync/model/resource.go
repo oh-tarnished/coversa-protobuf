@@ -9,8 +9,8 @@ package model
 import (
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/catalog"
-	"github.com/the-protobuf-project/vdm/sync/internal/naming"
+	"github.com/the-protobuf-project/vdm/sync/catalog"
+	"github.com/the-protobuf-project/vdm/sync/naming"
 )
 
 // MessageName renders a source object type as a protobuf message name.

@@ -32,32 +32,32 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `average_speed` | `double` | `OUTPUT_ONLY` | `KILOMETER_PER_HOUR` | Average speed for the current trip. |
-| `cargo_volume` | `double` | `OUTPUT_ONLY` | `LITER` | The available volume for cargo or luggage. For automobiles, this is usually the trunk volume. |
-| `curb_weight` | `int32` | `OUTPUT_ONLY` | `KILOGRAM` | Vehicle curb weight, including all liquids and full tank of fuel, but no cargo or passengers. |
-| `current_overall_weight` | `int32` | `OUTPUT_ONLY` | `KILOGRAM` | Current overall Vehicle weight. Including passengers, cargo and other load inside the car. |
-| `emissions_co2` | `int32` | `OUTPUT_ONLY` | `GRAMS_PER_KILOMETER` | The CO2 emissions. |
-| `gross_weight` | `int32` | `OUTPUT_ONLY` | `KILOGRAM` | Curb weight of vehicle, including all liquids and full tank of fuel and full load of cargo and passengers. |
-| `height` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | Overall vehicle height. |
+| `average_speed` | `double` | `OUTPUT_ONLY` | `km/h` | Average speed for the current trip. |
+| `cargo_volume` | `double` | `OUTPUT_ONLY` | `l` | The available volume for cargo or luggage. For automobiles, this is usually the trunk volume. |
+| `curb_weight` | `int32` | `OUTPUT_ONLY` | `kg` | Vehicle curb weight, including all liquids and full tank of fuel, but no cargo or passengers. |
+| `current_overall_weight` | `int32` | `OUTPUT_ONLY` | `kg` | Current overall Vehicle weight. Including passengers, cargo and other load inside the car. |
+| `emissions_co2` | `int32` | `OUTPUT_ONLY` | `g/km` | The CO2 emissions. |
+| `gross_weight` | `int32` | `OUTPUT_ONLY` | `kg` | Curb weight of vehicle, including all liquids and full tank of fuel and full load of cargo and passengers. |
+| `height` | `int32` | `OUTPUT_ONLY` | `mm` | Overall vehicle height. |
 | `is_auto_power_optimize` | `bool` | `OPTIONAL` | — | Auto Power Optimization Flag When set to 'true', the system enables automatic power optimization, dynamically adjusting the power optimization level based on runtime conditions or features managed by the OEM. When set to 'false', manual control of the power optimization level is allowed. |
 | `is_broken_down` | `bool` | `OUTPUT_ONLY` | — | Vehicle breakdown or any similar event causing vehicle to stop on the road, that might pose a risk to other road users. True = Vehicle broken down on the road, due to e.g. engine problems, flat tire, out of gas, brake problems. False = Vehicle not broken down. |
 | `is_moving` | `bool` | `OUTPUT_ONLY` | — | Indicates whether the vehicle is stationary or moving. |
-| `length` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | Overall vehicle length. |
+| `length` | `int32` | `OUTPUT_ONLY` | `mm` | Overall vehicle length. |
 | `low_voltage_system_state` | `LowVoltageSystemState` | `OUTPUT_ONLY` | — | State of the supply voltage of the control units (usually 12V). |
-| `max_tow_ball_weight` | `int32` | `OUTPUT_ONLY` | `KILOGRAM` | Maximum vertical weight on the tow ball of a trailer. |
-| `max_tow_weight` | `int32` | `OUTPUT_ONLY` | `KILOGRAM` | Maximum weight of trailer. |
+| `max_tow_ball_weight` | `int32` | `OUTPUT_ONLY` | `kg` | Maximum vertical weight on the tow ball of a trailer. |
+| `max_tow_weight` | `int32` | `OUTPUT_ONLY` | `kg` | Maximum weight of trailer. |
 | `power_optimize_level` | `int32` | `OPTIONAL` | — | Power optimization level for this branch/subsystem. A higher number indicates more aggressive power optimization. Level 0 indicates that all functionality is enabled, no power optimization enabled. Level 10 indicates most aggressive power optimization mode, only essential functionality enabled. |
-| `roof_load` | `int32` | `OUTPUT_ONLY` | `KILOGRAM` | The permitted total weight of cargo and installations (e.g. a roof rack) on top of the vehicle. |
-| `speed` | `double` | `OUTPUT_ONLY` | `KILOMETER_PER_HOUR` | Vehicle speed. |
+| `roof_load` | `int32` | `OUTPUT_ONLY` | `kg` | The permitted total weight of cargo and installations (e.g. a roof rack) on top of the vehicle. |
+| `speed` | `double` | `OUTPUT_ONLY` | `km/h` | Vehicle speed. |
 | `start_time` | `google.protobuf.Timestamp` | `OUTPUT_ONLY` | — | Start time of current or latest trip, formatted according to ISO 8601 with UTC time zone. |
-| `traveled_distance` | `int64` | `OUTPUT_ONLY` | `METER` | Odometer reading, total distance traveled during the lifetime of the vehicle. |
-| `trip_traveled_distance` | `int64` | `OUTPUT_ONLY` | `METER` | Distance traveled since start of current trip. |
-| `trip_duration` | `double` | `OUTPUT_ONLY` | `SECOND` | Duration of latest trip. |
-| `trip_meter_reading` | `int64` | `OPTIONAL` | `METER` | Trip meter reading. |
-| `turning_diameter` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | Minimum turning diameter, Wall-to-Wall, as defined by SAE J1100-2009 D102. |
-| `width_excluding_mirrors` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | Overall vehicle width excluding mirrors, as defined by SAE J1100-2009 W103. |
-| `width_folded_mirrors` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | Overall vehicle width with mirrors folded, as defined by SAE J1100-2009 W145. |
-| `width_mirrors_included` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | Overall vehicle width including mirrors, as defined by SAE J1100-2009 W144. |
+| `traveled_distance` | `int64` | `OUTPUT_ONLY` | `m` | Odometer reading, total distance traveled during the lifetime of the vehicle. |
+| `trip_traveled_distance` | `int64` | `OUTPUT_ONLY` | `m` | Distance traveled since start of current trip. |
+| `trip_duration` | `double` | `OUTPUT_ONLY` | `s` | Duration of latest trip. |
+| `trip_meter_reading` | `int64` | `OPTIONAL` | `m` | Trip meter reading. |
+| `turning_diameter` | `int32` | `OUTPUT_ONLY` | `mm` | Minimum turning diameter, Wall-to-Wall, as defined by SAE J1100-2009 D102. |
+| `width_excluding_mirrors` | `int32` | `OUTPUT_ONLY` | `mm` | Overall vehicle width excluding mirrors, as defined by SAE J1100-2009 W103. |
+| `width_folded_mirrors` | `int32` | `OUTPUT_ONLY` | `mm` | Overall vehicle width with mirrors folded, as defined by SAE J1100-2009 W145. |
+| `width_mirrors_included` | `int32` | `OUTPUT_ONLY` | `mm` | Overall vehicle width including mirrors, as defined by SAE J1100-2009 W144. |
 
 ## Enums
 
@@ -67,10 +67,10 @@ Allowed values for Vehicle.LowVoltageSystemState.
 
 | Value | Description |
 | --- | --- |
-| `UNDEFINED` | — |
-| `LOCK` | — |
-| `OFF` | — |
-| `ACC` | — |
-| `ON` | — |
-| `START` | — |
+| `LOW_VOLTAGE_SYSTEM_STATE_UNSPECIFIED` | Not specified. |
+| `LOW_VOLTAGE_SYSTEM_STATE_LOCK` | Lock. |
+| `LOW_VOLTAGE_SYSTEM_STATE_OFF` | Off. |
+| `LOW_VOLTAGE_SYSTEM_STATE_ACC` | Acc. |
+| `LOW_VOLTAGE_SYSTEM_STATE_ON_VALUE` | On. |
+| `LOW_VOLTAGE_SYSTEM_STATE_START` | Start. |
 

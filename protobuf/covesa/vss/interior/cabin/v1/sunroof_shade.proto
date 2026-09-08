@@ -64,7 +64,7 @@ message SunroofShade {
   // Switch controlling sliding action such as window, sunroof, or blind.
   //
   // VSS: Vehicle.Cabin.Sunroof.Switch (actuator).
-  CabinSunroofShadeSwitch switch_control = 3 [
+  SunroofShadeSwitch switch_control = 3 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -76,22 +76,22 @@ message SunroofShade {
 // Allowed values for Vehicle.Cabin.Sunroof.Shade.Switch.
 //
 // VSS: Vehicle.Cabin.Sunroof.Shade.Switch.
-enum CabinSunroofShadeSwitch {
+enum SunroofShadeSwitch {
   // Not specified.
-  CABIN_SUNROOF_SHADE_SWITCH_UNSPECIFIED = 0;
+  SUNROOF_SHADE_SWITCH_UNSPECIFIED = 0;
 
   // Inactive.
-  CABIN_SUNROOF_SHADE_SWITCH_INACTIVE = 1;
+  SUNROOF_SHADE_SWITCH_INACTIVE = 1;
 
   // Close.
-  CABIN_SUNROOF_SHADE_SWITCH_CLOSE = 2;
+  SUNROOF_SHADE_SWITCH_CLOSE = 2;
 
   // Open.
-  CABIN_SUNROOF_SHADE_SWITCH_OPEN = 3;
+  SUNROOF_SHADE_SWITCH_OPEN = 3;
 
   // One shot close.
-  CABIN_SUNROOF_SHADE_SWITCH_ONE_SHOT_CLOSE = 4;
+  SUNROOF_SHADE_SWITCH_ONE_SHOT_CLOSE = 4;
 
   // One shot open.
-  CABIN_SUNROOF_SHADE_SWITCH_ONE_SHOT_OPEN = 5;
+  SUNROOF_SHADE_SWITCH_ONE_SHOT_OPEN = 5;
 }

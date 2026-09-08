@@ -35,47 +35,49 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 | `is_charging_cable_connected` | `bool` | `OUTPUT_ONLY` | — | Indicates whether a charging cable is physically connected to a particular charging port or not. |
 | `is_charging_cable_locked` | `bool` | `OPTIONAL` | — | Is charging cable locked to prevent removal. |
 | `is_flap_open` | `bool` | `OPTIONAL` | — | Status of the charging port flap(s). |
-| `supported_inlet_types` | `PowertrainTractionBatteryChargingChargingPortSupportedInletTypes` | `OUTPUT_ONLY` | — | A list of the supported (i.e., available) charging inlets in a particular charging port. IEC types refer to IEC 62196, GBT refers to GB/T 20234. |
-| `instance_tag` | `ChargingPortInstanceTag` | `OPTIONAL` | — | — |
+| `supported_inlet_types` | `SupportedInletTypes` | `OUTPUT_ONLY` | — | A list of the supported (i.e., available) charging inlets in a particular charging port. IEC types refer to IEC 62196, GBT refers to GB/T 20234. |
+| `instance_tag` | `ChargingPortInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `ChargingPortInstanceTag`
 
+ChargingPortInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `ChargingPortInstanceTagDimension1` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `PowertrainTractionBatteryChargingChargingPortSupportedInletTypes`
+### `SupportedInletTypes`
 
 Allowed values for Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.SupportedInletTypes.
 
 | Value | Description |
 | --- | --- |
-| `IEC_TYPE_1_AC` | — |
-| `IEC_TYPE_2_AC` | — |
-| `IEC_TYPE_3_AC` | — |
-| `IEC_TYPE_4_DC` | — |
-| `IEC_TYPE_1_CCS_DC` | — |
-| `IEC_TYPE_2_CCS_DC` | — |
-| `TESLA_ROADSTER` | — |
-| `TESLA_HPWC` | — |
-| `TESLA_SUPERCHARGER` | — |
-| `GBT_AC` | — |
-| `GBT_DC` | — |
-| `OTHER` | — |
+| `SUPPORTED_INLET_TYPES_IEC_TYPE_1_AC` | Iec type 1 ac. |
+| `SUPPORTED_INLET_TYPES_IEC_TYPE_2_AC` | Iec type 2 ac. |
+| `SUPPORTED_INLET_TYPES_IEC_TYPE_3_AC` | Iec type 3 ac. |
+| `SUPPORTED_INLET_TYPES_IEC_TYPE_4_DC` | Iec type 4 dc. |
+| `SUPPORTED_INLET_TYPES_IEC_TYPE_1_CCS_DC` | Iec type 1 ccs dc. |
+| `SUPPORTED_INLET_TYPES_IEC_TYPE_2_CCS_DC` | Iec type 2 ccs dc. |
+| `SUPPORTED_INLET_TYPES_TESLA_ROADSTER` | Tesla roadster. |
+| `SUPPORTED_INLET_TYPES_TESLA_HPWC` | Tesla hpwc. |
+| `SUPPORTED_INLET_TYPES_TESLA_SUPERCHARGER` | Tesla supercharger. |
+| `SUPPORTED_INLET_TYPES_GBT_AC` | Gbt ac. |
+| `SUPPORTED_INLET_TYPES_GBT_DC` | Gbt dc. |
+| `SUPPORTED_INLET_TYPES_OTHER` | Other. |
 
-### `ChargingPortInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `FRONT_LEFT` | — |
-| `FRONT_MIDDLE` | — |
-| `FRONT_RIGHT` | — |
-| `REAR_LEFT` | — |
-| `REAR_MIDDLE` | — |
-| `REAR_RIGHT` | — |
-| `ANY_POSITION` | — |
+| `DIMENSION1_FRONT_LEFT` | Front left. |
+| `DIMENSION1_FRONT_MIDDLE` | Front middle. |
+| `DIMENSION1_FRONT_RIGHT` | Front right. |
+| `DIMENSION1_REAR_LEFT` | Rear left. |
+| `DIMENSION1_REAR_MIDDLE` | Rear middle. |
+| `DIMENSION1_REAR_RIGHT` | Rear right. |
+| `DIMENSION1_ANY_POSITION` | Any position. |
 

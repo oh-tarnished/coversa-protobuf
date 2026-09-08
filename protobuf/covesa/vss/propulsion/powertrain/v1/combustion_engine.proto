@@ -39,7 +39,7 @@ message CombustionEngine {
   // Type of aspiration (natural, turbocharger, supercharger etc).
   //
   // VSS: Vehicle.Powertrain.CombustionEngine.AspirationType (attribute).
-  PowertrainCombustionEngineAspirationType aspiration_type = 1 [
+  CombustionEngineAspirationType aspiration_type = 1 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -75,7 +75,7 @@ message CombustionEngine {
   // Engine configuration.
   //
   // VSS: Vehicle.Powertrain.CombustionEngine.Configuration (attribute).
-  PowertrainCombustionEngineConfig config = 4 [
+  CombustionEngineConfig config = 4 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {

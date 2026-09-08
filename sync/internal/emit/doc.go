@@ -9,8 +9,9 @@ package emit
 import (
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/model"
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/describe"
+	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // docWidth is the column comment text wraps at, leaving room for the `// `
@@ -66,10 +67,7 @@ func trimTrailingBlank(sb *strings.Builder) {
 // messageDoc builds a message's comment: the source description, what it is
 // in VSS terms, and what it is in AIP terms.
 func (e *Emitter) messageDoc(pkg *model.Package, t *sdl.Def, root bool) string {
-	doc := t.Doc
-	if doc == "" {
-		doc = model.MessageName(t.Name) + " is a node of the COVESA Vehicle Signal Specification."
-	}
+	doc := describe.Message(model.MessageName(t.Name), t)
 
 	var notes []string
 	if v, ok := t.Directive("vspec"); ok {
@@ -114,20 +112,4 @@ func resourceNote(pkg *model.Package) string {
 	default:
 		return "A root resource, named \"" + pkg.Pattern + "\"."
 	}
-}
-
-// unitSymbols maps a Unit enum value onto the symbol VSS writes for it.
-//
-// Filled by the vocabulary emitter from the same table it renders the enum
-// from, so a comment and the enum cannot disagree about what a unit is
-// called.
-var unitSymbols = map[string]string{}
-
-// unitSymbol renders a Unit enum value as its written symbol, falling back to
-// a readable form of the constant when the table has no entry.
-func unitSymbol(u string) string {
-	if s, ok := unitSymbols[u]; ok {
-		return s
-	}
-	return strings.ToLower(strings.ReplaceAll(strings.TrimPrefix(u, "UNIT_"), "_", " "))
 }

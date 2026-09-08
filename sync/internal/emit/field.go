@@ -11,11 +11,12 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/catalog"
-	"github.com/the-protobuf-project/vdm/sync/internal/model"
-	"github.com/the-protobuf-project/vdm/sync/internal/naming"
-	"github.com/the-protobuf-project/vdm/sync/internal/plan"
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/catalog"
+	"github.com/the-protobuf-project/vdm/sync/describe"
+	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/the-protobuf-project/vdm/sync/naming"
+	"github.com/the-protobuf-project/vdm/sync/plan"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // recordImports notes every file a planned field's type pulls in.
@@ -44,7 +45,7 @@ func (e *Emitter) recordImports(pkg *model.Package, f *File, p plan.Field, src s
 
 // renderField writes one field with its comment and annotations.
 func renderField(p plan.Field, num int, sb *strings.Builder) {
-	sb.WriteString(docBlock(fieldDoc(p), "  "))
+	sb.WriteString(docBlock(describe.Field(p), "  "))
 
 	prefix := "  "
 	if p.Repeated {
@@ -61,40 +62,6 @@ func renderField(p plan.Field, num int, sb *strings.Builder) {
 	}
 	fmt.Fprintf(sb, "%s%s %s = %d [\n    %s\n  ];\n\n",
 		prefix, p.Type, p.Name, num, strings.Join(opts, ",\n    "))
-}
-
-// fieldDoc assembles a field's comment: the source description, the unit and
-// VSS provenance, and a deprecation notice where there is one.
-func fieldDoc(p plan.Field) string {
-	doc := p.Doc
-	// AIP-192 requires a comment on every field. The source model leaves the
-	// instance-tag machinery undocumented, so one is synthesised.
-	if strings.TrimSpace(doc) == "" {
-		doc = synthDoc(p.Name)
-	}
-
-	var meta []string
-	if p.Unit != "" {
-		meta = append(meta, "Unit: "+unitSymbol(p.Unit)+".")
-	}
-	if p.FQN != "" {
-		if kind := strings.ToLower(strings.TrimPrefix(p.Element, "ELEMENT_")); kind != "" {
-			meta = append(meta, "VSS: "+p.FQN+" ("+kind+").")
-		} else {
-			meta = append(meta, "VSS: "+p.FQN+".")
-		}
-	}
-	if len(meta) > 0 {
-		if doc != "" {
-			doc += "\n\n"
-		}
-		doc += strings.Join(meta, " ")
-	}
-	// AIP-192 requires "Deprecated: <reason>" to be the *first* line.
-	if p.Deprecated != "" {
-		doc = "Deprecated: " + p.Deprecated + "\n\n" + doc
-	}
-	return doc
 }
 
 // fieldOptions renders the option list a field carries.
@@ -154,18 +121,4 @@ func (e *Emitter) renderReference(owner *sdl.Def, src sdl.Field, other *model.Pa
 	}
 	sb.WriteString("    (google.api.resource_reference) = {type: \"vdm.covesa.org/" + res + "\"}\n")
 	sb.WriteString("  ];\n\n")
-}
-
-// synthDoc describes a field the source model documents by structure alone.
-func synthDoc(name string) string {
-	switch {
-	case name == "instance_tag":
-		return "Which instance of this branch the values belong to."
-	case strings.HasPrefix(name, "dimension"):
-		return "Instance axis " + strings.TrimPrefix(name, "dimension") +
-			". VSS expands a branch across each axis in turn, so the axes " +
-			"together name one instance."
-	default:
-		return naming.Humanise(name) + "."
-	}
 }

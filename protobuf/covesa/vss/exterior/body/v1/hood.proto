@@ -63,7 +63,7 @@ message Hood {
   // Switch controlling sliding action such as window, sunroof, or blind.
   //
   // VSS: Vehicle.Body.Hood.Switch (actuator).
-  BodyHoodSwitch switch_control = 3 [
+  Switch switch_control = 3 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -75,22 +75,22 @@ message Hood {
 // Allowed values for Vehicle.Body.Hood.Switch.
 //
 // VSS: Vehicle.Body.Hood.Switch.
-enum BodyHoodSwitch {
+enum Switch {
   // Not specified.
-  BODY_HOOD_SWITCH_UNSPECIFIED = 0;
+  SWITCH_UNSPECIFIED = 0;
 
   // Inactive.
-  BODY_HOOD_SWITCH_INACTIVE = 1;
+  SWITCH_INACTIVE = 1;
 
   // Close.
-  BODY_HOOD_SWITCH_CLOSE = 2;
+  SWITCH_CLOSE = 2;
 
   // Open.
-  BODY_HOOD_SWITCH_OPEN = 3;
+  SWITCH_OPEN = 3;
 
   // One shot close.
-  BODY_HOOD_SWITCH_ONE_SHOT_CLOSE = 4;
+  SWITCH_ONE_SHOT_CLOSE = 4;
 
   // One shot open.
-  BODY_HOOD_SWITCH_ONE_SHOT_OPEN = 5;
+  SWITCH_ONE_SHOT_OPEN = 5;
 }

@@ -8,7 +8,7 @@ package model
 import (
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/naming"
+	"github.com/the-protobuf-project/vdm/sync/naming"
 )
 
 // CovesaRoot is the import prefix every emitted file lives under, matching

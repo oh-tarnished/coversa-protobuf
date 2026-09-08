@@ -34,22 +34,24 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 | --- | --- | --- | --- | --- |
 | `is_defect` | `bool` | `OUTPUT_ONLY` | — | Indicates if light is defect. True = Light is defect. False = Light has no defect. |
 | `is_signaling` | `bool` | `OPTIONAL` | — | Indicates if light is signaling or off. True = signaling. False = Off. |
-| `instance_tag` | `DirectionIndicatorInstanceTag` | `OPTIONAL` | — | — |
+| `instance_tag` | `DirectionIndicatorInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `DirectionIndicatorInstanceTag`
 
+DirectionIndicatorInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `DirectionIndicatorInstanceTagDimension1` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `DirectionIndicatorInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `LEFT` | — |
-| `RIGHT` | — |
+| `DIMENSION1_LEFT` | Left. |
+| `DIMENSION1_RIGHT` | Right. |
 

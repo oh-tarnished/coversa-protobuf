@@ -37,23 +37,23 @@ message SuspensionAxleInstanceTag {
 
   // Instance axis 1. VSS expands a branch across each axis in turn, so the
   // axes together name one instance.
-  SuspensionAxleInstanceTagDimension1 dimension1 = 1 [
+  Dimension1 dimension1 = 1 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true
   ];
 }
 // Dimensional enum for VSS instance dimension 1.
-enum SuspensionAxleInstanceTagDimension1 {
+enum Dimension1 {
   // Not specified.
-  SUSPENSION_AXLE_INSTANCE_TAG_DIMENSION1_UNSPECIFIED = 0;
+  DIMENSION1_UNSPECIFIED = 0;
 
   // Row1.
   //
   // The source model spells this "Row1".
-  SUSPENSION_AXLE_INSTANCE_TAG_DIMENSION1_ROW1 = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row1"}];
+  DIMENSION1_ROW1 = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row1"}];
 
   // Row2.
   //
   // The source model spells this "Row2".
-  SUSPENSION_AXLE_INSTANCE_TAG_DIMENSION1_ROW2 = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row2"}];
+  DIMENSION1_ROW2 = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row2"}];
 }

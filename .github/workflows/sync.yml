@@ -43,12 +43,13 @@ jobs:
           go run ./sync/cmd/sync
           buf format -w
           go run ./sync/cmd/docs
+          go run ./codec/cmd/manifest
 
       # A diff here means someone edited an emitted file. The next `just sync`
       # would silently revert it, so it is caught now rather than lost later.
       - name: Check For Drift
         run: |
-          git diff --exit-code -- protobuf/ || {
+          git diff --exit-code -- protobuf/ codec/manifest.json || {
             echo "::error::protobuf/ is stale or was hand-edited."
             echo "Run 'just sync' and commit the result; do not edit generated files."
             exit 1

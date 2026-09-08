@@ -32,26 +32,28 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `damping_force` | `int32` | `OUTPUT_ONLY` | `NEWTON` | Actuated damping force at given wheel. Signal orientation according ISO8855, meaning positive force is pointing upwards. |
-| `damping_force_target` | `int32` | `OPTIONAL` | `NEWTON` | Damping force request at given wheel. Signal orientation according ISO8855, meaning positive force is pointing upwards. |
-| `damping_rate` | `int32` | `OUTPUT_ONLY` | `PERCENT` | Actuated damping rate at given wheel. 0% = lowest possible damping rate 100% = highest possible damping rate |
-| `damping_rate_target` | `int32` | `OPTIONAL` | `PERCENT` | Damping rate request at given wheel. 0% = lowest possible damping rate 100% = highest possible damping rate |
-| `instance_tag` | `SuspensionAxleWheelInstanceTag` | `OPTIONAL` | — | — |
+| `damping_force` | `int32` | `OUTPUT_ONLY` | `N` | Actuated damping force at given wheel. Signal orientation according ISO8855, meaning positive force is pointing upwards. |
+| `damping_force_target` | `int32` | `OPTIONAL` | `N` | Damping force request at given wheel. Signal orientation according ISO8855, meaning positive force is pointing upwards. |
+| `damping_rate` | `int32` | `OUTPUT_ONLY` | `percent` | Actuated damping rate at given wheel. 0% = lowest possible damping rate 100% = highest possible damping rate |
+| `damping_rate_target` | `int32` | `OPTIONAL` | `percent` | Damping rate request at given wheel. 0% = lowest possible damping rate 100% = highest possible damping rate |
+| `instance_tag` | `SuspensionAxleWheelInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `SuspensionAxleWheelInstanceTag`
 
+SuspensionAxleWheelInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `SuspensionAxleWheelInstanceTagDimension1` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `SuspensionAxleWheelInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `LEFT` | — |
-| `RIGHT` | — |
+| `DIMENSION1_LEFT` | Left. |
+| `DIMENSION1_RIGHT` | Right. |
 

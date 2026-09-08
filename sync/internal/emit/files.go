@@ -9,8 +9,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/model"
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // lineCap is the per-file line limit. A file over it is split, never

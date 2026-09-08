@@ -86,7 +86,7 @@ message Station {
   // Direction of airstream
   //
   // VSS: Vehicle.Cabin.HVAC.Station.AirDistribution (actuator).
-  CabinHvacStationAirDistribution air_distribution = 16 [
+  AirDistribution air_distribution = 16 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -131,16 +131,16 @@ message Station {
 // Allowed values for Vehicle.Cabin.HVAC.Station.AirDistribution.
 //
 // VSS: Vehicle.Cabin.HVAC.Station.AirDistribution.
-enum CabinHvacStationAirDistribution {
+enum AirDistribution {
   // Not specified.
-  CABIN_HVAC_STATION_AIR_DISTRIBUTION_UNSPECIFIED = 0;
+  AIR_DISTRIBUTION_UNSPECIFIED = 0;
 
   // Up.
-  CABIN_HVAC_STATION_AIR_DISTRIBUTION_UP = 1;
+  AIR_DISTRIBUTION_UP = 1;
 
   // Middle.
-  CABIN_HVAC_STATION_AIR_DISTRIBUTION_MIDDLE = 2;
+  AIR_DISTRIBUTION_MIDDLE = 2;
 
   // Down.
-  CABIN_HVAC_STATION_AIR_DISTRIBUTION_DOWN = 3;
+  AIR_DISTRIBUTION_DOWN = 3;
 }

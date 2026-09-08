@@ -9,6 +9,8 @@
 > spec revision `2026-07-24` (`36bc939`).
 > Do not edit by hand; run `just docs`.
 
+Person is a node of the COVESA Vehicle Signal Specification.
+
 ## Service `People`
 
 | Method | Request | Response | Summary |
@@ -24,41 +26,49 @@
 
 ### `Person`
 
+Person is a node of the COVESA Vehicle Signal Specification.
+
 Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the four timestamps — ahead of the signals below. Field numbers 8–15 are reserved.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `vdm_uid` | `string` | `OPTIONAL, IMMUTABLE` | — | — |
-| `name_components` | `PersonName` | `OPTIONAL` | — | — |
-| `age_range` | `AgeRange` | `OPTIONAL` | — | — |
-| `home_address` | `Address` | `OPTIONAL` | — | — |
+| `vdm_uid` | `string` | `OPTIONAL, IMMUTABLE` | — | The identifier the originating system assigned, distinct from the server-assigned `uid` above. It arrives inside imported data and must survive a round trip unchanged, or every re-import duplicates the record. |
+| `name_components` | `PersonName` | `OPTIONAL` | — | Name components. |
+| `age_range` | `AgeRange` | `OPTIONAL` | — | Age range. |
+| `home_address` | `Address` | `OPTIONAL` | — | Home address. |
 
 ### `PersonName`
 
+PersonName is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `first` | `string` | `OPTIONAL` | — | — |
-| `middle` | `string` | `OPTIONAL` | — | — |
-| `last` | `string` | `OPTIONAL` | — | — |
+| `first` | `string` | `OPTIONAL` | — | First. |
+| `middle` | `string` | `OPTIONAL` | — | Middle. |
+| `last` | `string` | `OPTIONAL` | — | Last. |
 
 ### `Address`
 
+Address is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `street` | `string` | `OPTIONAL` | — | — |
-| `city` | `string` | `OPTIONAL` | — | — |
-| `state` | `string` | `OPTIONAL` | — | — |
+| `street` | `string` | `OPTIONAL` | — | Street. |
+| `city` | `string` | `OPTIONAL` | — | City. |
+| `state` | `string` | `OPTIONAL` | — | State. |
 | `region_code` | `string` | `OPTIONAL` | — | An ISO 3166-1 alpha-2 country code, e.g. "SE". |
-| `zip_code` | `string` | `OPTIONAL` | — | — |
+| `zip_code` | `string` | `OPTIONAL` | — | Zip code. |
 
 ## Enums
 
 ### `AgeRange`
 
+AgeRange is an allowed-value set from the source model.
+
 | Value | Description |
 | --- | --- |
-| `CHILD` | — |
-| `TEEN` | — |
-| `ADULT` | — |
-| `SENIOR` | — |
+| `AGE_RANGE_CHILD` | Child. |
+| `AGE_RANGE_TEEN` | Teen. |
+| `AGE_RANGE_ADULT` | Adult. |
+| `AGE_RANGE_SENIOR` | Senior. |
 

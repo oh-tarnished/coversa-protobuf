@@ -10,9 +10,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/catalog"
-	"github.com/the-protobuf-project/vdm/sync/internal/model"
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/catalog"
+	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // firstSignalFieldNumber leaves 8-15 free below it for AIP identity fields a

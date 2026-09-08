@@ -156,7 +156,7 @@ message ObstacleDetection {
   // other characteristics.
   //
   // VSS: Vehicle.ADAS.ObstacleDetection.WarningType (sensor).
-  AdasObstacleDetectionWarningType warning_type = 21 [
+  WarningType warning_type = 21 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -171,13 +171,13 @@ message ObstacleDetection {
 // Allowed values for Vehicle.ADAS.ObstacleDetection.WarningType.
 //
 // VSS: Vehicle.ADAS.ObstacleDetection.WarningType.
-enum AdasObstacleDetectionWarningType {
+enum WarningType {
   // Not specified.
-  ADAS_OBSTACLE_DETECTION_WARNING_TYPE_UNSPECIFIED = 0;
+  WARNING_TYPE_UNSPECIFIED = 0;
 
   // Cross traffic.
-  ADAS_OBSTACLE_DETECTION_WARNING_TYPE_CROSS_TRAFFIC = 1;
+  WARNING_TYPE_CROSS_TRAFFIC = 1;
 
   // Blind spot.
-  ADAS_OBSTACLE_DETECTION_WARNING_TYPE_BLIND_SPOT = 2;
+  WARNING_TYPE_BLIND_SPOT = 2;
 }

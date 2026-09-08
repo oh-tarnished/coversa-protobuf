@@ -63,7 +63,7 @@ message Window {
   // Switch controlling sliding action such as window, sunroof, or blind.
   //
   // VSS: Vehicle.Cabin.Door.Window.Switch (actuator).
-  CabinDoorWindowSwitch switch_control = 3 [
+  WindowSwitch switch_control = 3 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -75,22 +75,22 @@ message Window {
 // Allowed values for Vehicle.Cabin.Door.Window.Switch.
 //
 // VSS: Vehicle.Cabin.Door.Window.Switch.
-enum CabinDoorWindowSwitch {
+enum WindowSwitch {
   // Not specified.
-  CABIN_DOOR_WINDOW_SWITCH_UNSPECIFIED = 0;
+  WINDOW_SWITCH_UNSPECIFIED = 0;
 
   // Inactive.
-  CABIN_DOOR_WINDOW_SWITCH_INACTIVE = 1;
+  WINDOW_SWITCH_INACTIVE = 1;
 
   // Close.
-  CABIN_DOOR_WINDOW_SWITCH_CLOSE = 2;
+  WINDOW_SWITCH_CLOSE = 2;
 
   // Open.
-  CABIN_DOOR_WINDOW_SWITCH_OPEN = 3;
+  WINDOW_SWITCH_OPEN = 3;
 
   // One shot close.
-  CABIN_DOOR_WINDOW_SWITCH_ONE_SHOT_CLOSE = 4;
+  WINDOW_SWITCH_ONE_SHOT_CLOSE = 4;
 
   // One shot open.
-  CABIN_DOOR_WINDOW_SWITCH_ONE_SHOT_OPEN = 5;
+  WINDOW_SWITCH_ONE_SHOT_OPEN = 5;
 }

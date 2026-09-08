@@ -33,9 +33,9 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
 | `is_heating_on` | `bool` | `OPTIONAL` | — | Windshield heater status. False - off, True - on. |
-| `washer_fluid` | `WasherFluid` | `OPTIONAL` | — | — |
-| `wiping` | `Wiping` | `OPTIONAL` | — | — |
-| `instance_tag` | `WindshieldInstanceTag` | `OPTIONAL` | — | — |
+| `washer_fluid` | `WasherFluid` | `OPTIONAL` | — | Washer fluid. |
+| `wiping` | `Wiping` | `OPTIONAL` | — | Wiping. |
+| `instance_tag` | `WindshieldInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `WasherFluid`
 
@@ -44,7 +44,7 @@ Windshield washer fluid signals
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
 | `is_level_low` | `bool` | `OUTPUT_ONLY` | — | Low level indication for washer fluid. True = Level Low. False = Level OK. |
-| `level` | `int32` | `OUTPUT_ONLY` | `PERCENT` | Washer fluid level as a percent. 0 = Empty. 100 = Full. |
+| `level` | `int32` | `OUTPUT_ONLY` | `percent` | Washer fluid level as a percent. 0 = Empty. 100 = Full. |
 
 ### `Wiping`
 
@@ -54,9 +54,9 @@ Windshield wiper signals.
 | --- | --- | --- | --- | --- |
 | `intensity` | `int32` | `OPTIONAL` | — | Relative intensity/sensitivity for interval and rain sensor mode as requested by user/driver. Has no significance if Windshield.Wiping.Mode is OFF/SLOW/MEDIUM/FAST 0 - wipers inactive. 1 - minimum intensity (lowest frequency/sensitivity, longest interval). 2/3/4/... - higher intensity (higher frequency/sensitivity, shorter interval). Maximum value supported is vehicle specific. |
 | `is_wipers_worn` | `bool` | `OUTPUT_ONLY` | — | Wiper wear status. True = Worn, Replacement recommended or required. False = Not Worn. |
-| `mode` | `BodyWindshieldWipingMode` | `OPTIONAL` | — | Wiper mode requested by user/driver. INTERVAL indicates intermittent wiping, with fixed time interval between each wipe. RAIN_SENSOR indicates intermittent wiping based on rain intensity. |
-| `wiper_wear` | `int32` | `OUTPUT_ONLY` | `PERCENT` | Wiper wear as percent. 0 = No Wear. 100 = Worn. Replacement required. Method for calculating or estimating wiper wear is vehicle specific. For windshields with multiple wipers the wear reported shall correspond to the most worn wiper. |
-| `system` | `System` | `OPTIONAL` | — | — |
+| `mode` | `WipingMode` | `OPTIONAL` | — | Wiper mode requested by user/driver. INTERVAL indicates intermittent wiping, with fixed time interval between each wipe. RAIN_SENSOR indicates intermittent wiping based on rain intensity. |
+| `wiper_wear` | `int32` | `OUTPUT_ONLY` | `percent` | Wiper wear as percent. 0 = No Wear. 100 = Worn. Replacement required. Method for calculating or estimating wiper wear is vehicle specific. For windshields with multiple wipers the wear reported shall correspond to the most worn wiper. |
+| `system` | `System` | `OPTIONAL` | — | System. |
 
 ### `System`
 
@@ -64,56 +64,58 @@ Signals to control behavior of wipers in detail. By default VSS expects only one
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `actual_position` | `double` | `OPTIONAL` | `DEGREE` | Actual position of main wiper blade for the wiper system relative to reference position. Location of reference position (0 degrees) and direction of positive/negative degrees is vehicle specific. |
-| `drive_current` | `double` | `OUTPUT_ONLY` | `AMPERE` | Actual current used by wiper drive. |
-| `frequency` | `int32` | `OPTIONAL` | `CYCLES_PER_MINUTE` | Wiping frequency/speed, measured in cycles per minute. The signal concerns the actual speed of the wiper blades when moving. Intervals/pauses are excluded, i.e. the value corresponds to the number of cycles that would be completed in 1 minute if wiping permanently over default range. |
+| `actual_position` | `double` | `OPTIONAL` | `deg` | Actual position of main wiper blade for the wiper system relative to reference position. Location of reference position (0 degrees) and direction of positive/negative degrees is vehicle specific. |
+| `drive_current` | `double` | `OUTPUT_ONLY` | `A` | Actual current used by wiper drive. |
+| `frequency` | `int32` | `OPTIONAL` | `cpm` | Wiping frequency/speed, measured in cycles per minute. The signal concerns the actual speed of the wiper blades when moving. Intervals/pauses are excluded, i.e. the value corresponds to the number of cycles that would be completed in 1 minute if wiping permanently over default range. |
 | `is_blocked` | `bool` | `OUTPUT_ONLY` | — | Indicates if wiper movement is blocked. True = Movement blocked. False = Movement not blocked. |
 | `is_ending_wipe_cycle` | `bool` | `OUTPUT_ONLY` | — | Indicates if current wipe movement is completed or near completion. True = Movement is completed or near completion. Changes to RequestedPosition will be executed first after reaching previous RequestedPosition, if it has not already been reached. False = Movement is not near completion. Any change to RequestedPosition will be executed immediately. Change of direction may not be allowed. |
 | `is_overheated` | `bool` | `OUTPUT_ONLY` | — | Indicates if wiper system is overheated. True = Wiper system overheated. False = Wiper system not overheated. |
 | `is_position_reached` | `bool` | `OUTPUT_ONLY` | — | Indicates if a requested position has been reached. IsPositionReached refers to the previous position in case the TargetPosition is updated while IsEndingWipeCycle=True. True = Current or Previous TargetPosition reached. False = Position not (yet) reached, or wipers have moved away from the reached position. |
 | `is_wiper_error` | `bool` | `OUTPUT_ONLY` | — | Indicates system failure. True if wiping is disabled due to system failure. |
 | `is_wiping` | `bool` | `OUTPUT_ONLY` | — | Indicates wiper movement. True if wiper blades are moving. Change of direction shall be considered as IsWiping if wipers will continue to move directly after the change of direction. |
-| `mode` | `BodyWindshieldWipingSystemMode` | `OPTIONAL` | — | Requested mode of wiper system. STOP_HOLD means that the wipers shall move to position given by TargetPosition and then hold the position. WIPE means that wipers shall move to the position given by TargetPosition and then hold the position if no new TargetPosition is requested. PLANT_MODE means that wiping is disabled. Exact behavior is vehicle specific. EMERGENCY_STOP means that wiping shall be immediately stopped without holding the position. |
-| `target_position` | `double` | `OPTIONAL` | `DEGREE` | Requested position of main wiper blade for the wiper system relative to reference position. Location of reference position (0 degrees) and direction of positive/negative degrees is vehicle specific. System behavior when receiving TargetPosition depends on Mode and IsEndingWipeCycle. Supported values are vehicle specific and might be dynamically corrected. If IsEndingWipeCycle=True then wipers will complete current movement before actuating new TargetPosition. If IsEndingWipeCycle=False then wipers will directly change destination if the TargetPosition is changed. |
+| `mode` | `SystemMode` | `OPTIONAL` | — | Requested mode of wiper system. STOP_HOLD means that the wipers shall move to position given by TargetPosition and then hold the position. WIPE means that wipers shall move to the position given by TargetPosition and then hold the position if no new TargetPosition is requested. PLANT_MODE means that wiping is disabled. Exact behavior is vehicle specific. EMERGENCY_STOP means that wiping shall be immediately stopped without holding the position. |
+| `target_position` | `double` | `OPTIONAL` | `deg` | Requested position of main wiper blade for the wiper system relative to reference position. Location of reference position (0 degrees) and direction of positive/negative degrees is vehicle specific. System behavior when receiving TargetPosition depends on Mode and IsEndingWipeCycle. Supported values are vehicle specific and might be dynamically corrected. If IsEndingWipeCycle=True then wipers will complete current movement before actuating new TargetPosition. If IsEndingWipeCycle=False then wipers will directly change destination if the TargetPosition is changed. |
 
 ### `WindshieldInstanceTag`
 
+WindshieldInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `WindshieldInstanceTagDimension1` | `OPTIONAL` | — | — |
+| `dimension1` | `InstanceTagDimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `BodyWindshieldWipingMode`
+### `WipingMode`
 
 Allowed values for Vehicle.Body.Windshield.Wiping.Mode.
 
 | Value | Description |
 | --- | --- |
-| `OFF` | — |
-| `SLOW` | — |
-| `MEDIUM` | — |
-| `FAST` | — |
-| `INTERVAL` | — |
-| `RAIN_SENSOR` | — |
+| `WIPING_MODE_OFF` | Off. |
+| `WIPING_MODE_SLOW` | Slow. |
+| `WIPING_MODE_MEDIUM` | Medium. |
+| `WIPING_MODE_FAST` | Fast. |
+| `WIPING_MODE_INTERVAL` | Interval. |
+| `WIPING_MODE_RAIN_SENSOR` | Rain sensor. |
 
-### `BodyWindshieldWipingSystemMode`
+### `SystemMode`
 
 Allowed values for Vehicle.Body.Windshield.Wiping.System.Mode.
 
 | Value | Description |
 | --- | --- |
-| `STOP_HOLD` | — |
-| `WIPE` | — |
-| `PLANT_MODE` | — |
-| `EMERGENCY_STOP` | — |
+| `SYSTEM_MODE_STOP_HOLD` | Stop hold. |
+| `SYSTEM_MODE_WIPE` | Wipe. |
+| `SYSTEM_MODE_PLANT_MODE` | Plant mode. |
+| `SYSTEM_MODE_EMERGENCY_STOP` | Emergency stop. |
 
-### `WindshieldInstanceTagDimension1`
+### `InstanceTagDimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `FRONT` | — |
-| `REAR` | — |
+| `INSTANCE_TAG_DIMENSION1_FRONT` | Front. |
+| `INSTANCE_TAG_DIMENSION1_REAR` | Rear. |
 

@@ -51,7 +51,7 @@ message RangeExtender {
   // Current operating mode of the Extended Range Electric Vehicle.
   //
   // VSS: Vehicle.Powertrain.RangeExtender.OperatingMode (sensor).
-  PowertrainRangeExtenderOperatingMode operating_mode = 2 [
+  RangeExtenderOperatingMode operating_mode = 2 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -85,16 +85,16 @@ message RangeExtender {
 // Allowed values for Vehicle.Powertrain.RangeExtender.OperatingMode.
 //
 // VSS: Vehicle.Powertrain.RangeExtender.OperatingMode.
-enum PowertrainRangeExtenderOperatingMode {
+enum RangeExtenderOperatingMode {
   // Not specified.
-  POWERTRAIN_RANGE_EXTENDER_OPERATING_MODE_UNSPECIFIED = 0;
+  RANGE_EXTENDER_OPERATING_MODE_UNSPECIFIED = 0;
 
   // Charge depleting.
-  POWERTRAIN_RANGE_EXTENDER_OPERATING_MODE_CHARGE_DEPLETING = 1;
+  RANGE_EXTENDER_OPERATING_MODE_CHARGE_DEPLETING = 1;
 
   // Charge sustaining.
-  POWERTRAIN_RANGE_EXTENDER_OPERATING_MODE_CHARGE_SUSTAINING = 2;
+  RANGE_EXTENDER_OPERATING_MODE_CHARGE_SUSTAINING = 2;
 
   // Blended.
-  POWERTRAIN_RANGE_EXTENDER_OPERATING_MODE_BLENDED = 3;
+  RANGE_EXTENDER_OPERATING_MODE_BLENDED = 3;
 }

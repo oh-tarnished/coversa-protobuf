@@ -28,10 +28,10 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `attentive_probability` | `double` | `OUTPUT_ONLY` | `PERCENT` | Probability of attentiveness of the driver. |
-| `distraction_level` | `double` | `OUTPUT_ONLY` | `PERCENT` | Distraction level of the driver, which can be evaluated by multiple factors e.g. driving situation, acoustical or optical signals inside the cockpit, ongoing phone calls. |
-| `fatigue_level` | `double` | `OUTPUT_ONLY` | `PERCENT` | Fatigue level of the driver, which can be evaluated by multiple factors e.g. trip time, behaviour of steering, eye status. |
-| `heart_rate` | `int32` | `OUTPUT_ONLY` | `BEATS_PER_MINUTE` | Heart rate of the driver. |
+| `attentive_probability` | `double` | `OUTPUT_ONLY` | `percent` | Probability of attentiveness of the driver. |
+| `distraction_level` | `double` | `OUTPUT_ONLY` | `percent` | Distraction level of the driver, which can be evaluated by multiple factors e.g. driving situation, acoustical or optical signals inside the cockpit, ongoing phone calls. |
+| `fatigue_level` | `double` | `OUTPUT_ONLY` | `percent` | Fatigue level of the driver, which can be evaluated by multiple factors e.g. trip time, behaviour of steering, eye status. |
+| `heart_rate` | `int32` | `OUTPUT_ONLY` | `bpm` | Heart rate of the driver. |
 | `is_eyes_on_road` | `bool` | `OUTPUT_ONLY` | — | Has driver the eyes on road or not? |
 | `is_hands_on_wheel` | `bool` | `OUTPUT_ONLY` | — | Are the driver's hands on the steering wheel or not? |
 

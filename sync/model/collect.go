@@ -7,9 +7,9 @@ package model
 // synthesises the one value type the source model does not declare.
 
 import (
-	"github.com/the-protobuf-project/vdm/sync/internal/catalog"
-	"github.com/the-protobuf-project/vdm/sync/internal/naming"
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/catalog"
+	"github.com/the-protobuf-project/vdm/sync/naming"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // collect walks a branch subtree, assigning every value object it reaches to

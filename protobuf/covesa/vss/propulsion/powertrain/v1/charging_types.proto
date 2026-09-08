@@ -19,13 +19,13 @@ option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.propulsi
 // Vehicle.Powertrain.TractionBattery.Charging.StartStopCharging.
 //
 // VSS: Vehicle.Powertrain.TractionBattery.Charging.StartStopCharging.
-enum PowertrainTractionBatteryChargingStartStopCharging {
+enum ChargingStartStopCharging {
   // Not specified.
-  POWERTRAIN_TRACTION_BATTERY_CHARGING_START_STOP_CHARGING_UNSPECIFIED = 0;
+  CHARGING_START_STOP_CHARGING_UNSPECIFIED = 0;
 
   // Start.
-  POWERTRAIN_TRACTION_BATTERY_CHARGING_START_STOP_CHARGING_START = 1;
+  CHARGING_START_STOP_CHARGING_START = 1;
 
   // Stop.
-  POWERTRAIN_TRACTION_BATTERY_CHARGING_START_STOP_CHARGING_STOP = 2;
+  CHARGING_START_STOP_CHARGING_STOP = 2;
 }

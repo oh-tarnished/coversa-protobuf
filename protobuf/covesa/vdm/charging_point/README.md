@@ -9,6 +9,8 @@
 > spec revision `2026-07-24` (`36bc939`).
 > Do not edit by hand; run `just docs`.
 
+ChargingPoint is a node of the COVESA Vehicle Signal Specification.
+
 ## Service `ChargingPoints`
 
 | Method | Request | Response | Summary |
@@ -24,44 +26,54 @@
 
 ### `ChargingPoint`
 
+ChargingPoint is a node of the COVESA Vehicle Signal Specification.
+
 Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the four timestamps — ahead of the signals below. Field numbers 8–15 are reserved.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `instance_tag` | `ChargingPointInstanceTag` | `OPTIONAL` | — | — |
-| `location` | `Address` | `OPTIONAL` | — | — |
+| `instance_tag` | `ChargingPointInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
+| `location` | `Address` | `OPTIONAL` | — | Location. |
 
 ### `ChargingPointInstanceTag`
 
+ChargingPointInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `area` | `AreaInStation` | `OPTIONAL` | — | — |
-| `label` | `ChargingPointLabel` | `OPTIONAL` | — | — |
+| `area` | `AreaInStation` | `OPTIONAL` | — | Area. |
+| `label` | `ChargingPointLabel` | `OPTIONAL` | — | Label. |
 
 ### `Address`
 
+Address is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `street` | `string` | `OPTIONAL` | — | — |
-| `city` | `string` | `OPTIONAL` | — | — |
-| `state` | `string` | `OPTIONAL` | — | — |
+| `street` | `string` | `OPTIONAL` | — | Street. |
+| `city` | `string` | `OPTIONAL` | — | City. |
+| `state` | `string` | `OPTIONAL` | — | State. |
 | `region_code` | `string` | `OPTIONAL` | — | An ISO 3166-1 alpha-2 country code, e.g. "SE". |
-| `zip_code` | `string` | `OPTIONAL` | — | — |
+| `zip_code` | `string` | `OPTIONAL` | — | Zip code. |
 
 ## Enums
 
 ### `AreaInStation`
 
+AreaInStation is an allowed-value set from the source model.
+
 | Value | Description |
 | --- | --- |
-| `UNDERGROUND` | — |
-| `OUTDOOR` | — |
+| `AREA_IN_STATION_UNDERGROUND` | Underground. |
+| `AREA_IN_STATION_OUTDOOR` | Outdoor. |
 
 ### `ChargingPointLabel`
 
+ChargingPointLabel is an allowed-value set from the source model.
+
 | Value | Description |
 | --- | --- |
-| `POINT_A` | — |
-| `POINT_B` | — |
-| `POINT_C` | — |
+| `CHARGING_POINT_LABEL_POINT_A` | Point a. |
+| `CHARGING_POINT_LABEL_POINT_B` | Point b. |
+| `CHARGING_POINT_LABEL_POINT_C` | Point c. |
 

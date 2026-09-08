@@ -22,8 +22,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/model"
-	"github.com/the-protobuf-project/vdm/sync/internal/plan"
+	"github.com/the-protobuf-project/vdm/sync/describe"
+	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/the-protobuf-project/vdm/sync/plan"
 )
 
 // Generator renders documentation for one model.
@@ -83,7 +84,7 @@ func (g *Generator) packageDoc(pkg *model.Package) string {
 	fmt.Fprintf(&sb, "**Shape** %s\n\n", shapeOf(pkg))
 	sb.WriteString(g.banner())
 
-	if doc := firstParagraph(pkg.Root.Doc); doc != "" {
+	if doc := firstParagraph(describe.Message(pkg.ResourceName(), pkg.Root)); doc != "" {
 		sb.WriteString(doc + "\n\n")
 	}
 	g.renderService(pkg, &sb)

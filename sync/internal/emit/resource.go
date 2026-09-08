@@ -10,11 +10,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/catalog"
-	"github.com/the-protobuf-project/vdm/sync/internal/model"
-	"github.com/the-protobuf-project/vdm/sync/internal/naming"
-	"github.com/the-protobuf-project/vdm/sync/internal/plan"
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/describe"
+	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/the-protobuf-project/vdm/sync/naming"
+	"github.com/the-protobuf-project/vdm/sync/plan"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // lifecycleFields are the server-owned fields every resource carries, in
@@ -77,19 +77,10 @@ func (e *Emitter) renderResourceHeader(pkg *model.Package, sb *strings.Builder) 
 // renderEnum writes one enum, its values prefixed with the enum name so they
 // do not collide in the package scope proto3 gives them.
 func (e *Emitter) renderEnum(f *File, enum *sdl.Def, sb *strings.Builder) {
-	name := plan.EnumName(enum.Name)
+	name := e.M.EnumName(enum.Name)
 	prefix := naming.Screaming(name)
 
-	doc := enum.Doc
-	if doc == "" {
-		doc = name + " is an allowed-value set from the source model."
-	}
-	if v, ok := enum.Directive("vspec"); ok {
-		if fqn, ok := v.Arg("fqn"); ok {
-			doc += "\n\nVSS: " + fqn + "."
-		}
-	}
-	sb.WriteString(docBlock(doc, ""))
+	sb.WriteString(docBlock(describe.Enum(name, enum), ""))
 	sb.WriteString("enum " + name + " {\n")
 
 	// AIP-126 requires a zero value meaning "unspecified". Where the source
@@ -112,30 +103,10 @@ func (e *Emitter) renderEnum(f *File, enum *sdl.Def, sb *strings.Builder) {
 // renderEnumValue writes one enumerant, recording the source spelling where
 // the sanitised name differs from it.
 func (e *Emitter) renderEnumValue(f *File, v sdl.EnumValue, prefix string, index, num int, sb *strings.Builder) {
-	source, hasSource := "", false
-	if d, ok := v.Directive("vspec"); ok {
-		if s, ok := d.Arg("originalName"); ok {
-			source, hasSource = s, true
-		}
-	}
+	source, hasSource := describe.SourceSpelling(v)
+	sb.WriteString(docBlock(describe.EnumValue(v, index), "  "))
 
-	doc := v.Doc
-	if doc == "" {
-		if index == 0 && v.Name == "UNDEFINED" {
-			doc = "Not specified."
-		} else {
-			doc = naming.Humanise(v.Name) + "."
-		}
-	}
-	if hasSource {
-		doc += "\n\nThe source model spells this \"" + source + "\"."
-	}
-	sb.WriteString(docBlock(doc, "  "))
-
-	value := prefix + "_" + naming.Screaming(v.Name) + catalog.EnumValueSuffix(v.Name)
-	if index == 0 && v.Name == "UNDEFINED" {
-		value = prefix + "_UNSPECIFIED"
-	}
+	value := plan.EnumValueName(prefix, v, index)
 	if hasSource {
 		f.Imports[model.VocabRoot+"/annotations.proto"] = true
 		fmt.Fprintf(sb, "  %s = %d [(%s.allowed_value) = {source_spelling: %q}];\n\n",

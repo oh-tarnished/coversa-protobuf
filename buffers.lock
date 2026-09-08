@@ -6820,302 +6820,302 @@ enums:
       - number: 69
         ordinal: 69
         name: UNIT_KILOWATT_HOURS
-  - enum: protobuf.covesa.vss.assistance.adas.v1.AdasActiveAutonomyLevel
+  - enum: protobuf.covesa.vss.assistance.adas.v1.ActiveAutonomyLevel
     values:
       - number: 0
         ordinal: 0
-        name: ADAS_ACTIVE_AUTONOMY_LEVEL_UNSPECIFIED
+        name: ACTIVE_AUTONOMY_LEVEL_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: ADAS_ACTIVE_AUTONOMY_LEVEL_SAE_0
+        name: ACTIVE_AUTONOMY_LEVEL_SAE_0
       - number: 2
         ordinal: 2
-        name: ADAS_ACTIVE_AUTONOMY_LEVEL_SAE_1
+        name: ACTIVE_AUTONOMY_LEVEL_SAE_1
       - number: 3
         ordinal: 3
-        name: ADAS_ACTIVE_AUTONOMY_LEVEL_SAE_2_DISENGAGING
+        name: ACTIVE_AUTONOMY_LEVEL_SAE_2_DISENGAGING
       - number: 4
         ordinal: 4
-        name: ADAS_ACTIVE_AUTONOMY_LEVEL_SAE_2
+        name: ACTIVE_AUTONOMY_LEVEL_SAE_2
       - number: 5
         ordinal: 5
-        name: ADAS_ACTIVE_AUTONOMY_LEVEL_SAE_3_DISENGAGING
+        name: ACTIVE_AUTONOMY_LEVEL_SAE_3_DISENGAGING
       - number: 6
         ordinal: 6
-        name: ADAS_ACTIVE_AUTONOMY_LEVEL_SAE_3
+        name: ACTIVE_AUTONOMY_LEVEL_SAE_3
       - number: 7
         ordinal: 7
-        name: ADAS_ACTIVE_AUTONOMY_LEVEL_SAE_4_DISENGAGING
+        name: ACTIVE_AUTONOMY_LEVEL_SAE_4_DISENGAGING
       - number: 8
         ordinal: 8
-        name: ADAS_ACTIVE_AUTONOMY_LEVEL_SAE_4
+        name: ACTIVE_AUTONOMY_LEVEL_SAE_4
       - number: 9
         ordinal: 9
-        name: ADAS_ACTIVE_AUTONOMY_LEVEL_SAE_5_DISENGAGING
+        name: ACTIVE_AUTONOMY_LEVEL_SAE_5_DISENGAGING
       - number: 10
         ordinal: 10
-        name: ADAS_ACTIVE_AUTONOMY_LEVEL_SAE_5
-  - enum: protobuf.covesa.vss.assistance.adas.v1.AdasSupportedAutonomyLevel
+        name: ACTIVE_AUTONOMY_LEVEL_SAE_5
+  - enum: protobuf.covesa.vss.assistance.adas.v1.SupportedAutonomyLevel
     values:
       - number: 0
         ordinal: 0
-        name: ADAS_SUPPORTED_AUTONOMY_LEVEL_UNSPECIFIED
+        name: SUPPORTED_AUTONOMY_LEVEL_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: ADAS_SUPPORTED_AUTONOMY_LEVEL_SAE_0
+        name: SUPPORTED_AUTONOMY_LEVEL_SAE_0
       - number: 2
         ordinal: 2
-        name: ADAS_SUPPORTED_AUTONOMY_LEVEL_SAE_1
+        name: SUPPORTED_AUTONOMY_LEVEL_SAE_1
       - number: 3
         ordinal: 3
-        name: ADAS_SUPPORTED_AUTONOMY_LEVEL_SAE_2
+        name: SUPPORTED_AUTONOMY_LEVEL_SAE_2
       - number: 4
         ordinal: 4
-        name: ADAS_SUPPORTED_AUTONOMY_LEVEL_SAE_3
+        name: SUPPORTED_AUTONOMY_LEVEL_SAE_3
       - number: 5
         ordinal: 5
-        name: ADAS_SUPPORTED_AUTONOMY_LEVEL_SAE_4
+        name: SUPPORTED_AUTONOMY_LEVEL_SAE_4
       - number: 6
         ordinal: 6
-        name: ADAS_SUPPORTED_AUTONOMY_LEVEL_SAE_5
-  - enum: protobuf.covesa.vss.assistance.obstacle_detection.v1.AdasObstacleDetectionWarningType
+        name: SUPPORTED_AUTONOMY_LEVEL_SAE_5
+  - enum: protobuf.covesa.vss.assistance.obstacle_detection.v1.Dimension1
     values:
       - number: 0
         ordinal: 0
-        name: ADAS_OBSTACLE_DETECTION_WARNING_TYPE_UNSPECIFIED
+        name: DIMENSION1_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: ADAS_OBSTACLE_DETECTION_WARNING_TYPE_CROSS_TRAFFIC
+        name: DIMENSION1_FRONT
       - number: 2
         ordinal: 2
-        name: ADAS_OBSTACLE_DETECTION_WARNING_TYPE_BLIND_SPOT
-  - enum: protobuf.covesa.vss.assistance.obstacle_detection.v1.ObstacleDetectionInstanceTagDimension1
+        name: DIMENSION1_REAR
+  - enum: protobuf.covesa.vss.assistance.obstacle_detection.v1.Dimension2
     values:
       - number: 0
         ordinal: 0
-        name: OBSTACLE_DETECTION_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
+        name: DIMENSION2_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: OBSTACLE_DETECTION_INSTANCE_TAG_DIMENSION1_FRONT
+        name: DIMENSION2_LEFT
       - number: 2
         ordinal: 2
-        name: OBSTACLE_DETECTION_INSTANCE_TAG_DIMENSION1_REAR
-  - enum: protobuf.covesa.vss.assistance.obstacle_detection.v1.ObstacleDetectionInstanceTagDimension2
-    values:
-      - number: 0
-        ordinal: 0
-        name: OBSTACLE_DETECTION_INSTANCE_TAG_DIMENSION2_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: OBSTACLE_DETECTION_INSTANCE_TAG_DIMENSION2_LEFT
-      - number: 2
-        ordinal: 2
-        name: OBSTACLE_DETECTION_INSTANCE_TAG_DIMENSION2_CENTER
+        name: DIMENSION2_CENTER
       - number: 3
         ordinal: 3
-        name: OBSTACLE_DETECTION_INSTANCE_TAG_DIMENSION2_RIGHT
-  - enum: protobuf.covesa.vss.exterior.beam.v1.BeamInstanceTagDimension1
+        name: DIMENSION2_RIGHT
+  - enum: protobuf.covesa.vss.assistance.obstacle_detection.v1.WarningType
     values:
       - number: 0
         ordinal: 0
-        name: BEAM_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
+        name: WARNING_TYPE_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: BEAM_INSTANCE_TAG_DIMENSION1_LOW
+        name: WARNING_TYPE_CROSS_TRAFFIC
       - number: 2
         ordinal: 2
-        name: BEAM_INSTANCE_TAG_DIMENSION1_HIGH
-  - enum: protobuf.covesa.vss.exterior.body.v1.BodyHoodSwitch
+        name: WARNING_TYPE_BLIND_SPOT
+  - enum: protobuf.covesa.vss.exterior.beam.v1.Dimension1
     values:
       - number: 0
         ordinal: 0
-        name: BODY_HOOD_SWITCH_UNSPECIFIED
+        name: DIMENSION1_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: BODY_HOOD_SWITCH_INACTIVE
+        name: DIMENSION1_LOW
       - number: 2
         ordinal: 2
-        name: BODY_HOOD_SWITCH_CLOSE
+        name: DIMENSION1_HIGH
+  - enum: protobuf.covesa.vss.exterior.body.v1.IsActive
+    values:
+      - number: 0
+        ordinal: 0
+        name: IS_ACTIVE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: IS_ACTIVE_INACTIVE
+      - number: 2
+        ordinal: 2
+        name: IS_ACTIVE_ACTIVE
       - number: 3
         ordinal: 3
-        name: BODY_HOOD_SWITCH_OPEN
+        name: IS_ACTIVE_ADAPTIVE
+  - enum: protobuf.covesa.vss.exterior.body.v1.LightSwitch
+    values:
+      - number: 0
+        ordinal: 0
+        name: LIGHT_SWITCH_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: LIGHT_SWITCH_OFF
+      - number: 2
+        ordinal: 2
+        name: LIGHT_SWITCH_POSITION
+      - number: 3
+        ordinal: 3
+        name: LIGHT_SWITCH_DAYTIME_RUNNING_LIGHTS
       - number: 4
         ordinal: 4
-        name: BODY_HOOD_SWITCH_ONE_SHOT_CLOSE
+        name: LIGHT_SWITCH_AUTO
       - number: 5
         ordinal: 5
-        name: BODY_HOOD_SWITCH_ONE_SHOT_OPEN
-  - enum: protobuf.covesa.vss.exterior.body.v1.BodyLightsBrakeIsActive
+        name: LIGHT_SWITCH_BEAM
+  - enum: protobuf.covesa.vss.exterior.body.v1.Switch
     values:
       - number: 0
         ordinal: 0
-        name: BODY_LIGHTS_BRAKE_IS_ACTIVE_UNSPECIFIED
+        name: SWITCH_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: BODY_LIGHTS_BRAKE_IS_ACTIVE_INACTIVE
+        name: SWITCH_INACTIVE
       - number: 2
         ordinal: 2
-        name: BODY_LIGHTS_BRAKE_IS_ACTIVE_ACTIVE
+        name: SWITCH_CLOSE
       - number: 3
         ordinal: 3
-        name: BODY_LIGHTS_BRAKE_IS_ACTIVE_ADAPTIVE
-  - enum: protobuf.covesa.vss.exterior.body.v1.BodyLightsLightSwitch
-    values:
-      - number: 0
-        ordinal: 0
-        name: BODY_LIGHTS_LIGHT_SWITCH_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: BODY_LIGHTS_LIGHT_SWITCH_OFF
-      - number: 2
-        ordinal: 2
-        name: BODY_LIGHTS_LIGHT_SWITCH_POSITION
-      - number: 3
-        ordinal: 3
-        name: BODY_LIGHTS_LIGHT_SWITCH_DAYTIME_RUNNING_LIGHTS
+        name: SWITCH_OPEN
       - number: 4
         ordinal: 4
-        name: BODY_LIGHTS_LIGHT_SWITCH_AUTO
+        name: SWITCH_ONE_SHOT_CLOSE
       - number: 5
         ordinal: 5
-        name: BODY_LIGHTS_LIGHT_SWITCH_BEAM
-  - enum: protobuf.covesa.vss.exterior.direction_indicator.v1.DirectionIndicatorInstanceTagDimension1
+        name: SWITCH_ONE_SHOT_OPEN
+  - enum: protobuf.covesa.vss.exterior.direction_indicator.v1.Dimension1
     values:
       - number: 0
         ordinal: 0
-        name: DIRECTION_INDICATOR_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
+        name: DIMENSION1_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: DIRECTION_INDICATOR_INSTANCE_TAG_DIMENSION1_LEFT
+        name: DIMENSION1_LEFT
       - number: 2
         ordinal: 2
-        name: DIRECTION_INDICATOR_INSTANCE_TAG_DIMENSION1_RIGHT
-  - enum: protobuf.covesa.vss.exterior.fog.v1.FogInstanceTagDimension1
+        name: DIMENSION1_RIGHT
+  - enum: protobuf.covesa.vss.exterior.fog.v1.Dimension1
     values:
       - number: 0
         ordinal: 0
-        name: FOG_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
+        name: DIMENSION1_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: FOG_INSTANCE_TAG_DIMENSION1_REAR
+        name: DIMENSION1_REAR
       - number: 2
         ordinal: 2
-        name: FOG_INSTANCE_TAG_DIMENSION1_FRONT
-  - enum: protobuf.covesa.vss.exterior.mirrors.v1.MirrorsInstanceTagDimension1
+        name: DIMENSION1_FRONT
+  - enum: protobuf.covesa.vss.exterior.mirrors.v1.Dimension1
     values:
       - number: 0
         ordinal: 0
-        name: MIRRORS_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
+        name: DIMENSION1_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: MIRRORS_INSTANCE_TAG_DIMENSION1_DRIVER_SIDE
+        name: DIMENSION1_DRIVER_SIDE
       - number: 2
         ordinal: 2
-        name: MIRRORS_INSTANCE_TAG_DIMENSION1_PASSENGER_SIDE
-  - enum: protobuf.covesa.vss.exterior.trunk.v1.BodyTrunkSwitch
+        name: DIMENSION1_PASSENGER_SIDE
+  - enum: protobuf.covesa.vss.exterior.trunk.v1.Dimension1
     values:
       - number: 0
         ordinal: 0
-        name: BODY_TRUNK_SWITCH_UNSPECIFIED
+        name: DIMENSION1_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: BODY_TRUNK_SWITCH_INACTIVE
+        name: DIMENSION1_FRONT
       - number: 2
         ordinal: 2
-        name: BODY_TRUNK_SWITCH_CLOSE
+        name: DIMENSION1_REAR
+  - enum: protobuf.covesa.vss.exterior.trunk.v1.Switch
+    values:
+      - number: 0
+        ordinal: 0
+        name: SWITCH_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: SWITCH_INACTIVE
+      - number: 2
+        ordinal: 2
+        name: SWITCH_CLOSE
       - number: 3
         ordinal: 3
-        name: BODY_TRUNK_SWITCH_OPEN
+        name: SWITCH_OPEN
       - number: 4
         ordinal: 4
-        name: BODY_TRUNK_SWITCH_ONE_SHOT_CLOSE
+        name: SWITCH_ONE_SHOT_CLOSE
       - number: 5
         ordinal: 5
-        name: BODY_TRUNK_SWITCH_ONE_SHOT_OPEN
-  - enum: protobuf.covesa.vss.exterior.trunk.v1.TrunkInstanceTagDimension1
+        name: SWITCH_ONE_SHOT_OPEN
+  - enum: protobuf.covesa.vss.exterior.windshield.v1.InstanceTagDimension1
     values:
       - number: 0
         ordinal: 0
-        name: TRUNK_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
+        name: INSTANCE_TAG_DIMENSION1_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: TRUNK_INSTANCE_TAG_DIMENSION1_FRONT
+        name: INSTANCE_TAG_DIMENSION1_FRONT
       - number: 2
         ordinal: 2
-        name: TRUNK_INSTANCE_TAG_DIMENSION1_REAR
-  - enum: protobuf.covesa.vss.exterior.windshield.v1.BodyWindshieldWipingMode
+        name: INSTANCE_TAG_DIMENSION1_REAR
+  - enum: protobuf.covesa.vss.exterior.windshield.v1.SystemMode
     values:
       - number: 0
         ordinal: 0
-        name: BODY_WINDSHIELD_WIPING_MODE_UNSPECIFIED
+        name: SYSTEM_MODE_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: BODY_WINDSHIELD_WIPING_MODE_OFF
+        name: SYSTEM_MODE_STOP_HOLD
       - number: 2
         ordinal: 2
-        name: BODY_WINDSHIELD_WIPING_MODE_SLOW
+        name: SYSTEM_MODE_WIPE
       - number: 3
         ordinal: 3
-        name: BODY_WINDSHIELD_WIPING_MODE_MEDIUM
+        name: SYSTEM_MODE_PLANT_MODE
       - number: 4
         ordinal: 4
-        name: BODY_WINDSHIELD_WIPING_MODE_FAST
+        name: SYSTEM_MODE_EMERGENCY_STOP
+  - enum: protobuf.covesa.vss.exterior.windshield.v1.WipingMode
+    values:
+      - number: 0
+        ordinal: 0
+        name: WIPING_MODE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: WIPING_MODE_OFF
+      - number: 2
+        ordinal: 2
+        name: WIPING_MODE_SLOW
+      - number: 3
+        ordinal: 3
+        name: WIPING_MODE_MEDIUM
+      - number: 4
+        ordinal: 4
+        name: WIPING_MODE_FAST
       - number: 5
         ordinal: 5
-        name: BODY_WINDSHIELD_WIPING_MODE_INTERVAL
+        name: WIPING_MODE_INTERVAL
       - number: 6
         ordinal: 6
-        name: BODY_WINDSHIELD_WIPING_MODE_RAIN_SENSOR
-  - enum: protobuf.covesa.vss.exterior.windshield.v1.BodyWindshieldWipingSystemMode
+        name: WIPING_MODE_RAIN_SENSOR
+  - enum: protobuf.covesa.vss.interior.ambient_light.v1.Dimension1
     values:
       - number: 0
         ordinal: 0
-        name: BODY_WINDSHIELD_WIPING_SYSTEM_MODE_UNSPECIFIED
+        name: DIMENSION1_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: BODY_WINDSHIELD_WIPING_SYSTEM_MODE_STOP_HOLD
+        name: DIMENSION1_ROW1
       - number: 2
         ordinal: 2
-        name: BODY_WINDSHIELD_WIPING_SYSTEM_MODE_WIPE
-      - number: 3
-        ordinal: 3
-        name: BODY_WINDSHIELD_WIPING_SYSTEM_MODE_PLANT_MODE
-      - number: 4
-        ordinal: 4
-        name: BODY_WINDSHIELD_WIPING_SYSTEM_MODE_EMERGENCY_STOP
-  - enum: protobuf.covesa.vss.exterior.windshield.v1.WindshieldInstanceTagDimension1
+        name: DIMENSION1_ROW2
+  - enum: protobuf.covesa.vss.interior.ambient_light.v1.Dimension2
     values:
       - number: 0
         ordinal: 0
-        name: WINDSHIELD_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
+        name: DIMENSION2_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: WINDSHIELD_INSTANCE_TAG_DIMENSION1_FRONT
+        name: DIMENSION2_DRIVER_SIDE
       - number: 2
         ordinal: 2
-        name: WINDSHIELD_INSTANCE_TAG_DIMENSION1_REAR
-  - enum: protobuf.covesa.vss.interior.ambient_light.v1.AmbientLightInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: AMBIENT_LIGHT_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: AMBIENT_LIGHT_INSTANCE_TAG_DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: AMBIENT_LIGHT_INSTANCE_TAG_DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.interior.ambient_light.v1.AmbientLightInstanceTagDimension2
-    values:
-      - number: 0
-        ordinal: 0
-        name: AMBIENT_LIGHT_INSTANCE_TAG_DIMENSION2_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: AMBIENT_LIGHT_INSTANCE_TAG_DIMENSION2_DRIVER_SIDE
-      - number: 2
-        ordinal: 2
-        name: AMBIENT_LIGHT_INSTANCE_TAG_DIMENSION2_PASSENGER_SIDE
+        name: DIMENSION2_PASSENGER_SIDE
   - enum: protobuf.covesa.vss.interior.cabin.v1.CabinConvertibleState
     values:
       - number: 0
@@ -7150,363 +7150,6 @@ enums:
       - number: 3
         ordinal: 3
         name: CABIN_DRIVER_POSITION_RIGHT
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentHmiDateFormat
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_HMI_DATE_FORMAT_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_HMI_DATE_FORMAT_YYYY_MM_DD
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_HMI_DATE_FORMAT_DD_MM_YYYY
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_HMI_DATE_FORMAT_MM_DD_YYYY
-      - number: 4
-        ordinal: 4
-        name: CABIN_INFOTAINMENT_HMI_DATE_FORMAT_YY_MM_DD
-      - number: 5
-        ordinal: 5
-        name: CABIN_INFOTAINMENT_HMI_DATE_FORMAT_DD_MM_YY
-      - number: 6
-        ordinal: 6
-        name: CABIN_INFOTAINMENT_HMI_DATE_FORMAT_MM_DD_YY
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentHmiDayNightMode
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_HMI_DAY_NIGHT_MODE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_HMI_DAY_NIGHT_MODE_DAY
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_HMI_DAY_NIGHT_MODE_NIGHT
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentHmiDistanceUnit
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_HMI_DISTANCE_UNIT_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_HMI_DISTANCE_UNIT_MILES
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_HMI_DISTANCE_UNIT_KILOMETERS
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentHmiEvEconomyUnits
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_HMI_EV_ECONOMY_UNITS_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_HMI_EV_ECONOMY_UNITS_MILES_PER_KILOWATT_HOUR
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_HMI_EV_ECONOMY_UNITS_KILOMETERS_PER_KILOWATT_HOUR
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_HMI_EV_ECONOMY_UNITS_KILOWATT_HOURS_PER_100_MILES
-      - number: 4
-        ordinal: 4
-        name: CABIN_INFOTAINMENT_HMI_EV_ECONOMY_UNITS_KILOWATT_HOURS_PER_100_KILOMETERS
-      - number: 5
-        ordinal: 5
-        name: CABIN_INFOTAINMENT_HMI_EV_ECONOMY_UNITS_WATT_HOURS_PER_MILE
-      - number: 6
-        ordinal: 6
-        name: CABIN_INFOTAINMENT_HMI_EV_ECONOMY_UNITS_WATT_HOURS_PER_KILOMETER
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentHmiEvEnergyUnits
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_HMI_EV_ENERGY_UNITS_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_HMI_EV_ENERGY_UNITS_WATT_HOURS
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_HMI_EV_ENERGY_UNITS_AMPERE_HOURS
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_HMI_EV_ENERGY_UNITS_KILOWATT_HOURS
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentHmiFontSize
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_HMI_FONT_SIZE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_HMI_FONT_SIZE_STANDARD
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_HMI_FONT_SIZE_LARGE
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_HMI_FONT_SIZE_EXTRA_LARGE
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentHmiFuelEconomyUnits
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_MPG_UK
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_MPG_US
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_MILES_PER_LITER
-      - number: 4
-        ordinal: 4
-        name: CABIN_INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_KILOMETERS_PER_LITER
-      - number: 5
-        ordinal: 5
-        name: CABIN_INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_LITERS_PER_100_KILOMETERS
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentHmiFuelVolumeUnit
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_HMI_FUEL_VOLUME_UNIT_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_HMI_FUEL_VOLUME_UNIT_LITER
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_HMI_FUEL_VOLUME_UNIT_GALLON_US
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_HMI_FUEL_VOLUME_UNIT_GALLON_UK
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentHmiSpeedUnit
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_HMI_SPEED_UNIT_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_HMI_SPEED_UNIT_METERS_PER_SECOND
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_HMI_SPEED_UNIT_MILES_PER_HOUR
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_HMI_SPEED_UNIT_KILOMETERS_PER_HOUR
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentHmiTemperatureUnit
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_HMI_TEMPERATURE_UNIT_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_HMI_TEMPERATURE_UNIT_C
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_HMI_TEMPERATURE_UNIT_F
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentHmiTimeFormat
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_HMI_TIME_FORMAT_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_HMI_TIME_FORMAT_HR_12
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_HMI_TIME_FORMAT_HR_24
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentHmiTirePressureUnit
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_HMI_TIRE_PRESSURE_UNIT_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_HMI_TIRE_PRESSURE_UNIT_PSI
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_HMI_TIRE_PRESSURE_UNIT_KPA
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_HMI_TIRE_PRESSURE_UNIT_BAR
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentMediaAction
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_MEDIA_ACTION_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_MEDIA_ACTION_UNKNOWN
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_MEDIA_ACTION_STOP
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_MEDIA_ACTION_PLAY
-      - number: 4
-        ordinal: 4
-        name: CABIN_INFOTAINMENT_MEDIA_ACTION_FAST_FORWARD
-      - number: 5
-        ordinal: 5
-        name: CABIN_INFOTAINMENT_MEDIA_ACTION_FAST_BACKWARD
-      - number: 6
-        ordinal: 6
-        name: CABIN_INFOTAINMENT_MEDIA_ACTION_SKIP_FORWARD
-      - number: 7
-        ordinal: 7
-        name: CABIN_INFOTAINMENT_MEDIA_ACTION_SKIP_BACKWARD
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentMediaPlayedSource
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_UNKNOWN
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_SIRIUS_XM
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_AM
-      - number: 4
-        ordinal: 4
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_FM
-      - number: 5
-        ordinal: 5
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_DAB
-      - number: 6
-        ordinal: 6
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_TV
-      - number: 7
-        ordinal: 7
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_CD
-      - number: 8
-        ordinal: 8
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_DVD
-      - number: 9
-        ordinal: 9
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_AUX
-      - number: 10
-        ordinal: 10
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_USB
-      - number: 11
-        ordinal: 11
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_DISK
-      - number: 12
-        ordinal: 12
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_BLUETOOTH
-      - number: 13
-        ordinal: 13
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_INTERNET
-      - number: 14
-        ordinal: 14
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_VOICE
-      - number: 15
-        ordinal: 15
-        name: CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_BEEP
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentNavigationGuidanceVoice
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_STANDARD_MALE
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_STANDARD_FEMALE
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_ETC
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentNavigationMute
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_NAVIGATION_MUTE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_NAVIGATION_MUTE_MUTED
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_NAVIGATION_MUTE_ALERT_ONLY
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_NAVIGATION_MUTE_UNMUTED
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentSmartphoneProjectionActive
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_SMARTPHONE_PROJECTION_ACTIVE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_SMARTPHONE_PROJECTION_ACTIVE_NONE
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_SMARTPHONE_PROJECTION_ACTIVE_ACTIVE
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_SMARTPHONE_PROJECTION_ACTIVE_INACTIVE
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentSmartphoneProjectionSource
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_SMARTPHONE_PROJECTION_SOURCE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_SMARTPHONE_PROJECTION_SOURCE_USB
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_SMARTPHONE_PROJECTION_SOURCE_BLUETOOTH
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_SMARTPHONE_PROJECTION_SOURCE_WIFI
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentSmartphoneProjectionSupportedMode
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_SMARTPHONE_PROJECTION_SUPPORTED_MODE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_SMARTPHONE_PROJECTION_SUPPORTED_MODE_ANDROID_AUTO
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_SMARTPHONE_PROJECTION_SUPPORTED_MODE_APPLE_CARPLAY
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_SMARTPHONE_PROJECTION_SUPPORTED_MODE_MIRROR_LINK
-      - number: 4
-        ordinal: 4
-        name: CABIN_INFOTAINMENT_SMARTPHONE_PROJECTION_SUPPORTED_MODE_OTHER
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentSmartphoneScreenMirroringActive
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_ACTIVE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_ACTIVE_NONE
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_ACTIVE_ACTIVE
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_ACTIVE_INACTIVE
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinInfotainmentSmartphoneScreenMirroringSource
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_SOURCE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_SOURCE_USB
-      - number: 2
-        ordinal: 2
-        name: CABIN_INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_SOURCE_BLUETOOTH
-      - number: 3
-        ordinal: 3
-        name: CABIN_INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_SOURCE_WIFI
   - enum: protobuf.covesa.vss.interior.cabin.v1.CabinRearShadeSwitch
     values:
       - number: 0
@@ -7527,26 +7170,6 @@ enums:
       - number: 5
         ordinal: 5
         name: CABIN_REAR_SHADE_SWITCH_ONE_SHOT_OPEN
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinSunroofShadeSwitch
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_SUNROOF_SHADE_SWITCH_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_SUNROOF_SHADE_SWITCH_INACTIVE
-      - number: 2
-        ordinal: 2
-        name: CABIN_SUNROOF_SHADE_SWITCH_CLOSE
-      - number: 3
-        ordinal: 3
-        name: CABIN_SUNROOF_SHADE_SWITCH_OPEN
-      - number: 4
-        ordinal: 4
-        name: CABIN_SUNROOF_SHADE_SWITCH_ONE_SHOT_CLOSE
-      - number: 5
-        ordinal: 5
-        name: CABIN_SUNROOF_SHADE_SWITCH_ONE_SHOT_OPEN
   - enum: protobuf.covesa.vss.interior.cabin.v1.CabinSunroofSwitch
     values:
       - number: 0
@@ -7573,831 +7196,1109 @@ enums:
       - number: 7
         ordinal: 7
         name: CABIN_SUNROOF_SWITCH_TILT_DOWN
-  - enum: protobuf.covesa.vss.interior.door.v1.CabinDoorShadeSwitch
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentHmiDateFormat
     values:
       - number: 0
         ordinal: 0
-        name: CABIN_DOOR_SHADE_SWITCH_UNSPECIFIED
+        name: INFOTAINMENT_HMI_DATE_FORMAT_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: CABIN_DOOR_SHADE_SWITCH_INACTIVE
+        name: INFOTAINMENT_HMI_DATE_FORMAT_YYYY_MM_DD
       - number: 2
         ordinal: 2
-        name: CABIN_DOOR_SHADE_SWITCH_CLOSE
+        name: INFOTAINMENT_HMI_DATE_FORMAT_DD_MM_YYYY
       - number: 3
         ordinal: 3
-        name: CABIN_DOOR_SHADE_SWITCH_OPEN
+        name: INFOTAINMENT_HMI_DATE_FORMAT_MM_DD_YYYY
       - number: 4
         ordinal: 4
-        name: CABIN_DOOR_SHADE_SWITCH_ONE_SHOT_CLOSE
+        name: INFOTAINMENT_HMI_DATE_FORMAT_YY_MM_DD
       - number: 5
         ordinal: 5
-        name: CABIN_DOOR_SHADE_SWITCH_ONE_SHOT_OPEN
-  - enum: protobuf.covesa.vss.interior.door.v1.CabinDoorSwitch
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_DOOR_SWITCH_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_DOOR_SWITCH_INACTIVE
-      - number: 2
-        ordinal: 2
-        name: CABIN_DOOR_SWITCH_CLOSE
-      - number: 3
-        ordinal: 3
-        name: CABIN_DOOR_SWITCH_OPEN
-      - number: 4
-        ordinal: 4
-        name: CABIN_DOOR_SWITCH_ONE_SHOT_CLOSE
-      - number: 5
-        ordinal: 5
-        name: CABIN_DOOR_SWITCH_ONE_SHOT_OPEN
-  - enum: protobuf.covesa.vss.interior.door.v1.CabinDoorWindowSwitch
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_DOOR_WINDOW_SWITCH_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_DOOR_WINDOW_SWITCH_INACTIVE
-      - number: 2
-        ordinal: 2
-        name: CABIN_DOOR_WINDOW_SWITCH_CLOSE
-      - number: 3
-        ordinal: 3
-        name: CABIN_DOOR_WINDOW_SWITCH_OPEN
-      - number: 4
-        ordinal: 4
-        name: CABIN_DOOR_WINDOW_SWITCH_ONE_SHOT_CLOSE
-      - number: 5
-        ordinal: 5
-        name: CABIN_DOOR_WINDOW_SWITCH_ONE_SHOT_OPEN
-  - enum: protobuf.covesa.vss.interior.door.v1.DoorInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DOOR_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DOOR_INSTANCE_TAG_DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: DOOR_INSTANCE_TAG_DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.interior.door.v1.DoorInstanceTagDimension2
-    values:
-      - number: 0
-        ordinal: 0
-        name: DOOR_INSTANCE_TAG_DIMENSION2_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DOOR_INSTANCE_TAG_DIMENSION2_DRIVER_SIDE
-      - number: 2
-        ordinal: 2
-        name: DOOR_INSTANCE_TAG_DIMENSION2_PASSENGER_SIDE
-  - enum: protobuf.covesa.vss.interior.occupant.v1.OccupantInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: OCCUPANT_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: OCCUPANT_INSTANCE_TAG_DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: OCCUPANT_INSTANCE_TAG_DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.interior.occupant.v1.OccupantInstanceTagDimension2
-    values:
-      - number: 0
-        ordinal: 0
-        name: OCCUPANT_INSTANCE_TAG_DIMENSION2_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: OCCUPANT_INSTANCE_TAG_DIMENSION2_DRIVER_SIDE
-      - number: 2
-        ordinal: 2
-        name: OCCUPANT_INSTANCE_TAG_DIMENSION2_MIDDLE
-      - number: 3
-        ordinal: 3
-        name: OCCUPANT_INSTANCE_TAG_DIMENSION2_PASSENGER_SIDE
-  - enum: protobuf.covesa.vss.interior.seat.v1.CabinSeatMassageState
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_SEAT_MASSAGE_STATE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_SEAT_MASSAGE_STATE_ON_VALUE
-      - number: 2
-        ordinal: 2
-        name: CABIN_SEAT_MASSAGE_STATE_OFF
-  - enum: protobuf.covesa.vss.interior.seat.v1.CabinSeatOccupancyState
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_SEAT_OCCUPANCY_STATE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_SEAT_OCCUPANCY_STATE_UNKNOWN
-      - number: 2
-        ordinal: 2
-        name: CABIN_SEAT_OCCUPANCY_STATE_OCCUPIED
-      - number: 3
-        ordinal: 3
-        name: CABIN_SEAT_OCCUPANCY_STATE_EMPTY
-  - enum: protobuf.covesa.vss.interior.seat.v1.SeatInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: SEAT_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: SEAT_INSTANCE_TAG_DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: SEAT_INSTANCE_TAG_DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.interior.seat.v1.SeatInstanceTagDimension2
-    values:
-      - number: 0
-        ordinal: 0
-        name: SEAT_INSTANCE_TAG_DIMENSION2_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: SEAT_INSTANCE_TAG_DIMENSION2_DRIVER_SIDE
-      - number: 2
-        ordinal: 2
-        name: SEAT_INSTANCE_TAG_DIMENSION2_MIDDLE
-      - number: 3
-        ordinal: 3
-        name: SEAT_INSTANCE_TAG_DIMENSION2_PASSENGER_SIDE
-  - enum: protobuf.covesa.vss.interior.spotlight.v1.SpotlightInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: SPOTLIGHT_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: SPOTLIGHT_INSTANCE_TAG_DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: SPOTLIGHT_INSTANCE_TAG_DIMENSION1_ROW2
-      - number: 3
-        ordinal: 3
-        name: SPOTLIGHT_INSTANCE_TAG_DIMENSION1_ROW3
-      - number: 4
-        ordinal: 4
-        name: SPOTLIGHT_INSTANCE_TAG_DIMENSION1_ROW4
-  - enum: protobuf.covesa.vss.interior.spotlight.v1.SpotlightInstanceTagDimension2
-    values:
-      - number: 0
-        ordinal: 0
-        name: SPOTLIGHT_INSTANCE_TAG_DIMENSION2_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: SPOTLIGHT_INSTANCE_TAG_DIMENSION2_DRIVER_SIDE
-      - number: 2
-        ordinal: 2
-        name: SPOTLIGHT_INSTANCE_TAG_DIMENSION2_PASSENGER_SIDE
-  - enum: protobuf.covesa.vss.interior.station.v1.CabinHvacStationAirDistribution
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_HVAC_STATION_AIR_DISTRIBUTION_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_HVAC_STATION_AIR_DISTRIBUTION_UP
-      - number: 2
-        ordinal: 2
-        name: CABIN_HVAC_STATION_AIR_DISTRIBUTION_MIDDLE
-      - number: 3
-        ordinal: 3
-        name: CABIN_HVAC_STATION_AIR_DISTRIBUTION_DOWN
-  - enum: protobuf.covesa.vss.interior.station.v1.StationInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: STATION_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: STATION_INSTANCE_TAG_DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: STATION_INSTANCE_TAG_DIMENSION1_ROW2
-      - number: 3
-        ordinal: 3
-        name: STATION_INSTANCE_TAG_DIMENSION1_ROW3
-      - number: 4
-        ordinal: 4
-        name: STATION_INSTANCE_TAG_DIMENSION1_ROW4
-  - enum: protobuf.covesa.vss.interior.station.v1.StationInstanceTagDimension2
-    values:
-      - number: 0
-        ordinal: 0
-        name: STATION_INSTANCE_TAG_DIMENSION2_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: STATION_INSTANCE_TAG_DIMENSION2_DRIVER
-      - number: 2
-        ordinal: 2
-        name: STATION_INSTANCE_TAG_DIMENSION2_PASSENGER
-  - enum: protobuf.covesa.vss.location.current_location.v1.CurrentLocationGnSsReceiverFixType
-    values:
-      - number: 0
-        ordinal: 0
-        name: CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_NONE
-      - number: 2
-        ordinal: 2
-        name: CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_TWO_D
-      - number: 3
-        ordinal: 3
-        name: CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_TWO_D_SATELLITE_BASED_AUGMENTATION
-      - number: 4
-        ordinal: 4
-        name: CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_TWO_D_GROUND_BASED_AUGMENTATION
-      - number: 5
-        ordinal: 5
-        name: CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_TWO_D_SATELLITE_AND_GROUND_BASED_AUGMENTATION
+        name: INFOTAINMENT_HMI_DATE_FORMAT_DD_MM_YY
       - number: 6
         ordinal: 6
-        name: CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_THREE_D
+        name: INFOTAINMENT_HMI_DATE_FORMAT_MM_DD_YY
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentHmiDayNightMode
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_HMI_DAY_NIGHT_MODE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_HMI_DAY_NIGHT_MODE_DAY
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_HMI_DAY_NIGHT_MODE_NIGHT
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentHmiDistanceUnit
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_HMI_DISTANCE_UNIT_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_HMI_DISTANCE_UNIT_MILES
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_HMI_DISTANCE_UNIT_KILOMETERS
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentHmiEvEconomyUnits
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_HMI_EV_ECONOMY_UNITS_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_HMI_EV_ECONOMY_UNITS_MILES_PER_KILOWATT_HOUR
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_HMI_EV_ECONOMY_UNITS_KILOMETERS_PER_KILOWATT_HOUR
+      - number: 3
+        ordinal: 3
+        name: INFOTAINMENT_HMI_EV_ECONOMY_UNITS_KILOWATT_HOURS_PER_100_MILES
+      - number: 4
+        ordinal: 4
+        name: INFOTAINMENT_HMI_EV_ECONOMY_UNITS_KILOWATT_HOURS_PER_100_KILOMETERS
+      - number: 5
+        ordinal: 5
+        name: INFOTAINMENT_HMI_EV_ECONOMY_UNITS_WATT_HOURS_PER_MILE
+      - number: 6
+        ordinal: 6
+        name: INFOTAINMENT_HMI_EV_ECONOMY_UNITS_WATT_HOURS_PER_KILOMETER
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentHmiEvEnergyUnits
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_HMI_EV_ENERGY_UNITS_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_HMI_EV_ENERGY_UNITS_WATT_HOURS
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_HMI_EV_ENERGY_UNITS_AMPERE_HOURS
+      - number: 3
+        ordinal: 3
+        name: INFOTAINMENT_HMI_EV_ENERGY_UNITS_KILOWATT_HOURS
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentHmiFontSize
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_HMI_FONT_SIZE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_HMI_FONT_SIZE_STANDARD
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_HMI_FONT_SIZE_LARGE
+      - number: 3
+        ordinal: 3
+        name: INFOTAINMENT_HMI_FONT_SIZE_EXTRA_LARGE
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentHmiFuelEconomyUnits
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_MPG_UK
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_MPG_US
+      - number: 3
+        ordinal: 3
+        name: INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_MILES_PER_LITER
+      - number: 4
+        ordinal: 4
+        name: INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_KILOMETERS_PER_LITER
+      - number: 5
+        ordinal: 5
+        name: INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_LITERS_PER_100_KILOMETERS
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentHmiFuelVolumeUnit
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_HMI_FUEL_VOLUME_UNIT_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_HMI_FUEL_VOLUME_UNIT_LITER
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_HMI_FUEL_VOLUME_UNIT_GALLON_US
+      - number: 3
+        ordinal: 3
+        name: INFOTAINMENT_HMI_FUEL_VOLUME_UNIT_GALLON_UK
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentHmiSpeedUnit
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_HMI_SPEED_UNIT_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_HMI_SPEED_UNIT_METERS_PER_SECOND
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_HMI_SPEED_UNIT_MILES_PER_HOUR
+      - number: 3
+        ordinal: 3
+        name: INFOTAINMENT_HMI_SPEED_UNIT_KILOMETERS_PER_HOUR
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentHmiTemperatureUnit
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_HMI_TEMPERATURE_UNIT_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_HMI_TEMPERATURE_UNIT_C
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_HMI_TEMPERATURE_UNIT_F
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentHmiTimeFormat
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_HMI_TIME_FORMAT_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_HMI_TIME_FORMAT_HR_12
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_HMI_TIME_FORMAT_HR_24
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentHmiTirePressureUnit
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_HMI_TIRE_PRESSURE_UNIT_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_HMI_TIRE_PRESSURE_UNIT_PSI
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_HMI_TIRE_PRESSURE_UNIT_KPA
+      - number: 3
+        ordinal: 3
+        name: INFOTAINMENT_HMI_TIRE_PRESSURE_UNIT_BAR
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentMediaAction
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_MEDIA_ACTION_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_MEDIA_ACTION_UNKNOWN
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_MEDIA_ACTION_STOP
+      - number: 3
+        ordinal: 3
+        name: INFOTAINMENT_MEDIA_ACTION_PLAY
+      - number: 4
+        ordinal: 4
+        name: INFOTAINMENT_MEDIA_ACTION_FAST_FORWARD
+      - number: 5
+        ordinal: 5
+        name: INFOTAINMENT_MEDIA_ACTION_FAST_BACKWARD
+      - number: 6
+        ordinal: 6
+        name: INFOTAINMENT_MEDIA_ACTION_SKIP_FORWARD
       - number: 7
         ordinal: 7
-        name: CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_THREE_D_SATELLITE_BASED_AUGMENTATION
+        name: INFOTAINMENT_MEDIA_ACTION_SKIP_BACKWARD
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentNavigationGuidanceVoice
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_STANDARD_MALE
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_STANDARD_FEMALE
+      - number: 3
+        ordinal: 3
+        name: INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_ETC
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentNavigationMute
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_NAVIGATION_MUTE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_NAVIGATION_MUTE_MUTED
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_NAVIGATION_MUTE_ALERT_ONLY
+      - number: 3
+        ordinal: 3
+        name: INFOTAINMENT_NAVIGATION_MUTE_UNMUTED
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentSmartphoneProjectionActive
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_SMARTPHONE_PROJECTION_ACTIVE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_SMARTPHONE_PROJECTION_ACTIVE_NONE
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_SMARTPHONE_PROJECTION_ACTIVE_ACTIVE
+      - number: 3
+        ordinal: 3
+        name: INFOTAINMENT_SMARTPHONE_PROJECTION_ACTIVE_INACTIVE
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentSmartphoneProjectionSource
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_SMARTPHONE_PROJECTION_SOURCE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_SMARTPHONE_PROJECTION_SOURCE_USB
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_SMARTPHONE_PROJECTION_SOURCE_BLUETOOTH
+      - number: 3
+        ordinal: 3
+        name: INFOTAINMENT_SMARTPHONE_PROJECTION_SOURCE_WIFI
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentSmartphoneProjectionSupportedMode
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_SMARTPHONE_PROJECTION_SUPPORTED_MODE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_SMARTPHONE_PROJECTION_SUPPORTED_MODE_ANDROID_AUTO
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_SMARTPHONE_PROJECTION_SUPPORTED_MODE_APPLE_CARPLAY
+      - number: 3
+        ordinal: 3
+        name: INFOTAINMENT_SMARTPHONE_PROJECTION_SUPPORTED_MODE_MIRROR_LINK
+      - number: 4
+        ordinal: 4
+        name: INFOTAINMENT_SMARTPHONE_PROJECTION_SUPPORTED_MODE_OTHER
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentSmartphoneScreenMirroringActive
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_ACTIVE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_ACTIVE_NONE
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_ACTIVE_ACTIVE
+      - number: 3
+        ordinal: 3
+        name: INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_ACTIVE_INACTIVE
+  - enum: protobuf.covesa.vss.interior.cabin.v1.InfotainmentSmartphoneScreenMirroringSource
+    values:
+      - number: 0
+        ordinal: 0
+        name: INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_SOURCE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_SOURCE_USB
+      - number: 2
+        ordinal: 2
+        name: INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_SOURCE_BLUETOOTH
+      - number: 3
+        ordinal: 3
+        name: INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_SOURCE_WIFI
+  - enum: protobuf.covesa.vss.interior.cabin.v1.MediaPlayedSource
+    values:
+      - number: 0
+        ordinal: 0
+        name: MEDIA_PLAYED_SOURCE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: MEDIA_PLAYED_SOURCE_UNKNOWN
+      - number: 2
+        ordinal: 2
+        name: MEDIA_PLAYED_SOURCE_SIRIUS_XM
+      - number: 3
+        ordinal: 3
+        name: MEDIA_PLAYED_SOURCE_AM
+      - number: 4
+        ordinal: 4
+        name: MEDIA_PLAYED_SOURCE_FM
+      - number: 5
+        ordinal: 5
+        name: MEDIA_PLAYED_SOURCE_DAB
+      - number: 6
+        ordinal: 6
+        name: MEDIA_PLAYED_SOURCE_TV
+      - number: 7
+        ordinal: 7
+        name: MEDIA_PLAYED_SOURCE_CD
       - number: 8
         ordinal: 8
-        name: CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_THREE_D_GROUND_BASED_AUGMENTATION
+        name: MEDIA_PLAYED_SOURCE_DVD
       - number: 9
         ordinal: 9
-        name: CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_THREE_D_SATELLITE_AND_GROUND_BASED_AUGMENTATION
-  - enum: protobuf.covesa.vss.motion.axle_wheel.v1.AxleWheelInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: AXLE_WHEEL_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: AXLE_WHEEL_INSTANCE_TAG_DIMENSION1_LEFT
-      - number: 2
-        ordinal: 2
-        name: AXLE_WHEEL_INSTANCE_TAG_DIMENSION1_RIGHT
-  - enum: protobuf.covesa.vss.motion.brake_axle.v1.BrakeAxleInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: BRAKE_AXLE_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: BRAKE_AXLE_INSTANCE_TAG_DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: BRAKE_AXLE_INSTANCE_TAG_DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.motion.brake_axle_wheel.v1.BrakeAxleWheelInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: BRAKE_AXLE_WHEEL_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: BRAKE_AXLE_WHEEL_INSTANCE_TAG_DIMENSION1_LEFT
-      - number: 2
-        ordinal: 2
-        name: BRAKE_AXLE_WHEEL_INSTANCE_TAG_DIMENSION1_RIGHT
-  - enum: protobuf.covesa.vss.motion.chassis_axle.v1.ChassisAxleInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: CHASSIS_AXLE_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CHASSIS_AXLE_INSTANCE_TAG_DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: CHASSIS_AXLE_INSTANCE_TAG_DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.motion.electric_axle.v1.ElectricAxleInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: ELECTRIC_AXLE_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: ELECTRIC_AXLE_INSTANCE_TAG_DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: ELECTRIC_AXLE_INSTANCE_TAG_DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.motion.suspension_axle.v1.SuspensionAxleInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: SUSPENSION_AXLE_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: SUSPENSION_AXLE_INSTANCE_TAG_DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: SUSPENSION_AXLE_INSTANCE_TAG_DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.SuspensionAxleWheelInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: SUSPENSION_AXLE_WHEEL_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: SUSPENSION_AXLE_WHEEL_INSTANCE_TAG_DIMENSION1_LEFT
-      - number: 2
-        ordinal: 2
-        name: SUSPENSION_AXLE_WHEEL_INSTANCE_TAG_DIMENSION1_RIGHT
-  - enum: protobuf.covesa.vss.platform.control_unit.v1.ControlUnitInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: CONTROL_UNIT_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CONTROL_UNIT_INSTANCE_TAG_DIMENSION1_CENTRAL
-      - number: 2
-        ordinal: 2
-        name: CONTROL_UNIT_INSTANCE_TAG_DIMENSION1_FRONT_LEFT
-      - number: 3
-        ordinal: 3
-        name: CONTROL_UNIT_INSTANCE_TAG_DIMENSION1_FRONT_RIGHT
-      - number: 4
-        ordinal: 4
-        name: CONTROL_UNIT_INSTANCE_TAG_DIMENSION1_REAR_LEFT1
-      - number: 5
-        ordinal: 5
-        name: CONTROL_UNIT_INSTANCE_TAG_DIMENSION1_REAR_LEFT2
-      - number: 6
-        ordinal: 6
-        name: CONTROL_UNIT_INSTANCE_TAG_DIMENSION1_TRUNK
-  - enum: protobuf.covesa.vss.propulsion.charging_port.v1.ChargingPortInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: CHARGING_PORT_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CHARGING_PORT_INSTANCE_TAG_DIMENSION1_FRONT_LEFT
-      - number: 2
-        ordinal: 2
-        name: CHARGING_PORT_INSTANCE_TAG_DIMENSION1_FRONT_MIDDLE
-      - number: 3
-        ordinal: 3
-        name: CHARGING_PORT_INSTANCE_TAG_DIMENSION1_FRONT_RIGHT
-      - number: 4
-        ordinal: 4
-        name: CHARGING_PORT_INSTANCE_TAG_DIMENSION1_REAR_LEFT
-      - number: 5
-        ordinal: 5
-        name: CHARGING_PORT_INSTANCE_TAG_DIMENSION1_REAR_MIDDLE
-      - number: 6
-        ordinal: 6
-        name: CHARGING_PORT_INSTANCE_TAG_DIMENSION1_REAR_RIGHT
-      - number: 7
-        ordinal: 7
-        name: CHARGING_PORT_INSTANCE_TAG_DIMENSION1_ANY_POSITION
-  - enum: protobuf.covesa.vss.propulsion.charging_port.v1.PowertrainTractionBatteryChargingChargingPortSupportedInletTypes
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_CHARGING_PORT_SUPPORTED_INLET_TYPES_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_CHARGING_PORT_SUPPORTED_INLET_TYPES_IEC_TYPE_1_AC
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_CHARGING_PORT_SUPPORTED_INLET_TYPES_IEC_TYPE_2_AC
-      - number: 3
-        ordinal: 3
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_CHARGING_PORT_SUPPORTED_INLET_TYPES_IEC_TYPE_3_AC
-      - number: 4
-        ordinal: 4
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_CHARGING_PORT_SUPPORTED_INLET_TYPES_IEC_TYPE_4_DC
-      - number: 5
-        ordinal: 5
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_CHARGING_PORT_SUPPORTED_INLET_TYPES_IEC_TYPE_1_CCS_DC
-      - number: 6
-        ordinal: 6
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_CHARGING_PORT_SUPPORTED_INLET_TYPES_IEC_TYPE_2_CCS_DC
-      - number: 7
-        ordinal: 7
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_CHARGING_PORT_SUPPORTED_INLET_TYPES_TESLA_ROADSTER
-      - number: 8
-        ordinal: 8
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_CHARGING_PORT_SUPPORTED_INLET_TYPES_TESLA_HPWC
-      - number: 9
-        ordinal: 9
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_CHARGING_PORT_SUPPORTED_INLET_TYPES_TESLA_SUPERCHARGER
+        name: MEDIA_PLAYED_SOURCE_AUX
       - number: 10
         ordinal: 10
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_CHARGING_PORT_SUPPORTED_INLET_TYPES_GBT_AC
+        name: MEDIA_PLAYED_SOURCE_USB
       - number: 11
         ordinal: 11
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_CHARGING_PORT_SUPPORTED_INLET_TYPES_GBT_DC
+        name: MEDIA_PLAYED_SOURCE_DISK
       - number: 12
         ordinal: 12
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_CHARGING_PORT_SUPPORTED_INLET_TYPES_OTHER
-  - enum: protobuf.covesa.vss.propulsion.electric_motor.v1.ElectricMotorInstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: ELECTRIC_MOTOR_INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: ELECTRIC_MOTOR_INSTANCE_TAG_DIMENSION1_FRONT
-      - number: 2
-        ordinal: 2
-        name: ELECTRIC_MOTOR_INSTANCE_TAG_DIMENSION1_REAR
-      - number: 3
-        ordinal: 3
-        name: ELECTRIC_MOTOR_INSTANCE_TAG_DIMENSION1_FRONT_LEFT
-      - number: 4
-        ordinal: 4
-        name: ELECTRIC_MOTOR_INSTANCE_TAG_DIMENSION1_FRONT_RIGHT
-      - number: 5
-        ordinal: 5
-        name: ELECTRIC_MOTOR_INSTANCE_TAG_DIMENSION1_REAR_LEFT
-      - number: 6
-        ordinal: 6
-        name: ELECTRIC_MOTOR_INSTANCE_TAG_DIMENSION1_REAR_RIGHT
-  - enum: protobuf.covesa.vss.propulsion.electric_motor.v1.PowertrainElectricMotorEngineCoolantLevel
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_ELECTRIC_MOTOR_ENGINE_COOLANT_LEVEL_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_ELECTRIC_MOTOR_ENGINE_COOLANT_LEVEL_CRITICALLY_LOW
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_ELECTRIC_MOTOR_ENGINE_COOLANT_LEVEL_LOW
-      - number: 3
-        ordinal: 3
-        name: POWERTRAIN_ELECTRIC_MOTOR_ENGINE_COOLANT_LEVEL_NORMAL
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainCombustionEngineAspirationType
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_COMBUSTION_ENGINE_ASPIRATION_TYPE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_COMBUSTION_ENGINE_ASPIRATION_TYPE_UNKNOWN
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_COMBUSTION_ENGINE_ASPIRATION_TYPE_NATURAL
-      - number: 3
-        ordinal: 3
-        name: POWERTRAIN_COMBUSTION_ENGINE_ASPIRATION_TYPE_SUPERCHARGER
-      - number: 4
-        ordinal: 4
-        name: POWERTRAIN_COMBUSTION_ENGINE_ASPIRATION_TYPE_TURBOCHARGER
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainCombustionEngineConfig
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_COMBUSTION_ENGINE_CONFIG_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_COMBUSTION_ENGINE_CONFIG_UNKNOWN
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_COMBUSTION_ENGINE_CONFIG_STRAIGHT
-      - number: 3
-        ordinal: 3
-        name: POWERTRAIN_COMBUSTION_ENGINE_CONFIG_V
-      - number: 4
-        ordinal: 4
-        name: POWERTRAIN_COMBUSTION_ENGINE_CONFIG_BOXER
-      - number: 5
-        ordinal: 5
-        name: POWERTRAIN_COMBUSTION_ENGINE_CONFIG_W
-      - number: 6
-        ordinal: 6
-        name: POWERTRAIN_COMBUSTION_ENGINE_CONFIG_ROTARY
-      - number: 7
-        ordinal: 7
-        name: POWERTRAIN_COMBUSTION_ENGINE_CONFIG_RADIAL
-      - number: 8
-        ordinal: 8
-        name: POWERTRAIN_COMBUSTION_ENGINE_CONFIG_SQUARE
-      - number: 9
-        ordinal: 9
-        name: POWERTRAIN_COMBUSTION_ENGINE_CONFIG_H
-      - number: 10
-        ordinal: 10
-        name: POWERTRAIN_COMBUSTION_ENGINE_CONFIG_U
-      - number: 11
-        ordinal: 11
-        name: POWERTRAIN_COMBUSTION_ENGINE_CONFIG_OPPOSED
-      - number: 12
-        ordinal: 12
-        name: POWERTRAIN_COMBUSTION_ENGINE_CONFIG_X
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainCombustionEngineEngineCoolantLevel
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_COMBUSTION_ENGINE_ENGINE_COOLANT_LEVEL_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_COMBUSTION_ENGINE_ENGINE_COOLANT_LEVEL_CRITICALLY_LOW
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_COMBUSTION_ENGINE_ENGINE_COOLANT_LEVEL_LOW
-      - number: 3
-        ordinal: 3
-        name: POWERTRAIN_COMBUSTION_ENGINE_ENGINE_COOLANT_LEVEL_NORMAL
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainCombustionEngineEngineOilLevel
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_COMBUSTION_ENGINE_ENGINE_OIL_LEVEL_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_COMBUSTION_ENGINE_ENGINE_OIL_LEVEL_CRITICALLY_LOW
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_COMBUSTION_ENGINE_ENGINE_OIL_LEVEL_LOW
-      - number: 3
-        ordinal: 3
-        name: POWERTRAIN_COMBUSTION_ENGINE_ENGINE_OIL_LEVEL_NORMAL
-      - number: 4
-        ordinal: 4
-        name: POWERTRAIN_COMBUSTION_ENGINE_ENGINE_OIL_LEVEL_HIGH
-      - number: 5
-        ordinal: 5
-        name: POWERTRAIN_COMBUSTION_ENGINE_ENGINE_OIL_LEVEL_CRITICALLY_HIGH
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainFuelSystemHybridType
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_FUEL_SYSTEM_HYBRID_TYPE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_FUEL_SYSTEM_HYBRID_TYPE_UNKNOWN
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_FUEL_SYSTEM_HYBRID_TYPE_NOT_APPLICABLE
-      - number: 3
-        ordinal: 3
-        name: POWERTRAIN_FUEL_SYSTEM_HYBRID_TYPE_STOP_START
-      - number: 4
-        ordinal: 4
-        name: POWERTRAIN_FUEL_SYSTEM_HYBRID_TYPE_BELT_ISG
-      - number: 5
-        ordinal: 5
-        name: POWERTRAIN_FUEL_SYSTEM_HYBRID_TYPE_CIMG
-      - number: 6
-        ordinal: 6
-        name: POWERTRAIN_FUEL_SYSTEM_HYBRID_TYPE_PHEV
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainFuelSystemRefuelPortPosition
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_FUEL_SYSTEM_REFUEL_PORT_POSITION_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_FUEL_SYSTEM_REFUEL_PORT_POSITION_FRONT_LEFT
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_FUEL_SYSTEM_REFUEL_PORT_POSITION_FRONT_MIDDLE
-      - number: 3
-        ordinal: 3
-        name: POWERTRAIN_FUEL_SYSTEM_REFUEL_PORT_POSITION_FRONT_RIGHT
-      - number: 4
-        ordinal: 4
-        name: POWERTRAIN_FUEL_SYSTEM_REFUEL_PORT_POSITION_REAR_LEFT
-      - number: 5
-        ordinal: 5
-        name: POWERTRAIN_FUEL_SYSTEM_REFUEL_PORT_POSITION_REAR_MIDDLE
-      - number: 6
-        ordinal: 6
-        name: POWERTRAIN_FUEL_SYSTEM_REFUEL_PORT_POSITION_REAR_RIGHT
-      - number: 7
-        ordinal: 7
-        name: POWERTRAIN_FUEL_SYSTEM_REFUEL_PORT_POSITION_LEFT_FRONT
-      - number: 8
-        ordinal: 8
-        name: POWERTRAIN_FUEL_SYSTEM_REFUEL_PORT_POSITION_LEFT_MIDDLE
-      - number: 9
-        ordinal: 9
-        name: POWERTRAIN_FUEL_SYSTEM_REFUEL_PORT_POSITION_LEFT_REAR
-      - number: 10
-        ordinal: 10
-        name: POWERTRAIN_FUEL_SYSTEM_REFUEL_PORT_POSITION_RIGHT_FRONT
-      - number: 11
-        ordinal: 11
-        name: POWERTRAIN_FUEL_SYSTEM_REFUEL_PORT_POSITION_RIGHT_MIDDLE
-      - number: 12
-        ordinal: 12
-        name: POWERTRAIN_FUEL_SYSTEM_REFUEL_PORT_POSITION_RIGHT_REAR
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainFuelSystemSupportedFuel
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_E5_95
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_E5_98
-      - number: 3
-        ordinal: 3
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_E10_95
-      - number: 4
-        ordinal: 4
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_E10_98
-      - number: 5
-        ordinal: 5
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_E85
-      - number: 6
-        ordinal: 6
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_B7
-      - number: 7
-        ordinal: 7
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_B10
-      - number: 8
-        ordinal: 8
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_B20
-      - number: 9
-        ordinal: 9
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_B30
-      - number: 10
-        ordinal: 10
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_B100
-      - number: 11
-        ordinal: 11
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_XTL
-      - number: 12
-        ordinal: 12
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_LPG
+        name: MEDIA_PLAYED_SOURCE_BLUETOOTH
       - number: 13
         ordinal: 13
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_CNG
+        name: MEDIA_PLAYED_SOURCE_INTERNET
       - number: 14
         ordinal: 14
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_LNG
+        name: MEDIA_PLAYED_SOURCE_VOICE
       - number: 15
         ordinal: 15
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_H2
-      - number: 16
-        ordinal: 16
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_OTHER
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainFuelSystemSupportedFuelTypes
+        name: MEDIA_PLAYED_SOURCE_BEEP
+  - enum: protobuf.covesa.vss.interior.cabin.v1.SunroofShadeSwitch
     values:
       - number: 0
         ordinal: 0
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_UNSPECIFIED
+        name: SUNROOF_SHADE_SWITCH_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_GASOLINE
+        name: SUNROOF_SHADE_SWITCH_INACTIVE
       - number: 2
         ordinal: 2
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_DIESEL
+        name: SUNROOF_SHADE_SWITCH_CLOSE
       - number: 3
         ordinal: 3
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_E85
+        name: SUNROOF_SHADE_SWITCH_OPEN
       - number: 4
         ordinal: 4
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_LPG
+        name: SUNROOF_SHADE_SWITCH_ONE_SHOT_CLOSE
       - number: 5
         ordinal: 5
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_CNG
+        name: SUNROOF_SHADE_SWITCH_ONE_SHOT_OPEN
+  - enum: protobuf.covesa.vss.interior.door.v1.DoorSwitch
+    values:
+      - number: 0
+        ordinal: 0
+        name: DOOR_SWITCH_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DOOR_SWITCH_INACTIVE
+      - number: 2
+        ordinal: 2
+        name: DOOR_SWITCH_CLOSE
+      - number: 3
+        ordinal: 3
+        name: DOOR_SWITCH_OPEN
+      - number: 4
+        ordinal: 4
+        name: DOOR_SWITCH_ONE_SHOT_CLOSE
+      - number: 5
+        ordinal: 5
+        name: DOOR_SWITCH_ONE_SHOT_OPEN
+  - enum: protobuf.covesa.vss.interior.door.v1.InstanceTagDimension1
+    values:
+      - number: 0
+        ordinal: 0
+        name: INSTANCE_TAG_DIMENSION1_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INSTANCE_TAG_DIMENSION1_ROW1
+      - number: 2
+        ordinal: 2
+        name: INSTANCE_TAG_DIMENSION1_ROW2
+  - enum: protobuf.covesa.vss.interior.door.v1.InstanceTagDimension2
+    values:
+      - number: 0
+        ordinal: 0
+        name: INSTANCE_TAG_DIMENSION2_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: INSTANCE_TAG_DIMENSION2_DRIVER_SIDE
+      - number: 2
+        ordinal: 2
+        name: INSTANCE_TAG_DIMENSION2_PASSENGER_SIDE
+  - enum: protobuf.covesa.vss.interior.door.v1.ShadeSwitch
+    values:
+      - number: 0
+        ordinal: 0
+        name: SHADE_SWITCH_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: SHADE_SWITCH_INACTIVE
+      - number: 2
+        ordinal: 2
+        name: SHADE_SWITCH_CLOSE
+      - number: 3
+        ordinal: 3
+        name: SHADE_SWITCH_OPEN
+      - number: 4
+        ordinal: 4
+        name: SHADE_SWITCH_ONE_SHOT_CLOSE
+      - number: 5
+        ordinal: 5
+        name: SHADE_SWITCH_ONE_SHOT_OPEN
+  - enum: protobuf.covesa.vss.interior.door.v1.WindowSwitch
+    values:
+      - number: 0
+        ordinal: 0
+        name: WINDOW_SWITCH_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: WINDOW_SWITCH_INACTIVE
+      - number: 2
+        ordinal: 2
+        name: WINDOW_SWITCH_CLOSE
+      - number: 3
+        ordinal: 3
+        name: WINDOW_SWITCH_OPEN
+      - number: 4
+        ordinal: 4
+        name: WINDOW_SWITCH_ONE_SHOT_CLOSE
+      - number: 5
+        ordinal: 5
+        name: WINDOW_SWITCH_ONE_SHOT_OPEN
+  - enum: protobuf.covesa.vss.interior.occupant.v1.Dimension1
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION1_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION1_ROW1
+      - number: 2
+        ordinal: 2
+        name: DIMENSION1_ROW2
+  - enum: protobuf.covesa.vss.interior.occupant.v1.Dimension2
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION2_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION2_DRIVER_SIDE
+      - number: 2
+        ordinal: 2
+        name: DIMENSION2_MIDDLE
+      - number: 3
+        ordinal: 3
+        name: DIMENSION2_PASSENGER_SIDE
+  - enum: protobuf.covesa.vss.interior.seat.v1.Dimension1
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION1_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION1_ROW1
+      - number: 2
+        ordinal: 2
+        name: DIMENSION1_ROW2
+  - enum: protobuf.covesa.vss.interior.seat.v1.Dimension2
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION2_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION2_DRIVER_SIDE
+      - number: 2
+        ordinal: 2
+        name: DIMENSION2_MIDDLE
+      - number: 3
+        ordinal: 3
+        name: DIMENSION2_PASSENGER_SIDE
+  - enum: protobuf.covesa.vss.interior.seat.v1.OccupancyState
+    values:
+      - number: 0
+        ordinal: 0
+        name: OCCUPANCY_STATE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: OCCUPANCY_STATE_UNKNOWN
+      - number: 2
+        ordinal: 2
+        name: OCCUPANCY_STATE_OCCUPIED
+      - number: 3
+        ordinal: 3
+        name: OCCUPANCY_STATE_EMPTY
+  - enum: protobuf.covesa.vss.interior.seat.v1.State
+    values:
+      - number: 0
+        ordinal: 0
+        name: STATE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: STATE_ON_VALUE
+      - number: 2
+        ordinal: 2
+        name: STATE_OFF
+  - enum: protobuf.covesa.vss.interior.spotlight.v1.Dimension1
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION1_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION1_ROW1
+      - number: 2
+        ordinal: 2
+        name: DIMENSION1_ROW2
+      - number: 3
+        ordinal: 3
+        name: DIMENSION1_ROW3
+      - number: 4
+        ordinal: 4
+        name: DIMENSION1_ROW4
+  - enum: protobuf.covesa.vss.interior.spotlight.v1.Dimension2
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION2_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION2_DRIVER_SIDE
+      - number: 2
+        ordinal: 2
+        name: DIMENSION2_PASSENGER_SIDE
+  - enum: protobuf.covesa.vss.interior.station.v1.AirDistribution
+    values:
+      - number: 0
+        ordinal: 0
+        name: AIR_DISTRIBUTION_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: AIR_DISTRIBUTION_UP
+      - number: 2
+        ordinal: 2
+        name: AIR_DISTRIBUTION_MIDDLE
+      - number: 3
+        ordinal: 3
+        name: AIR_DISTRIBUTION_DOWN
+  - enum: protobuf.covesa.vss.interior.station.v1.Dimension1
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION1_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION1_ROW1
+      - number: 2
+        ordinal: 2
+        name: DIMENSION1_ROW2
+      - number: 3
+        ordinal: 3
+        name: DIMENSION1_ROW3
+      - number: 4
+        ordinal: 4
+        name: DIMENSION1_ROW4
+  - enum: protobuf.covesa.vss.interior.station.v1.Dimension2
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION2_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION2_DRIVER
+      - number: 2
+        ordinal: 2
+        name: DIMENSION2_PASSENGER
+  - enum: protobuf.covesa.vss.location.current_location.v1.FixType
+    values:
+      - number: 0
+        ordinal: 0
+        name: FIX_TYPE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: FIX_TYPE_NONE
+      - number: 2
+        ordinal: 2
+        name: FIX_TYPE_TWO_D
+      - number: 3
+        ordinal: 3
+        name: FIX_TYPE_TWO_D_SATELLITE_BASED_AUGMENTATION
+      - number: 4
+        ordinal: 4
+        name: FIX_TYPE_TWO_D_GROUND_BASED_AUGMENTATION
+      - number: 5
+        ordinal: 5
+        name: FIX_TYPE_TWO_D_SATELLITE_AND_GROUND_BASED_AUGMENTATION
       - number: 6
         ordinal: 6
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_LNG
+        name: FIX_TYPE_THREE_D
       - number: 7
         ordinal: 7
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_H2
+        name: FIX_TYPE_THREE_D_SATELLITE_BASED_AUGMENTATION
       - number: 8
         ordinal: 8
-        name: POWERTRAIN_FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_OTHER
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainRangeExtenderOperatingMode
+        name: FIX_TYPE_THREE_D_GROUND_BASED_AUGMENTATION
+      - number: 9
+        ordinal: 9
+        name: FIX_TYPE_THREE_D_SATELLITE_AND_GROUND_BASED_AUGMENTATION
+  - enum: protobuf.covesa.vss.motion.axle_wheel.v1.Dimension1
     values:
       - number: 0
         ordinal: 0
-        name: POWERTRAIN_RANGE_EXTENDER_OPERATING_MODE_UNSPECIFIED
+        name: DIMENSION1_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: POWERTRAIN_RANGE_EXTENDER_OPERATING_MODE_CHARGE_DEPLETING
+        name: DIMENSION1_LEFT
       - number: 2
         ordinal: 2
-        name: POWERTRAIN_RANGE_EXTENDER_OPERATING_MODE_CHARGE_SUSTAINING
+        name: DIMENSION1_RIGHT
+  - enum: protobuf.covesa.vss.motion.brake_axle.v1.Dimension1
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION1_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION1_ROW1
+      - number: 2
+        ordinal: 2
+        name: DIMENSION1_ROW2
+  - enum: protobuf.covesa.vss.motion.brake_axle_wheel.v1.Dimension1
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION1_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION1_LEFT
+      - number: 2
+        ordinal: 2
+        name: DIMENSION1_RIGHT
+  - enum: protobuf.covesa.vss.motion.chassis_axle.v1.Dimension1
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION1_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION1_ROW1
+      - number: 2
+        ordinal: 2
+        name: DIMENSION1_ROW2
+  - enum: protobuf.covesa.vss.motion.electric_axle.v1.Dimension1
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION1_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION1_ROW1
+      - number: 2
+        ordinal: 2
+        name: DIMENSION1_ROW2
+  - enum: protobuf.covesa.vss.motion.suspension_axle.v1.Dimension1
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION1_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION1_ROW1
+      - number: 2
+        ordinal: 2
+        name: DIMENSION1_ROW2
+  - enum: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.Dimension1
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION1_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION1_LEFT
+      - number: 2
+        ordinal: 2
+        name: DIMENSION1_RIGHT
+  - enum: protobuf.covesa.vss.platform.control_unit.v1.Dimension1
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION1_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION1_CENTRAL
+      - number: 2
+        ordinal: 2
+        name: DIMENSION1_FRONT_LEFT
       - number: 3
         ordinal: 3
-        name: POWERTRAIN_RANGE_EXTENDER_OPERATING_MODE_BLENDED
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainTractionBatteryBatteryConditioningRequestedMode
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_TRACTION_BATTERY_BATTERY_CONDITIONING_REQUESTED_MODE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_TRACTION_BATTERY_BATTERY_CONDITIONING_REQUESTED_MODE_INACTIVE
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_TRACTION_BATTERY_BATTERY_CONDITIONING_REQUESTED_MODE_FAST_CHARGING_PREPARATION
-      - number: 3
-        ordinal: 3
-        name: POWERTRAIN_TRACTION_BATTERY_BATTERY_CONDITIONING_REQUESTED_MODE_DRIVING_PREPARATION
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainTractionBatteryChargingStartStopCharging
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_START_STOP_CHARGING_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_START_STOP_CHARGING_START
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_START_STOP_CHARGING_STOP
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainTractionBatteryChargingTimerMode
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_TIMER_MODE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_TIMER_MODE_INACTIVE
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_TIMER_MODE_START_TIME
-      - number: 3
-        ordinal: 3
-        name: POWERTRAIN_TRACTION_BATTERY_CHARGING_TIMER_MODE_END_TIME
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainTransmissionDriveType
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_TRANSMISSION_DRIVE_TYPE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_TRANSMISSION_DRIVE_TYPE_UNKNOWN
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_TRANSMISSION_DRIVE_TYPE_FORWARD_WHEEL_DRIVE
-      - number: 3
-        ordinal: 3
-        name: POWERTRAIN_TRANSMISSION_DRIVE_TYPE_REAR_WHEEL_DRIVE
+        name: DIMENSION1_FRONT_RIGHT
       - number: 4
         ordinal: 4
-        name: POWERTRAIN_TRANSMISSION_DRIVE_TYPE_ALL_WHEEL_DRIVE
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainTransmissionGearChangeMode
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_TRANSMISSION_GEAR_CHANGE_MODE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_TRANSMISSION_GEAR_CHANGE_MODE_MANUAL
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_TRANSMISSION_GEAR_CHANGE_MODE_AUTOMATIC
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainTransmissionPerformanceMode
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_TRANSMISSION_PERFORMANCE_MODE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_TRANSMISSION_PERFORMANCE_MODE_NORMAL
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_TRANSMISSION_PERFORMANCE_MODE_SPORT
-      - number: 3
-        ordinal: 3
-        name: POWERTRAIN_TRANSMISSION_PERFORMANCE_MODE_ECONOMY
-      - number: 4
-        ordinal: 4
-        name: POWERTRAIN_TRANSMISSION_PERFORMANCE_MODE_SNOW
+        name: DIMENSION1_REAR_LEFT1
       - number: 5
         ordinal: 5
-        name: POWERTRAIN_TRANSMISSION_PERFORMANCE_MODE_RAIN
-  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainTransmissionType
-    values:
-      - number: 0
-        ordinal: 0
-        name: POWERTRAIN_TRANSMISSION_TYPE_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: POWERTRAIN_TRANSMISSION_TYPE_UNKNOWN
-      - number: 2
-        ordinal: 2
-        name: POWERTRAIN_TRANSMISSION_TYPE_SEQUENTIAL
-      - number: 3
-        ordinal: 3
-        name: POWERTRAIN_TRANSMISSION_TYPE_H
-      - number: 4
-        ordinal: 4
-        name: POWERTRAIN_TRANSMISSION_TYPE_AUTOMATIC
-      - number: 5
-        ordinal: 5
-        name: POWERTRAIN_TRANSMISSION_TYPE_DSG
+        name: DIMENSION1_REAR_LEFT2
       - number: 6
         ordinal: 6
-        name: POWERTRAIN_TRANSMISSION_TYPE_CVT
+        name: DIMENSION1_TRUNK
+  - enum: protobuf.covesa.vss.propulsion.charging_port.v1.Dimension1
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION1_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION1_FRONT_LEFT
+      - number: 2
+        ordinal: 2
+        name: DIMENSION1_FRONT_MIDDLE
+      - number: 3
+        ordinal: 3
+        name: DIMENSION1_FRONT_RIGHT
+      - number: 4
+        ordinal: 4
+        name: DIMENSION1_REAR_LEFT
+      - number: 5
+        ordinal: 5
+        name: DIMENSION1_REAR_MIDDLE
+      - number: 6
+        ordinal: 6
+        name: DIMENSION1_REAR_RIGHT
+      - number: 7
+        ordinal: 7
+        name: DIMENSION1_ANY_POSITION
+  - enum: protobuf.covesa.vss.propulsion.charging_port.v1.SupportedInletTypes
+    values:
+      - number: 0
+        ordinal: 0
+        name: SUPPORTED_INLET_TYPES_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: SUPPORTED_INLET_TYPES_IEC_TYPE_1_AC
+      - number: 2
+        ordinal: 2
+        name: SUPPORTED_INLET_TYPES_IEC_TYPE_2_AC
+      - number: 3
+        ordinal: 3
+        name: SUPPORTED_INLET_TYPES_IEC_TYPE_3_AC
+      - number: 4
+        ordinal: 4
+        name: SUPPORTED_INLET_TYPES_IEC_TYPE_4_DC
+      - number: 5
+        ordinal: 5
+        name: SUPPORTED_INLET_TYPES_IEC_TYPE_1_CCS_DC
+      - number: 6
+        ordinal: 6
+        name: SUPPORTED_INLET_TYPES_IEC_TYPE_2_CCS_DC
+      - number: 7
+        ordinal: 7
+        name: SUPPORTED_INLET_TYPES_TESLA_ROADSTER
+      - number: 8
+        ordinal: 8
+        name: SUPPORTED_INLET_TYPES_TESLA_HPWC
+      - number: 9
+        ordinal: 9
+        name: SUPPORTED_INLET_TYPES_TESLA_SUPERCHARGER
+      - number: 10
+        ordinal: 10
+        name: SUPPORTED_INLET_TYPES_GBT_AC
+      - number: 11
+        ordinal: 11
+        name: SUPPORTED_INLET_TYPES_GBT_DC
+      - number: 12
+        ordinal: 12
+        name: SUPPORTED_INLET_TYPES_OTHER
+  - enum: protobuf.covesa.vss.propulsion.electric_motor.v1.Dimension1
+    values:
+      - number: 0
+        ordinal: 0
+        name: DIMENSION1_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: DIMENSION1_FRONT
+      - number: 2
+        ordinal: 2
+        name: DIMENSION1_REAR
+      - number: 3
+        ordinal: 3
+        name: DIMENSION1_FRONT_LEFT
+      - number: 4
+        ordinal: 4
+        name: DIMENSION1_FRONT_RIGHT
+      - number: 5
+        ordinal: 5
+        name: DIMENSION1_REAR_LEFT
+      - number: 6
+        ordinal: 6
+        name: DIMENSION1_REAR_RIGHT
+  - enum: protobuf.covesa.vss.propulsion.electric_motor.v1.Level
+    values:
+      - number: 0
+        ordinal: 0
+        name: LEVEL_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: LEVEL_CRITICALLY_LOW
+      - number: 2
+        ordinal: 2
+        name: LEVEL_LOW
+      - number: 3
+        ordinal: 3
+        name: LEVEL_NORMAL
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.BatteryConditioningRequestedMode
+    values:
+      - number: 0
+        ordinal: 0
+        name: BATTERY_CONDITIONING_REQUESTED_MODE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: BATTERY_CONDITIONING_REQUESTED_MODE_INACTIVE
+      - number: 2
+        ordinal: 2
+        name: BATTERY_CONDITIONING_REQUESTED_MODE_FAST_CHARGING_PREPARATION
+      - number: 3
+        ordinal: 3
+        name: BATTERY_CONDITIONING_REQUESTED_MODE_DRIVING_PREPARATION
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.ChargingStartStopCharging
+    values:
+      - number: 0
+        ordinal: 0
+        name: CHARGING_START_STOP_CHARGING_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: CHARGING_START_STOP_CHARGING_START
+      - number: 2
+        ordinal: 2
+        name: CHARGING_START_STOP_CHARGING_STOP
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.CombustionEngineAspirationType
+    values:
+      - number: 0
+        ordinal: 0
+        name: COMBUSTION_ENGINE_ASPIRATION_TYPE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: COMBUSTION_ENGINE_ASPIRATION_TYPE_UNKNOWN
+      - number: 2
+        ordinal: 2
+        name: COMBUSTION_ENGINE_ASPIRATION_TYPE_NATURAL
+      - number: 3
+        ordinal: 3
+        name: COMBUSTION_ENGINE_ASPIRATION_TYPE_SUPERCHARGER
+      - number: 4
+        ordinal: 4
+        name: COMBUSTION_ENGINE_ASPIRATION_TYPE_TURBOCHARGER
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.CombustionEngineConfig
+    values:
+      - number: 0
+        ordinal: 0
+        name: COMBUSTION_ENGINE_CONFIG_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: COMBUSTION_ENGINE_CONFIG_UNKNOWN
+      - number: 2
+        ordinal: 2
+        name: COMBUSTION_ENGINE_CONFIG_STRAIGHT
+      - number: 3
+        ordinal: 3
+        name: COMBUSTION_ENGINE_CONFIG_V
+      - number: 4
+        ordinal: 4
+        name: COMBUSTION_ENGINE_CONFIG_BOXER
+      - number: 5
+        ordinal: 5
+        name: COMBUSTION_ENGINE_CONFIG_W
+      - number: 6
+        ordinal: 6
+        name: COMBUSTION_ENGINE_CONFIG_ROTARY
+      - number: 7
+        ordinal: 7
+        name: COMBUSTION_ENGINE_CONFIG_RADIAL
+      - number: 8
+        ordinal: 8
+        name: COMBUSTION_ENGINE_CONFIG_SQUARE
+      - number: 9
+        ordinal: 9
+        name: COMBUSTION_ENGINE_CONFIG_H
+      - number: 10
+        ordinal: 10
+        name: COMBUSTION_ENGINE_CONFIG_U
+      - number: 11
+        ordinal: 11
+        name: COMBUSTION_ENGINE_CONFIG_OPPOSED
+      - number: 12
+        ordinal: 12
+        name: COMBUSTION_ENGINE_CONFIG_X
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.EngineCoolantLevel
+    values:
+      - number: 0
+        ordinal: 0
+        name: ENGINE_COOLANT_LEVEL_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: ENGINE_COOLANT_LEVEL_CRITICALLY_LOW
+      - number: 2
+        ordinal: 2
+        name: ENGINE_COOLANT_LEVEL_LOW
+      - number: 3
+        ordinal: 3
+        name: ENGINE_COOLANT_LEVEL_NORMAL
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.EngineOilLevel
+    values:
+      - number: 0
+        ordinal: 0
+        name: ENGINE_OIL_LEVEL_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: ENGINE_OIL_LEVEL_CRITICALLY_LOW
+      - number: 2
+        ordinal: 2
+        name: ENGINE_OIL_LEVEL_LOW
+      - number: 3
+        ordinal: 3
+        name: ENGINE_OIL_LEVEL_NORMAL
+      - number: 4
+        ordinal: 4
+        name: ENGINE_OIL_LEVEL_HIGH
+      - number: 5
+        ordinal: 5
+        name: ENGINE_OIL_LEVEL_CRITICALLY_HIGH
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.FuelSystemHybridType
+    values:
+      - number: 0
+        ordinal: 0
+        name: FUEL_SYSTEM_HYBRID_TYPE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: FUEL_SYSTEM_HYBRID_TYPE_UNKNOWN
+      - number: 2
+        ordinal: 2
+        name: FUEL_SYSTEM_HYBRID_TYPE_NOT_APPLICABLE
+      - number: 3
+        ordinal: 3
+        name: FUEL_SYSTEM_HYBRID_TYPE_STOP_START
+      - number: 4
+        ordinal: 4
+        name: FUEL_SYSTEM_HYBRID_TYPE_BELT_ISG
+      - number: 5
+        ordinal: 5
+        name: FUEL_SYSTEM_HYBRID_TYPE_CIMG
+      - number: 6
+        ordinal: 6
+        name: FUEL_SYSTEM_HYBRID_TYPE_PHEV
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.FuelSystemRefuelPortPosition
+    values:
+      - number: 0
+        ordinal: 0
+        name: FUEL_SYSTEM_REFUEL_PORT_POSITION_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: FUEL_SYSTEM_REFUEL_PORT_POSITION_FRONT_LEFT
+      - number: 2
+        ordinal: 2
+        name: FUEL_SYSTEM_REFUEL_PORT_POSITION_FRONT_MIDDLE
+      - number: 3
+        ordinal: 3
+        name: FUEL_SYSTEM_REFUEL_PORT_POSITION_FRONT_RIGHT
+      - number: 4
+        ordinal: 4
+        name: FUEL_SYSTEM_REFUEL_PORT_POSITION_REAR_LEFT
+      - number: 5
+        ordinal: 5
+        name: FUEL_SYSTEM_REFUEL_PORT_POSITION_REAR_MIDDLE
+      - number: 6
+        ordinal: 6
+        name: FUEL_SYSTEM_REFUEL_PORT_POSITION_REAR_RIGHT
+      - number: 7
+        ordinal: 7
+        name: FUEL_SYSTEM_REFUEL_PORT_POSITION_LEFT_FRONT
+      - number: 8
+        ordinal: 8
+        name: FUEL_SYSTEM_REFUEL_PORT_POSITION_LEFT_MIDDLE
+      - number: 9
+        ordinal: 9
+        name: FUEL_SYSTEM_REFUEL_PORT_POSITION_LEFT_REAR
+      - number: 10
+        ordinal: 10
+        name: FUEL_SYSTEM_REFUEL_PORT_POSITION_RIGHT_FRONT
+      - number: 11
+        ordinal: 11
+        name: FUEL_SYSTEM_REFUEL_PORT_POSITION_RIGHT_MIDDLE
+      - number: 12
+        ordinal: 12
+        name: FUEL_SYSTEM_REFUEL_PORT_POSITION_RIGHT_REAR
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.FuelSystemSupportedFuel
+    values:
+      - number: 0
+        ordinal: 0
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_E5_95
+      - number: 2
+        ordinal: 2
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_E5_98
+      - number: 3
+        ordinal: 3
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_E10_95
+      - number: 4
+        ordinal: 4
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_E10_98
+      - number: 5
+        ordinal: 5
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_E85
+      - number: 6
+        ordinal: 6
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_B7
+      - number: 7
+        ordinal: 7
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_B10
+      - number: 8
+        ordinal: 8
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_B20
+      - number: 9
+        ordinal: 9
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_B30
+      - number: 10
+        ordinal: 10
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_B100
+      - number: 11
+        ordinal: 11
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_XTL
+      - number: 12
+        ordinal: 12
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_LPG
+      - number: 13
+        ordinal: 13
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_CNG
+      - number: 14
+        ordinal: 14
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_LNG
+      - number: 15
+        ordinal: 15
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_H2
+      - number: 16
+        ordinal: 16
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_OTHER
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.FuelSystemSupportedFuelTypes
+    values:
+      - number: 0
+        ordinal: 0
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_GASOLINE
+      - number: 2
+        ordinal: 2
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_DIESEL
+      - number: 3
+        ordinal: 3
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_E85
+      - number: 4
+        ordinal: 4
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_LPG
+      - number: 5
+        ordinal: 5
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_CNG
+      - number: 6
+        ordinal: 6
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_LNG
+      - number: 7
+        ordinal: 7
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_H2
+      - number: 8
+        ordinal: 8
+        name: FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_OTHER
   - enum: protobuf.covesa.vss.propulsion.powertrain.v1.PowertrainType
     values:
       - number: 0
@@ -8412,6 +8313,105 @@ enums:
       - number: 3
         ordinal: 3
         name: POWERTRAIN_TYPE_ELECTRIC
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.RangeExtenderOperatingMode
+    values:
+      - number: 0
+        ordinal: 0
+        name: RANGE_EXTENDER_OPERATING_MODE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: RANGE_EXTENDER_OPERATING_MODE_CHARGE_DEPLETING
+      - number: 2
+        ordinal: 2
+        name: RANGE_EXTENDER_OPERATING_MODE_CHARGE_SUSTAINING
+      - number: 3
+        ordinal: 3
+        name: RANGE_EXTENDER_OPERATING_MODE_BLENDED
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.TimerMode
+    values:
+      - number: 0
+        ordinal: 0
+        name: TIMER_MODE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: TIMER_MODE_INACTIVE
+      - number: 2
+        ordinal: 2
+        name: TIMER_MODE_START_TIME
+      - number: 3
+        ordinal: 3
+        name: TIMER_MODE_END_TIME
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.TransmissionDriveType
+    values:
+      - number: 0
+        ordinal: 0
+        name: TRANSMISSION_DRIVE_TYPE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: TRANSMISSION_DRIVE_TYPE_UNKNOWN
+      - number: 2
+        ordinal: 2
+        name: TRANSMISSION_DRIVE_TYPE_FORWARD_WHEEL_DRIVE
+      - number: 3
+        ordinal: 3
+        name: TRANSMISSION_DRIVE_TYPE_REAR_WHEEL_DRIVE
+      - number: 4
+        ordinal: 4
+        name: TRANSMISSION_DRIVE_TYPE_ALL_WHEEL_DRIVE
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.TransmissionGearChangeMode
+    values:
+      - number: 0
+        ordinal: 0
+        name: TRANSMISSION_GEAR_CHANGE_MODE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: TRANSMISSION_GEAR_CHANGE_MODE_MANUAL
+      - number: 2
+        ordinal: 2
+        name: TRANSMISSION_GEAR_CHANGE_MODE_AUTOMATIC
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.TransmissionPerformanceMode
+    values:
+      - number: 0
+        ordinal: 0
+        name: TRANSMISSION_PERFORMANCE_MODE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: TRANSMISSION_PERFORMANCE_MODE_NORMAL
+      - number: 2
+        ordinal: 2
+        name: TRANSMISSION_PERFORMANCE_MODE_SPORT
+      - number: 3
+        ordinal: 3
+        name: TRANSMISSION_PERFORMANCE_MODE_ECONOMY
+      - number: 4
+        ordinal: 4
+        name: TRANSMISSION_PERFORMANCE_MODE_SNOW
+      - number: 5
+        ordinal: 5
+        name: TRANSMISSION_PERFORMANCE_MODE_RAIN
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.TransmissionType
+    values:
+      - number: 0
+        ordinal: 0
+        name: TRANSMISSION_TYPE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: TRANSMISSION_TYPE_UNKNOWN
+      - number: 2
+        ordinal: 2
+        name: TRANSMISSION_TYPE_SEQUENTIAL
+      - number: 3
+        ordinal: 3
+        name: TRANSMISSION_TYPE_H
+      - number: 4
+        ordinal: 4
+        name: TRANSMISSION_TYPE_AUTOMATIC
+      - number: 5
+        ordinal: 5
+        name: TRANSMISSION_TYPE_DSG
+      - number: 6
+        ordinal: 6
+        name: TRANSMISSION_TYPE_CVT
   - enum: protobuf.covesa.vss.vehicle.v1.LowVoltageSystemState
     values:
       - number: 0

@@ -69,7 +69,7 @@ message BatteryConditioning {
   // VSS:
   // Vehicle.Powertrain.TractionBattery.BatteryConditioning.RequestedMode
   // (actuator).
-  PowertrainTractionBatteryBatteryConditioningRequestedMode requested_mode = 3 [
+  BatteryConditioningRequestedMode requested_mode = 3 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -123,16 +123,16 @@ message BatteryConditioning {
 // Vehicle.Powertrain.TractionBattery.BatteryConditioning.RequestedMode.
 //
 // VSS: Vehicle.Powertrain.TractionBattery.BatteryConditioning.RequestedMode.
-enum PowertrainTractionBatteryBatteryConditioningRequestedMode {
+enum BatteryConditioningRequestedMode {
   // Not specified.
-  POWERTRAIN_TRACTION_BATTERY_BATTERY_CONDITIONING_REQUESTED_MODE_UNSPECIFIED = 0;
+  BATTERY_CONDITIONING_REQUESTED_MODE_UNSPECIFIED = 0;
 
   // Inactive.
-  POWERTRAIN_TRACTION_BATTERY_BATTERY_CONDITIONING_REQUESTED_MODE_INACTIVE = 1;
+  BATTERY_CONDITIONING_REQUESTED_MODE_INACTIVE = 1;
 
   // Fast charging preparation.
-  POWERTRAIN_TRACTION_BATTERY_BATTERY_CONDITIONING_REQUESTED_MODE_FAST_CHARGING_PREPARATION = 2;
+  BATTERY_CONDITIONING_REQUESTED_MODE_FAST_CHARGING_PREPARATION = 2;
 
   // Driving preparation.
-  POWERTRAIN_TRACTION_BATTERY_BATTERY_CONDITIONING_REQUESTED_MODE_DRIVING_PREPARATION = 3;
+  BATTERY_CONDITIONING_REQUESTED_MODE_DRIVING_PREPARATION = 3;
 }

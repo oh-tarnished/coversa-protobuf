@@ -35,13 +35,13 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 | `power_optimize_level` | `int32` | `OPTIONAL` | — | Power optimization level for this branch/subsystem. A higher number indicates more aggressive power optimization. Level 0 indicates that all functionality is enabled, no power optimization enabled. Level 10 indicates most aggressive power optimization mode, only essential functionality enabled. |
 | `seat_pos_count` | `repeated int32` | `OUTPUT_ONLY` | — | Number of seats across each row from the front to the rear. |
 | `seat_row_count` | `int32` | `OUTPUT_ONLY` | — | Number of seat rows in vehicle. |
-| `convertible` | `Convertible` | `OPTIONAL` | — | — |
-| `hvac` | `Hvac` | `OPTIONAL` | — | — |
-| `infotainment` | `Infotainment` | `OPTIONAL` | — | — |
-| `light` | `Light` | `OPTIONAL` | — | — |
-| `rear_shade` | `RearShade` | `OPTIONAL` | — | — |
-| `rearview_mirror` | `RearviewMirror` | `OPTIONAL` | — | — |
-| `sunroof` | `Sunroof` | `OPTIONAL` | — | — |
+| `convertible` | `Convertible` | `OPTIONAL` | — | Convertible. |
+| `hvac` | `Hvac` | `OPTIONAL` | — | Hvac. |
+| `infotainment` | `Infotainment` | `OPTIONAL` | — | Infotainment. |
+| `light` | `Light` | `OPTIONAL` | — | Light. |
+| `rear_shade` | `RearShade` | `OPTIONAL` | — | Rear shade. |
+| `rearview_mirror` | `RearviewMirror` | `OPTIONAL` | — | Rearview mirror. |
+| `sunroof` | `Sunroof` | `OPTIONAL` | — | Sunroof. |
 
 ### `Convertible`
 
@@ -57,7 +57,7 @@ Climate control
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `ambient_air_temperature` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Ambient air temperature inside the vehicle. |
+| `ambient_air_temperature` | `double` | `OUTPUT_ONLY` | `degC` | Ambient air temperature inside the vehicle. |
 | `is_air_conditioning_active` | `bool` | `OPTIONAL` | — | Is Air conditioning active. |
 | `is_auto_power_optimize` | `bool` | `OPTIONAL` | — | Auto Power Optimization Flag When set to 'true', the system enables automatic power optimization, dynamically adjusting the power optimization level based on runtime conditions or features managed by the OEM. When set to 'false', manual control of the power optimization level is allowed. |
 | `is_front_defroster_active` | `bool` | `OPTIONAL` | — | Is front defroster active. |
@@ -73,11 +73,11 @@ Infotainment system.
 | --- | --- | --- | --- | --- |
 | `is_auto_power_optimize` | `bool` | `OPTIONAL` | — | Auto Power Optimization Flag When set to 'true', the system enables automatic power optimization, dynamically adjusting the power optimization level based on runtime conditions or features managed by the OEM. When set to 'false', manual control of the power optimization level is allowed. |
 | `power_optimize_level` | `int32` | `OPTIONAL` | — | Power optimization level for this branch/subsystem. A higher number indicates more aggressive power optimization. Level 0 indicates that all functionality is enabled, no power optimization enabled. Level 10 indicates most aggressive power optimization mode, only essential functionality enabled. |
-| `hmi` | `Hmi` | `OPTIONAL` | — | — |
-| `media` | `Media` | `OPTIONAL` | — | — |
-| `navigation` | `Navigation` | `OPTIONAL` | — | — |
-| `smartphone_projection` | `SmartphoneProjection` | `OPTIONAL` | — | — |
-| `smartphone_screen_mirroring` | `SmartphoneScreenMirroring` | `OPTIONAL` | — | — |
+| `hmi` | `Hmi` | `OPTIONAL` | — | Hmi. |
+| `media` | `Media` | `OPTIONAL` | — | Media. |
+| `navigation` | `Navigation` | `OPTIONAL` | — | Navigation. |
+| `smartphone_projection` | `SmartphoneProjection` | `OPTIONAL` | — | Smartphone projection. |
+| `smartphone_screen_mirroring` | `SmartphoneScreenMirroring` | `OPTIONAL` | — | Smartphone screen mirroring. |
 
 ### `Hmi`
 
@@ -85,23 +85,23 @@ HMI related signals
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `brightness` | `double` | `OPTIONAL` | `PERCENT` | Brightness of the HMI, relative to supported range. 0 = Lowest brightness possible. 100 = Maximum Brightness possible. |
+| `brightness` | `double` | `OPTIONAL` | `percent` | Brightness of the HMI, relative to supported range. 0 = Lowest brightness possible. 100 = Maximum Brightness possible. |
 | `current_language` | `string` | `OUTPUT_ONLY` | — | ISO 639-1 standard language code for the current HMI |
-| `date_format` | `CabinInfotainmentHmiDateFormat` | `OPTIONAL` | — | Date format used in the current HMI |
-| `day_night_mode` | `CabinInfotainmentHmiDayNightMode` | `OPTIONAL` | — | Current display theme |
-| `display_off_duration` | `int32` | `OPTIONAL` | `SECOND` | Duration in seconds before the display is turned off. Value shall be 0 if screen never shall turn off. |
-| `distance_unit` | `CabinInfotainmentHmiDistanceUnit` | `OPTIONAL` | — | Distance unit used in the current HMI |
-| `eveconomy_units` | `CabinInfotainmentHmiEvEconomyUnits` | `OPTIONAL` | — | EV fuel economy unit used in the current HMI |
-| `evenergy_units` | `CabinInfotainmentHmiEvEnergyUnits` | `OPTIONAL` | — | EV energy unit used in the current HMI |
-| `font_size` | `CabinInfotainmentHmiFontSize` | `OPTIONAL` | — | Font size used in the current HMI |
-| `fuel_economy_units` | `CabinInfotainmentHmiFuelEconomyUnits` | `OPTIONAL` | — | Fuel economy unit used in the current HMI |
-| `fuel_volume_unit` | `CabinInfotainmentHmiFuelVolumeUnit` | `OPTIONAL` | — | Fuel volume unit used in the current HMI |
+| `date_format` | `InfotainmentHmiDateFormat` | `OPTIONAL` | — | Date format used in the current HMI |
+| `day_night_mode` | `InfotainmentHmiDayNightMode` | `OPTIONAL` | — | Current display theme |
+| `display_off_duration` | `int32` | `OPTIONAL` | `s` | Duration in seconds before the display is turned off. Value shall be 0 if screen never shall turn off. |
+| `distance_unit` | `InfotainmentHmiDistanceUnit` | `OPTIONAL` | — | Distance unit used in the current HMI |
+| `eveconomy_units` | `InfotainmentHmiEvEconomyUnits` | `OPTIONAL` | — | EV fuel economy unit used in the current HMI |
+| `evenergy_units` | `InfotainmentHmiEvEnergyUnits` | `OPTIONAL` | — | EV energy unit used in the current HMI |
+| `font_size` | `InfotainmentHmiFontSize` | `OPTIONAL` | — | Font size used in the current HMI |
+| `fuel_economy_units` | `InfotainmentHmiFuelEconomyUnits` | `OPTIONAL` | — | Fuel economy unit used in the current HMI |
+| `fuel_volume_unit` | `InfotainmentHmiFuelVolumeUnit` | `OPTIONAL` | — | Fuel volume unit used in the current HMI |
 | `is_screen_always_on` | `bool` | `OPTIONAL` | — | Used to prevent the screen going black if no action placed. |
 | `last_action_time` | `google.protobuf.Timestamp` | `OUTPUT_ONLY` | — | Time for last hmi action, formatted according to ISO 8601 with UTC time zone. |
-| `speed_unit` | `CabinInfotainmentHmiSpeedUnit` | `OPTIONAL` | — | Speed unit used in the current HMI |
-| `temperature_unit` | `CabinInfotainmentHmiTemperatureUnit` | `OPTIONAL` | — | Temperature unit used in the current HMI |
-| `time_format` | `CabinInfotainmentHmiTimeFormat` | `OPTIONAL` | — | Time format used in the current HMI |
-| `tire_pressure_unit` | `CabinInfotainmentHmiTirePressureUnit` | `OPTIONAL` | — | Tire pressure unit used in the current HMI |
+| `speed_unit` | `InfotainmentHmiSpeedUnit` | `OPTIONAL` | — | Speed unit used in the current HMI |
+| `temperature_unit` | `InfotainmentHmiTemperatureUnit` | `OPTIONAL` | — | Temperature unit used in the current HMI |
+| `time_format` | `InfotainmentHmiTimeFormat` | `OPTIONAL` | — | Time format used in the current HMI |
+| `tire_pressure_unit` | `InfotainmentHmiTirePressureUnit` | `OPTIONAL` | — | Tire pressure unit used in the current HMI |
 
 ### `Media`
 
@@ -109,11 +109,11 @@ All Media actions
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `action` | `CabinInfotainmentMediaAction` | `OPTIONAL` | — | Tells if the media was |
+| `action` | `InfotainmentMediaAction` | `OPTIONAL` | — | Tells if the media was |
 | `declined_uri` | `string` | `OUTPUT_ONLY` | — | URI of suggested media that was declined |
 | `selected_uri` | `string` | `OPTIONAL` | — | URI of suggested media that was selected |
-| `volume` | `int32` | `OPTIONAL` | `PERCENT` | Current Media Volume |
-| `played` | `Played` | `OPTIONAL` | — | — |
+| `volume` | `int32` | `OPTIONAL` | `percent` | Current Media Volume |
+| `played` | `Played` | `OPTIONAL` | — | Played. |
 
 ### `Played`
 
@@ -125,7 +125,7 @@ Collection of signals updated in concert when a new media is played
 | `artist` | `string` | `OUTPUT_ONLY` | — | Name of artist being played |
 | `genre` | `string` | `OUTPUT_ONLY` | — | Name of genre being played |
 | `playback_rate` | `double` | `OPTIONAL` | — | Current playback rate of media being played. |
-| `source` | `CabinInfotainmentMediaPlayedSource` | `OPTIONAL` | — | Media selected for playback |
+| `source` | `MediaPlayedSource` | `OPTIONAL` | — | Media selected for playback |
 | `track` | `string` | `OUTPUT_ONLY` | — | Name of track being played |
 | `uri` | `string` | `OUTPUT_ONLY` | — | User Resource associated with the media |
 
@@ -135,11 +135,11 @@ All navigation actions
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `guidance_voice` | `CabinInfotainmentNavigationGuidanceVoice` | `OPTIONAL` | — | Navigation guidance state that was selected. |
-| `mute` | `CabinInfotainmentNavigationMute` | `OPTIONAL` | — | Navigation mute state that was selected. |
-| `volume` | `int32` | `OPTIONAL` | `PERCENT` | Current navigation volume |
-| `destination_set` | `DestinationSet` | `OPTIONAL` | — | — |
-| `map_control` | `Map` | `OPTIONAL` | — | — |
+| `guidance_voice` | `InfotainmentNavigationGuidanceVoice` | `OPTIONAL` | — | Navigation guidance state that was selected. |
+| `mute` | `InfotainmentNavigationMute` | `OPTIONAL` | — | Navigation mute state that was selected. |
+| `volume` | `int32` | `OPTIONAL` | `percent` | Current navigation volume |
+| `destination_set` | `DestinationSet` | `OPTIONAL` | — | Destination set. |
+| `map_control` | `Map` | `OPTIONAL` | — | Map control. |
 
 ### `DestinationSet`
 
@@ -147,8 +147,8 @@ A navigation has been selected.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `latitude` | `double` | `OPTIONAL` | `DEGREE` | Latitude of destination in WGS 84 geodetic coordinates. |
-| `longitude` | `double` | `OPTIONAL` | `DEGREE` | Longitude of destination in WGS 84 geodetic coordinates. |
+| `latitude` | `double` | `OPTIONAL` | `deg` | Latitude of destination in WGS 84 geodetic coordinates. |
+| `longitude` | `double` | `OPTIONAL` | `deg` | Longitude of destination in WGS 84 geodetic coordinates. |
 
 ### `Map`
 
@@ -164,9 +164,9 @@ All smartphone projection actions.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `active` | `CabinInfotainmentSmartphoneProjectionActive` | `OPTIONAL` | — | Projection activation info. |
-| `source` | `CabinInfotainmentSmartphoneProjectionSource` | `OPTIONAL` | — | Connectivity source selected for projection. |
-| `supported_mode` | `CabinInfotainmentSmartphoneProjectionSupportedMode` | `OUTPUT_ONLY` | — | Supportable list for projection. |
+| `active` | `InfotainmentSmartphoneProjectionActive` | `OPTIONAL` | — | Projection activation info. |
+| `source` | `InfotainmentSmartphoneProjectionSource` | `OPTIONAL` | — | Connectivity source selected for projection. |
+| `supported_mode` | `InfotainmentSmartphoneProjectionSupportedMode` | `OUTPUT_ONLY` | — | Supportable list for projection. |
 
 ### `SmartphoneScreenMirroring`
 
@@ -174,8 +174,8 @@ All smartphone screen mirroring actions.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `active` | `CabinInfotainmentSmartphoneScreenMirroringActive` | `OPTIONAL` | — | Mirroring activation info. |
-| `source` | `CabinInfotainmentSmartphoneScreenMirroringSource` | `OPTIONAL` | — | Connectivity source selected for mirroring. |
+| `active` | `InfotainmentSmartphoneScreenMirroringActive` | `OPTIONAL` | — | Mirroring activation info. |
+| `source` | `InfotainmentSmartphoneScreenMirroringSource` | `OPTIONAL` | — | Connectivity source selected for mirroring. |
 
 ### `Light`
 
@@ -185,8 +185,8 @@ Light that is part of the Cabin.
 | --- | --- | --- | --- | --- |
 | `is_dome_on` | `bool` | `OPTIONAL` | — | Is central dome light on |
 | `is_glove_box_on` | `bool` | `OPTIONAL` | — | Is glove box light on |
-| `perceived_ambient_light` | `int32` | `OUTPUT_ONLY` | `PERCENT` | The percentage of ambient light that is measured (e.g., by a sensor) inside the cabin. 0 = No ambient light. 100 = Full brightness. |
-| `interactive_light_bar` | `InteractiveLightBar` | `OPTIONAL` | — | — |
+| `perceived_ambient_light` | `int32` | `OUTPUT_ONLY` | `percent` | The percentage of ambient light that is measured (e.g., by a sensor) inside the cabin. 0 = No ambient light. 100 = Full brightness. |
+| `interactive_light_bar` | `InteractiveLightBar` | `OPTIONAL` | — | Interactive light bar. |
 
 ### `InteractiveLightBar`
 
@@ -196,7 +196,7 @@ Decorative coloured light bar that supports effects, usually mounted on the dash
 | --- | --- | --- | --- | --- |
 | `color` | `string` | `OPTIONAL` | — | Hexadecimal color code represented as a 3-byte RGB (i.e. Red, Green, and Blue) value preceded by a hash symbol "#". Allowed range "#000000" to "#FFFFFF". |
 | `effect` | `string` | `OPTIONAL` | — | Light effect selection from a predefined set of allowed values. |
-| `intensity` | `int32` | `OPTIONAL` | `PERCENT` | How much of the maximum possible brightness of the light is used. 1 = Maximum attenuation, 100 = No attenuation (i.e. full brightness). |
+| `intensity` | `int32` | `OPTIONAL` | `percent` | How much of the maximum possible brightness of the light is used. 1 = Maximum attenuation, 100 = No attenuation (i.e. full brightness). |
 | `is_light_on` | `bool` | `OPTIONAL` | — | Indicates whether the light is turned on. True = On, False = Off. |
 
 ### `RearShade`
@@ -206,7 +206,7 @@ Rear window shade. Open = Retracted, Closed = Deployed. Start position for RearS
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
 | `is_open` | `bool` | `OPTIONAL` | — | Is item open or closed? True = Fully or partially open. False = Fully closed. |
-| `position` | `int32` | `OPTIONAL` | `PERCENT` | Item position. 0 = Start position 100 = End position. |
+| `position` | `int32` | `OPTIONAL` | `percent` | Item position. 0 = Start position 100 = End position. |
 | `switch_control` | `CabinRearShadeSwitch` | `OPTIONAL` | — | Switch controlling sliding action such as window, sunroof, or blind. |
 
 ### `RearviewMirror`
@@ -215,7 +215,7 @@ Rear-view mirror.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimming_level` | `int32` | `OPTIONAL` | `PERCENT` | Dimming level of rear-view mirror. 0 = Undimmed. 100 = Fully dimmed. |
+| `dimming_level` | `int32` | `OPTIONAL` | `percent` | Dimming level of rear-view mirror. 0 = Undimmed. 100 = Fully dimmed. |
 
 ### `Sunroof`
 
@@ -223,9 +223,9 @@ Sun roof status.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `position` | `int32` | `OUTPUT_ONLY` | `PERCENT` | Sunroof position. 0 = Fully closed 100 = Fully opened. -100 = Fully tilted. |
+| `position` | `int32` | `OUTPUT_ONLY` | `percent` | Sunroof position. 0 = Fully closed 100 = Fully opened. -100 = Fully tilted. |
 | `switch_control` | `CabinSunroofSwitch` | `OPTIONAL` | — | Switch controlling sliding action such as window, sunroof, or shade. |
-| `shade` | `SunroofShade` | `OPTIONAL` | — | — |
+| `shade` | `SunroofShade` | `OPTIONAL` | — | Shade. |
 
 ### `SunroofShade`
 
@@ -234,8 +234,8 @@ Sun roof shade status. Open = Retracted, Closed = Deployed. Start position for S
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
 | `is_open` | `bool` | `OPTIONAL` | — | Is item open or closed? True = Fully or partially open. False = Fully closed. |
-| `position` | `int32` | `OUTPUT_ONLY` | `PERCENT` | Item position. 0 = Start position 100 = End position. |
-| `switch_control` | `CabinSunroofShadeSwitch` | `OPTIONAL` | — | Switch controlling sliding action such as window, sunroof, or blind. |
+| `position` | `int32` | `OUTPUT_ONLY` | `percent` | Item position. 0 = Start position 100 = End position. |
+| `switch_control` | `SunroofShadeSwitch` | `OPTIONAL` | — | Switch controlling sliding action such as window, sunroof, or blind. |
 
 ## Enums
 
@@ -245,9 +245,9 @@ Allowed values for Vehicle.Cabin.DriverPosition.
 
 | Value | Description |
 | --- | --- |
-| `LEFT` | — |
-| `MIDDLE` | — |
-| `RIGHT` | — |
+| `CABIN_DRIVER_POSITION_LEFT` | Left. |
+| `CABIN_DRIVER_POSITION_MIDDLE` | Middle. |
+| `CABIN_DRIVER_POSITION_RIGHT` | Right. |
 
 ### `CabinConvertibleState`
 
@@ -255,243 +255,243 @@ Allowed values for Vehicle.Cabin.Convertible.Status.
 
 | Value | Description |
 | --- | --- |
-| `UNDEFINED` | — |
-| `CLOSED` | — |
-| `OPEN` | — |
-| `CLOSING` | — |
-| `OPENING` | — |
-| `STALLED` | — |
+| `CABIN_CONVERTIBLE_STATE_UNSPECIFIED` | Not specified. |
+| `CABIN_CONVERTIBLE_STATE_CLOSED` | Closed. |
+| `CABIN_CONVERTIBLE_STATE_OPEN` | Open. |
+| `CABIN_CONVERTIBLE_STATE_CLOSING` | Closing. |
+| `CABIN_CONVERTIBLE_STATE_OPENING` | Opening. |
+| `CABIN_CONVERTIBLE_STATE_STALLED` | Stalled. |
 
-### `CabinInfotainmentHmiDateFormat`
+### `InfotainmentHmiDateFormat`
 
 Allowed values for Vehicle.Cabin.Infotainment.HMI.DateFormat.
 
 | Value | Description |
 | --- | --- |
-| `YYYY_MM_DD` | — |
-| `DD_MM_YYYY` | — |
-| `MM_DD_YYYY` | — |
-| `YY_MM_DD` | — |
-| `DD_MM_YY` | — |
-| `MM_DD_YY` | — |
+| `INFOTAINMENT_HMI_DATE_FORMAT_YYYY_MM_DD` | Yyyy mm dd. |
+| `INFOTAINMENT_HMI_DATE_FORMAT_DD_MM_YYYY` | Dd mm yyyy. |
+| `INFOTAINMENT_HMI_DATE_FORMAT_MM_DD_YYYY` | Mm dd yyyy. |
+| `INFOTAINMENT_HMI_DATE_FORMAT_YY_MM_DD` | Yy mm dd. |
+| `INFOTAINMENT_HMI_DATE_FORMAT_DD_MM_YY` | Dd mm yy. |
+| `INFOTAINMENT_HMI_DATE_FORMAT_MM_DD_YY` | Mm dd yy. |
 
-### `CabinInfotainmentHmiDayNightMode`
+### `InfotainmentHmiDayNightMode`
 
 Allowed values for Vehicle.Cabin.Infotainment.HMI.DayNightMode.
 
 | Value | Description |
 | --- | --- |
-| `DAY` | — |
-| `NIGHT` | — |
+| `INFOTAINMENT_HMI_DAY_NIGHT_MODE_DAY` | Day. |
+| `INFOTAINMENT_HMI_DAY_NIGHT_MODE_NIGHT` | Night. |
 
-### `CabinInfotainmentHmiDistanceUnit`
+### `InfotainmentHmiDistanceUnit`
 
 Allowed values for Vehicle.Cabin.Infotainment.HMI.DistanceUnit.
 
 | Value | Description |
 | --- | --- |
-| `MILES` | — |
-| `KILOMETERS` | — |
+| `INFOTAINMENT_HMI_DISTANCE_UNIT_MILES` | Miles. |
+| `INFOTAINMENT_HMI_DISTANCE_UNIT_KILOMETERS` | Kilometers. |
 
-### `CabinInfotainmentHmiEvEconomyUnits`
+### `InfotainmentHmiEvEconomyUnits`
 
 Allowed values for Vehicle.Cabin.Infotainment.HMI.EVEconomyUnits.
 
 | Value | Description |
 | --- | --- |
-| `MILES_PER_KILOWATT_HOUR` | — |
-| `KILOMETERS_PER_KILOWATT_HOUR` | — |
-| `KILOWATT_HOURS_PER_100_MILES` | — |
-| `KILOWATT_HOURS_PER_100_KILOMETERS` | — |
-| `WATT_HOURS_PER_MILE` | — |
-| `WATT_HOURS_PER_KILOMETER` | — |
+| `INFOTAINMENT_HMI_EV_ECONOMY_UNITS_MILES_PER_KILOWATT_HOUR` | Miles per kilowatt hour. |
+| `INFOTAINMENT_HMI_EV_ECONOMY_UNITS_KILOMETERS_PER_KILOWATT_HOUR` | Kilometers per kilowatt hour. |
+| `INFOTAINMENT_HMI_EV_ECONOMY_UNITS_KILOWATT_HOURS_PER_100_MILES` | Kilowatt hours per 100 miles. |
+| `INFOTAINMENT_HMI_EV_ECONOMY_UNITS_KILOWATT_HOURS_PER_100_KILOMETERS` | Kilowatt hours per 100 kilometers. |
+| `INFOTAINMENT_HMI_EV_ECONOMY_UNITS_WATT_HOURS_PER_MILE` | Watt hours per mile. |
+| `INFOTAINMENT_HMI_EV_ECONOMY_UNITS_WATT_HOURS_PER_KILOMETER` | Watt hours per kilometer. |
 
-### `CabinInfotainmentHmiEvEnergyUnits`
+### `InfotainmentHmiEvEnergyUnits`
 
 Allowed values for Vehicle.Cabin.Infotainment.HMI.EVEnergyUnits.
 
 | Value | Description |
 | --- | --- |
-| `WATT_HOURS` | — |
-| `AMPERE_HOURS` | — |
-| `KILOWATT_HOURS` | — |
+| `INFOTAINMENT_HMI_EV_ENERGY_UNITS_WATT_HOURS` | Watt hours. |
+| `INFOTAINMENT_HMI_EV_ENERGY_UNITS_AMPERE_HOURS` | Ampere hours. |
+| `INFOTAINMENT_HMI_EV_ENERGY_UNITS_KILOWATT_HOURS` | Kilowatt hours. |
 
-### `CabinInfotainmentHmiFontSize`
+### `InfotainmentHmiFontSize`
 
 Allowed values for Vehicle.Cabin.Infotainment.HMI.FontSize.
 
 | Value | Description |
 | --- | --- |
-| `STANDARD` | — |
-| `LARGE` | — |
-| `EXTRA_LARGE` | — |
+| `INFOTAINMENT_HMI_FONT_SIZE_STANDARD` | Standard. |
+| `INFOTAINMENT_HMI_FONT_SIZE_LARGE` | Large. |
+| `INFOTAINMENT_HMI_FONT_SIZE_EXTRA_LARGE` | Extra large. |
 
-### `CabinInfotainmentHmiFuelEconomyUnits`
+### `InfotainmentHmiFuelEconomyUnits`
 
 Allowed values for Vehicle.Cabin.Infotainment.HMI.FuelEconomyUnits.
 
 | Value | Description |
 | --- | --- |
-| `MPG_UK` | — |
-| `MPG_US` | — |
-| `MILES_PER_LITER` | — |
-| `KILOMETERS_PER_LITER` | — |
-| `LITERS_PER_100_KILOMETERS` | — |
+| `INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_MPG_UK` | Mpg uk. |
+| `INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_MPG_US` | Mpg us. |
+| `INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_MILES_PER_LITER` | Miles per liter. |
+| `INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_KILOMETERS_PER_LITER` | Kilometers per liter. |
+| `INFOTAINMENT_HMI_FUEL_ECONOMY_UNITS_LITERS_PER_100_KILOMETERS` | Liters per 100 kilometers. |
 
-### `CabinInfotainmentHmiFuelVolumeUnit`
+### `InfotainmentHmiFuelVolumeUnit`
 
 Allowed values for Vehicle.Cabin.Infotainment.HMI.FuelVolumeUnit.
 
 | Value | Description |
 | --- | --- |
-| `LITER` | — |
-| `GALLON_US` | — |
-| `GALLON_UK` | — |
+| `INFOTAINMENT_HMI_FUEL_VOLUME_UNIT_LITER` | Liter. |
+| `INFOTAINMENT_HMI_FUEL_VOLUME_UNIT_GALLON_US` | Gallon us. |
+| `INFOTAINMENT_HMI_FUEL_VOLUME_UNIT_GALLON_UK` | Gallon uk. |
 
-### `CabinInfotainmentHmiSpeedUnit`
+### `InfotainmentHmiSpeedUnit`
 
 Allowed values for Vehicle.Cabin.Infotainment.HMI.SpeedUnit.
 
 | Value | Description |
 | --- | --- |
-| `METERS_PER_SECOND` | — |
-| `MILES_PER_HOUR` | — |
-| `KILOMETERS_PER_HOUR` | — |
+| `INFOTAINMENT_HMI_SPEED_UNIT_METERS_PER_SECOND` | Meters per second. |
+| `INFOTAINMENT_HMI_SPEED_UNIT_MILES_PER_HOUR` | Miles per hour. |
+| `INFOTAINMENT_HMI_SPEED_UNIT_KILOMETERS_PER_HOUR` | Kilometers per hour. |
 
-### `CabinInfotainmentHmiTemperatureUnit`
+### `InfotainmentHmiTemperatureUnit`
 
 Allowed values for Vehicle.Cabin.Infotainment.HMI.TemperatureUnit.
 
 | Value | Description |
 | --- | --- |
-| `C` | — |
-| `F` | — |
+| `INFOTAINMENT_HMI_TEMPERATURE_UNIT_C` | C. |
+| `INFOTAINMENT_HMI_TEMPERATURE_UNIT_F` | F. |
 
-### `CabinInfotainmentHmiTimeFormat`
+### `InfotainmentHmiTimeFormat`
 
 Allowed values for Vehicle.Cabin.Infotainment.HMI.TimeFormat.
 
 | Value | Description |
 | --- | --- |
-| `HR_12` | — |
-| `HR_24` | — |
+| `INFOTAINMENT_HMI_TIME_FORMAT_HR_12` | Hr 12. |
+| `INFOTAINMENT_HMI_TIME_FORMAT_HR_24` | Hr 24. |
 
-### `CabinInfotainmentHmiTirePressureUnit`
+### `InfotainmentHmiTirePressureUnit`
 
 Allowed values for Vehicle.Cabin.Infotainment.HMI.TirePressureUnit.
 
 | Value | Description |
 | --- | --- |
-| `PSI` | — |
-| `KPA` | — |
-| `BAR` | — |
+| `INFOTAINMENT_HMI_TIRE_PRESSURE_UNIT_PSI` | Psi. |
+| `INFOTAINMENT_HMI_TIRE_PRESSURE_UNIT_KPA` | Kpa. |
+| `INFOTAINMENT_HMI_TIRE_PRESSURE_UNIT_BAR` | Bar. |
 
-### `CabinInfotainmentMediaAction`
+### `InfotainmentMediaAction`
 
 Allowed values for Vehicle.Cabin.Infotainment.Media.Action.
 
 | Value | Description |
 | --- | --- |
-| `UNKNOWN` | — |
-| `STOP` | — |
-| `PLAY` | — |
-| `FAST_FORWARD` | — |
-| `FAST_BACKWARD` | — |
-| `SKIP_FORWARD` | — |
-| `SKIP_BACKWARD` | — |
+| `INFOTAINMENT_MEDIA_ACTION_UNKNOWN` | Unknown. |
+| `INFOTAINMENT_MEDIA_ACTION_STOP` | Stop. |
+| `INFOTAINMENT_MEDIA_ACTION_PLAY` | Play. |
+| `INFOTAINMENT_MEDIA_ACTION_FAST_FORWARD` | Fast forward. |
+| `INFOTAINMENT_MEDIA_ACTION_FAST_BACKWARD` | Fast backward. |
+| `INFOTAINMENT_MEDIA_ACTION_SKIP_FORWARD` | Skip forward. |
+| `INFOTAINMENT_MEDIA_ACTION_SKIP_BACKWARD` | Skip backward. |
 
-### `CabinInfotainmentMediaPlayedSource`
+### `MediaPlayedSource`
 
 Allowed values for Vehicle.Cabin.Infotainment.Media.Played.Source.
 
 | Value | Description |
 | --- | --- |
-| `UNKNOWN` | — |
-| `SIRIUS_XM` | — |
-| `AM` | — |
-| `FM` | — |
-| `DAB` | — |
-| `TV` | — |
-| `CD` | — |
-| `DVD` | — |
-| `AUX` | — |
-| `USB` | — |
-| `DISK` | — |
-| `BLUETOOTH` | — |
-| `INTERNET` | — |
-| `VOICE` | — |
-| `BEEP` | — |
+| `MEDIA_PLAYED_SOURCE_UNKNOWN` | Unknown. |
+| `MEDIA_PLAYED_SOURCE_SIRIUS_XM` | Sirius xm. |
+| `MEDIA_PLAYED_SOURCE_AM` | Am. |
+| `MEDIA_PLAYED_SOURCE_FM` | Fm. |
+| `MEDIA_PLAYED_SOURCE_DAB` | Dab. |
+| `MEDIA_PLAYED_SOURCE_TV` | Tv. |
+| `MEDIA_PLAYED_SOURCE_CD` | Cd. |
+| `MEDIA_PLAYED_SOURCE_DVD` | Dvd. |
+| `MEDIA_PLAYED_SOURCE_AUX` | Aux. |
+| `MEDIA_PLAYED_SOURCE_USB` | Usb. |
+| `MEDIA_PLAYED_SOURCE_DISK` | Disk. |
+| `MEDIA_PLAYED_SOURCE_BLUETOOTH` | Bluetooth. |
+| `MEDIA_PLAYED_SOURCE_INTERNET` | Internet. |
+| `MEDIA_PLAYED_SOURCE_VOICE` | Voice. |
+| `MEDIA_PLAYED_SOURCE_BEEP` | Beep. |
 
-### `CabinInfotainmentNavigationGuidanceVoice`
+### `InfotainmentNavigationGuidanceVoice`
 
 Allowed values for Vehicle.Cabin.Infotainment.Navigation.GuidanceVoice.
 
 | Value | Description |
 | --- | --- |
-| `STANDARD_MALE` | — |
-| `STANDARD_FEMALE` | — |
-| `ETC` | — |
+| `INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_STANDARD_MALE` | Standard male. |
+| `INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_STANDARD_FEMALE` | Standard female. |
+| `INFOTAINMENT_NAVIGATION_GUIDANCE_VOICE_ETC` | Etc. |
 
-### `CabinInfotainmentNavigationMute`
+### `InfotainmentNavigationMute`
 
 Allowed values for Vehicle.Cabin.Infotainment.Navigation.Mute.
 
 | Value | Description |
 | --- | --- |
-| `MUTED` | — |
-| `ALERT_ONLY` | — |
-| `UNMUTED` | — |
+| `INFOTAINMENT_NAVIGATION_MUTE_MUTED` | Muted. |
+| `INFOTAINMENT_NAVIGATION_MUTE_ALERT_ONLY` | Alert only. |
+| `INFOTAINMENT_NAVIGATION_MUTE_UNMUTED` | Unmuted. |
 
-### `CabinInfotainmentSmartphoneProjectionActive`
+### `InfotainmentSmartphoneProjectionActive`
 
 Allowed values for Vehicle.Cabin.Infotainment.SmartphoneProjection.Active.
 
 | Value | Description |
 | --- | --- |
-| `NONE` | — |
-| `ACTIVE` | — |
-| `INACTIVE` | — |
+| `INFOTAINMENT_SMARTPHONE_PROJECTION_ACTIVE_NONE` | None. |
+| `INFOTAINMENT_SMARTPHONE_PROJECTION_ACTIVE_ACTIVE` | Active. |
+| `INFOTAINMENT_SMARTPHONE_PROJECTION_ACTIVE_INACTIVE` | Inactive. |
 
-### `CabinInfotainmentSmartphoneProjectionSource`
+### `InfotainmentSmartphoneProjectionSource`
 
 Allowed values for Vehicle.Cabin.Infotainment.SmartphoneProjection.Source.
 
 | Value | Description |
 | --- | --- |
-| `USB` | — |
-| `BLUETOOTH` | — |
-| `WIFI` | — |
+| `INFOTAINMENT_SMARTPHONE_PROJECTION_SOURCE_USB` | Usb. |
+| `INFOTAINMENT_SMARTPHONE_PROJECTION_SOURCE_BLUETOOTH` | Bluetooth. |
+| `INFOTAINMENT_SMARTPHONE_PROJECTION_SOURCE_WIFI` | Wifi. |
 
-### `CabinInfotainmentSmartphoneProjectionSupportedMode`
+### `InfotainmentSmartphoneProjectionSupportedMode`
 
 Allowed values for Vehicle.Cabin.Infotainment.SmartphoneProjection.SupportedMode.
 
 | Value | Description |
 | --- | --- |
-| `ANDROID_AUTO` | — |
-| `APPLE_CARPLAY` | — |
-| `MIRROR_LINK` | — |
-| `OTHER` | — |
+| `INFOTAINMENT_SMARTPHONE_PROJECTION_SUPPORTED_MODE_ANDROID_AUTO` | Android auto. |
+| `INFOTAINMENT_SMARTPHONE_PROJECTION_SUPPORTED_MODE_APPLE_CARPLAY` | Apple carplay. |
+| `INFOTAINMENT_SMARTPHONE_PROJECTION_SUPPORTED_MODE_MIRROR_LINK` | Mirror link. |
+| `INFOTAINMENT_SMARTPHONE_PROJECTION_SUPPORTED_MODE_OTHER` | Other. |
 
-### `CabinInfotainmentSmartphoneScreenMirroringActive`
+### `InfotainmentSmartphoneScreenMirroringActive`
 
 Allowed values for Vehicle.Cabin.Infotainment.SmartphoneScreenMirroring.Active.
 
 | Value | Description |
 | --- | --- |
-| `NONE` | — |
-| `ACTIVE` | — |
-| `INACTIVE` | — |
+| `INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_ACTIVE_NONE` | None. |
+| `INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_ACTIVE_ACTIVE` | Active. |
+| `INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_ACTIVE_INACTIVE` | Inactive. |
 
-### `CabinInfotainmentSmartphoneScreenMirroringSource`
+### `InfotainmentSmartphoneScreenMirroringSource`
 
 Allowed values for Vehicle.Cabin.Infotainment.SmartphoneScreenMirroring.Source.
 
 | Value | Description |
 | --- | --- |
-| `USB` | — |
-| `BLUETOOTH` | — |
-| `WIFI` | — |
+| `INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_SOURCE_USB` | Usb. |
+| `INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_SOURCE_BLUETOOTH` | Bluetooth. |
+| `INFOTAINMENT_SMARTPHONE_SCREEN_MIRRORING_SOURCE_WIFI` | Wifi. |
 
 ### `CabinRearShadeSwitch`
 
@@ -499,11 +499,11 @@ Allowed values for Vehicle.Cabin.RearShade.Switch.
 
 | Value | Description |
 | --- | --- |
-| `INACTIVE` | — |
-| `CLOSE` | — |
-| `OPEN` | — |
-| `ONE_SHOT_CLOSE` | — |
-| `ONE_SHOT_OPEN` | — |
+| `CABIN_REAR_SHADE_SWITCH_INACTIVE` | Inactive. |
+| `CABIN_REAR_SHADE_SWITCH_CLOSE` | Close. |
+| `CABIN_REAR_SHADE_SWITCH_OPEN` | Open. |
+| `CABIN_REAR_SHADE_SWITCH_ONE_SHOT_CLOSE` | One shot close. |
+| `CABIN_REAR_SHADE_SWITCH_ONE_SHOT_OPEN` | One shot open. |
 
 ### `CabinSunroofSwitch`
 
@@ -511,23 +511,23 @@ Allowed values for Vehicle.Cabin.Sunroof.Switch.
 
 | Value | Description |
 | --- | --- |
-| `INACTIVE` | — |
-| `CLOSE` | — |
-| `OPEN` | — |
-| `ONE_SHOT_CLOSE` | — |
-| `ONE_SHOT_OPEN` | — |
-| `TILT_UP` | — |
-| `TILT_DOWN` | — |
+| `CABIN_SUNROOF_SWITCH_INACTIVE` | Inactive. |
+| `CABIN_SUNROOF_SWITCH_CLOSE` | Close. |
+| `CABIN_SUNROOF_SWITCH_OPEN` | Open. |
+| `CABIN_SUNROOF_SWITCH_ONE_SHOT_CLOSE` | One shot close. |
+| `CABIN_SUNROOF_SWITCH_ONE_SHOT_OPEN` | One shot open. |
+| `CABIN_SUNROOF_SWITCH_TILT_UP` | Tilt up. |
+| `CABIN_SUNROOF_SWITCH_TILT_DOWN` | Tilt down. |
 
-### `CabinSunroofShadeSwitch`
+### `SunroofShadeSwitch`
 
 Allowed values for Vehicle.Cabin.Sunroof.Shade.Switch.
 
 | Value | Description |
 | --- | --- |
-| `INACTIVE` | — |
-| `CLOSE` | — |
-| `OPEN` | — |
-| `ONE_SHOT_CLOSE` | — |
-| `ONE_SHOT_OPEN` | — |
+| `SUNROOF_SHADE_SWITCH_INACTIVE` | Inactive. |
+| `SUNROOF_SHADE_SWITCH_CLOSE` | Close. |
+| `SUNROOF_SHADE_SWITCH_OPEN` | Open. |
+| `SUNROOF_SHADE_SWITCH_ONE_SHOT_CLOSE` | One shot close. |
+| `SUNROOF_SHADE_SWITCH_ONE_SHOT_OPEN` | One shot open. |
 

@@ -32,33 +32,35 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `axle_width` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | The lateral distance between the wheel mounting faces, measured along the spindle axis. |
-| `steering_angle` | `double` | `OUTPUT_ONLY` | `DEGREE` | Single track two-axle model steering angle. Angle according to ISO 8855. Positive = degrees to the left. Negative = degrees to the right. |
-| `tire_aspect_ratio` | `int32` | `OUTPUT_ONLY` | `PERCENT` | Aspect ratio between tire section height and tire section width, as per ETRTO / TRA standard. |
-| `tire_diameter` | `double` | `OUTPUT_ONLY` | `INCH` | Outer diameter of tires, in inches, as per ETRTO / TRA standard. |
-| `tire_width` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | Nominal section width of tires, in mm, as per ETRTO / TRA standard. |
-| `torque` | `int32` | `OUTPUT_ONLY` | `NEWTON_METER` | Incoming axle torque to differential. Negative values indicate regen mode. |
-| `track_width` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | The lateral distance between the centers of the wheels, measured along the spindle, or axle axis. If there are dual rear wheels, measure from the midway points between the inner and outer tires. |
-| `tread_width` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | The lateral distance between the centerlines of the base tires at ground, including camber angle. If there are dual rear wheels, measure from the midway points between the inner and outer tires. |
+| `axle_width` | `int32` | `OUTPUT_ONLY` | `mm` | The lateral distance between the wheel mounting faces, measured along the spindle axis. |
+| `steering_angle` | `double` | `OUTPUT_ONLY` | `deg` | Single track two-axle model steering angle. Angle according to ISO 8855. Positive = degrees to the left. Negative = degrees to the right. |
+| `tire_aspect_ratio` | `int32` | `OUTPUT_ONLY` | `percent` | Aspect ratio between tire section height and tire section width, as per ETRTO / TRA standard. |
+| `tire_diameter` | `double` | `OUTPUT_ONLY` | `in` | Outer diameter of tires, in inches, as per ETRTO / TRA standard. |
+| `tire_width` | `int32` | `OUTPUT_ONLY` | `mm` | Nominal section width of tires, in mm, as per ETRTO / TRA standard. |
+| `torque` | `int32` | `OUTPUT_ONLY` | `Nm` | Incoming axle torque to differential. Negative values indicate regen mode. |
+| `track_width` | `int32` | `OUTPUT_ONLY` | `mm` | The lateral distance between the centers of the wheels, measured along the spindle, or axle axis. If there are dual rear wheels, measure from the midway points between the inner and outer tires. |
+| `tread_width` | `int32` | `OUTPUT_ONLY` | `mm` | The lateral distance between the centerlines of the base tires at ground, including camber angle. If there are dual rear wheels, measure from the midway points between the inner and outer tires. |
 | `wheel_count` | `int32` | `OUTPUT_ONLY` | — | Number of wheels on the axle |
-| `wheel_diameter` | `double` | `OUTPUT_ONLY` | `INCH` | Diameter of wheels (rims without tires), in inches, as per ETRTO / TRA standard. |
-| `wheel_width` | `double` | `OUTPUT_ONLY` | `INCH` | Width of wheels (rims without tires), in inches, as per ETRTO / TRA standard. |
-| `instance_tag` | `ChassisAxleInstanceTag` | `OPTIONAL` | — | — |
+| `wheel_diameter` | `double` | `OUTPUT_ONLY` | `in` | Diameter of wheels (rims without tires), in inches, as per ETRTO / TRA standard. |
+| `wheel_width` | `double` | `OUTPUT_ONLY` | `in` | Width of wheels (rims without tires), in inches, as per ETRTO / TRA standard. |
+| `instance_tag` | `ChassisAxleInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `ChassisAxleInstanceTag`
 
+ChassisAxleInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `ChassisAxleInstanceTagDimension1` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `ChassisAxleInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `ROW1` | — |
-| `ROW2` | — |
+| `DIMENSION1_ROW1` | Row1. |
+| `DIMENSION1_ROW2` | Row2. |
 

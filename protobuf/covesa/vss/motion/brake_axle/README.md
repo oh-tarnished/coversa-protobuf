@@ -32,26 +32,28 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `torque_distribution_friction_right_maximum` | `int32` | `OPTIONAL` | `PERCENT` | Maximum distribution range of the friction brake request on the axle to the right wheel. 0% = Complete friction torque shall be shifted to the left wheel. 50% = At most 50% friction torque may be shifted to the right wheel. 100% = Complete friction torque may be shifted to the right wheel. |
-| `torque_distribution_friction_right_minimum` | `int32` | `OPTIONAL` | `PERCENT` | Minimum distribution range of the friction brake request on the axle to the right wheel. 0% = Complete friction torque may be shifted to the left wheel. 50% = At least 50% friction torque shall be shifted to the right wheel. 100% = Complete friction torque shall be shifted to the right wheel. |
-| `torque_electric_minimum` | `int32` | `OPTIONAL` | `NEWTON_METER` | Limit for regenerative brake torque at given axle. Brake Torque < 0Nm. |
-| `torque_friction_difference_maximum` | `int32` | `OPTIONAL` | `NEWTON_METER` | Maximum absolute wheel torque difference between left and right wheel for friction brake. |
-| `instance_tag` | `BrakeAxleInstanceTag` | `OPTIONAL` | — | — |
+| `torque_distribution_friction_right_maximum` | `int32` | `OPTIONAL` | `percent` | Maximum distribution range of the friction brake request on the axle to the right wheel. 0% = Complete friction torque shall be shifted to the left wheel. 50% = At most 50% friction torque may be shifted to the right wheel. 100% = Complete friction torque may be shifted to the right wheel. |
+| `torque_distribution_friction_right_minimum` | `int32` | `OPTIONAL` | `percent` | Minimum distribution range of the friction brake request on the axle to the right wheel. 0% = Complete friction torque may be shifted to the left wheel. 50% = At least 50% friction torque shall be shifted to the right wheel. 100% = Complete friction torque shall be shifted to the right wheel. |
+| `torque_electric_minimum` | `int32` | `OPTIONAL` | `Nm` | Limit for regenerative brake torque at given axle. Brake Torque < 0Nm. |
+| `torque_friction_difference_maximum` | `int32` | `OPTIONAL` | `Nm` | Maximum absolute wheel torque difference between left and right wheel for friction brake. |
+| `instance_tag` | `BrakeAxleInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `BrakeAxleInstanceTag`
 
+BrakeAxleInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `BrakeAxleInstanceTagDimension1` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `BrakeAxleInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `ROW1` | — |
-| `ROW2` | — |
+| `DIMENSION1_ROW1` | Row1. |
+| `DIMENSION1_ROW2` | Row2. |
 

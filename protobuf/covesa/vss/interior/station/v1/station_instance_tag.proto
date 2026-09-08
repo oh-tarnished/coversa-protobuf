@@ -36,55 +36,55 @@ message StationInstanceTag {
 
   // Instance axis 1. VSS expands a branch across each axis in turn, so the
   // axes together name one instance.
-  StationInstanceTagDimension1 dimension1 = 1 [
+  Dimension1 dimension1 = 1 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true
   ];
 
   // Instance axis 2. VSS expands a branch across each axis in turn, so the
   // axes together name one instance.
-  StationInstanceTagDimension2 dimension2 = 2 [
+  Dimension2 dimension2 = 2 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true
   ];
 }
 // Dimensional enum for VSS instance dimension 1.
-enum StationInstanceTagDimension1 {
+enum Dimension1 {
   // Not specified.
-  STATION_INSTANCE_TAG_DIMENSION1_UNSPECIFIED = 0;
+  DIMENSION1_UNSPECIFIED = 0;
 
   // Row1.
   //
   // The source model spells this "Row1".
-  STATION_INSTANCE_TAG_DIMENSION1_ROW1 = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row1"}];
+  DIMENSION1_ROW1 = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row1"}];
 
   // Row2.
   //
   // The source model spells this "Row2".
-  STATION_INSTANCE_TAG_DIMENSION1_ROW2 = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row2"}];
+  DIMENSION1_ROW2 = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row2"}];
 
   // Row3.
   //
   // The source model spells this "Row3".
-  STATION_INSTANCE_TAG_DIMENSION1_ROW3 = 3 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row3"}];
+  DIMENSION1_ROW3 = 3 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row3"}];
 
   // Row4.
   //
   // The source model spells this "Row4".
-  STATION_INSTANCE_TAG_DIMENSION1_ROW4 = 4 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row4"}];
+  DIMENSION1_ROW4 = 4 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row4"}];
 }
 // Dimensional enum for VSS instance dimension 2.
-enum StationInstanceTagDimension2 {
+enum Dimension2 {
   // Not specified.
-  STATION_INSTANCE_TAG_DIMENSION2_UNSPECIFIED = 0;
+  DIMENSION2_UNSPECIFIED = 0;
 
   // Driver.
   //
   // The source model spells this "Driver".
-  STATION_INSTANCE_TAG_DIMENSION2_DRIVER = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Driver"}];
+  DIMENSION2_DRIVER = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Driver"}];
 
   // Passenger.
   //
   // The source model spells this "Passenger".
-  STATION_INSTANCE_TAG_DIMENSION2_PASSENGER = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Passenger"}];
+  DIMENSION2_PASSENGER = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Passenger"}];
 }

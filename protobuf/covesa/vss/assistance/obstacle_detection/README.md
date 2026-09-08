@@ -32,49 +32,51 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `distance` | `double` | `OUTPUT_ONLY` | `METER` | Distance in meters to detected object |
+| `distance` | `double` | `OUTPUT_ONLY` | `m` | Distance in meters to detected object |
 | `is_enabled` | `bool` | `OPTIONAL` | — | Indicates if obstacle sensor system is enabled (i.e. monitoring for obstacles). True = Enabled. False = Disabled. |
 | `is_error` | `bool` | `OUTPUT_ONLY` | — | Indicates if obstacle sensor system incurred an error condition. True = Error. False = No Error. |
 | `is_warning` | `bool` | `OUTPUT_ONLY` | — | Indicates if obstacle sensor system registered an obstacle. |
-| `time_gap` | `int64` | `OUTPUT_ONLY` | `MILLISECOND` | Time in milliseconds before potential impact object |
-| `warning_type` | `AdasObstacleDetectionWarningType` | `OUTPUT_ONLY` | — | Indicates the type of obstacle warning detected as some track not only the presence of an obstacle but potential intercepting trajectory or other characteristics. |
-| `instance_tag` | `ObstacleDetectionInstanceTag` | `OPTIONAL` | — | — |
+| `time_gap` | `int64` | `OUTPUT_ONLY` | `ms` | Time in milliseconds before potential impact object |
+| `warning_type` | `WarningType` | `OUTPUT_ONLY` | — | Indicates the type of obstacle warning detected as some track not only the presence of an obstacle but potential intercepting trajectory or other characteristics. |
+| `instance_tag` | `ObstacleDetectionInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `ObstacleDetectionInstanceTag`
 
+ObstacleDetectionInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `ObstacleDetectionInstanceTagDimension1` | `OPTIONAL` | — | — |
-| `dimension2` | `ObstacleDetectionInstanceTagDimension2` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
+| `dimension2` | `Dimension2` | `OPTIONAL` | — | Instance axis 2. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `AdasObstacleDetectionWarningType`
+### `WarningType`
 
 Allowed values for Vehicle.ADAS.ObstacleDetection.WarningType.
 
 | Value | Description |
 | --- | --- |
-| `UNDEFINED` | — |
-| `CROSS_TRAFFIC` | — |
-| `BLIND_SPOT` | — |
+| `WARNING_TYPE_UNSPECIFIED` | Not specified. |
+| `WARNING_TYPE_CROSS_TRAFFIC` | Cross traffic. |
+| `WARNING_TYPE_BLIND_SPOT` | Blind spot. |
 
-### `ObstacleDetectionInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `FRONT` | — |
-| `REAR` | — |
+| `DIMENSION1_FRONT` | Front. |
+| `DIMENSION1_REAR` | Rear. |
 
-### `ObstacleDetectionInstanceTagDimension2`
+### `Dimension2`
 
 Dimensional enum for VSS instance dimension 2.
 
 | Value | Description |
 | --- | --- |
-| `LEFT` | — |
-| `CENTER` | — |
-| `RIGHT` | — |
+| `DIMENSION2_LEFT` | Left. |
+| `DIMENSION2_CENTER` | Center. |
+| `DIMENSION2_RIGHT` | Right. |
 

@@ -9,6 +9,8 @@
 > spec revision `2026-07-24` (`36bc939`).
 > Do not edit by hand; run `just docs`.
 
+ChargingStation is a node of the COVESA Vehicle Signal Specification.
+
 ## Service `ChargingStations`
 
 | Method | Request | Response | Summary |
@@ -24,19 +26,23 @@
 
 ### `ChargingStation`
 
+ChargingStation is a node of the COVESA Vehicle Signal Specification.
+
 Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the four timestamps — ahead of the signals below. Field numbers 8–15 are reserved.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `location` | `Address` | `OPTIONAL` | — | — |
+| `location` | `Address` | `OPTIONAL` | — | Location. |
 
 ### `Address`
 
+Address is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `street` | `string` | `OPTIONAL` | — | — |
-| `city` | `string` | `OPTIONAL` | — | — |
-| `state` | `string` | `OPTIONAL` | — | — |
+| `street` | `string` | `OPTIONAL` | — | Street. |
+| `city` | `string` | `OPTIONAL` | — | City. |
+| `state` | `string` | `OPTIONAL` | — | State. |
 | `region_code` | `string` | `OPTIONAL` | — | An ISO 3166-1 alpha-2 country code, e.g. "SE". |
-| `zip_code` | `string` | `OPTIONAL` | — | — |
+| `zip_code` | `string` | `OPTIONAL` | — | Zip code. |
 

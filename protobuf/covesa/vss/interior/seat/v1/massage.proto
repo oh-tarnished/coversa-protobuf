@@ -62,7 +62,7 @@ message Massage {
   // Massage status.
   //
   // VSS: Vehicle.Cabin.Seat.Massage.Status (sensor).
-  CabinSeatMassageState activation = 3 [
+  State activation = 3 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -96,13 +96,13 @@ message Massage {
 // Allowed values for Vehicle.Cabin.Seat.Massage.Status.
 //
 // VSS: Vehicle.Cabin.Seat.Massage.Status.
-enum CabinSeatMassageState {
+enum State {
   // Not specified.
-  CABIN_SEAT_MASSAGE_STATE_UNSPECIFIED = 0;
+  STATE_UNSPECIFIED = 0;
 
   // On.
-  CABIN_SEAT_MASSAGE_STATE_ON_VALUE = 1;
+  STATE_ON_VALUE = 1;
 
   // Off.
-  CABIN_SEAT_MASSAGE_STATE_OFF = 2;
+  STATE_OFF = 2;
 }

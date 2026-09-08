@@ -33,36 +33,38 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
 | `color` | `string` | `OPTIONAL` | — | Hexadecimal color code represented as a 3-byte RGB (i.e. Red, Green, and Blue) value preceded by a hash symbol "#". Allowed range "#000000" to "#FFFFFF". |
-| `intensity` | `int32` | `OPTIONAL` | `PERCENT` | How much of the maximum possible brightness of the light is used. 1 = Maximum attenuation, 100 = No attenuation (i.e. full brightness). |
+| `intensity` | `int32` | `OPTIONAL` | `percent` | How much of the maximum possible brightness of the light is used. 1 = Maximum attenuation, 100 = No attenuation (i.e. full brightness). |
 | `is_light_on` | `bool` | `OPTIONAL` | — | Indicates whether the light is turned on. True = On, False = Off. |
-| `instance_tag` | `SpotlightInstanceTag` | `OPTIONAL` | — | — |
+| `instance_tag` | `SpotlightInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `SpotlightInstanceTag`
 
+SpotlightInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `SpotlightInstanceTagDimension1` | `OPTIONAL` | — | — |
-| `dimension2` | `SpotlightInstanceTagDimension2` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
+| `dimension2` | `Dimension2` | `OPTIONAL` | — | Instance axis 2. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `SpotlightInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `ROW1` | — |
-| `ROW2` | — |
-| `ROW3` | — |
-| `ROW4` | — |
+| `DIMENSION1_ROW1` | Row1. |
+| `DIMENSION1_ROW2` | Row2. |
+| `DIMENSION1_ROW3` | Row3. |
+| `DIMENSION1_ROW4` | Row4. |
 
-### `SpotlightInstanceTagDimension2`
+### `Dimension2`
 
 Dimensional enum for VSS instance dimension 2.
 
 | Value | Description |
 | --- | --- |
-| `DRIVER_SIDE` | — |
-| `PASSENGER_SIDE` | — |
+| `DIMENSION2_DRIVER_SIDE` | Driver side. |
+| `DIMENSION2_PASSENGER_SIDE` | Passenger side. |
 

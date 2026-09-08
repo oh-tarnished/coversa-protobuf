@@ -48,7 +48,7 @@ message CombustionEngineEngineCoolant {
   // Engine coolant level.
   //
   // VSS: Vehicle.Powertrain.CombustionEngine.EngineCoolant.Level (sensor).
-  PowertrainCombustionEngineEngineCoolantLevel level = 2 [
+  EngineCoolantLevel level = 2 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -91,16 +91,16 @@ message CombustionEngineEngineCoolant {
 // Vehicle.Powertrain.CombustionEngine.EngineCoolant.Level.
 //
 // VSS: Vehicle.Powertrain.CombustionEngine.EngineCoolant.Level.
-enum PowertrainCombustionEngineEngineCoolantLevel {
+enum EngineCoolantLevel {
   // Not specified.
-  POWERTRAIN_COMBUSTION_ENGINE_ENGINE_COOLANT_LEVEL_UNSPECIFIED = 0;
+  ENGINE_COOLANT_LEVEL_UNSPECIFIED = 0;
 
   // Critically low.
-  POWERTRAIN_COMBUSTION_ENGINE_ENGINE_COOLANT_LEVEL_CRITICALLY_LOW = 1;
+  ENGINE_COOLANT_LEVEL_CRITICALLY_LOW = 1;
 
   // Low.
-  POWERTRAIN_COMBUSTION_ENGINE_ENGINE_COOLANT_LEVEL_LOW = 2;
+  ENGINE_COOLANT_LEVEL_LOW = 2;
 
   // Normal.
-  POWERTRAIN_COMBUSTION_ENGINE_ENGINE_COOLANT_LEVEL_NORMAL = 3;
+  ENGINE_COOLANT_LEVEL_NORMAL = 3;
 }

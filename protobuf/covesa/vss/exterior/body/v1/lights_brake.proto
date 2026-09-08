@@ -36,7 +36,7 @@ message LightsBrake {
   // indicating emergency-breaking.
   //
   // VSS: Vehicle.Body.Lights.Brake.IsActive (actuator).
-  BodyLightsBrakeIsActive is_active = 1 [
+  IsActive is_active = 1 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -60,16 +60,16 @@ message LightsBrake {
 // Allowed values for Vehicle.Body.Lights.Brake.IsActive.
 //
 // VSS: Vehicle.Body.Lights.Brake.IsActive.
-enum BodyLightsBrakeIsActive {
+enum IsActive {
   // Not specified.
-  BODY_LIGHTS_BRAKE_IS_ACTIVE_UNSPECIFIED = 0;
+  IS_ACTIVE_UNSPECIFIED = 0;
 
   // Inactive.
-  BODY_LIGHTS_BRAKE_IS_ACTIVE_INACTIVE = 1;
+  IS_ACTIVE_INACTIVE = 1;
 
   // Active.
-  BODY_LIGHTS_BRAKE_IS_ACTIVE_ACTIVE = 2;
+  IS_ACTIVE_ACTIVE = 2;
 
   // Adaptive.
-  BODY_LIGHTS_BRAKE_IS_ACTIVE_ADAPTIVE = 3;
+  IS_ACTIVE_ADAPTIVE = 3;
 }

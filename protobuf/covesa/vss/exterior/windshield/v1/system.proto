@@ -173,7 +173,7 @@ message System {
   // stopped without holding the position.
   //
   // VSS: Vehicle.Body.Windshield.Wiping.System.Mode (actuator).
-  BodyWindshieldWipingSystemMode mode = 10 [
+  SystemMode mode = 10 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -207,19 +207,19 @@ message System {
 // Allowed values for Vehicle.Body.Windshield.Wiping.System.Mode.
 //
 // VSS: Vehicle.Body.Windshield.Wiping.System.Mode.
-enum BodyWindshieldWipingSystemMode {
+enum SystemMode {
   // Not specified.
-  BODY_WINDSHIELD_WIPING_SYSTEM_MODE_UNSPECIFIED = 0;
+  SYSTEM_MODE_UNSPECIFIED = 0;
 
   // Stop hold.
-  BODY_WINDSHIELD_WIPING_SYSTEM_MODE_STOP_HOLD = 1;
+  SYSTEM_MODE_STOP_HOLD = 1;
 
   // Wipe.
-  BODY_WINDSHIELD_WIPING_SYSTEM_MODE_WIPE = 2;
+  SYSTEM_MODE_WIPE = 2;
 
   // Plant mode.
-  BODY_WINDSHIELD_WIPING_SYSTEM_MODE_PLANT_MODE = 3;
+  SYSTEM_MODE_PLANT_MODE = 3;
 
   // Emergency stop.
-  BODY_WINDSHIELD_WIPING_SYSTEM_MODE_EMERGENCY_STOP = 4;
+  SYSTEM_MODE_EMERGENCY_STOP = 4;
 }

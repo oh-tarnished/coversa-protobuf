@@ -33,8 +33,8 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
 | `control_unit_id` | `int32` | `OUTPUT_ONLY` | — | Control unit ID |
-| `health` | `Health` | `OPTIONAL` | — | — |
-| `instance_tag` | `ControlUnitInstanceTag` | `OPTIONAL` | — | — |
+| `health` | `Health` | `OPTIONAL` | — | Health. |
+| `instance_tag` | `ControlUnitInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `Health`
 
@@ -42,9 +42,9 @@ Health attributes and signals
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `network` | `Network` | `OPTIONAL` | — | — |
-| `resources` | `Resources` | `OPTIONAL` | — | — |
-| `swsupervision` | `SwSupervision` | `OPTIONAL` | — | — |
+| `network` | `Network` | `OPTIONAL` | — | Network. |
+| `resources` | `Resources` | `OPTIONAL` | — | Resources. |
+| `swsupervision` | `SwSupervision` | `OPTIONAL` | — | Swsupervision. |
 
 ### `Network`
 
@@ -52,8 +52,8 @@ Network attributes and signals
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `can` | `Can` | `OPTIONAL` | — | — |
-| `eth` | `Eth` | `OPTIONAL` | — | — |
+| `can` | `Can` | `OPTIONAL` | — | Can. |
+| `eth` | `Eth` | `OPTIONAL` | — | Eth. |
 
 ### `Can`
 
@@ -77,9 +77,9 @@ Resources attributes and signals
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `power` | `double` | `OUTPUT_ONLY` | `WATT` | Power consumption |
-| `temperature` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Instance temperature |
-| `utilization` | `Utilization` | `OPTIONAL` | — | — |
+| `power` | `double` | `OUTPUT_ONLY` | `W` | Power consumption |
+| `temperature` | `double` | `OUTPUT_ONLY` | `degC` | Instance temperature |
+| `utilization` | `Utilization` | `OPTIONAL` | — | Utilization. |
 
 ### `Utilization`
 
@@ -87,8 +87,8 @@ Resources utilization branch
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `cpu` | `double` | `OUTPUT_ONLY` | `PERCENT` | CPU utilization |
-| `memory` | `double` | `OUTPUT_ONLY` | `PERCENT` | Memory utilization |
+| `cpu` | `double` | `OUTPUT_ONLY` | `percent` | CPU utilization |
+| `memory` | `double` | `OUTPUT_ONLY` | `percent` | Memory utilization |
 
 ### `SwSupervision`
 
@@ -103,22 +103,24 @@ SW supervision attributes and signals
 
 ### `ControlUnitInstanceTag`
 
+ControlUnitInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `ControlUnitInstanceTagDimension1` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `ControlUnitInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `CENTRAL` | — |
-| `FRONT_LEFT` | — |
-| `FRONT_RIGHT` | — |
-| `REAR_LEFT1` | — |
-| `REAR_LEFT2` | — |
-| `TRUNK` | — |
+| `DIMENSION1_CENTRAL` | Central. |
+| `DIMENSION1_FRONT_LEFT` | Front left. |
+| `DIMENSION1_FRONT_RIGHT` | Front right. |
+| `DIMENSION1_REAR_LEFT1` | Rear left1. |
+| `DIMENSION1_REAR_LEFT2` | Rear left2. |
+| `DIMENSION1_TRUNK` | Trunk. |
 

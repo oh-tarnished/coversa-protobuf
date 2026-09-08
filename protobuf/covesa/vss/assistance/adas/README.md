@@ -28,18 +28,18 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `active_autonomy_level` | `AdasActiveAutonomyLevel` | `OUTPUT_ONLY` | — | Indicates the currently active level of driving automation according to the SAE J3016 (Taxonomy and Definitions for Terms Related to Driving Automation Systems for On-Road Motor Vehicles). |
+| `active_autonomy_level` | `ActiveAutonomyLevel` | `OUTPUT_ONLY` | — | Indicates the currently active level of driving automation according to the SAE J3016 (Taxonomy and Definitions for Terms Related to Driving Automation Systems for On-Road Motor Vehicles). |
 | `is_auto_power_optimize` | `bool` | `OPTIONAL` | — | Auto Power Optimization Flag When set to 'true', the system enables automatic power optimization, dynamically adjusting the power optimization level based on runtime conditions or features managed by the OEM. When set to 'false', manual control of the power optimization level is allowed. |
 | `power_optimize_level` | `int32` | `OPTIONAL` | — | Power optimization level for this branch/subsystem. A higher number indicates more aggressive power optimization. Level 0 indicates that all functionality is enabled, no power optimization enabled. Level 10 indicates most aggressive power optimization mode, only essential functionality enabled. |
-| `supported_autonomy_level` | `AdasSupportedAutonomyLevel` | `OUTPUT_ONLY` | — | Indicates the highest level of driving automation according to the SAE J3016 taxonomy the vehicle is capable of. |
-| `abs` | `Abs` | `OPTIONAL` | — | — |
-| `cruise_control` | `CruiseControl` | `OPTIONAL` | — | — |
-| `dms` | `Dms` | `OPTIONAL` | — | — |
-| `eba` | `Eba` | `OPTIONAL` | — | — |
-| `ebd` | `Ebd` | `OPTIONAL` | — | — |
-| `esc` | `Esc` | `OPTIONAL` | — | — |
-| `lane_departure_detection` | `LaneDepartureDetection` | `OPTIONAL` | — | — |
-| `tcs` | `Tcs` | `OPTIONAL` | — | — |
+| `supported_autonomy_level` | `SupportedAutonomyLevel` | `OUTPUT_ONLY` | — | Indicates the highest level of driving automation according to the SAE J3016 taxonomy the vehicle is capable of. |
+| `abs` | `Abs` | `OPTIONAL` | — | Abs. |
+| `cruise_control` | `CruiseControl` | `OPTIONAL` | — | Cruise control. |
+| `dms` | `Dms` | `OPTIONAL` | — | Dms. |
+| `eba` | `Eba` | `OPTIONAL` | — | Eba. |
+| `ebd` | `Ebd` | `OPTIONAL` | — | Ebd. |
+| `esc` | `Esc` | `OPTIONAL` | — | Esc. |
+| `lane_departure_detection` | `LaneDepartureDetection` | `OPTIONAL` | — | Lane departure detection. |
+| `tcs` | `Tcs` | `OPTIONAL` | — | Tcs. |
 
 ### `Abs`
 
@@ -57,13 +57,13 @@ Signals from Cruise Control system.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `adaptive_distance_set` | `double` | `OPTIONAL` | `METER` | Distance in meters to keep from lead vehicle |
+| `adaptive_distance_set` | `double` | `OPTIONAL` | `m` | Distance in meters to keep from lead vehicle |
 | `adaptive_interval_set` | `int32` | `OPTIONAL` | — | Follow distance setting, commonly 1-5 with 1 being closest. |
 | `is_active` | `bool` | `OPTIONAL` | — | Indicates if cruise control system is active (i.e. actively controls speed). True = Active. False = Inactive. |
 | `is_adaptive` | `bool` | `OPTIONAL` | — | Indicates if cruise control system is adaptive (i.e. actively controls speed). |
 | `is_enabled` | `bool` | `OPTIONAL` | — | Indicates if cruise control system is enabled (e.g. ready to receive configurations and settings) True = Enabled. False = Disabled. |
 | `is_error` | `bool` | `OUTPUT_ONLY` | — | Indicates if cruise control system incurred an error condition. True = Error. False = No Error. |
-| `speed_set` | `double` | `OPTIONAL` | `KILOMETER_PER_HOUR` | Set cruise control speed in kilometers per hour. |
+| `speed_set` | `double` | `OPTIONAL` | `km/h` | Set cruise control speed in kilometers per hour. |
 
 ### `Dms`
 
@@ -105,7 +105,7 @@ Electronic Stability Control System signals.
 | `is_engaged` | `bool` | `OUTPUT_ONLY` | — | Indicates if ESC is currently regulating vehicle stability. True = Engaged. False = Not Engaged. |
 | `is_error` | `bool` | `OUTPUT_ONLY` | — | Indicates if ESC incurred an error condition. True = Error. False = No Error. |
 | `is_strong_cross_wind_detected` | `bool` | `OUTPUT_ONLY` | — | Indicates if the ESC system is detecting strong cross winds. True = Strong cross winds detected. False = No strong cross winds detected. |
-| `road_friction` | `RoadFriction` | `OPTIONAL` | — | — |
+| `road_friction` | `RoadFriction` | `OPTIONAL` | — | Road friction. |
 
 ### `RoadFriction`
 
@@ -113,9 +113,9 @@ Road friction values reported by the ESC system.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `lower_bound` | `double` | `OUTPUT_ONLY` | `PERCENT` | Lower bound road friction, as calculated by the ESC system. 5% possibility that road friction is below this value. 0 = no friction, 100 = maximum friction. |
-| `most_probable` | `double` | `OUTPUT_ONLY` | `PERCENT` | Most probable road friction, as calculated by the ESC system. Exact meaning of most probable is implementation specific. 0 = no friction, 100 = maximum friction. |
-| `upper_bound` | `double` | `OUTPUT_ONLY` | `PERCENT` | Upper bound road friction, as calculated by the ESC system. 95% possibility that road friction is below this value. 0 = no friction, 100 = maximum friction. |
+| `lower_bound` | `double` | `OUTPUT_ONLY` | `percent` | Lower bound road friction, as calculated by the ESC system. 5% possibility that road friction is below this value. 0 = no friction, 100 = maximum friction. |
+| `most_probable` | `double` | `OUTPUT_ONLY` | `percent` | Most probable road friction, as calculated by the ESC system. Exact meaning of most probable is implementation specific. 0 = no friction, 100 = maximum friction. |
+| `upper_bound` | `double` | `OUTPUT_ONLY` | `percent` | Upper bound road friction, as calculated by the ESC system. 95% possibility that road friction is below this value. 0 = no friction, 100 = maximum friction. |
 
 ### `LaneDepartureDetection`
 
@@ -139,33 +139,33 @@ Traction Control System signals.
 
 ## Enums
 
-### `AdasActiveAutonomyLevel`
+### `ActiveAutonomyLevel`
 
 Allowed values for Vehicle.ADAS.ActiveAutonomyLevel.
 
 | Value | Description |
 | --- | --- |
-| `SAE_0` | — |
-| `SAE_1` | — |
-| `SAE_2_DISENGAGING` | — |
-| `SAE_2` | — |
-| `SAE_3_DISENGAGING` | — |
-| `SAE_3` | — |
-| `SAE_4_DISENGAGING` | — |
-| `SAE_4` | — |
-| `SAE_5_DISENGAGING` | — |
-| `SAE_5` | — |
+| `ACTIVE_AUTONOMY_LEVEL_SAE_0` | Sae 0. |
+| `ACTIVE_AUTONOMY_LEVEL_SAE_1` | Sae 1. |
+| `ACTIVE_AUTONOMY_LEVEL_SAE_2_DISENGAGING` | Sae 2 disengaging. |
+| `ACTIVE_AUTONOMY_LEVEL_SAE_2` | Sae 2. |
+| `ACTIVE_AUTONOMY_LEVEL_SAE_3_DISENGAGING` | Sae 3 disengaging. |
+| `ACTIVE_AUTONOMY_LEVEL_SAE_3` | Sae 3. |
+| `ACTIVE_AUTONOMY_LEVEL_SAE_4_DISENGAGING` | Sae 4 disengaging. |
+| `ACTIVE_AUTONOMY_LEVEL_SAE_4` | Sae 4. |
+| `ACTIVE_AUTONOMY_LEVEL_SAE_5_DISENGAGING` | Sae 5 disengaging. |
+| `ACTIVE_AUTONOMY_LEVEL_SAE_5` | Sae 5. |
 
-### `AdasSupportedAutonomyLevel`
+### `SupportedAutonomyLevel`
 
 Allowed values for Vehicle.ADAS.SupportedAutonomyLevel.
 
 | Value | Description |
 | --- | --- |
-| `SAE_0` | — |
-| `SAE_1` | — |
-| `SAE_2` | — |
-| `SAE_3` | — |
-| `SAE_4` | — |
-| `SAE_5` | — |
+| `SUPPORTED_AUTONOMY_LEVEL_SAE_0` | Sae 0. |
+| `SUPPORTED_AUTONOMY_LEVEL_SAE_1` | Sae 1. |
+| `SUPPORTED_AUTONOMY_LEVEL_SAE_2` | Sae 2. |
+| `SUPPORTED_AUTONOMY_LEVEL_SAE_3` | Sae 3. |
+| `SUPPORTED_AUTONOMY_LEVEL_SAE_4` | Sae 4. |
+| `SUPPORTED_AUTONOMY_LEVEL_SAE_5` | Sae 5. |
 

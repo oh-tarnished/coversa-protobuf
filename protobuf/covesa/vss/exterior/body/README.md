@@ -31,11 +31,11 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 | `body_type` | `string` | `OUTPUT_ONLY` | — | Body type code as defined by ISO 3779. |
 | `is_auto_power_optimize` | `bool` | `OPTIONAL` | — | Auto Power Optimization Flag When set to 'true', the system enables automatic power optimization, dynamically adjusting the power optimization level based on runtime conditions or features managed by the OEM. When set to 'false', manual control of the power optimization level is allowed. |
 | `power_optimize_level` | `int32` | `OPTIONAL` | — | Power optimization level for this branch/subsystem. A higher number indicates more aggressive power optimization. Level 0 indicates that all functionality is enabled, no power optimization enabled. Level 10 indicates most aggressive power optimization mode, only essential functionality enabled. |
-| `rear_main_spoiler_position` | `double` | `OPTIONAL` | `PERCENT` | Rear spoiler position, 0% = Spoiler fully stowed. 100% = Spoiler fully exposed. |
-| `hood` | `Hood` | `OPTIONAL` | — | — |
-| `horn` | `Horn` | `OPTIONAL` | — | — |
-| `lights` | `Lights` | `OPTIONAL` | — | — |
-| `raindetection` | `Raindetection` | `OPTIONAL` | — | — |
+| `rear_main_spoiler_position` | `double` | `OPTIONAL` | `percent` | Rear spoiler position, 0% = Spoiler fully stowed. 100% = Spoiler fully exposed. |
+| `hood` | `Hood` | `OPTIONAL` | — | Hood. |
+| `horn` | `Horn` | `OPTIONAL` | — | Horn. |
+| `lights` | `Lights` | `OPTIONAL` | — | Lights. |
+| `raindetection` | `Raindetection` | `OPTIONAL` | — | Raindetection. |
 
 ### `Hood`
 
@@ -44,8 +44,8 @@ Hood status. Start position for Hood is Closed.
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
 | `is_open` | `bool` | `OPTIONAL` | — | Is item open or closed? True = Fully or partially open. False = Fully closed. |
-| `position` | `int32` | `OPTIONAL` | `PERCENT` | Item position. 0 = Start position 100 = End position. |
-| `switch_control` | `BodyHoodSwitch` | `OPTIONAL` | — | Switch controlling sliding action such as window, sunroof, or blind. |
+| `position` | `int32` | `OPTIONAL` | `percent` | Item position. 0 = Start position 100 = End position. |
+| `switch_control` | `Switch` | `OPTIONAL` | — | Switch controlling sliding action such as window, sunroof, or blind. |
 
 ### `Horn`
 
@@ -62,13 +62,13 @@ Exterior lights.
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
 | `is_high_beam_switch_on` | `bool` | `OPTIONAL` | — | Status of the high beam switch. True = high beam enabled. False = high beam not enabled. |
-| `light_switch` | `BodyLightsLightSwitch` | `OPTIONAL` | — | Status of the vehicle main light switch. |
-| `backup` | `Backup` | `OPTIONAL` | — | — |
-| `brake` | `LightsBrake` | `OPTIONAL` | — | — |
-| `hazard` | `Hazard` | `OPTIONAL` | — | — |
-| `license_plate` | `LicensePlate` | `OPTIONAL` | — | — |
-| `parking` | `Parking` | `OPTIONAL` | — | — |
-| `running` | `Running` | `OPTIONAL` | — | — |
+| `light_switch` | `LightSwitch` | `OPTIONAL` | — | Status of the vehicle main light switch. |
+| `backup` | `Backup` | `OPTIONAL` | — | Backup. |
+| `brake` | `LightsBrake` | `OPTIONAL` | — | Brake. |
+| `hazard` | `Hazard` | `OPTIONAL` | — | Hazard. |
+| `license_plate` | `LicensePlate` | `OPTIONAL` | — | License plate. |
+| `parking` | `Parking` | `OPTIONAL` | — | Parking. |
+| `running` | `Running` | `OPTIONAL` | — | Running. |
 
 ### `Backup`
 
@@ -85,7 +85,7 @@ Brake lights.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `is_active` | `BodyLightsBrakeIsActive` | `OPTIONAL` | — | Indicates if break-light is active. INACTIVE means lights are off. ACTIVE means lights are on. ADAPTIVE means that break-light is indicating emergency-breaking. |
+| `is_active` | `IsActive` | `OPTIONAL` | — | Indicates if break-light is active. INACTIVE means lights are off. ACTIVE means lights are on. ADAPTIVE means that break-light is indicating emergency-breaking. |
 | `is_defect` | `bool` | `OUTPUT_ONLY` | — | Indicates if light is defect. True = Light is defect. False = Light has no defect. |
 
 ### `Hazard`
@@ -130,41 +130,41 @@ Rain sensor signals.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `intensity` | `int32` | `OUTPUT_ONLY` | `PERCENT` | Rain intensity. 0 = Dry, No Rain. 100 = Covered. |
+| `intensity` | `int32` | `OUTPUT_ONLY` | `percent` | Rain intensity. 0 = Dry, No Rain. 100 = Covered. |
 
 ## Enums
 
-### `BodyHoodSwitch`
+### `Switch`
 
 Allowed values for Vehicle.Body.Hood.Switch.
 
 | Value | Description |
 | --- | --- |
-| `INACTIVE` | — |
-| `CLOSE` | — |
-| `OPEN` | — |
-| `ONE_SHOT_CLOSE` | — |
-| `ONE_SHOT_OPEN` | — |
+| `SWITCH_INACTIVE` | Inactive. |
+| `SWITCH_CLOSE` | Close. |
+| `SWITCH_OPEN` | Open. |
+| `SWITCH_ONE_SHOT_CLOSE` | One shot close. |
+| `SWITCH_ONE_SHOT_OPEN` | One shot open. |
 
-### `BodyLightsLightSwitch`
+### `LightSwitch`
 
 Allowed values for Vehicle.Body.Lights.LightSwitch.
 
 | Value | Description |
 | --- | --- |
-| `OFF` | — |
-| `POSITION` | — |
-| `DAYTIME_RUNNING_LIGHTS` | — |
-| `AUTO` | — |
-| `BEAM` | — |
+| `LIGHT_SWITCH_OFF` | Off. |
+| `LIGHT_SWITCH_POSITION` | Position. |
+| `LIGHT_SWITCH_DAYTIME_RUNNING_LIGHTS` | Daytime running lights. |
+| `LIGHT_SWITCH_AUTO` | Auto. |
+| `LIGHT_SWITCH_BEAM` | Beam. |
 
-### `BodyLightsBrakeIsActive`
+### `IsActive`
 
 Allowed values for Vehicle.Body.Lights.Brake.IsActive.
 
 | Value | Description |
 | --- | --- |
-| `INACTIVE` | — |
-| `ACTIVE` | — |
-| `ADAPTIVE` | — |
+| `IS_ACTIVE_INACTIVE` | Inactive. |
+| `IS_ACTIVE_ACTIVE` | Active. |
+| `IS_ACTIVE_ADAPTIVE` | Adaptive. |
 

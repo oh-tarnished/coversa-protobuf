@@ -35,11 +35,11 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 | `is_child_lock_active` | `bool` | `OUTPUT_ONLY` | — | Is door child lock active. True = Door cannot be opened from inside. False = Door can be opened from inside. |
 | `is_locked` | `bool` | `OPTIONAL` | — | Is item locked or unlocked. True = Locked. False = Unlocked. |
 | `is_open` | `bool` | `OPTIONAL` | — | Is item open or closed? True = Fully or partially open. False = Fully closed. |
-| `position` | `int32` | `OPTIONAL` | `PERCENT` | Item position. 0 = Start position 100 = End position. |
-| `switch_control` | `CabinDoorSwitch` | `OPTIONAL` | — | Switch controlling sliding action such as window, sunroof, or blind. |
-| `shade` | `DoorShade` | `OPTIONAL` | — | — |
-| `window` | `Window` | `OPTIONAL` | — | — |
-| `instance_tag` | `DoorInstanceTag` | `OPTIONAL` | — | — |
+| `position` | `int32` | `OPTIONAL` | `percent` | Item position. 0 = Start position 100 = End position. |
+| `switch_control` | `DoorSwitch` | `OPTIONAL` | — | Switch controlling sliding action such as window, sunroof, or blind. |
+| `shade` | `DoorShade` | `OPTIONAL` | — | Shade. |
+| `window` | `Window` | `OPTIONAL` | — | Window. |
+| `instance_tag` | `DoorInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `DoorShade`
 
@@ -48,8 +48,8 @@ Side window shade. Open = Retracted, Closed = Deployed. Start position for Shade
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
 | `is_open` | `bool` | `OPTIONAL` | — | Is item open or closed? True = Fully or partially open. False = Fully closed. |
-| `position` | `int32` | `OPTIONAL` | `PERCENT` | Item position. 0 = Start position 100 = End position. |
-| `switch_control` | `CabinDoorShadeSwitch` | `OPTIONAL` | — | Switch controlling sliding action such as window, sunroof, or blind. |
+| `position` | `int32` | `OPTIONAL` | `percent` | Item position. 0 = Start position 100 = End position. |
+| `switch_control` | `ShadeSwitch` | `OPTIONAL` | — | Switch controlling sliding action such as window, sunroof, or blind. |
 
 ### `Window`
 
@@ -58,69 +58,71 @@ Door window status. Start position for Window is Closed.
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
 | `is_open` | `bool` | `OPTIONAL` | — | Is item open or closed? True = Fully or partially open. False = Fully closed. |
-| `position` | `int32` | `OPTIONAL` | `PERCENT` | Item position. 0 = Start position 100 = End position. |
-| `switch_control` | `CabinDoorWindowSwitch` | `OPTIONAL` | — | Switch controlling sliding action such as window, sunroof, or blind. |
+| `position` | `int32` | `OPTIONAL` | `percent` | Item position. 0 = Start position 100 = End position. |
+| `switch_control` | `WindowSwitch` | `OPTIONAL` | — | Switch controlling sliding action such as window, sunroof, or blind. |
 
 ### `DoorInstanceTag`
 
+DoorInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `DoorInstanceTagDimension1` | `OPTIONAL` | — | — |
-| `dimension2` | `DoorInstanceTagDimension2` | `OPTIONAL` | — | — |
+| `dimension1` | `InstanceTagDimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
+| `dimension2` | `InstanceTagDimension2` | `OPTIONAL` | — | Instance axis 2. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `CabinDoorSwitch`
+### `DoorSwitch`
 
 Allowed values for Vehicle.Cabin.Door.Switch.
 
 | Value | Description |
 | --- | --- |
-| `INACTIVE` | — |
-| `CLOSE` | — |
-| `OPEN` | — |
-| `ONE_SHOT_CLOSE` | — |
-| `ONE_SHOT_OPEN` | — |
+| `DOOR_SWITCH_INACTIVE` | Inactive. |
+| `DOOR_SWITCH_CLOSE` | Close. |
+| `DOOR_SWITCH_OPEN` | Open. |
+| `DOOR_SWITCH_ONE_SHOT_CLOSE` | One shot close. |
+| `DOOR_SWITCH_ONE_SHOT_OPEN` | One shot open. |
 
-### `CabinDoorShadeSwitch`
+### `ShadeSwitch`
 
 Allowed values for Vehicle.Cabin.Door.Shade.Switch.
 
 | Value | Description |
 | --- | --- |
-| `INACTIVE` | — |
-| `CLOSE` | — |
-| `OPEN` | — |
-| `ONE_SHOT_CLOSE` | — |
-| `ONE_SHOT_OPEN` | — |
+| `SHADE_SWITCH_INACTIVE` | Inactive. |
+| `SHADE_SWITCH_CLOSE` | Close. |
+| `SHADE_SWITCH_OPEN` | Open. |
+| `SHADE_SWITCH_ONE_SHOT_CLOSE` | One shot close. |
+| `SHADE_SWITCH_ONE_SHOT_OPEN` | One shot open. |
 
-### `CabinDoorWindowSwitch`
+### `WindowSwitch`
 
 Allowed values for Vehicle.Cabin.Door.Window.Switch.
 
 | Value | Description |
 | --- | --- |
-| `INACTIVE` | — |
-| `CLOSE` | — |
-| `OPEN` | — |
-| `ONE_SHOT_CLOSE` | — |
-| `ONE_SHOT_OPEN` | — |
+| `WINDOW_SWITCH_INACTIVE` | Inactive. |
+| `WINDOW_SWITCH_CLOSE` | Close. |
+| `WINDOW_SWITCH_OPEN` | Open. |
+| `WINDOW_SWITCH_ONE_SHOT_CLOSE` | One shot close. |
+| `WINDOW_SWITCH_ONE_SHOT_OPEN` | One shot open. |
 
-### `DoorInstanceTagDimension1`
+### `InstanceTagDimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `ROW1` | — |
-| `ROW2` | — |
+| `INSTANCE_TAG_DIMENSION1_ROW1` | Row1. |
+| `INSTANCE_TAG_DIMENSION1_ROW2` | Row2. |
 
-### `DoorInstanceTagDimension2`
+### `InstanceTagDimension2`
 
 Dimensional enum for VSS instance dimension 2.
 
 | Value | Description |
 | --- | --- |
-| `DRIVER_SIDE` | — |
-| `PASSENGER_SIDE` | — |
+| `INSTANCE_TAG_DIMENSION2_DRIVER_SIDE` | Driver side. |
+| `INSTANCE_TAG_DIMENSION2_PASSENGER_SIDE` | Passenger side. |
 

@@ -6,7 +6,7 @@ package model
 import (
 	"testing"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // parse is the fixture helper: a small specification exercising the shapes

@@ -69,7 +69,7 @@ message Wiping {
   // indicates intermittent wiping based on rain intensity.
   //
   // VSS: Vehicle.Body.Windshield.Wiping.Mode (actuator).
-  BodyWindshieldWipingMode mode = 3 [
+  WipingMode mode = 3 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -112,25 +112,25 @@ message Wiping {
 // Allowed values for Vehicle.Body.Windshield.Wiping.Mode.
 //
 // VSS: Vehicle.Body.Windshield.Wiping.Mode.
-enum BodyWindshieldWipingMode {
+enum WipingMode {
   // Not specified.
-  BODY_WINDSHIELD_WIPING_MODE_UNSPECIFIED = 0;
+  WIPING_MODE_UNSPECIFIED = 0;
 
   // Off.
-  BODY_WINDSHIELD_WIPING_MODE_OFF = 1;
+  WIPING_MODE_OFF = 1;
 
   // Slow.
-  BODY_WINDSHIELD_WIPING_MODE_SLOW = 2;
+  WIPING_MODE_SLOW = 2;
 
   // Medium.
-  BODY_WINDSHIELD_WIPING_MODE_MEDIUM = 3;
+  WIPING_MODE_MEDIUM = 3;
 
   // Fast.
-  BODY_WINDSHIELD_WIPING_MODE_FAST = 4;
+  WIPING_MODE_FAST = 4;
 
   // Interval.
-  BODY_WINDSHIELD_WIPING_MODE_INTERVAL = 5;
+  WIPING_MODE_INTERVAL = 5;
 
   // Rain sensor.
-  BODY_WINDSHIELD_WIPING_MODE_RAIN_SENSOR = 6;
+  WIPING_MODE_RAIN_SENSOR = 6;
 }

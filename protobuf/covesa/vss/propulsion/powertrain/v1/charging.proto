@@ -154,7 +154,7 @@ message Charging {
   //
   // VSS: Vehicle.Powertrain.TractionBattery.Charging.StartStopCharging
   // (actuator).
-  PowertrainTractionBatteryChargingStartStopCharging start_stop_charging = 9 [
+  ChargingStartStopCharging start_stop_charging = 9 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {

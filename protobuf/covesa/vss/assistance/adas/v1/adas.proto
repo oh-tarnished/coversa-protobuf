@@ -95,7 +95,7 @@ message Adas {
   // Automation Systems for On-Road Motor Vehicles).
   //
   // VSS: Vehicle.ADAS.ActiveAutonomyLevel (sensor).
-  AdasActiveAutonomyLevel active_autonomy_level = 16 [
+  ActiveAutonomyLevel active_autonomy_level = 16 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -142,7 +142,7 @@ message Adas {
   // J3016 taxonomy the vehicle is capable of.
   //
   // VSS: Vehicle.ADAS.SupportedAutonomyLevel (attribute).
-  AdasSupportedAutonomyLevel supported_autonomy_level = 19 [
+  SupportedAutonomyLevel supported_autonomy_level = 19 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {

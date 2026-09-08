@@ -28,17 +28,17 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `accumulated_braking_energy` | `double` | `OUTPUT_ONLY` | `KILOWATT_HOURS` | The accumulated energy from regenerative braking over lifetime. |
+| `accumulated_braking_energy` | `double` | `OUTPUT_ONLY` | `kWh` | The accumulated energy from regenerative braking over lifetime. |
 | `is_auto_power_optimize` | `bool` | `OPTIONAL` | — | Auto Power Optimization Flag When set to 'true', the system enables automatic power optimization, dynamically adjusting the power optimization level based on runtime conditions or features managed by the OEM. When set to 'false', manual control of the power optimization level is allowed. |
 | `power_optimize_level` | `int32` | `OPTIONAL` | — | Power optimization level for this branch/subsystem. A higher number indicates more aggressive power optimization. Level 0 indicates that all functionality is enabled, no power optimization enabled. Level 10 indicates most aggressive power optimization mode, only essential functionality enabled. |
-| `range_control` | `int64` | `OUTPUT_ONLY` | `METER` | Remaining range in meters using all energy sources available in the vehicle. |
-| `time_remaining` | `int64` | `OUTPUT_ONLY` | `SECOND` | Time remaining in seconds before all energy sources available in the vehicle are empty. |
+| `range_control` | `int64` | `OUTPUT_ONLY` | `m` | Remaining range in meters using all energy sources available in the vehicle. |
+| `time_remaining` | `int64` | `OUTPUT_ONLY` | `s` | Time remaining in seconds before all energy sources available in the vehicle are empty. |
 | `type_control` | `PowertrainType` | `OUTPUT_ONLY` | — | Defines the powertrain type of the vehicle. |
-| `combustion_engine` | `CombustionEngine` | `OPTIONAL` | — | — |
-| `fuel_system` | `FuelSystem` | `OPTIONAL` | — | — |
-| `range_extender` | `RangeExtender` | `OPTIONAL` | — | — |
-| `traction_battery` | `TractionBattery` | `OPTIONAL` | — | — |
-| `transmission` | `Transmission` | `OPTIONAL` | — | — |
+| `combustion_engine` | `CombustionEngine` | `OPTIONAL` | — | Combustion engine. |
+| `fuel_system` | `FuelSystem` | `OPTIONAL` | — | Fuel system. |
+| `range_extender` | `RangeExtender` | `OPTIONAL` | — | Range extender. |
+| `traction_battery` | `TractionBattery` | `OPTIONAL` | — | Traction battery. |
+| `transmission` | `Transmission` | `OPTIONAL` | — | Transmission. |
 
 ### `CombustionEngine`
 
@@ -46,31 +46,31 @@ Engine-specific data, stopping at the bell housing.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `aspiration_type` | `PowertrainCombustionEngineAspirationType` | `OUTPUT_ONLY` | — | Type of aspiration (natural, turbocharger, supercharger etc). |
-| `bore` | `double` | `OUTPUT_ONLY` | `MILLIMETER` | Bore in millimetres. |
+| `aspiration_type` | `CombustionEngineAspirationType` | `OUTPUT_ONLY` | — | Type of aspiration (natural, turbocharger, supercharger etc). |
+| `bore` | `double` | `OUTPUT_ONLY` | `mm` | Bore in millimetres. |
 | `compression_ratio` | `string` | `OUTPUT_ONLY` | — | Engine compression ratio, specified in the format 'X:1', e.g. '9.2:1'. |
-| `config` | `PowertrainCombustionEngineConfig` | `OUTPUT_ONLY` | — | Engine configuration. |
-| `displacement` | `int32` | `OUTPUT_ONLY` | `CUBIC_CENTIMETERS` | Displacement in cubic centimetres. |
-| `eop` | `int32` | `OUTPUT_ONLY` | `KILOPASCAL` | Engine oil pressure. |
+| `config` | `CombustionEngineConfig` | `OUTPUT_ONLY` | — | Engine configuration. |
+| `displacement` | `int32` | `OUTPUT_ONLY` | `cm^3` | Displacement in cubic centimetres. |
+| `eop` | `int32` | `OUTPUT_ONLY` | `kPa` | Engine oil pressure. |
 | `engine_code` | `string` | `OUTPUT_ONLY` | — | Engine code designation, as specified by vehicle manufacturer. |
-| `engine_hours` | `double` | `OUTPUT_ONLY` | `HOUR` | Accumulated time during engine lifetime with 'engine speed (rpm) > 0'. |
-| `idle_hours` | `double` | `OUTPUT_ONLY` | `HOUR` | Accumulated idling time during engine lifetime. Definition of idling is not standardized. |
+| `engine_hours` | `double` | `OUTPUT_ONLY` | `h` | Accumulated time during engine lifetime with 'engine speed (rpm) > 0'. |
+| `idle_hours` | `double` | `OUTPUT_ONLY` | `h` | Accumulated idling time during engine lifetime. Definition of idling is not standardized. |
 | `is_running` | `bool` | `OUTPUT_ONLY` | — | Engine Running. True if engine is rotating (Speed > 0). |
-| `maf` | `int32` | `OUTPUT_ONLY` | `GRAMS_PER_SECOND` | Grams of air drawn into engine per second. |
-| `map_control` | `int32` | `OUTPUT_ONLY` | `KILOPASCAL` | Manifold absolute pressure possibly boosted using forced induction. |
-| `max_power` | `int32` | `OUTPUT_ONLY` | `KILOWATT` | Peak power, in kilowatts, that engine can generate. |
-| `max_torque` | `int32` | `OUTPUT_ONLY` | `NEWTON_METER` | Peak torque, in newton meter, that the engine can generate. |
+| `maf` | `int32` | `OUTPUT_ONLY` | `g/s` | Grams of air drawn into engine per second. |
+| `map_control` | `int32` | `OUTPUT_ONLY` | `kPa` | Manifold absolute pressure possibly boosted using forced induction. |
+| `max_power` | `int32` | `OUTPUT_ONLY` | `kW` | Peak power, in kilowatts, that engine can generate. |
+| `max_torque` | `int32` | `OUTPUT_ONLY` | `Nm` | Peak torque, in newton meter, that the engine can generate. |
 | `cylinder_count` | `int32` | `OUTPUT_ONLY` | — | Number of cylinders. |
 | `cylinder_valve_count` | `int32` | `OUTPUT_ONLY` | — | Number of valves per cylinder. |
-| `power` | `int32` | `OUTPUT_ONLY` | `KILOWATT` | Current engine power output. Shall be reported as 0 during engine breaking. |
-| `speed` | `double` | `OUTPUT_ONLY` | `REVOLUTIONS_PER_MINUTE` | Engine speed measured as rotations per minute. |
-| `stroke_length` | `double` | `OUTPUT_ONLY` | `MILLIMETER` | Stroke length in millimetres. |
-| `tps` | `int32` | `OUTPUT_ONLY` | `PERCENT` | Current throttle position. |
-| `torque` | `int32` | `OUTPUT_ONLY` | `NEWTON_METER` | Current engine torque. Shall be reported as a negative number during engine breaking. |
-| `diesel_exhaust_fluid` | `DieselExhaustFluid` | `OPTIONAL` | — | — |
-| `diesel_particulate_filter` | `DieselParticulateFilter` | `OPTIONAL` | — | — |
-| `engine_coolant` | `CombustionEngineEngineCoolant` | `OPTIONAL` | — | — |
-| `engine_oil` | `EngineOil` | `OPTIONAL` | — | — |
+| `power` | `int32` | `OUTPUT_ONLY` | `kW` | Current engine power output. Shall be reported as 0 during engine breaking. |
+| `speed` | `double` | `OUTPUT_ONLY` | `rpm` | Engine speed measured as rotations per minute. |
+| `stroke_length` | `double` | `OUTPUT_ONLY` | `mm` | Stroke length in millimetres. |
+| `tps` | `int32` | `OUTPUT_ONLY` | `percent` | Current throttle position. |
+| `torque` | `int32` | `OUTPUT_ONLY` | `Nm` | Current engine torque. Shall be reported as a negative number during engine breaking. |
+| `diesel_exhaust_fluid` | `DieselExhaustFluid` | `OPTIONAL` | — | Diesel exhaust fluid. |
+| `diesel_particulate_filter` | `DieselParticulateFilter` | `OPTIONAL` | — | Diesel particulate filter. |
+| `engine_coolant` | `CombustionEngineEngineCoolant` | `OPTIONAL` | — | Engine coolant. |
+| `engine_oil` | `EngineOil` | `OPTIONAL` | — | Engine oil. |
 
 ### `DieselExhaustFluid`
 
@@ -78,10 +78,10 @@ Signals related to Diesel Exhaust Fluid (DEF). DEF is called AUS32 in ISO 22241.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `capacity` | `double` | `OUTPUT_ONLY` | `LITER` | Capacity in liters of the Diesel Exhaust Fluid Tank. |
+| `capacity` | `double` | `OUTPUT_ONLY` | `l` | Capacity in liters of the Diesel Exhaust Fluid Tank. |
 | `is_level_low` | `bool` | `OUTPUT_ONLY` | — | Indicates if the Diesel Exhaust Fluid level is low. True if level is low. Definition of low is vehicle dependent. |
-| `level` | `int32` | `OUTPUT_ONLY` | `PERCENT` | Level of the Diesel Exhaust Fluid tank as percent of capacity. 0 = empty. 100 = full. |
-| `range_control` | `int64` | `OUTPUT_ONLY` | `METER` | Remaining range in meters of the Diesel Exhaust Fluid present in the vehicle. |
+| `level` | `int32` | `OUTPUT_ONLY` | `percent` | Level of the Diesel Exhaust Fluid tank as percent of capacity. 0 = empty. 100 = full. |
+| `range_control` | `int64` | `OUTPUT_ONLY` | `m` | Remaining range in meters of the Diesel Exhaust Fluid present in the vehicle. |
 
 ### `DieselParticulateFilter`
 
@@ -89,9 +89,9 @@ Diesel Particulate Filter signals.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `delta_pressure` | `double` | `OUTPUT_ONLY` | `PASCAL` | Delta Pressure of Diesel Particulate Filter. |
-| `inlet_temperature` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Inlet temperature of Diesel Particulate Filter. |
-| `outlet_temperature` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Outlet temperature of Diesel Particulate Filter. |
+| `delta_pressure` | `double` | `OUTPUT_ONLY` | `Pa` | Delta Pressure of Diesel Particulate Filter. |
+| `inlet_temperature` | `double` | `OUTPUT_ONLY` | `degC` | Inlet temperature of Diesel Particulate Filter. |
+| `outlet_temperature` | `double` | `OUTPUT_ONLY` | `degC` | Outlet temperature of Diesel Particulate Filter. |
 
 ### `CombustionEngineEngineCoolant`
 
@@ -99,10 +99,10 @@ Signals related to the engine coolant
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `capacity` | `double` | `OUTPUT_ONLY` | `LITER` | Engine coolant capacity in liters. |
-| `level` | `PowertrainCombustionEngineEngineCoolantLevel` | `OUTPUT_ONLY` | — | Engine coolant level. |
-| `life_remaining` | `int32` | `OUTPUT_ONLY` | `SECOND` | Remaining engine coolant life in seconds. Negative values can be used to indicate that lifetime has been exceeded. |
-| `temperature` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Engine coolant temperature. |
+| `capacity` | `double` | `OUTPUT_ONLY` | `l` | Engine coolant capacity in liters. |
+| `level` | `EngineCoolantLevel` | `OUTPUT_ONLY` | — | Engine coolant level. |
+| `life_remaining` | `int32` | `OUTPUT_ONLY` | `s` | Remaining engine coolant life in seconds. Negative values can be used to indicate that lifetime has been exceeded. |
+| `temperature` | `double` | `OUTPUT_ONLY` | `degC` | Engine coolant temperature. |
 
 ### `EngineOil`
 
@@ -110,10 +110,10 @@ Signals related to the engine oil
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `capacity` | `double` | `OUTPUT_ONLY` | `LITER` | Engine oil capacity in liters. |
-| `level` | `PowertrainCombustionEngineEngineOilLevel` | `OUTPUT_ONLY` | — | Engine oil level. |
-| `life_remaining` | `int32` | `OUTPUT_ONLY` | `SECOND` | Remaining engine oil life in seconds. Negative values can be used to indicate that lifetime has been exceeded. |
-| `temperature` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | EOT, Engine oil temperature. |
+| `capacity` | `double` | `OUTPUT_ONLY` | `l` | Engine oil capacity in liters. |
+| `level` | `EngineOilLevel` | `OUTPUT_ONLY` | — | Engine oil level. |
+| `life_remaining` | `int32` | `OUTPUT_ONLY` | `s` | Remaining engine oil life in seconds. Negative values can be used to indicate that lifetime has been exceeded. |
+| `temperature` | `double` | `OUTPUT_ONLY` | `degC` | EOT, Engine oil temperature. |
 
 ### `FuelSystem`
 
@@ -121,27 +121,27 @@ Fuel system data.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `absolute_level` | `double` | `OUTPUT_ONLY` | `LITER` | Current available fuel in the fuel tank expressed in liters. |
-| `current_tank_fuel_economy` | `double` | `OUTPUT_ONLY` | `KILOMETERS_PER_LITER` | Average fuel economy calculated from the most recent refueling event to the current time. |
-| `average_consumption` | `double` | `OUTPUT_ONLY` | `LITER_PER_100_KILOMETERS` | Average consumption in liters per 100 km. |
-| `current_tank_consumption` | `double` | `OUTPUT_ONLY` | `LITER` | Fuel consumption since last refueling. |
-| `trip_consumption` | `double` | `OUTPUT_ONLY` | `LITER` | Fuel amount in liters consumed since start of current trip. |
-| `cumulative_fuel_economy` | `double` | `OUTPUT_ONLY` | `KILOMETERS_PER_LITER` | Cumulative average fuel economy calculated from vehicle start or last user reset. |
-| `drive_fuel_economy` | `double` | `OUTPUT_ONLY` | `KILOMETERS_PER_LITER` | Average fuel economy for the current drive cycle, calculated from engine start to current time. |
-| `hybrid_type` | `PowertrainFuelSystemHybridType` | `OUTPUT_ONLY` | — | Defines the hybrid type of the vehicle. |
-| `instant_consumption` | `double` | `OUTPUT_ONLY` | `LITER_PER_100_KILOMETERS` | Current consumption in liters per 100 km. |
-| `instantant_fuel_economy` | `double` | `OUTPUT_ONLY` | `KILOMETERS_PER_LITER` | Real-time instantaneous fuel economy calculated over a short time window. |
+| `absolute_level` | `double` | `OUTPUT_ONLY` | `l` | Current available fuel in the fuel tank expressed in liters. |
+| `current_tank_fuel_economy` | `double` | `OUTPUT_ONLY` | `km/l` | Average fuel economy calculated from the most recent refueling event to the current time. |
+| `average_consumption` | `double` | `OUTPUT_ONLY` | `l/100km` | Average consumption in liters per 100 km. |
+| `current_tank_consumption` | `double` | `OUTPUT_ONLY` | `l` | Fuel consumption since last refueling. |
+| `trip_consumption` | `double` | `OUTPUT_ONLY` | `l` | Fuel amount in liters consumed since start of current trip. |
+| `cumulative_fuel_economy` | `double` | `OUTPUT_ONLY` | `km/l` | Cumulative average fuel economy calculated from vehicle start or last user reset. |
+| `drive_fuel_economy` | `double` | `OUTPUT_ONLY` | `km/l` | Average fuel economy for the current drive cycle, calculated from engine start to current time. |
+| `hybrid_type` | `FuelSystemHybridType` | `OUTPUT_ONLY` | — | Defines the hybrid type of the vehicle. |
+| `instant_consumption` | `double` | `OUTPUT_ONLY` | `l/100km` | Current consumption in liters per 100 km. |
+| `instantant_fuel_economy` | `double` | `OUTPUT_ONLY` | `km/l` | Real-time instantaneous fuel economy calculated over a short time window. |
 | `is_engine_stop_start_enabled` | `bool` | `OUTPUT_ONLY` | — | Indicates whether eco start stop is currently enabled. |
 | `is_fuel_level_empty` | `bool` | `OUTPUT_ONLY` | — | Indicates that the fuel gauge on the instrument cluster displays empty (0). |
 | `is_fuel_level_low` | `bool` | `OUTPUT_ONLY` | — | Indicates that the fuel level is low (e.g. <50km range). |
 | `is_fuel_port_flap_open` | `bool` | `OPTIONAL` | — | Status of the fuel port flap(s). True if at least one is open. |
-| `range_control` | `int64` | `OUTPUT_ONLY` | `METER` | Remaining range in meters using only liquid fuel. |
-| `refuel_port_position` | `PowertrainFuelSystemRefuelPortPosition` | `OUTPUT_ONLY` | — | Position of refuel port(s). First part indicates side of vehicle, second part relative position on that side. |
-| `relative_level` | `int32` | `OUTPUT_ONLY` | `PERCENT` | Level in fuel tank as percent of capacity. 0 = empty. 100 = full. |
-| `supported_fuel` | `PowertrainFuelSystemSupportedFuel` | `OUTPUT_ONLY` | — | Detailed information on fuels supported by the vehicle. Identifiers originating from DIN EN 16942:2021-08, appendix B, with additional suffix for octane (RON) where relevant. |
-| `supported_fuel_types` | `PowertrainFuelSystemSupportedFuelTypes` | `OUTPUT_ONLY` | — | High level information of fuel types supported |
-| `tank_capacity` | `double` | `OUTPUT_ONLY` | `LITER` | Capacity of the fuel tank in liters. |
-| `time_remaining` | `int64` | `OUTPUT_ONLY` | `SECOND` | Time remaining in seconds before the fuel tank is empty. |
+| `range_control` | `int64` | `OUTPUT_ONLY` | `m` | Remaining range in meters using only liquid fuel. |
+| `refuel_port_position` | `FuelSystemRefuelPortPosition` | `OUTPUT_ONLY` | — | Position of refuel port(s). First part indicates side of vehicle, second part relative position on that side. |
+| `relative_level` | `int32` | `OUTPUT_ONLY` | `percent` | Level in fuel tank as percent of capacity. 0 = empty. 100 = full. |
+| `supported_fuel` | `FuelSystemSupportedFuel` | `OUTPUT_ONLY` | — | Detailed information on fuels supported by the vehicle. Identifiers originating from DIN EN 16942:2021-08, appendix B, with additional suffix for octane (RON) where relevant. |
+| `supported_fuel_types` | `FuelSystemSupportedFuelTypes` | `OUTPUT_ONLY` | — | High level information of fuel types supported |
+| `tank_capacity` | `double` | `OUTPUT_ONLY` | `l` | Capacity of the fuel tank in liters. |
+| `time_remaining` | `int64` | `OUTPUT_ONLY` | `s` | Time remaining in seconds before the fuel tank is empty. |
 
 ### `RangeExtender`
 
@@ -149,10 +149,10 @@ Extended Range Electric Vehicle (EREV) specific data.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `combined_fuel_economy` | `double` | `OUTPUT_ONLY` | `KILOMETERS_PER_LITER` | Combined fuel economy equivalent that accounts for both electric energy and fuel consumption. |
-| `operating_mode` | `PowertrainRangeExtenderOperatingMode` | `OUTPUT_ONLY` | — | Current operating mode of the Extended Range Electric Vehicle. |
-| `charge_depleting` | `ChargeDepleting` | `OPTIONAL` | — | — |
-| `charge_sustaining` | `ChargeSustaining` | `OPTIONAL` | — | — |
+| `combined_fuel_economy` | `double` | `OUTPUT_ONLY` | `km/l` | Combined fuel economy equivalent that accounts for both electric energy and fuel consumption. |
+| `operating_mode` | `RangeExtenderOperatingMode` | `OUTPUT_ONLY` | — | Current operating mode of the Extended Range Electric Vehicle. |
+| `charge_depleting` | `ChargeDepleting` | `OPTIONAL` | — | Charge depleting. |
+| `charge_sustaining` | `ChargeSustaining` | `OPTIONAL` | — | Charge sustaining. |
 
 ### `ChargeDepleting`
 
@@ -160,8 +160,8 @@ Signals related to Charge Depleting (CD) mode operation.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `energy_consumption` | `double` | `OUTPUT_ONLY` | `KILOWATT_HOURS_PER_100_KILOMETERS` | Current electric energy consumption rate during Charge Depleting mode operation. |
-| `range_control` | `int64` | `OUTPUT_ONLY` | `METER` | Estimated remaining distance that can be traveled in Charge Depleting mode using available battery energy. |
+| `energy_consumption` | `double` | `OUTPUT_ONLY` | `kWh/100km` | Current electric energy consumption rate during Charge Depleting mode operation. |
+| `range_control` | `int64` | `OUTPUT_ONLY` | `m` | Estimated remaining distance that can be traveled in Charge Depleting mode using available battery energy. |
 
 ### `ChargeSustaining`
 
@@ -169,8 +169,8 @@ Signals related to Charge Sustaining (CS) mode operation.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `fuel_economy` | `double` | `OUTPUT_ONLY` | `KILOMETERS_PER_LITER` | Current fuel economy during Charge Sustaining mode operation. |
-| `range_control` | `int64` | `OUTPUT_ONLY` | `METER` | Estimated remaining distance that can be traveled in Charge Sustaining mode using available fuel. |
+| `fuel_economy` | `double` | `OUTPUT_ONLY` | `km/l` | Current fuel economy during Charge Sustaining mode operation. |
+| `range_control` | `int64` | `OUTPUT_ONLY` | `m` | Estimated remaining distance that can be traveled in Charge Sustaining mode using available fuel. |
 
 ### `TractionBattery`
 
@@ -178,32 +178,32 @@ Battery Management data.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `accumulated_charged_energy` | `double` | `OUTPUT_ONLY` | `KILOWATT_HOURS` | The accumulated energy delivered to the battery during charging over lifetime of the battery. |
-| `accumulated_charged_throughput` | `double` | `OUTPUT_ONLY` | `AMPERE_HOURS` | The accumulated charge throughput delivered to the battery during charging over lifetime of the battery. |
-| `accumulated_consumed_energy` | `double` | `OUTPUT_ONLY` | `KILOWATT_HOURS` | The accumulated energy leaving HV battery for propulsion and auxiliary loads over lifetime of the battery. |
-| `accumulated_consumed_throughput` | `double` | `OUTPUT_ONLY` | `AMPERE_HOURS` | The accumulated charge throughput leaving HV battery for propulsion and auxiliary loads over lifetime of the battery. |
-| `current_current` | `double` | `OUTPUT_ONLY` | `AMPERE` | Current current flowing in/out of battery. Positive = Current flowing in to battery, e.g. during charging. Negative = Current flowing out of battery, e.g. during driving. |
-| `current_power` | `double` | `OUTPUT_ONLY` | `WATT` | Current electrical energy flowing in/out of battery. Positive = Energy flowing in to battery, e.g. during charging. Negative = Energy flowing out of battery, e.g. during driving. |
-| `current_voltage` | `double` | `OUTPUT_ONLY` | `VOLT` | Current Voltage of the battery. |
+| `accumulated_charged_energy` | `double` | `OUTPUT_ONLY` | `kWh` | The accumulated energy delivered to the battery during charging over lifetime of the battery. |
+| `accumulated_charged_throughput` | `double` | `OUTPUT_ONLY` | `Ah` | The accumulated charge throughput delivered to the battery during charging over lifetime of the battery. |
+| `accumulated_consumed_energy` | `double` | `OUTPUT_ONLY` | `kWh` | The accumulated energy leaving HV battery for propulsion and auxiliary loads over lifetime of the battery. |
+| `accumulated_consumed_throughput` | `double` | `OUTPUT_ONLY` | `Ah` | The accumulated charge throughput leaving HV battery for propulsion and auxiliary loads over lifetime of the battery. |
+| `current_current` | `double` | `OUTPUT_ONLY` | `A` | Current current flowing in/out of battery. Positive = Current flowing in to battery, e.g. during charging. Negative = Current flowing out of battery, e.g. during driving. |
+| `current_power` | `double` | `OUTPUT_ONLY` | `W` | Current electrical energy flowing in/out of battery. Positive = Energy flowing in to battery, e.g. during charging. Negative = Energy flowing out of battery, e.g. during driving. |
+| `current_voltage` | `double` | `OUTPUT_ONLY` | `V` | Current Voltage of the battery. |
 | `error_codes` | `repeated string` | `OUTPUT_ONLY` | — | Current error codes related to the battery, if any. |
-| `gross_capacity` | `int32` | `OUTPUT_ONLY` | `KILOWATT_HOURS` | Gross capacity of the battery. |
+| `gross_capacity` | `int32` | `OUTPUT_ONLY` | `kWh` | Gross capacity of the battery. |
 | `id` | `string` | `OUTPUT_ONLY` | — | Battery Identification Number as assigned by OEM. |
 | `is_ground_connected` | `bool` | `OUTPUT_ONLY` | — | Indicating if the ground (negative terminator) of the traction battery is connected to the powertrain. |
 | `is_power_connected` | `bool` | `OUTPUT_ONLY` | — | Indicating if the power (positive terminator) of the traction battery is connected to the powertrain. |
-| `max_voltage` | `int32` | `OUTPUT_ONLY` | `VOLT` | Max allowed voltage of the battery, e.g. during charging. |
-| `net_capacity` | `int32` | `OUTPUT_ONLY` | `KILOWATT_HOURS` | Total net capacity of the battery considering aging. |
-| `nominal_voltage` | `int32` | `OUTPUT_ONLY` | `VOLT` | Nominal Voltage of the battery. |
-| `power_loss` | `double` | `OUTPUT_ONLY` | `WATT` | Electrical energy lost by power dissipation to heat inside the battery. |
+| `max_voltage` | `int32` | `OUTPUT_ONLY` | `V` | Max allowed voltage of the battery, e.g. during charging. |
+| `net_capacity` | `int32` | `OUTPUT_ONLY` | `kWh` | Total net capacity of the battery considering aging. |
+| `nominal_voltage` | `int32` | `OUTPUT_ONLY` | `V` | Nominal Voltage of the battery. |
+| `power_loss` | `double` | `OUTPUT_ONLY` | `W` | Electrical energy lost by power dissipation to heat inside the battery. |
 | `production` | `Date` | `OUTPUT_ONLY` | — | Production date of battery in ISO8601 format, e.g. YYYY-MM-DD. |
-| `range_control` | `int64` | `OUTPUT_ONLY` | `METER` | Remaining range in meters using only battery. |
-| `health_state` | `double` | `OUTPUT_ONLY` | `PERCENT` | Calculated battery state of health at standard conditions. |
-| `time_remaining` | `int64` | `OUTPUT_ONLY` | `SECOND` | Time remaining in seconds before the battery is empty. |
-| `battery_conditioning` | `BatteryConditioning` | `OPTIONAL` | — | — |
-| `cell_voltage` | `CellVoltage` | `OPTIONAL` | — | — |
-| `charging` | `Charging` | `OPTIONAL` | — | — |
-| `dcdc` | `Dcdc` | `OPTIONAL` | — | — |
-| `charge_state` | `StateOfCharge` | `OPTIONAL` | — | — |
-| `temperature` | `Temperature` | `OPTIONAL` | — | — |
+| `range_control` | `int64` | `OUTPUT_ONLY` | `m` | Remaining range in meters using only battery. |
+| `health_state` | `double` | `OUTPUT_ONLY` | `percent` | Calculated battery state of health at standard conditions. |
+| `time_remaining` | `int64` | `OUTPUT_ONLY` | `s` | Time remaining in seconds before the battery is empty. |
+| `battery_conditioning` | `BatteryConditioning` | `OPTIONAL` | — | Battery conditioning. |
+| `cell_voltage` | `CellVoltage` | `OPTIONAL` | — | Cell voltage. |
+| `charging` | `Charging` | `OPTIONAL` | — | Charging. |
+| `dcdc` | `Dcdc` | `OPTIONAL` | — | Dcdc. |
+| `charge_state` | `StateOfCharge` | `OPTIONAL` | — | Charge state. |
+| `temperature` | `Temperature` | `OPTIONAL` | — | Temperature. |
 
 ### `BatteryConditioning`
 
@@ -213,9 +213,9 @@ Properties related to preparing the vehicle battery for charging or driving.
 | --- | --- | --- | --- | --- |
 | `is_active` | `bool` | `OUTPUT_ONLY` | — | Indicates if battery conditioning is active (i.e. actively monitors battery temperature). True = Active. False = Inactive. |
 | `is_ongoing` | `bool` | `OUTPUT_ONLY` | — | Indicating if battery conditioning is currently ongoing. Battery conditioning is considered ongoing when the battery conditioning system is actively heating or cooling the battery, or requesting heating or cooling. |
-| `requested_mode` | `PowertrainTractionBatteryBatteryConditioningRequestedMode` | `OPTIONAL` | — | Defines requested mode for battery conditioning. INACTIVE - Battery conditioning inactive. FAST_CHARGING_PREPARATION - Battery conditioning for fast charging. DRIVING_PREPARATION - Battery conditioning for driving. |
+| `requested_mode` | `BatteryConditioningRequestedMode` | `OPTIONAL` | — | Defines requested mode for battery conditioning. INACTIVE - Battery conditioning inactive. FAST_CHARGING_PREPARATION - Battery conditioning for fast charging. DRIVING_PREPARATION - Battery conditioning for driving. |
 | `start_time` | `google.protobuf.Timestamp` | `OPTIONAL` | — | Start time for battery conditioning, formatted according to ISO 8601 with UTC time zone. |
-| `target_temperature` | `double` | `OPTIONAL` | `DEGREE_CELSIUS` | Target temperature for battery conditioning. |
+| `target_temperature` | `double` | `OPTIONAL` | `degC` | Target temperature for battery conditioning. |
 | `target_time` | `google.protobuf.Timestamp` | `OPTIONAL` | — | Target time when conditioning shall be finished, formatted according to ISO 8601 with UTC time zone. |
 
 ### `CellVoltage`
@@ -227,8 +227,8 @@ Voltage information for cells in the battery pack.
 | `cell_voltages` | `repeated double` | `OUTPUT_ONLY` | — | Array of cell voltages. Length or array shall correspond to number of cells in vehicle. |
 | `id_max` | `int32` | `OUTPUT_ONLY` | — | Identifier of the battery cell with highest voltage. |
 | `id_min` | `int32` | `OUTPUT_ONLY` | — | Identifier of the battery cell with lowest voltage. |
-| `max` | `double` | `OUTPUT_ONLY` | `VOLT` | Current voltage of the battery cell with highest voltage. |
-| `min` | `double` | `OUTPUT_ONLY` | `VOLT` | Current voltage of the battery cell with lowest voltage. |
+| `max` | `double` | `OUTPUT_ONLY` | `V` | Current voltage of the battery cell with highest voltage. |
+| `min` | `double` | `OUTPUT_ONLY` | `V` | Current voltage of the battery cell with lowest voltage. |
 
 ### `Charging`
 
@@ -236,22 +236,22 @@ Properties related to battery charging.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `average_power` | `double` | `OUTPUT_ONLY` | `KILOWATT` | Average charging power of last or current charging event. |
-| `charge_limit` | `int32` | `OPTIONAL` | `PERCENT` | Target charge limit (state of charge) for battery. |
-| `charge_rate` | `double` | `OUTPUT_ONLY` | `KILOMETER_PER_HOUR` | Current charging rate, as in kilometers of range added per hour. |
+| `average_power` | `double` | `OUTPUT_ONLY` | `kW` | Average charging power of last or current charging event. |
+| `charge_limit` | `int32` | `OPTIONAL` | `percent` | Target charge limit (state of charge) for battery. |
+| `charge_rate` | `double` | `OUTPUT_ONLY` | `km/h` | Current charging rate, as in kilometers of range added per hour. |
 | `evse_id` | `string` | `OUTPUT_ONLY` | — | EVSE charging point ID (without separators) of last or current charging event according to ISO 15118-2 Annex H. |
 | `is_charging` | `bool` | `OUTPUT_ONLY` | — | True if charging is ongoing. Charging is considered to be ongoing if energy is flowing from charger to vehicle. |
 | `is_discharging` | `bool` | `OUTPUT_ONLY` | — | True if discharging (vehicle to grid) is ongoing. Discharging is considered to be ongoing if energy is flowing from vehicle to charger/grid. |
-| `max_power` | `double` | `OUTPUT_ONLY` | `KILOWATT` | Maximum charging power of last or current charging event. |
-| `power_loss` | `double` | `OUTPUT_ONLY` | `WATT` | Electrical energy lost by power dissipation to heat inside the AC/DC converter. |
-| `start_stop_charging` | `PowertrainTractionBatteryChargingStartStopCharging` | `OPTIONAL` | — | Start or stop the charging process. |
-| `temperature` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Current temperature of AC/DC converter converting grid voltage to battery voltage. |
+| `max_power` | `double` | `OUTPUT_ONLY` | `kW` | Maximum charging power of last or current charging event. |
+| `power_loss` | `double` | `OUTPUT_ONLY` | `W` | Electrical energy lost by power dissipation to heat inside the AC/DC converter. |
+| `start_stop_charging` | `ChargingStartStopCharging` | `OPTIONAL` | — | Start or stop the charging process. |
+| `temperature` | `double` | `OUTPUT_ONLY` | `degC` | Current temperature of AC/DC converter converting grid voltage to battery voltage. |
 | `completion_duration` | `google.protobuf.Duration` | `OUTPUT_ONLY` | — | The time needed for the current charging process to reach Charging.ChargeLimit. 0 if charging is complete or no charging process is active or planned. |
-| `charge_current` | `ChargeCurrent` | `OPTIONAL` | — | — |
-| `charge_voltage` | `ChargeVoltage` | `OPTIONAL` | — | — |
-| `location` | `Location` | `OPTIONAL` | — | — |
-| `maximum_charging_current` | `MaximumChargingCurrent` | `OPTIONAL` | — | — |
-| `timer` | `Timer` | `OPTIONAL` | — | — |
+| `charge_current` | `ChargeCurrent` | `OPTIONAL` | — | Charge current. |
+| `charge_voltage` | `ChargeVoltage` | `OPTIONAL` | — | Charge voltage. |
+| `location` | `Location` | `OPTIONAL` | — | Location. |
+| `maximum_charging_current` | `MaximumChargingCurrent` | `OPTIONAL` | — | Maximum charging current. |
+| `timer` | `Timer` | `OPTIONAL` | — | Timer. |
 
 ### `ChargeCurrent`
 
@@ -259,10 +259,10 @@ Current charging current.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dc` | `double` | `OUTPUT_ONLY` | `AMPERE` | Current DC charging current at inlet. Negative if returning energy to grid. |
-| `phase1` | `double` | `OUTPUT_ONLY` | `AMPERE` | Current AC charging current (rms) at inlet for Phase 1. Negative if returning energy to grid. |
-| `phase2` | `double` | `OUTPUT_ONLY` | `AMPERE` | Current AC charging current (rms) at inlet for Phase 2. Negative if returning energy to grid. |
-| `phase3` | `double` | `OUTPUT_ONLY` | `AMPERE` | Current AC charging current (rms) at inlet for Phase 3. Negative if returning energy to grid. |
+| `dc` | `double` | `OUTPUT_ONLY` | `A` | Current DC charging current at inlet. Negative if returning energy to grid. |
+| `phase1` | `double` | `OUTPUT_ONLY` | `A` | Current AC charging current (rms) at inlet for Phase 1. Negative if returning energy to grid. |
+| `phase2` | `double` | `OUTPUT_ONLY` | `A` | Current AC charging current (rms) at inlet for Phase 2. Negative if returning energy to grid. |
+| `phase3` | `double` | `OUTPUT_ONLY` | `A` | Current AC charging current (rms) at inlet for Phase 3. Negative if returning energy to grid. |
 
 ### `ChargeVoltage`
 
@@ -270,10 +270,10 @@ Current charging voltage, as measured at the charging inlet.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dc` | `double` | `OUTPUT_ONLY` | `VOLT` | Current DC charging voltage at charging inlet. |
-| `phase1` | `double` | `OUTPUT_ONLY` | `VOLT` | Current AC charging voltage (rms) at inlet for Phase 1. |
-| `phase2` | `double` | `OUTPUT_ONLY` | `VOLT` | Current AC charging voltage (rms) at inlet for Phase 2. |
-| `phase3` | `double` | `OUTPUT_ONLY` | `VOLT` | Current AC charging voltage (rms) at inlet for Phase 3. |
+| `dc` | `double` | `OUTPUT_ONLY` | `V` | Current DC charging voltage at charging inlet. |
+| `phase1` | `double` | `OUTPUT_ONLY` | `V` | Current AC charging voltage (rms) at inlet for Phase 1. |
+| `phase2` | `double` | `OUTPUT_ONLY` | `V` | Current AC charging voltage (rms) at inlet for Phase 2. |
+| `phase3` | `double` | `OUTPUT_ONLY` | `V` | Current AC charging voltage (rms) at inlet for Phase 3. |
 
 ### `Location`
 
@@ -281,9 +281,9 @@ Location of last or current charging event.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `altitude` | `double` | `OUTPUT_ONLY` | `METER` | Altitude relative to WGS 84 reference ellipsoid of last or current charging event. |
-| `latitude` | `double` | `OUTPUT_ONLY` | `DEGREE` | Latitude of last or current charging event in WGS 84 geodetic coordinates. |
-| `longitude` | `double` | `OUTPUT_ONLY` | `DEGREE` | Longitude of last or current charging event in WGS 84 geodetic coordinates. |
+| `altitude` | `double` | `OUTPUT_ONLY` | `m` | Altitude relative to WGS 84 reference ellipsoid of last or current charging event. |
+| `latitude` | `double` | `OUTPUT_ONLY` | `deg` | Latitude of last or current charging event in WGS 84 geodetic coordinates. |
+| `longitude` | `double` | `OUTPUT_ONLY` | `deg` | Longitude of last or current charging event in WGS 84 geodetic coordinates. |
 
 ### `MaximumChargingCurrent`
 
@@ -291,10 +291,10 @@ Maximum charging current that can be accepted by the system, as measured at the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dc` | `double` | `OUTPUT_ONLY` | `AMPERE` | Maximum DC charging current at inlet that can be accepted by the system. |
-| `phase1` | `double` | `OUTPUT_ONLY` | `AMPERE` | Maximum AC charging current (rms) at inlet for Phase 1 that can be accepted by the system. |
-| `phase2` | `double` | `OUTPUT_ONLY` | `AMPERE` | Maximum AC charging current (rms) at inlet for Phase 2 that can be accepted by the system. |
-| `phase3` | `double` | `OUTPUT_ONLY` | `AMPERE` | Maximum AC charging current (rms) at inlet for Phase 3 that can be accepted by the system. |
+| `dc` | `double` | `OUTPUT_ONLY` | `A` | Maximum DC charging current at inlet that can be accepted by the system. |
+| `phase1` | `double` | `OUTPUT_ONLY` | `A` | Maximum AC charging current (rms) at inlet for Phase 1 that can be accepted by the system. |
+| `phase2` | `double` | `OUTPUT_ONLY` | `A` | Maximum AC charging current (rms) at inlet for Phase 2 that can be accepted by the system. |
+| `phase3` | `double` | `OUTPUT_ONLY` | `A` | Maximum AC charging current (rms) at inlet for Phase 3 that can be accepted by the system. |
 
 ### `Timer`
 
@@ -302,7 +302,7 @@ Properties related to timing of battery charging sessions.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `mode` | `PowertrainTractionBatteryChargingTimerMode` | `OPTIONAL` | — | Defines timer mode for charging: INACTIVE - no timer set, charging may start as soon as battery is connected to a charger. START_TIME - charging shall start at Charging.Timer.Time. END_TIME - charging shall be finished (reach Charging.ChargeLimit) at Charging.Timer.Time. When charging is completed the vehicle shall change mode to 'inactive' or set a new Charging.Timer.Time. Charging shall start immediately if mode is 'starttime' or 'endtime' and Charging.Timer.Time is a time in the past. |
+| `mode` | `TimerMode` | `OPTIONAL` | — | Defines timer mode for charging: INACTIVE - no timer set, charging may start as soon as battery is connected to a charger. START_TIME - charging shall start at Charging.Timer.Time. END_TIME - charging shall be finished (reach Charging.ChargeLimit) at Charging.Timer.Time. When charging is completed the vehicle shall change mode to 'inactive' or set a new Charging.Timer.Time. Charging shall start immediately if mode is 'starttime' or 'endtime' and Charging.Timer.Time is a time in the past. |
 | `action_time` | `google.protobuf.Timestamp` | `OPTIONAL` | — | Time for next charging-related action, formatted according to ISO 8601 with UTC time zone. Value has no significance if Charging.Timer.Mode is 'inactive'. |
 
 ### `Dcdc`
@@ -311,8 +311,8 @@ Properties related to DC/DC converter converting high voltage (from high voltage
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `power_loss` | `double` | `OUTPUT_ONLY` | `WATT` | Electrical energy lost by power dissipation to heat inside DC/DC converter. |
-| `temperature` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Current temperature of DC/DC converter converting battery high voltage to vehicle low voltage (typically 12 Volts). |
+| `power_loss` | `double` | `OUTPUT_ONLY` | `W` | Electrical energy lost by power dissipation to heat inside DC/DC converter. |
+| `temperature` | `double` | `OUTPUT_ONLY` | `degC` | Current temperature of DC/DC converter converting battery high voltage to vehicle low voltage (typically 12 Volts). |
 
 ### `StateOfCharge`
 
@@ -320,9 +320,9 @@ Information on the state of charge of the vehicle's high voltage battery.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `current` | `double` | `OUTPUT_ONLY` | `PERCENT` | Physical state of charge of the high voltage battery, relative to net capacity. This is not necessarily the state of charge being displayed to the customer. |
-| `current_energy` | `double` | `OUTPUT_ONLY` | `KILOWATT_HOURS` | Physical state of charge of high voltage battery expressed in kWh. |
-| `displayed` | `double` | `OUTPUT_ONLY` | `PERCENT` | State of charge displayed to the customer. |
+| `current` | `double` | `OUTPUT_ONLY` | `percent` | Physical state of charge of the high voltage battery, relative to net capacity. This is not necessarily the state of charge being displayed to the customer. |
+| `current_energy` | `double` | `OUTPUT_ONLY` | `kWh` | Physical state of charge of high voltage battery expressed in kWh. |
+| `displayed` | `double` | `OUTPUT_ONLY` | `percent` | State of charge displayed to the customer. |
 
 ### `Temperature`
 
@@ -330,10 +330,10 @@ Temperature Information for the battery pack.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `average` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Current average temperature of the battery cells. |
+| `average` | `double` | `OUTPUT_ONLY` | `degC` | Current average temperature of the battery cells. |
 | `cell_temperature` | `repeated double` | `OUTPUT_ONLY` | — | Array of cell temperatures. Length or array shall correspond to number of cells in vehicle. |
-| `max` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Current maximum temperature of the battery cells, i.e. temperature of the hottest cell. |
-| `min` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Current minimum temperature of the battery cells, i.e. temperature of the coldest cell. |
+| `max` | `double` | `OUTPUT_ONLY` | `degC` | Current maximum temperature of the battery cells, i.e. temperature of the hottest cell. |
+| `min` | `double` | `OUTPUT_ONLY` | `degC` | Current minimum temperature of the battery cells, i.e. temperature of the coldest cell. |
 
 ### `Transmission`
 
@@ -341,23 +341,23 @@ Transmission-specific data, stopping at the drive shafts.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `clutch_engagement` | `double` | `OPTIONAL` | `PERCENT` | Clutch engagement. 0% = Clutch fully disengaged. 100% = Clutch fully engaged. |
-| `clutch_wear` | `int32` | `OUTPUT_ONLY` | `PERCENT` | Clutch wear as a percent. 0 = no wear. 100 = worn. |
+| `clutch_engagement` | `double` | `OPTIONAL` | `percent` | Clutch engagement. 0% = Clutch fully disengaged. 100% = Clutch fully engaged. |
+| `clutch_wear` | `int32` | `OUTPUT_ONLY` | `percent` | Clutch wear as a percent. 0 = no wear. 100 = worn. |
 | `current_gear` | `int32` | `OUTPUT_ONLY` | — | The current gear. 0=Neutral, 1/2/..=Forward, -1/-2/..=Reverse. |
-| `diff_lock_front_engagement` | `double` | `OPTIONAL` | `PERCENT` | Front Diff Lock engagement. 0% = Diff lock fully disengaged. 100% = Diff lock fully engaged. |
-| `diff_lock_rear_engagement` | `double` | `OPTIONAL` | `PERCENT` | Rear Diff Lock engagement. 0% = Diff lock fully disengaged. 100% = Diff lock fully engaged. |
-| `drive_type` | `PowertrainTransmissionDriveType` | `OUTPUT_ONLY` | — | Drive type. |
-| `gear_change_mode` | `PowertrainTransmissionGearChangeMode` | `OPTIONAL` | — | Is the gearbox in automatic or manual (paddle) mode. |
+| `diff_lock_front_engagement` | `double` | `OPTIONAL` | `percent` | Front Diff Lock engagement. 0% = Diff lock fully disengaged. 100% = Diff lock fully engaged. |
+| `diff_lock_rear_engagement` | `double` | `OPTIONAL` | `percent` | Rear Diff Lock engagement. 0% = Diff lock fully disengaged. 100% = Diff lock fully engaged. |
+| `drive_type` | `TransmissionDriveType` | `OUTPUT_ONLY` | — | Drive type. |
+| `gear_change_mode` | `TransmissionGearChangeMode` | `OPTIONAL` | — | Is the gearbox in automatic or manual (paddle) mode. |
 | `gear_count` | `int32` | `OUTPUT_ONLY` | — | Number of forward gears in the transmission. -1 = CVT. |
 | `is_electrical_powertrain_engaged` | `bool` | `OPTIONAL` | — | Is electrical powertrain mechanically connected/engaged to the drivetrain or not. False = Disconnected/Disengaged. True = Connected/Engaged. |
 | `is_low_range_engaged` | `bool` | `OPTIONAL` | — | Is gearbox in low range mode or not. False = Normal/High range engaged. True = Low range engaged. |
 | `is_park_lock_engaged` | `bool` | `OPTIONAL` | — | Is the transmission park lock engaged or not. False = Disengaged. True = Engaged. |
-| `performance_mode` | `PowertrainTransmissionPerformanceMode` | `OPTIONAL` | — | Current gearbox performance mode. |
+| `performance_mode` | `TransmissionPerformanceMode` | `OPTIONAL` | — | Current gearbox performance mode. |
 | `selected_gear` | `int32` | `OPTIONAL` | — | The selected gear. 0=Neutral, 1/2/..=Forward, -1/-2/..=Reverse, 126=Park, 127=Drive. |
-| `temperature` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | The current gearbox temperature. |
-| `torque_distribution` | `double` | `OPTIONAL` | `PERCENT` | Torque distribution between front and rear axle in percent. -100% = Full torque to front axle, 0% = 50:50 Front/Rear, 100% = Full torque to rear axle. |
-| `travelled_distance` | `double` | `OUTPUT_ONLY` | `KILOMETER` | Odometer reading, total distance travelled during the lifetime of the transmission. |
-| `type_control` | `PowertrainTransmissionType` | `OUTPUT_ONLY` | — | Transmission type. |
+| `temperature` | `double` | `OUTPUT_ONLY` | `degC` | The current gearbox temperature. |
+| `torque_distribution` | `double` | `OPTIONAL` | `percent` | Torque distribution between front and rear axle in percent. -100% = Full torque to front axle, 0% = 50:50 Front/Rear, 100% = Full torque to rear axle. |
+| `travelled_distance` | `double` | `OUTPUT_ONLY` | `km` | Odometer reading, total distance travelled during the lifetime of the transmission. |
+| `type_control` | `TransmissionType` | `OUTPUT_ONLY` | — | Transmission type. |
 
 ### `Date`
 
@@ -377,213 +377,213 @@ Allowed values for Vehicle.Powertrain.Type.
 
 | Value | Description |
 | --- | --- |
-| `COMBUSTION` | — |
-| `HYBRID` | — |
-| `ELECTRIC` | — |
+| `POWERTRAIN_TYPE_COMBUSTION` | Combustion. |
+| `POWERTRAIN_TYPE_HYBRID` | Hybrid. |
+| `POWERTRAIN_TYPE_ELECTRIC` | Electric. |
 
-### `PowertrainCombustionEngineAspirationType`
+### `CombustionEngineAspirationType`
 
 Allowed values for Vehicle.Powertrain.CombustionEngine.AspirationType.
 
 | Value | Description |
 | --- | --- |
-| `UNKNOWN` | — |
-| `NATURAL` | — |
-| `SUPERCHARGER` | — |
-| `TURBOCHARGER` | — |
+| `COMBUSTION_ENGINE_ASPIRATION_TYPE_UNKNOWN` | Unknown. |
+| `COMBUSTION_ENGINE_ASPIRATION_TYPE_NATURAL` | Natural. |
+| `COMBUSTION_ENGINE_ASPIRATION_TYPE_SUPERCHARGER` | Supercharger. |
+| `COMBUSTION_ENGINE_ASPIRATION_TYPE_TURBOCHARGER` | Turbocharger. |
 
-### `PowertrainCombustionEngineConfig`
+### `CombustionEngineConfig`
 
 Allowed values for Vehicle.Powertrain.CombustionEngine.Configuration.
 
 | Value | Description |
 | --- | --- |
-| `UNKNOWN` | — |
-| `STRAIGHT` | — |
-| `V` | — |
-| `BOXER` | — |
-| `W` | — |
-| `ROTARY` | — |
-| `RADIAL` | — |
-| `SQUARE` | — |
-| `H` | — |
-| `U` | — |
-| `OPPOSED` | — |
-| `X` | — |
+| `COMBUSTION_ENGINE_CONFIG_UNKNOWN` | Unknown. |
+| `COMBUSTION_ENGINE_CONFIG_STRAIGHT` | Straight. |
+| `COMBUSTION_ENGINE_CONFIG_V` | V. |
+| `COMBUSTION_ENGINE_CONFIG_BOXER` | Boxer. |
+| `COMBUSTION_ENGINE_CONFIG_W` | W. |
+| `COMBUSTION_ENGINE_CONFIG_ROTARY` | Rotary. |
+| `COMBUSTION_ENGINE_CONFIG_RADIAL` | Radial. |
+| `COMBUSTION_ENGINE_CONFIG_SQUARE` | Square. |
+| `COMBUSTION_ENGINE_CONFIG_H` | H. |
+| `COMBUSTION_ENGINE_CONFIG_U` | U. |
+| `COMBUSTION_ENGINE_CONFIG_OPPOSED` | Opposed. |
+| `COMBUSTION_ENGINE_CONFIG_X` | X. |
 
-### `PowertrainCombustionEngineEngineCoolantLevel`
+### `EngineCoolantLevel`
 
 Allowed values for Vehicle.Powertrain.CombustionEngine.EngineCoolant.Level.
 
 | Value | Description |
 | --- | --- |
-| `CRITICALLY_LOW` | — |
-| `LOW` | — |
-| `NORMAL` | — |
+| `ENGINE_COOLANT_LEVEL_CRITICALLY_LOW` | Critically low. |
+| `ENGINE_COOLANT_LEVEL_LOW` | Low. |
+| `ENGINE_COOLANT_LEVEL_NORMAL` | Normal. |
 
-### `PowertrainCombustionEngineEngineOilLevel`
+### `EngineOilLevel`
 
 Allowed values for Vehicle.Powertrain.CombustionEngine.EngineOil.Level.
 
 | Value | Description |
 | --- | --- |
-| `CRITICALLY_LOW` | — |
-| `LOW` | — |
-| `NORMAL` | — |
-| `HIGH` | — |
-| `CRITICALLY_HIGH` | — |
+| `ENGINE_OIL_LEVEL_CRITICALLY_LOW` | Critically low. |
+| `ENGINE_OIL_LEVEL_LOW` | Low. |
+| `ENGINE_OIL_LEVEL_NORMAL` | Normal. |
+| `ENGINE_OIL_LEVEL_HIGH` | High. |
+| `ENGINE_OIL_LEVEL_CRITICALLY_HIGH` | Critically high. |
 
-### `PowertrainFuelSystemHybridType`
+### `FuelSystemHybridType`
 
 Allowed values for Vehicle.Powertrain.FuelSystem.HybridType.
 
 | Value | Description |
 | --- | --- |
-| `UNKNOWN` | — |
-| `NOT_APPLICABLE` | — |
-| `STOP_START` | — |
-| `BELT_ISG` | — |
-| `CIMG` | — |
-| `PHEV` | — |
+| `FUEL_SYSTEM_HYBRID_TYPE_UNKNOWN` | Unknown. |
+| `FUEL_SYSTEM_HYBRID_TYPE_NOT_APPLICABLE` | Not applicable. |
+| `FUEL_SYSTEM_HYBRID_TYPE_STOP_START` | Stop start. |
+| `FUEL_SYSTEM_HYBRID_TYPE_BELT_ISG` | Belt isg. |
+| `FUEL_SYSTEM_HYBRID_TYPE_CIMG` | Cimg. |
+| `FUEL_SYSTEM_HYBRID_TYPE_PHEV` | Phev. |
 
-### `PowertrainFuelSystemRefuelPortPosition`
+### `FuelSystemRefuelPortPosition`
 
 Allowed values for Vehicle.Powertrain.FuelSystem.RefuelPortPosition.
 
 | Value | Description |
 | --- | --- |
-| `FRONT_LEFT` | — |
-| `FRONT_MIDDLE` | — |
-| `FRONT_RIGHT` | — |
-| `REAR_LEFT` | — |
-| `REAR_MIDDLE` | — |
-| `REAR_RIGHT` | — |
-| `LEFT_FRONT` | — |
-| `LEFT_MIDDLE` | — |
-| `LEFT_REAR` | — |
-| `RIGHT_FRONT` | — |
-| `RIGHT_MIDDLE` | — |
-| `RIGHT_REAR` | — |
+| `FUEL_SYSTEM_REFUEL_PORT_POSITION_FRONT_LEFT` | Front left. |
+| `FUEL_SYSTEM_REFUEL_PORT_POSITION_FRONT_MIDDLE` | Front middle. |
+| `FUEL_SYSTEM_REFUEL_PORT_POSITION_FRONT_RIGHT` | Front right. |
+| `FUEL_SYSTEM_REFUEL_PORT_POSITION_REAR_LEFT` | Rear left. |
+| `FUEL_SYSTEM_REFUEL_PORT_POSITION_REAR_MIDDLE` | Rear middle. |
+| `FUEL_SYSTEM_REFUEL_PORT_POSITION_REAR_RIGHT` | Rear right. |
+| `FUEL_SYSTEM_REFUEL_PORT_POSITION_LEFT_FRONT` | Left front. |
+| `FUEL_SYSTEM_REFUEL_PORT_POSITION_LEFT_MIDDLE` | Left middle. |
+| `FUEL_SYSTEM_REFUEL_PORT_POSITION_LEFT_REAR` | Left rear. |
+| `FUEL_SYSTEM_REFUEL_PORT_POSITION_RIGHT_FRONT` | Right front. |
+| `FUEL_SYSTEM_REFUEL_PORT_POSITION_RIGHT_MIDDLE` | Right middle. |
+| `FUEL_SYSTEM_REFUEL_PORT_POSITION_RIGHT_REAR` | Right rear. |
 
-### `PowertrainFuelSystemSupportedFuel`
+### `FuelSystemSupportedFuel`
 
 Allowed values for Vehicle.Powertrain.FuelSystem.SupportedFuel.
 
 | Value | Description |
 | --- | --- |
-| `E5_95` | — |
-| `E5_98` | — |
-| `E10_95` | — |
-| `E10_98` | — |
-| `E85` | — |
-| `B7` | — |
-| `B10` | — |
-| `B20` | — |
-| `B30` | — |
-| `B100` | — |
-| `XTL` | — |
-| `LPG` | — |
-| `CNG` | — |
-| `LNG` | — |
-| `H2` | — |
-| `OTHER` | — |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_E5_95` | E5 95. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_E5_98` | E5 98. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_E10_95` | E10 95. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_E10_98` | E10 98. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_E85` | E85. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_B7` | B7. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_B10` | B10. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_B20` | B20. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_B30` | B30. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_B100` | B100. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_XTL` | Xtl. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_LPG` | Lpg. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_CNG` | Cng. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_LNG` | Lng. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_H2` | H2. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_OTHER` | Other. |
 
-### `PowertrainFuelSystemSupportedFuelTypes`
+### `FuelSystemSupportedFuelTypes`
 
 Allowed values for Vehicle.Powertrain.FuelSystem.SupportedFuelTypes.
 
 | Value | Description |
 | --- | --- |
-| `GASOLINE` | — |
-| `DIESEL` | — |
-| `E85` | — |
-| `LPG` | — |
-| `CNG` | — |
-| `LNG` | — |
-| `H2` | — |
-| `OTHER` | — |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_GASOLINE` | Gasoline. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_DIESEL` | Diesel. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_E85` | E85. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_LPG` | Lpg. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_CNG` | Cng. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_LNG` | Lng. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_H2` | H2. |
+| `FUEL_SYSTEM_SUPPORTED_FUEL_TYPES_OTHER` | Other. |
 
-### `PowertrainRangeExtenderOperatingMode`
+### `RangeExtenderOperatingMode`
 
 Allowed values for Vehicle.Powertrain.RangeExtender.OperatingMode.
 
 | Value | Description |
 | --- | --- |
-| `CHARGE_DEPLETING` | — |
-| `CHARGE_SUSTAINING` | — |
-| `BLENDED` | — |
+| `RANGE_EXTENDER_OPERATING_MODE_CHARGE_DEPLETING` | Charge depleting. |
+| `RANGE_EXTENDER_OPERATING_MODE_CHARGE_SUSTAINING` | Charge sustaining. |
+| `RANGE_EXTENDER_OPERATING_MODE_BLENDED` | Blended. |
 
-### `PowertrainTractionBatteryBatteryConditioningRequestedMode`
+### `BatteryConditioningRequestedMode`
 
 Allowed values for Vehicle.Powertrain.TractionBattery.BatteryConditioning.RequestedMode.
 
 | Value | Description |
 | --- | --- |
-| `INACTIVE` | — |
-| `FAST_CHARGING_PREPARATION` | — |
-| `DRIVING_PREPARATION` | — |
+| `BATTERY_CONDITIONING_REQUESTED_MODE_INACTIVE` | Inactive. |
+| `BATTERY_CONDITIONING_REQUESTED_MODE_FAST_CHARGING_PREPARATION` | Fast charging preparation. |
+| `BATTERY_CONDITIONING_REQUESTED_MODE_DRIVING_PREPARATION` | Driving preparation. |
 
-### `PowertrainTractionBatteryChargingStartStopCharging`
+### `ChargingStartStopCharging`
 
 Allowed values for Vehicle.Powertrain.TractionBattery.Charging.StartStopCharging.
 
 | Value | Description |
 | --- | --- |
-| `START` | — |
-| `STOP` | — |
+| `CHARGING_START_STOP_CHARGING_START` | Start. |
+| `CHARGING_START_STOP_CHARGING_STOP` | Stop. |
 
-### `PowertrainTractionBatteryChargingTimerMode`
+### `TimerMode`
 
 Allowed values for Vehicle.Powertrain.TractionBattery.Charging.Timer.Mode.
 
 | Value | Description |
 | --- | --- |
-| `INACTIVE` | — |
-| `START_TIME` | — |
-| `END_TIME` | — |
+| `TIMER_MODE_INACTIVE` | Inactive. |
+| `TIMER_MODE_START_TIME` | Start time. |
+| `TIMER_MODE_END_TIME` | End time. |
 
-### `PowertrainTransmissionDriveType`
+### `TransmissionDriveType`
 
 Allowed values for Vehicle.Powertrain.Transmission.DriveType.
 
 | Value | Description |
 | --- | --- |
-| `UNKNOWN` | — |
-| `FORWARD_WHEEL_DRIVE` | — |
-| `REAR_WHEEL_DRIVE` | — |
-| `ALL_WHEEL_DRIVE` | — |
+| `TRANSMISSION_DRIVE_TYPE_UNKNOWN` | Unknown. |
+| `TRANSMISSION_DRIVE_TYPE_FORWARD_WHEEL_DRIVE` | Forward wheel drive. |
+| `TRANSMISSION_DRIVE_TYPE_REAR_WHEEL_DRIVE` | Rear wheel drive. |
+| `TRANSMISSION_DRIVE_TYPE_ALL_WHEEL_DRIVE` | All wheel drive. |
 
-### `PowertrainTransmissionGearChangeMode`
+### `TransmissionGearChangeMode`
 
 Allowed values for Vehicle.Powertrain.Transmission.GearChangeMode.
 
 | Value | Description |
 | --- | --- |
-| `MANUAL` | — |
-| `AUTOMATIC` | — |
+| `TRANSMISSION_GEAR_CHANGE_MODE_MANUAL` | Manual. |
+| `TRANSMISSION_GEAR_CHANGE_MODE_AUTOMATIC` | Automatic. |
 
-### `PowertrainTransmissionPerformanceMode`
+### `TransmissionPerformanceMode`
 
 Allowed values for Vehicle.Powertrain.Transmission.PerformanceMode.
 
 | Value | Description |
 | --- | --- |
-| `NORMAL` | — |
-| `SPORT` | — |
-| `ECONOMY` | — |
-| `SNOW` | — |
-| `RAIN` | — |
+| `TRANSMISSION_PERFORMANCE_MODE_NORMAL` | Normal. |
+| `TRANSMISSION_PERFORMANCE_MODE_SPORT` | Sport. |
+| `TRANSMISSION_PERFORMANCE_MODE_ECONOMY` | Economy. |
+| `TRANSMISSION_PERFORMANCE_MODE_SNOW` | Snow. |
+| `TRANSMISSION_PERFORMANCE_MODE_RAIN` | Rain. |
 
-### `PowertrainTransmissionType`
+### `TransmissionType`
 
 Allowed values for Vehicle.Powertrain.Transmission.Type.
 
 | Value | Description |
 | --- | --- |
-| `UNKNOWN` | — |
-| `SEQUENTIAL` | — |
-| `H` | — |
-| `AUTOMATIC` | — |
-| `DSG` | — |
-| `CVT` | — |
+| `TRANSMISSION_TYPE_UNKNOWN` | Unknown. |
+| `TRANSMISSION_TYPE_SEQUENTIAL` | Sequential. |
+| `TRANSMISSION_TYPE_H` | H. |
+| `TRANSMISSION_TYPE_AUTOMATIC` | Automatic. |
+| `TRANSMISSION_TYPE_DSG` | Dsg. |
+| `TRANSMISSION_TYPE_CVT` | Cvt. |
 

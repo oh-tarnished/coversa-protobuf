@@ -14,10 +14,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/catalog"
-	"github.com/the-protobuf-project/vdm/sync/internal/model"
-	"github.com/the-protobuf-project/vdm/sync/internal/naming"
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/catalog"
+	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/the-protobuf-project/vdm/sync/naming"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // Field is one planned protobuf field, before it is written out.
@@ -143,12 +143,28 @@ func (p *Planner) unit(f sdl.Field, out *Field) string {
 }
 
 // roundTripID marks the originating system's own identifier.
+//
+// Two identifiers, not one: `uid` is server-assigned and ours, this one
+// arrives inside imported data and is whatever the originating system chose.
+// It must survive a round trip unchanged or every re-import duplicates the
+// record, which is why it is IMMUTABLE rather than merely optional.
 func (p *Planner) roundTripID(out *Field) {
 	out.Behavior = []string{"OPTIONAL", "IMMUTABLE"}
-	out.Doc += "\n\nThe identifier the originating system assigned, distinct " +
+
+	const note = "The identifier the originating system assigned, distinct " +
 		"from the server-assigned `uid` above. It arrives inside imported data " +
 		"and must survive a round trip unchanged, or every re-import duplicates " +
 		"the record."
+
+	// Appended to the source description where there is one, and standing as
+	// the description where there is not. Concatenating unconditionally left
+	// the comment opening with two blank lines, and the Markdown reference --
+	// which reads the first paragraph -- with nothing at all.
+	if strings.TrimSpace(out.Doc) == "" {
+		out.Doc = note
+		return
+	}
+	out.Doc += "\n\n" + note
 }
 
 // behavior sets the field_behavior a signal's VSS kind implies.

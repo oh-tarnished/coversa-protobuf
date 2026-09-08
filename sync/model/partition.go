@@ -11,8 +11,8 @@ package model
 // package; deeper down, only a branch whose members have identity.
 
 import (
-	"github.com/the-protobuf-project/vdm/sync/internal/naming"
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/naming"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // spawn promotes the child resources of one type into packages of their own,

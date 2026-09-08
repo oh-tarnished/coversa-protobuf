@@ -9,10 +9,10 @@ package plan
 import (
 	"fmt"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/catalog"
-	"github.com/the-protobuf-project/vdm/sync/internal/model"
-	"github.com/the-protobuf-project/vdm/sync/internal/naming"
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/catalog"
+	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/the-protobuf-project/vdm/sync/naming"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // assignType resolves the protobuf type for a field.
@@ -97,7 +97,7 @@ func (p *Planner) assignNamed(owner *sdl.Def, f sdl.Field, out *Field) error {
 		return nil
 	}
 	if e, ok := p.M.Enums[name]; ok {
-		out.Type = EnumName(e.Name)
+		out.Type = p.M.EnumName(e.Name)
 		out.Validate = append(out.Validate, "(buf.validate.field).enum.defined_only = true")
 		return nil
 	}

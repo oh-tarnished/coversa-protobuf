@@ -19,8 +19,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/model"
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/describe"
+	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // quantity is one quantity kind and the units belonging to it.
@@ -53,13 +54,6 @@ func (e *Emitter) generateVocab(defs []sdl.Def, out string) (int, error) {
 		}
 	}
 
-	// Field comments read unit symbols from the same table the enum is
-	// rendered from, rather than a second copy that could disagree.
-	for _, q := range qs {
-		for _, u := range q.units {
-			unitSymbols["UNIT_"+normaliseUnit(u)] = unitSymbolTable[u]
-		}
-	}
 	return len(files), nil
 }
 
@@ -122,12 +116,8 @@ func (e *Emitter) renderUnits(qs []quantity) string {
 		sb.WriteString("\n  // " + q.kind + "\n")
 		for _, u := range q.units {
 			n++
-			doc := unitSymbolTable[u]
-			if doc == "" {
-				doc = strings.ToLower(strings.ReplaceAll(u, "_", " "))
-			}
-			doc += "."
-			if note, ok := unitNotes[u]; ok {
+			doc := describe.UnitSymbol(u) + "."
+			if note, ok := describe.UnitNote(u); ok {
 				doc += " " + note
 			}
 			sb.WriteString(docBlock(doc, "  "))
@@ -153,9 +143,7 @@ func (e *Emitter) renderQuantityKinds(qs []quantity) string {
 	for i, q := range qs {
 		var symbols []string
 		for _, u := range q.units {
-			if s := unitSymbolTable[u]; s != "" {
-				symbols = append(symbols, s)
-			}
+			symbols = append(symbols, describe.UnitSymbol(u))
 		}
 		sb.WriteString(docBlock("\""+q.kind+"\": "+strings.Join(symbols, ", ")+".", "  "))
 		fmt.Fprintf(&sb, "  QUANTITY_KIND_%s = %d;\n\n",

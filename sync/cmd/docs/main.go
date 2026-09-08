@@ -23,8 +23,8 @@ import (
 	"os"
 
 	"github.com/the-protobuf-project/vdm/sync/internal/docs"
-	"github.com/the-protobuf-project/vdm/sync/internal/model"
-	"github.com/the-protobuf-project/vdm/sync/internal/spec"
+	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/the-protobuf-project/vdm/sync/spec"
 )
 
 func main() {

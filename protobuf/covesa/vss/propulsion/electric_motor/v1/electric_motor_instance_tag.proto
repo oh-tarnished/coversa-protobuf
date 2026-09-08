@@ -37,43 +37,43 @@ message ElectricMotorInstanceTag {
 
   // Instance axis 1. VSS expands a branch across each axis in turn, so the
   // axes together name one instance.
-  ElectricMotorInstanceTagDimension1 dimension1 = 1 [
+  Dimension1 dimension1 = 1 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true
   ];
 }
 // Dimensional enum for VSS instance dimension 1.
-enum ElectricMotorInstanceTagDimension1 {
+enum Dimension1 {
   // Not specified.
-  ELECTRIC_MOTOR_INSTANCE_TAG_DIMENSION1_UNSPECIFIED = 0;
+  DIMENSION1_UNSPECIFIED = 0;
 
   // Front.
   //
   // The source model spells this "Front".
-  ELECTRIC_MOTOR_INSTANCE_TAG_DIMENSION1_FRONT = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Front"}];
+  DIMENSION1_FRONT = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Front"}];
 
   // Rear.
   //
   // The source model spells this "Rear".
-  ELECTRIC_MOTOR_INSTANCE_TAG_DIMENSION1_REAR = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Rear"}];
+  DIMENSION1_REAR = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Rear"}];
 
   // Front left.
   //
   // The source model spells this "FrontLeft".
-  ELECTRIC_MOTOR_INSTANCE_TAG_DIMENSION1_FRONT_LEFT = 3 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "FrontLeft"}];
+  DIMENSION1_FRONT_LEFT = 3 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "FrontLeft"}];
 
   // Front right.
   //
   // The source model spells this "FrontRight".
-  ELECTRIC_MOTOR_INSTANCE_TAG_DIMENSION1_FRONT_RIGHT = 4 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "FrontRight"}];
+  DIMENSION1_FRONT_RIGHT = 4 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "FrontRight"}];
 
   // Rear left.
   //
   // The source model spells this "RearLeft".
-  ELECTRIC_MOTOR_INSTANCE_TAG_DIMENSION1_REAR_LEFT = 5 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "RearLeft"}];
+  DIMENSION1_REAR_LEFT = 5 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "RearLeft"}];
 
   // Rear right.
   //
   // The source model spells this "RearRight".
-  ELECTRIC_MOTOR_INSTANCE_TAG_DIMENSION1_REAR_RIGHT = 6 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "RearRight"}];
+  DIMENSION1_REAR_RIGHT = 6 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "RearRight"}];
 }

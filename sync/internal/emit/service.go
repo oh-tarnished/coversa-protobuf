@@ -10,8 +10,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/model"
-	"github.com/the-protobuf-project/vdm/sync/internal/naming"
+	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/the-protobuf-project/vdm/sync/naming"
 )
 
 // Service renders service.proto for a package.

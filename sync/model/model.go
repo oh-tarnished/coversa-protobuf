@@ -15,8 +15,8 @@ package model
 import (
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
-	"github.com/the-protobuf-project/vdm/sync/internal/spec"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
+	"github.com/the-protobuf-project/vdm/sync/spec"
 )
 
 // Family is the specification a package comes from.
@@ -46,6 +46,10 @@ type Model struct {
 
 	// Packages is one entry per resource, sorted by family then name.
 	Packages []*Package
+
+	// enumNames maps a source enum name to the name emitted for it. Resolved
+	// per package once the packages are known; see enums.go.
+	enumNames map[string]string
 }
 
 // Package is one emitted protobuf package.

@@ -32,12 +32,12 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `angular_speed` | `double` | `OUTPUT_ONLY` | `DEGREE_PER_SECOND` | Angular (Rotational) speed of a vehicle's wheel. |
-| `speed` | `double` | `OUTPUT_ONLY` | `KILOMETER_PER_HOUR` | Linear speed of a vehicle's wheel. |
-| `torque` | `int32` | `OUTPUT_ONLY` | `NEWTON_METER` | Torque provided by drivetrain, excluding torque provided by friction brakes. Negative values indicate regen mode. |
-| `brake` | `WheelBrake` | `OPTIONAL` | — | — |
-| `tire` | `Tire` | `OPTIONAL` | — | — |
-| `instance_tag` | `AxleWheelInstanceTag` | `OPTIONAL` | — | — |
+| `angular_speed` | `double` | `OUTPUT_ONLY` | `deg/s` | Angular (Rotational) speed of a vehicle's wheel. |
+| `speed` | `double` | `OUTPUT_ONLY` | `km/h` | Linear speed of a vehicle's wheel. |
+| `torque` | `int32` | `OUTPUT_ONLY` | `Nm` | Torque provided by drivetrain, excluding torque provided by friction brakes. Negative values indicate regen mode. |
+| `brake` | `WheelBrake` | `OPTIONAL` | — | Brake. |
+| `tire` | `Tire` | `OPTIONAL` | — | Tire. |
+| `instance_tag` | `AxleWheelInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `WheelBrake`
 
@@ -45,10 +45,10 @@ Brake signals for wheel
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `fluid_level` | `int32` | `OUTPUT_ONLY` | `PERCENT` | Brake fluid level as percent. 0 = Empty. 100 = Full. |
+| `fluid_level` | `int32` | `OUTPUT_ONLY` | `percent` | Brake fluid level as percent. 0 = Empty. 100 = Full. |
 | `is_brakes_worn` | `bool` | `OUTPUT_ONLY` | — | Brake pad wear status. True = Worn. False = Not Worn. |
 | `is_fluid_level_low` | `bool` | `OUTPUT_ONLY` | — | Brake fluid level status. True = Brake fluid level low. False = Brake fluid level OK. |
-| `pad_wear` | `int32` | `OUTPUT_ONLY` | `PERCENT` | Brake pad wear as percent. 0 = No Wear. 100 = Worn. |
+| `pad_wear` | `int32` | `OUTPUT_ONLY` | `percent` | Brake pad wear as percent. 0 = No Wear. 100 = Worn. |
 
 ### `Tire`
 
@@ -56,26 +56,28 @@ Tire signals for wheel.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `air_temperature` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Air temperature inside the tire in Celsius. |
+| `air_temperature` | `double` | `OUTPUT_ONLY` | `degC` | Air temperature inside the tire in Celsius. |
 | `is_pressure_low` | `bool` | `OUTPUT_ONLY` | — | Tire Pressure Status. True = Low tire pressure. False = Good tire pressure. |
-| `pressure` | `int32` | `OUTPUT_ONLY` | `KILOPASCAL` | Tire pressure in kilo-Pascal. |
-| `rubber_temperature` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Rubber temperature of the tire in Celsius. |
-| `temperature` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Tire temperature in Celsius. |
+| `pressure` | `int32` | `OUTPUT_ONLY` | `kPa` | Tire pressure in kilo-Pascal. |
+| `rubber_temperature` | `double` | `OUTPUT_ONLY` | `degC` | Rubber temperature of the tire in Celsius. |
+| `temperature` | `double` | `OUTPUT_ONLY` | `degC` | Tire temperature in Celsius. |
 
 ### `AxleWheelInstanceTag`
 
+AxleWheelInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `AxleWheelInstanceTagDimension1` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `AxleWheelInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `LEFT` | — |
-| `RIGHT` | — |
+| `DIMENSION1_LEFT` | Left. |
+| `DIMENSION1_RIGHT` | Right. |
 

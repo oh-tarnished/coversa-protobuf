@@ -124,7 +124,7 @@ message Transmission {
   // Drive type.
   //
   // VSS: Vehicle.Powertrain.Transmission.DriveType (attribute).
-  PowertrainTransmissionDriveType drive_type = 6 [
+  TransmissionDriveType drive_type = 6 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -136,7 +136,7 @@ message Transmission {
   // Is the gearbox in automatic or manual (paddle) mode.
   //
   // VSS: Vehicle.Powertrain.Transmission.GearChangeMode (actuator).
-  PowertrainTransmissionGearChangeMode gear_change_mode = 7 [
+  TransmissionGearChangeMode gear_change_mode = 7 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -201,7 +201,7 @@ message Transmission {
   // Current gearbox performance mode.
   //
   // VSS: Vehicle.Powertrain.Transmission.PerformanceMode (actuator).
-  PowertrainTransmissionPerformanceMode performance_mode = 12 [
+  TransmissionPerformanceMode performance_mode = 12 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -277,7 +277,7 @@ message Transmission {
   // Transmission type.
   //
   // VSS: Vehicle.Powertrain.Transmission.Type (attribute).
-  PowertrainTransmissionType type_control = 17 [
+  TransmissionType type_control = 17 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {

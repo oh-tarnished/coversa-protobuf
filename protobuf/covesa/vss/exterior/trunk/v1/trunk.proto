@@ -137,7 +137,7 @@ message Trunk {
   // Switch controlling sliding action such as window, sunroof, or blind.
   //
   // VSS: Vehicle.Body.Trunk.Switch (actuator).
-  BodyTrunkSwitch switch_control = 20 [
+  Switch switch_control = 20 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -152,22 +152,22 @@ message Trunk {
 // Allowed values for Vehicle.Body.Trunk.Switch.
 //
 // VSS: Vehicle.Body.Trunk.Switch.
-enum BodyTrunkSwitch {
+enum Switch {
   // Not specified.
-  BODY_TRUNK_SWITCH_UNSPECIFIED = 0;
+  SWITCH_UNSPECIFIED = 0;
 
   // Inactive.
-  BODY_TRUNK_SWITCH_INACTIVE = 1;
+  SWITCH_INACTIVE = 1;
 
   // Close.
-  BODY_TRUNK_SWITCH_CLOSE = 2;
+  SWITCH_CLOSE = 2;
 
   // Open.
-  BODY_TRUNK_SWITCH_OPEN = 3;
+  SWITCH_OPEN = 3;
 
   // One shot close.
-  BODY_TRUNK_SWITCH_ONE_SHOT_CLOSE = 4;
+  SWITCH_ONE_SHOT_CLOSE = 4;
 
   // One shot open.
-  BODY_TRUNK_SWITCH_ONE_SHOT_OPEN = 5;
+  SWITCH_ONE_SHOT_OPEN = 5;
 }

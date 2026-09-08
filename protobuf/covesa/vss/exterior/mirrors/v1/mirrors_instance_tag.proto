@@ -36,23 +36,23 @@ message MirrorsInstanceTag {
 
   // Instance axis 1. VSS expands a branch across each axis in turn, so the
   // axes together name one instance.
-  MirrorsInstanceTagDimension1 dimension1 = 1 [
+  Dimension1 dimension1 = 1 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true
   ];
 }
 // Dimensional enum for VSS instance dimension 1.
-enum MirrorsInstanceTagDimension1 {
+enum Dimension1 {
   // Not specified.
-  MIRRORS_INSTANCE_TAG_DIMENSION1_UNSPECIFIED = 0;
+  DIMENSION1_UNSPECIFIED = 0;
 
   // Driver side.
   //
   // The source model spells this "DriverSide".
-  MIRRORS_INSTANCE_TAG_DIMENSION1_DRIVER_SIDE = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "DriverSide"}];
+  DIMENSION1_DRIVER_SIDE = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "DriverSide"}];
 
   // Passenger side.
   //
   // The source model spells this "PassengerSide".
-  MIRRORS_INSTANCE_TAG_DIMENSION1_PASSENGER_SIDE = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "PassengerSide"}];
+  DIMENSION1_PASSENGER_SIDE = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "PassengerSide"}];
 }

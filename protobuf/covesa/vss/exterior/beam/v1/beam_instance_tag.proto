@@ -36,23 +36,23 @@ message BeamInstanceTag {
 
   // Instance axis 1. VSS expands a branch across each axis in turn, so the
   // axes together name one instance.
-  BeamInstanceTagDimension1 dimension1 = 1 [
+  Dimension1 dimension1 = 1 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true
   ];
 }
 // Dimensional enum for VSS instance dimension 1.
-enum BeamInstanceTagDimension1 {
+enum Dimension1 {
   // Not specified.
-  BEAM_INSTANCE_TAG_DIMENSION1_UNSPECIFIED = 0;
+  DIMENSION1_UNSPECIFIED = 0;
 
   // Low.
   //
   // The source model spells this "Low".
-  BEAM_INSTANCE_TAG_DIMENSION1_LOW = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Low"}];
+  DIMENSION1_LOW = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Low"}];
 
   // High.
   //
   // The source model spells this "High".
-  BEAM_INSTANCE_TAG_DIMENSION1_HIGH = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "High"}];
+  DIMENSION1_HIGH = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "High"}];
 }

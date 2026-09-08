@@ -1,16 +1,21 @@
 // Go workspace for this repository.
 //
-// There are two modules and they are not peers:
+// Modules, and they are not peers:
 //
-//	sync/         the generator. Real code, built and vetted here.
+//	sync/         the generator: specification in, protobuf out.
+//	codec/        converts between the schema and the VSS shape. A consumer
+//	              of the model, never a part of producing it.
 //	sandbox/go/   a go.mod *template*, copied over gen/go in CI so the
 //	              generated protobuf Go can be compiled. It holds no
 //	              packages of its own.
 //
-// Only the generator is a workspace member. The template is deliberately
-// left out: adding it would put a module in the workspace that has nothing
-// to build, and the tree it describes -- gen/go -- does not exist until
-// `buf generate` has run.
+// The first two are workspace members, which is what lets codec import sync
+// without either being published: the `replace` in codec/go.mod names the
+// path, and the workspace resolves it against this checkout.
+//
+// The template is deliberately left out: adding it would put a module in the
+// workspace that has nothing to build, and the tree it describes -- gen/go --
+// does not exist until `buf generate` has run.
 //
 // That omission has a consequence worth knowing. Once a go.work exists at the
 // repository root, a `go build` run *inside* gen/go resolves this workspace
@@ -18,4 +23,7 @@
 // set GOWORK=off for that build; see .github/workflows/generate.yml.
 go 1.24
 
-use ./sync
+use (
+	./sync
+	./codec
+)

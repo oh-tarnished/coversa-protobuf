@@ -18,16 +18,16 @@ option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.interior
 // Allowed values for Vehicle.Cabin.Seat.OccupancyStatus.
 //
 // VSS: Vehicle.Cabin.Seat.OccupancyStatus.
-enum CabinSeatOccupancyState {
+enum OccupancyState {
   // Not specified.
-  CABIN_SEAT_OCCUPANCY_STATE_UNSPECIFIED = 0;
+  OCCUPANCY_STATE_UNSPECIFIED = 0;
 
   // Unknown.
-  CABIN_SEAT_OCCUPANCY_STATE_UNKNOWN = 1;
+  OCCUPANCY_STATE_UNKNOWN = 1;
 
   // Occupied.
-  CABIN_SEAT_OCCUPANCY_STATE_OCCUPIED = 2;
+  OCCUPANCY_STATE_OCCUPIED = 2;
 
   // Empty.
-  CABIN_SEAT_OCCUPANCY_STATE_EMPTY = 3;
+  OCCUPANCY_STATE_EMPTY = 3;
 }

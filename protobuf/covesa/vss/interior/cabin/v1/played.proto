@@ -78,7 +78,7 @@ message Played {
   // Media selected for playback
   //
   // VSS: Vehicle.Cabin.Infotainment.Media.Played.Source (actuator).
-  CabinInfotainmentMediaPlayedSource source = 5 [
+  MediaPlayedSource source = 5 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -112,52 +112,52 @@ message Played {
 // Allowed values for Vehicle.Cabin.Infotainment.Media.Played.Source.
 //
 // VSS: Vehicle.Cabin.Infotainment.Media.Played.Source.
-enum CabinInfotainmentMediaPlayedSource {
+enum MediaPlayedSource {
   // Not specified.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_UNSPECIFIED = 0;
+  MEDIA_PLAYED_SOURCE_UNSPECIFIED = 0;
 
   // Unknown.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_UNKNOWN = 1;
+  MEDIA_PLAYED_SOURCE_UNKNOWN = 1;
 
   // Sirius xm.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_SIRIUS_XM = 2;
+  MEDIA_PLAYED_SOURCE_SIRIUS_XM = 2;
 
   // Am.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_AM = 3;
+  MEDIA_PLAYED_SOURCE_AM = 3;
 
   // Fm.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_FM = 4;
+  MEDIA_PLAYED_SOURCE_FM = 4;
 
   // Dab.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_DAB = 5;
+  MEDIA_PLAYED_SOURCE_DAB = 5;
 
   // Tv.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_TV = 6;
+  MEDIA_PLAYED_SOURCE_TV = 6;
 
   // Cd.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_CD = 7;
+  MEDIA_PLAYED_SOURCE_CD = 7;
 
   // Dvd.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_DVD = 8;
+  MEDIA_PLAYED_SOURCE_DVD = 8;
 
   // Aux.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_AUX = 9;
+  MEDIA_PLAYED_SOURCE_AUX = 9;
 
   // Usb.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_USB = 10;
+  MEDIA_PLAYED_SOURCE_USB = 10;
 
   // Disk.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_DISK = 11;
+  MEDIA_PLAYED_SOURCE_DISK = 11;
 
   // Bluetooth.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_BLUETOOTH = 12;
+  MEDIA_PLAYED_SOURCE_BLUETOOTH = 12;
 
   // Internet.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_INTERNET = 13;
+  MEDIA_PLAYED_SOURCE_INTERNET = 13;
 
   // Voice.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_VOICE = 14;
+  MEDIA_PLAYED_SOURCE_VOICE = 14;
 
   // Beep.
-  CABIN_INFOTAINMENT_MEDIA_PLAYED_SOURCE_BEEP = 15;
+  MEDIA_PLAYED_SOURCE_BEEP = 15;
 }

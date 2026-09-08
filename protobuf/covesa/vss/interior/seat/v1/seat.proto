@@ -250,7 +250,7 @@ message Seat {
   // Occupancy status of the seat.
   //
   // VSS: Vehicle.Cabin.Seat.OccupancyStatus (sensor).
-  CabinSeatOccupancyState occupancy_status = 29 [
+  OccupancyState occupancy_status = 29 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {

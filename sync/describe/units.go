@@ -1,15 +1,18 @@
 // Copyright 2026 The Protobuf Project authors.
 // SPDX-License-Identifier: Apache-2.0
 
-package emit
+package describe
+
+import "strings"
 
 // units.go is the symbol table: how VSS writes each unit.
 //
-// Kept beside the vocabulary emitter because both readers of it are here --
-// the Unit enum's comments and the "Unit: km/h." line on every signal field.
-// A second copy of this mapping is how a field comment and the enum it refers
-// to end up disagreeing.
+// One copy, read by everything that mentions a unit -- the Unit enum's own
+// comments, the "Unit: km/h." line on every signal field, and the Markdown
+// reference. A second copy is how a field comment and the enum it refers to
+// end up disagreeing about what a unit is called.
 
+// unitSymbolTable maps a source unit spelling to the symbol VSS writes.
 var unitSymbolTable = map[string]string{
 	"MILLIMETER": "mm", "CENTIMETER": "cm", "METER": "m", "KILOMETER": "km",
 	"INCH": "in", "KILOMETER_PER_HOUR": "km/h", "METERS_PER_SECOND": "m/s",
@@ -44,4 +47,19 @@ var unitNotes = map[string]string{
 		"artefact of splitting the VSS name \"UNIX Timestamp\" on case.",
 	"MILES_PER_US_GALLON_DEPRECATED": "VSS retains this alongside " +
 		"UNIT_MILES_PER_US_GALLON for compatibility; prefer that one.",
+}
+
+// UnitSymbol renders a source unit spelling as the symbol VSS writes, or a
+// readable form of the constant when the table has no entry.
+func UnitSymbol(source string) string {
+	if s, ok := unitSymbolTable[source]; ok {
+		return s
+	}
+	return strings.ToLower(strings.ReplaceAll(source, "_", " "))
+}
+
+// UnitNote returns the explanation a unit's source spelling needs, if any.
+func UnitNote(source string) (string, bool) {
+	n, ok := unitNotes[source]
+	return n, ok
 }

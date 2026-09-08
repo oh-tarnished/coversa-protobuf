@@ -16,8 +16,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/naming"
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/naming"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // trap is one field name that hits a known AIP rule.

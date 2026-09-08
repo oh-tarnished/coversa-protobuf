@@ -55,10 +55,10 @@ jobs:
       # a per-directory module dance; see go.work.
       - name: Build And Test The Generator
         run: |
-          test -z "$(gofmt -l sync)" || { gofmt -l sync; exit 1; }
-          go build ./sync/...
-          go vet ./sync/...
-          go test ./sync/...
+          test -z "$(gofmt -l sync codec)" || { gofmt -l sync codec; exit 1; }
+          go build ./sync/... ./codec/...
+          go vet ./sync/... ./codec/...
+          go test ./sync/... ./codec/...
 
       # Resolves buf.yaml deps itself, so googleapis and protovalidate are
       # available without a hand-built descriptor set. ignore-comment-disables
@@ -83,7 +83,7 @@ jobs:
               echo "::error file=$file::missing SPDX-License-Identifier header"
               missing=1
             fi
-          done < <(find protobuf sync -name '*.proto' -o -name '*.go')
+          done < <(find protobuf sync codec -name '*.proto' -o -name '*.go')
           [ "$missing" -eq 0 ] || { echo "Add the two-line Apache-2.0 header."; exit 1; }
           echo "All files carry an SPDX header."
 

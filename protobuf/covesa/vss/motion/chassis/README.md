@@ -29,11 +29,11 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
 | `axle_count` | `int32` | `OUTPUT_ONLY` | — | Number of axles on the vehicle |
-| `wheelbase` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | Overall wheelbase, in mm. |
-| `accelerator` | `Accelerator` | `OPTIONAL` | — | — |
-| `brake` | `ChassisBrake` | `OPTIONAL` | — | — |
-| `parking_brake` | `ParkingBrake` | `OPTIONAL` | — | — |
-| `steering_wheel` | `ChassisSteeringWheel` | `OPTIONAL` | — | — |
+| `wheelbase` | `int32` | `OUTPUT_ONLY` | `mm` | Overall wheelbase, in mm. |
+| `accelerator` | `Accelerator` | `OPTIONAL` | — | Accelerator. |
+| `brake` | `ChassisBrake` | `OPTIONAL` | — | Brake. |
+| `parking_brake` | `ParkingBrake` | `OPTIONAL` | — | Parking brake. |
+| `steering_wheel` | `ChassisSteeringWheel` | `OPTIONAL` | — | Steering wheel. |
 
 ### `Accelerator`
 
@@ -41,7 +41,7 @@ Accelerator signals
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `pedal_position` | `int32` | `OUTPUT_ONLY` | `PERCENT` | Accelerator pedal position as percent. 0 = Not depressed. 100 = Fully depressed. |
+| `pedal_position` | `int32` | `OUTPUT_ONLY` | `percent` | Accelerator pedal position as percent. 0 = Not depressed. 100 = Fully depressed. |
 
 ### `ChassisBrake`
 
@@ -50,7 +50,7 @@ Brake system signals
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
 | `is_driver_emergency_braking_detected` | `bool` | `OUTPUT_ONLY` | — | Indicates if emergency braking initiated by driver is detected. True = Emergency braking detected. False = Emergency braking not detected. |
-| `pedal_position` | `int32` | `OUTPUT_ONLY` | `PERCENT` | Brake pedal position as percent. 0 = Not depressed. 100 = Fully depressed. |
+| `pedal_position` | `int32` | `OUTPUT_ONLY` | `percent` | Brake pedal position as percent. 0 = Not depressed. 100 = Fully depressed. |
 
 ### `ParkingBrake`
 
@@ -67,8 +67,8 @@ Steering wheel signals
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `angle` | `int32` | `OUTPUT_ONLY` | `DEGREE` | Steering wheel angle. Positive = degrees to the left. Negative = degrees to the right. |
-| `extension` | `int32` | `OPTIONAL` | `PERCENT` | Steering wheel column extension from dashboard. 0 = Closest to dashboard. 100 = Furthest from dashboard. |
-| `heating_cooling` | `int32` | `OPTIONAL` | `PERCENT` | Heating or Cooling requsted for the Item. -100 = Maximum cooling, 0 = Heating/cooling deactivated, 100 = Maximum heating. |
-| `tilt` | `int32` | `OPTIONAL` | `PERCENT` | Steering wheel column tilt. 0 = Lowest position. 100 = Highest position. |
+| `angle` | `int32` | `OUTPUT_ONLY` | `deg` | Steering wheel angle. Positive = degrees to the left. Negative = degrees to the right. |
+| `extension` | `int32` | `OPTIONAL` | `percent` | Steering wheel column extension from dashboard. 0 = Closest to dashboard. 100 = Furthest from dashboard. |
+| `heating_cooling` | `int32` | `OPTIONAL` | `percent` | Heating or Cooling requsted for the Item. -100 = Maximum cooling, 0 = Heating/cooling deactivated, 100 = Maximum heating. |
+| `tilt` | `int32` | `OPTIONAL` | `percent` | Steering wheel column tilt. 0 = Lowest position. 100 = Highest position. |
 

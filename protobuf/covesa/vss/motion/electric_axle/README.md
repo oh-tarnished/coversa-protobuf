@@ -32,32 +32,34 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `rotational_speed` | `int32` | `OUTPUT_ONLY` | `REVOLUTIONS_PER_MINUTE` | Rotational speed for the specified axle, positive sign for rotation in forward direction, negative sign for rotation in backward direction. |
-| `rotational_speed_maximum_limit` | `int32` | `OPTIONAL` | `REVOLUTIONS_PER_MINUTE` | Maximum allowed axle rotational speed in torque control mode, positive sign for rotation in forward direction, negative sign for rotation in backward direction. |
-| `rotational_speed_minimum_limit` | `int32` | `OPTIONAL` | `REVOLUTIONS_PER_MINUTE` | Minimum allowed axle rotational speed in torque control mode, positive sign for rotation in forward direction, negative sign for rotation in backward direction. |
-| `rotational_speed_target` | `int32` | `OPTIONAL` | `REVOLUTIONS_PER_MINUTE` | Target axle rotational speed in rotation speed control mode, positive sign for rotation in forward direction, negative sign for rotation in backward direction. |
-| `torque` | `int32` | `OUTPUT_ONLY` | `NEWTON_METER` | Axle torque, positive sign for torque in forward direction, negative sign for torque in backward direction. |
-| `torque_maximum` | `int32` | `OUTPUT_ONLY` | `NEWTON_METER` | Maximum momentarily available eAxle torque, positive sign for torque in forward direction, negative sign for torque in backward direction. |
-| `torque_maximum_limit` | `int32` | `OPTIONAL` | `NEWTON_METER` | Maximum allowed eAxle torque in rotation speed control mode, positive sign for torque in forward direction, negative sign unused. |
-| `torque_minimum` | `int32` | `OUTPUT_ONLY` | `NEWTON_METER` | Minimum momentarily available eAxle torque, positive sign for torque in forward direction, negative sign for torque in backward direction. |
-| `torque_minimum_limit` | `int32` | `OPTIONAL` | `NEWTON_METER` | Minimum allowed axle torque in rotation speed control mode, positive sign unused, negative sign for torque in backward direction (ISO8855). |
-| `torque_target` | `int32` | `OPTIONAL` | `NEWTON_METER` | Target axle torque in torque control mode, positive sign for torque in forward direction, negative sign for torque in backward direction (ISO8855). |
-| `instance_tag` | `ElectricAxleInstanceTag` | `OPTIONAL` | — | — |
+| `rotational_speed` | `int32` | `OUTPUT_ONLY` | `rpm` | Rotational speed for the specified axle, positive sign for rotation in forward direction, negative sign for rotation in backward direction. |
+| `rotational_speed_maximum_limit` | `int32` | `OPTIONAL` | `rpm` | Maximum allowed axle rotational speed in torque control mode, positive sign for rotation in forward direction, negative sign for rotation in backward direction. |
+| `rotational_speed_minimum_limit` | `int32` | `OPTIONAL` | `rpm` | Minimum allowed axle rotational speed in torque control mode, positive sign for rotation in forward direction, negative sign for rotation in backward direction. |
+| `rotational_speed_target` | `int32` | `OPTIONAL` | `rpm` | Target axle rotational speed in rotation speed control mode, positive sign for rotation in forward direction, negative sign for rotation in backward direction. |
+| `torque` | `int32` | `OUTPUT_ONLY` | `Nm` | Axle torque, positive sign for torque in forward direction, negative sign for torque in backward direction. |
+| `torque_maximum` | `int32` | `OUTPUT_ONLY` | `Nm` | Maximum momentarily available eAxle torque, positive sign for torque in forward direction, negative sign for torque in backward direction. |
+| `torque_maximum_limit` | `int32` | `OPTIONAL` | `Nm` | Maximum allowed eAxle torque in rotation speed control mode, positive sign for torque in forward direction, negative sign unused. |
+| `torque_minimum` | `int32` | `OUTPUT_ONLY` | `Nm` | Minimum momentarily available eAxle torque, positive sign for torque in forward direction, negative sign for torque in backward direction. |
+| `torque_minimum_limit` | `int32` | `OPTIONAL` | `Nm` | Minimum allowed axle torque in rotation speed control mode, positive sign unused, negative sign for torque in backward direction (ISO8855). |
+| `torque_target` | `int32` | `OPTIONAL` | `Nm` | Target axle torque in torque control mode, positive sign for torque in forward direction, negative sign for torque in backward direction (ISO8855). |
+| `instance_tag` | `ElectricAxleInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `ElectricAxleInstanceTag`
 
+ElectricAxleInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `ElectricAxleInstanceTagDimension1` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `ElectricAxleInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `ROW1` | — |
-| `ROW2` | — |
+| `DIMENSION1_ROW1` | Row1. |
+| `DIMENSION1_ROW2` | Row2. |
 

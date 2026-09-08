@@ -32,23 +32,25 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `roll_torque` | `int32` | `OUTPUT_ONLY` | `NEWTON_METER` | Actuated roll torque on this axle by anti-roll actuator. Signal orientation according to ISO8855. |
-| `instance_tag` | `SuspensionAxleInstanceTag` | `OPTIONAL` | — | — |
+| `roll_torque` | `int32` | `OUTPUT_ONLY` | `Nm` | Actuated roll torque on this axle by anti-roll actuator. Signal orientation according to ISO8855. |
+| `instance_tag` | `SuspensionAxleInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `SuspensionAxleInstanceTag`
 
+SuspensionAxleInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `SuspensionAxleInstanceTagDimension1` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `SuspensionAxleInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `ROW1` | — |
-| `ROW2` | — |
+| `DIMENSION1_ROW1` | Row1. |
+| `DIMENSION1_ROW2` | Row2. |
 

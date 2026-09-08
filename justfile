@@ -3,6 +3,7 @@
 # Common flows:
 #   just sync     # regenerate protobuf/ from the pinned spec revision
 #   just docs     # regenerate the Markdown reference beside the protos
+#   just manifest # regenerate the VSS mapping the codec reads
 #   just lint     # what CI checks: format, buf lint, build, api-linter
 #   just schema   # FlatBuffers + Cap'n Proto, then compile both
 #   just ci       # everything CI runs
@@ -29,11 +30,22 @@ sync:
     go run ./sync/cmd/sync
     buf format -w
     @just docs
+    @just manifest
 
 # Render the Markdown reference: one README per package, plus an index.
 [doc("Regenerate the Markdown reference from the pinned spec.")]
 docs:
     @go run ./sync/cmd/docs
+
+# Regenerate codec/manifest.json, the language-neutral VSS mapping.
+[doc("Regenerate the VSS mapping manifest.")]
+manifest:
+    @go run ./codec/cmd/manifest
+
+# Fail if the manifest is stale, changing nothing.
+[doc("Check the VSS mapping manifest is current.")]
+verify-manifest:
+    @go run ./codec/cmd/manifest -check
 
 # Check sync/spec.yaml against the specification actually checked out.
 [doc("Verify the spec revision pin matches the vdm working tree.")]
@@ -47,19 +59,19 @@ survey:
 
 # Format Go sources in place.
 fmt:
-    gofmt -w sync
+    gofmt -w sync codec
 
 # Build and test the generator.
 [doc("Build and vet the generator, and run its tests.")]
 test:
-    go build ./sync/...
-    go vet ./sync/...
-    go test ./sync/...
+    go build ./sync/... ./codec/...
+    go vet ./sync/... ./codec/...
+    go test ./sync/... ./codec/...
 
 # Everything the Lint job checks. Mutates nothing.
 [doc("Format check, buf lint, buf build, api-linter, and the hand-written line cap.")]
 lint: spec aip test
-    @test -z "$(gofmt -l sync)" || { echo "unformatted Go (run: just fmt):"; gofmt -l sync; exit 1; }
+    @test -z "$(gofmt -l sync codec)" || { echo "unformatted Go (run: just fmt):"; gofmt -l sync codec; exit 1; }
     buf format --diff --exit-code
     buf lint
     buf build
@@ -163,4 +175,4 @@ clean:
 
 # Everything CI runs.
 [doc("Everything CI checks.")]
-ci: lint verify-sync schema verify-schema
+ci: lint verify-sync verify-manifest schema verify-schema

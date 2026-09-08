@@ -32,8 +32,8 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `heating_cooling` | `int32` | `OPTIONAL` | `PERCENT` | Heating or Cooling requsted for the Item. -100 = Maximum cooling, 0 = Heating/cooling deactivated, 100 = Maximum heating. |
-| `height` | `int32` | `OPTIONAL` | `MILLIMETER` | Seat position on vehicle z-axis. Position is relative within available movable range of the seating. 0 = Lowermost position supported. |
+| `heating_cooling` | `int32` | `OPTIONAL` | `percent` | Heating or Cooling requsted for the Item. -100 = Maximum cooling, 0 = Heating/cooling deactivated, 100 = Maximum heating. |
+| `height` | `int32` | `OPTIONAL` | `mm` | Seat position on vehicle z-axis. Position is relative within available movable range of the seating. 0 = Lowermost position supported. |
 | `is_backward_switch_engaged` | `bool` | `OPTIONAL` | — | Seat backward switch engaged. |
 | `is_belted` | `bool` | `OUTPUT_ONLY` | — | Is the belt engaged. |
 | `is_cooler_switch_engaged` | `bool` | `OPTIONAL` | — | Cooler switch for Seat heater. |
@@ -45,17 +45,17 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 | `is_tilt_forward_switch_engaged` | `bool` | `OPTIONAL` | — | Tilt forward switch engaged. |
 | `is_up_switch_engaged` | `bool` | `OPTIONAL` | — | Seat up switch engaged. |
 | `is_warmer_switch_engaged` | `bool` | `OPTIONAL` | — | Warmer switch for Seat heater. |
-| `occupancy_status` | `CabinSeatOccupancyState` | `OUTPUT_ONLY` | — | Occupancy status of the seat. |
-| `position` | `int32` | `OPTIONAL` | `MILLIMETER` | Seat position on vehicle x-axis. Position is relative to the frontmost position supported by the seat. 0 = Frontmost position supported. |
-| `seat_belt_height` | `int32` | `OPTIONAL` | `MILLIMETER` | Seat belt position on vehicle z-axis. Position is relative within available movable range of the seat belt. 0 = Lowermost position supported. |
-| `tilt` | `double` | `OPTIONAL` | `DEGREE` | Tilting of seat (seating and backrest) relative to vehicle x-axis. 0 = seat bottom is flat, seat bottom and vehicle x-axis are parallel. Positive degrees = seat tilted backwards, seat x-axis tilted upward, seat z-axis is tilted backward. |
-| `airbag` | `Airbag` | `OPTIONAL` | — | — |
-| `backrest` | `Backrest` | `OPTIONAL` | — | — |
-| `headrest` | `Headrest` | `OPTIONAL` | — | — |
-| `massage` | `Massage` | `OPTIONAL` | — | — |
-| `neck_scarf` | `NeckScarf` | `OPTIONAL` | — | — |
-| `seating` | `Seating` | `OPTIONAL` | — | — |
-| `instance_tag` | `SeatInstanceTag` | `OPTIONAL` | — | — |
+| `occupancy_status` | `OccupancyState` | `OUTPUT_ONLY` | — | Occupancy status of the seat. |
+| `position` | `int32` | `OPTIONAL` | `mm` | Seat position on vehicle x-axis. Position is relative to the frontmost position supported by the seat. 0 = Frontmost position supported. |
+| `seat_belt_height` | `int32` | `OPTIONAL` | `mm` | Seat belt position on vehicle z-axis. Position is relative within available movable range of the seat belt. 0 = Lowermost position supported. |
+| `tilt` | `double` | `OPTIONAL` | `deg` | Tilting of seat (seating and backrest) relative to vehicle x-axis. 0 = seat bottom is flat, seat bottom and vehicle x-axis are parallel. Positive degrees = seat tilted backwards, seat x-axis tilted upward, seat z-axis is tilted backward. |
+| `airbag` | `Airbag` | `OPTIONAL` | — | Airbag. |
+| `backrest` | `Backrest` | `OPTIONAL` | — | Backrest. |
+| `headrest` | `Headrest` | `OPTIONAL` | — | Headrest. |
+| `massage` | `Massage` | `OPTIONAL` | — | Massage. |
+| `neck_scarf` | `NeckScarf` | `OPTIONAL` | — | Neck scarf. |
+| `seating` | `Seating` | `OPTIONAL` | — | Seating. |
+| `instance_tag` | `SeatInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `Airbag`
 
@@ -72,8 +72,8 @@ Describes signals related to the backrest of the seat.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `bottom_lumbar_support` | `double` | `OPTIONAL` | `PERCENT` | Bottom lumbar support (in/out position). 0 = Innermost position. 100 = Outermost position. |
-| `heating_cooling` | `int32` | `OPTIONAL` | `PERCENT` | Heating or Cooling requsted for the Item. -100 = Maximum cooling, 0 = Heating/cooling deactivated, 100 = Maximum heating. |
+| `bottom_lumbar_support` | `double` | `OPTIONAL` | `percent` | Bottom lumbar support (in/out position). 0 = Innermost position. 100 = Outermost position. |
+| `heating_cooling` | `int32` | `OPTIONAL` | `percent` | Heating or Cooling requsted for the Item. -100 = Maximum cooling, 0 = Heating/cooling deactivated, 100 = Maximum heating. |
 | `is_less_lumbar_support_switch_engaged` | `bool` | `OPTIONAL` | — | Is switch for less lumbar support engaged. |
 | `is_less_side_bolster_support_switch_engaged` | `bool` | `OPTIONAL` | — | Is switch for less side bolster support engaged. |
 | `is_lumbar_down_switch_engaged` | `bool` | `OPTIONAL` | — | Lumbar down switch engaged. |
@@ -82,15 +82,15 @@ Describes signals related to the backrest of the seat.
 | `is_more_side_bolster_support_switch_engaged` | `bool` | `OPTIONAL` | — | Is switch for more side bolster support engaged. |
 | `is_recline_backward_switch_engaged` | `bool` | `OPTIONAL` | — | Backrest recline backward switch engaged. |
 | `is_recline_forward_switch_engaged` | `bool` | `OPTIONAL` | — | Backrest recline forward switch engaged. |
-| `lumbar_height` | `int32` | `OPTIONAL` | `MILLIMETER` | Height of lumbar support. Position is relative within available movable range of the lumbar support. 0 = Lowermost position supported. |
-| `lumbar_support` | `double` | `OPTIONAL` | `PERCENT` | Lumbar support (in/out position). 0 = Innermost position. 100 = Outermost position. |
-| `mid_lumbar_support` | `double` | `OPTIONAL` | `PERCENT` | Mid lumbar support (in/out position). 0 = Innermost position. 100 = Outermost position. |
-| `recline` | `double` | `OPTIONAL` | `DEGREE` | Backrest recline compared to seat z-axis (seat vertical axis). 0 degrees = Upright/Vertical backrest. Negative degrees for forward recline. Positive degrees for backward recline. |
-| `side_bolster_support` | `double` | `OPTIONAL` | `PERCENT` | Side bolster support. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
-| `side_bolster_support_left` | `double` | `OPTIONAL` | `PERCENT` | Side bolster support left. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
-| `side_bolster_support_right` | `double` | `OPTIONAL` | `PERCENT` | Side bolster support right. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
-| `top_lumbar_support` | `double` | `OPTIONAL` | `PERCENT` | Top lumbar support (in/out position). 0 = Innermost position. 100 = Outermost position. |
-| `upper_shoulder_support` | `double` | `OPTIONAL` | `PERCENT` | Upper shoulder support. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
+| `lumbar_height` | `int32` | `OPTIONAL` | `mm` | Height of lumbar support. Position is relative within available movable range of the lumbar support. 0 = Lowermost position supported. |
+| `lumbar_support` | `double` | `OPTIONAL` | `percent` | Lumbar support (in/out position). 0 = Innermost position. 100 = Outermost position. |
+| `mid_lumbar_support` | `double` | `OPTIONAL` | `percent` | Mid lumbar support (in/out position). 0 = Innermost position. 100 = Outermost position. |
+| `recline` | `double` | `OPTIONAL` | `deg` | Backrest recline compared to seat z-axis (seat vertical axis). 0 degrees = Upright/Vertical backrest. Negative degrees for forward recline. Positive degrees for backward recline. |
+| `side_bolster_support` | `double` | `OPTIONAL` | `percent` | Side bolster support. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
+| `side_bolster_support_left` | `double` | `OPTIONAL` | `percent` | Side bolster support left. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
+| `side_bolster_support_right` | `double` | `OPTIONAL` | `percent` | Side bolster support right. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
+| `top_lumbar_support` | `double` | `OPTIONAL` | `percent` | Top lumbar support (in/out position). 0 = Innermost position. 100 = Outermost position. |
+| `upper_shoulder_support` | `double` | `OPTIONAL` | `percent` | Upper shoulder support. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
 
 ### `Headrest`
 
@@ -98,8 +98,8 @@ Headrest settings.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `angle` | `double` | `OPTIONAL` | `DEGREE` | Headrest angle, relative to backrest, 0 degrees if parallel to backrest, Positive degrees = tilted forward. |
-| `height` | `int32` | `OPTIONAL` | `MILLIMETER` | Position of headrest relative to movable range of the head rest. 0 = Bottommost position supported. |
+| `angle` | `double` | `OPTIONAL` | `deg` | Headrest angle, relative to backrest, 0 degrees if parallel to backrest, Positive degrees = tilted forward. |
+| `height` | `int32` | `OPTIONAL` | `mm` | Position of headrest relative to movable range of the head rest. 0 = Bottommost position supported. |
 | `is_backward_switch_engaged` | `bool` | `OPTIONAL` | — | Headrest backward switch engaged. |
 | `is_down_switch_engaged` | `bool` | `OPTIONAL` | — | Headrest down switch engaged. |
 | `is_forward_switch_engaged` | `bool` | `OPTIONAL` | — | Headrest forward switch engaged. |
@@ -112,8 +112,8 @@ Massage related information for the seat.
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
 | `is_available` | `bool` | `OUTPUT_ONLY` | — | True if the seat have the massage capability |
-| `level` | `int32` | `OPTIONAL` | `PERCENT` | Seat massage level. 0 = off. 100 = max massage. |
-| `activation` | `CabinSeatMassageState` | `OUTPUT_ONLY` | — | Massage status. |
+| `level` | `int32` | `OPTIONAL` | `percent` | Seat massage level. 0 = off. 100 = max massage. |
+| `activation` | `State` | `OUTPUT_ONLY` | — | Massage status. |
 | `supported_types` | `repeated string` | `OUTPUT_ONLY` | — | Type of massage. |
 | `type_active` | `string` | `OPTIONAL` | — | Type of massage active. |
 
@@ -123,8 +123,8 @@ NeckScarf settings.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `fan_speed` | `int32` | `OPTIONAL` | `PERCENT` | Speed of the fan. |
-| `heating_cooling` | `int32` | `OPTIONAL` | `PERCENT` | Heating or Cooling requsted for the Item. -100 = Maximum cooling, 0 = Heating/cooling deactivated, 100 = Maximum heating. |
+| `fan_speed` | `int32` | `OPTIONAL` | `percent` | Speed of the fan. |
+| `heating_cooling` | `int32` | `OPTIONAL` | `percent` | Heating or Cooling requsted for the Item. -100 = Maximum cooling, 0 = Heating/cooling deactivated, 100 = Maximum heating. |
 
 ### `Seating`
 
@@ -132,57 +132,59 @@ Describes signals related to the seat bottom of the seat.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `heating_cooling` | `int32` | `OPTIONAL` | `PERCENT` | Heating or Cooling requsted for the Item. -100 = Maximum cooling, 0 = Heating/cooling deactivated, 100 = Maximum heating. |
+| `heating_cooling` | `int32` | `OPTIONAL` | `percent` | Heating or Cooling requsted for the Item. -100 = Maximum cooling, 0 = Heating/cooling deactivated, 100 = Maximum heating. |
 | `is_backward_switch_engaged` | `bool` | `OPTIONAL` | — | Is switch to decrease seating length engaged. |
 | `is_forward_switch_engaged` | `bool` | `OPTIONAL` | — | Is switch to increase seating length engaged. |
-| `length` | `int32` | `OPTIONAL` | `MILLIMETER` | Length adjustment of seating. 0 = Adjustable part of seating in rearmost position (Shortest length of seating). |
-| `side_bolster_support_left` | `double` | `OPTIONAL` | `PERCENT` | Seat bottom side bolster support left. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
-| `side_bolster_support_right` | `double` | `OPTIONAL` | `PERCENT` | Seat bottom side bolster support right. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
+| `length` | `int32` | `OPTIONAL` | `mm` | Length adjustment of seating. 0 = Adjustable part of seating in rearmost position (Shortest length of seating). |
+| `side_bolster_support_left` | `double` | `OPTIONAL` | `percent` | Seat bottom side bolster support left. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
+| `side_bolster_support_right` | `double` | `OPTIONAL` | `percent` | Seat bottom side bolster support right. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
 
 ### `SeatInstanceTag`
 
+SeatInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `SeatInstanceTagDimension1` | `OPTIONAL` | — | — |
-| `dimension2` | `SeatInstanceTagDimension2` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
+| `dimension2` | `Dimension2` | `OPTIONAL` | — | Instance axis 2. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `CabinSeatOccupancyState`
+### `OccupancyState`
 
 Allowed values for Vehicle.Cabin.Seat.OccupancyStatus.
 
 | Value | Description |
 | --- | --- |
-| `UNKNOWN` | — |
-| `OCCUPIED` | — |
-| `EMPTY` | — |
+| `OCCUPANCY_STATE_UNKNOWN` | Unknown. |
+| `OCCUPANCY_STATE_OCCUPIED` | Occupied. |
+| `OCCUPANCY_STATE_EMPTY` | Empty. |
 
-### `CabinSeatMassageState`
+### `State`
 
 Allowed values for Vehicle.Cabin.Seat.Massage.Status.
 
 | Value | Description |
 | --- | --- |
-| `ON` | — |
-| `OFF` | — |
+| `STATE_ON_VALUE` | On. |
+| `STATE_OFF` | Off. |
 
-### `SeatInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `ROW1` | — |
-| `ROW2` | — |
+| `DIMENSION1_ROW1` | Row1. |
+| `DIMENSION1_ROW2` | Row2. |
 
-### `SeatInstanceTagDimension2`
+### `Dimension2`
 
 Dimensional enum for VSS instance dimension 2.
 
 | Value | Description |
 | --- | --- |
-| `DRIVER_SIDE` | — |
-| `MIDDLE` | — |
-| `PASSENGER_SIDE` | — |
+| `DIMENSION2_DRIVER_SIDE` | Driver side. |
+| `DIMENSION2_MIDDLE` | Middle. |
+| `DIMENSION2_PASSENGER_SIDE` | Passenger side. |
 

@@ -36,45 +36,45 @@ message DoorInstanceTag {
 
   // Instance axis 1. VSS expands a branch across each axis in turn, so the
   // axes together name one instance.
-  DoorInstanceTagDimension1 dimension1 = 1 [
+  InstanceTagDimension1 dimension1 = 1 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true
   ];
 
   // Instance axis 2. VSS expands a branch across each axis in turn, so the
   // axes together name one instance.
-  DoorInstanceTagDimension2 dimension2 = 2 [
+  InstanceTagDimension2 dimension2 = 2 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true
   ];
 }
 // Dimensional enum for VSS instance dimension 1.
-enum DoorInstanceTagDimension1 {
+enum InstanceTagDimension1 {
   // Not specified.
-  DOOR_INSTANCE_TAG_DIMENSION1_UNSPECIFIED = 0;
+  INSTANCE_TAG_DIMENSION1_UNSPECIFIED = 0;
 
   // Row1.
   //
   // The source model spells this "Row1".
-  DOOR_INSTANCE_TAG_DIMENSION1_ROW1 = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row1"}];
+  INSTANCE_TAG_DIMENSION1_ROW1 = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row1"}];
 
   // Row2.
   //
   // The source model spells this "Row2".
-  DOOR_INSTANCE_TAG_DIMENSION1_ROW2 = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row2"}];
+  INSTANCE_TAG_DIMENSION1_ROW2 = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "Row2"}];
 }
 // Dimensional enum for VSS instance dimension 2.
-enum DoorInstanceTagDimension2 {
+enum InstanceTagDimension2 {
   // Not specified.
-  DOOR_INSTANCE_TAG_DIMENSION2_UNSPECIFIED = 0;
+  INSTANCE_TAG_DIMENSION2_UNSPECIFIED = 0;
 
   // Driver side.
   //
   // The source model spells this "DriverSide".
-  DOOR_INSTANCE_TAG_DIMENSION2_DRIVER_SIDE = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "DriverSide"}];
+  INSTANCE_TAG_DIMENSION2_DRIVER_SIDE = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "DriverSide"}];
 
   // Passenger side.
   //
   // The source model spells this "PassengerSide".
-  DOOR_INSTANCE_TAG_DIMENSION2_PASSENGER_SIDE = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "PassengerSide"}];
+  INSTANCE_TAG_DIMENSION2_PASSENGER_SIDE = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "PassengerSide"}];
 }

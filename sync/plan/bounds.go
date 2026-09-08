@@ -11,8 +11,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/naming"
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/catalog"
+	"github.com/the-protobuf-project/vdm/sync/naming"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // bounds intersects the width bound with any @range and emits one rule.
@@ -104,20 +105,17 @@ func numLit(v, protoType string) string {
 	return strconv.FormatFloat(f, 'g', -1, 64)
 }
 
-// EnumName renders a source enum name as a protobuf enum name.
+// EnumValueName renders one enumerant as the constant the schema emits.
 //
-// The `Vehicle_` prefix every allowed-value enum carries is redundant inside a
-// package that is already part of the vehicle, and the `_Enum` suffix says
-// nothing. AIP-216 then prefers "State" over "Status", and reads any enum
-// ending in Status as a lifecycle enum -- VSS uses Status for a physical
-// position, so the suffix is renamed and the field keeps VSS's own term
-// through the catalogue.
-func EnumName(g string) string {
-	g = strings.TrimPrefix(g, "Vehicle_")
-	g = strings.TrimSuffix(g, "_Enum")
-	n := naming.Pascal(g)
-	if strings.HasSuffix(n, "Status") {
-		n = strings.TrimSuffix(n, "Status") + "State"
+// AIP-126 prefixes every value with its enum's name, because proto3 scopes
+// enumerants in the *package* rather than the enum. The suffix keeps the
+// result clear of the keywords a target reserves once it strips that prefix
+// back off again -- see catalog.EnumValueSuffix.
+func EnumValueName(prefix string, v sdl.EnumValue, index int) string {
+	// Where the source model opens with UNDEFINED, that value is the zero
+	// AIP-126 requires rather than a second spelling of it.
+	if index == 0 && v.Name == "UNDEFINED" {
+		return prefix + "_UNSPECIFIED"
 	}
-	return n
+	return prefix + "_" + naming.Screaming(v.Name) + catalog.EnumValueSuffix(v.Name)
 }

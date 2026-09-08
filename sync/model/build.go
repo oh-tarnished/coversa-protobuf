@@ -11,8 +11,8 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/naming"
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/naming"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // Build indexes the definitions, folds `extend type` into its target and
@@ -39,6 +39,7 @@ func Build(defs []sdl.Def) (*Model, error) {
 		return nil, err
 	}
 	m.placeDates()
+	m.nameEnums()
 
 	sort.Slice(m.Packages, func(i, j int) bool {
 		if m.Packages[i].Family != m.Packages[j].Family {

@@ -12,7 +12,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // loadTree parses every .graphql file under root, in a stable order.

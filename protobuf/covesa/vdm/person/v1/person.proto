@@ -72,8 +72,6 @@ message Person {
   // When this resource was last modified.
   google.protobuf.Timestamp update_time = 7 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  //
-  //
   // The identifier the originating system assigned, distinct from the
   // server-assigned `uid` above. It arrives inside imported data and must
   // survive a round trip unchanged, or every re-import duplicates the

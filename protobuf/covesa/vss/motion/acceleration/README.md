@@ -28,7 +28,7 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `lateral` | `double` | `OUTPUT_ONLY` | `METERS_PER_SECOND_SQUARED` | Vehicle acceleration in Y (lateral acceleration). |
-| `longitudinal` | `double` | `OUTPUT_ONLY` | `METERS_PER_SECOND_SQUARED` | Vehicle acceleration in X (longitudinal acceleration). |
-| `vertical` | `double` | `OUTPUT_ONLY` | `METERS_PER_SECOND_SQUARED` | Vehicle acceleration in Z (vertical acceleration). |
+| `lateral` | `double` | `OUTPUT_ONLY` | `m/s^2` | Vehicle acceleration in Y (lateral acceleration). |
+| `longitudinal` | `double` | `OUTPUT_ONLY` | `m/s^2` | Vehicle acceleration in X (longitudinal acceleration). |
+| `vertical` | `double` | `OUTPUT_ONLY` | `m/s^2` | Vehicle acceleration in Z (vertical acceleration). |
 

@@ -9,6 +9,8 @@
 > spec revision `2026-07-24` (`36bc939`).
 > Do not edit by hand; run `just docs`.
 
+ChargingSession is a node of the COVESA Vehicle Signal Specification.
+
 ## Service `ChargingSessions`
 
 | Method | Request | Response | Summary |
@@ -24,6 +26,8 @@
 
 ### `ChargingSession`
 
+ChargingSession is a node of the COVESA Vehicle Signal Specification.
+
 Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the four timestamps — ahead of the signals below. Field numbers 8–15 are reserved.
 
 | Field | Type | Behavior | Unit | Description |
@@ -31,6 +35,6 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 | `vehicle` | `string` | `REQUIRED, IMMUTABLE` | — | Resource name of a `Vehicle`, `vehicles/{vehicle}`. |
 | `customer` | `string` | `REQUIRED, IMMUTABLE` | — | Resource name of a `Person`, `people/{person}`. |
 | `chargingPoint` | `string` | `REQUIRED, IMMUTABLE` | — | Resource name of a `ChargingPoint`, `chargingStations/{charging_station}/chargingPoints/{charging_point}`. |
-| `start_time` | `google.protobuf.Timestamp` | `OPTIONAL` | — | — |
-| `end_time` | `google.protobuf.Timestamp` | `OPTIONAL` | — | — |
+| `start_time` | `google.protobuf.Timestamp` | `OPTIONAL` | — | Start time. |
+| `end_time` | `google.protobuf.Timestamp` | `OPTIONAL` | — | End time. |
 

@@ -28,7 +28,7 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `air_temperature` | `double` | `OUTPUT_ONLY` | `DEGREE_CELSIUS` | Air temperature outside the vehicle. |
-| `humidity` | `double` | `OUTPUT_ONLY` | `PERCENT` | Relative humidity outside the vehicle. 0 = Dry, 100 = Air fully saturated. |
-| `light_intensity` | `double` | `OUTPUT_ONLY` | `PERCENT` | Light intensity outside the vehicle. 0 = No light detected, 100 = Fully lit. |
+| `air_temperature` | `double` | `OUTPUT_ONLY` | `degC` | Air temperature outside the vehicle. |
+| `humidity` | `double` | `OUTPUT_ONLY` | `percent` | Relative humidity outside the vehicle. 0 = Dry, 100 = Air fully saturated. |
+| `light_intensity` | `double` | `OUTPUT_ONLY` | `percent` | Light intensity outside the vehicle. 0 = No light detected, 100 = Fully lit. |
 

@@ -28,9 +28,9 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `brake` | `MotionManagementBrake` | `OPTIONAL` | — | — |
-| `steering` | `Steering` | `OPTIONAL` | — | — |
-| `suspension` | `Suspension` | `OPTIONAL` | — | — |
+| `brake` | `MotionManagementBrake` | `OPTIONAL` | — | Brake. |
+| `steering` | `Steering` | `OPTIONAL` | — | Steering. |
+| `suspension` | `Suspension` | `OPTIONAL` | — | Suspension. |
 
 ### `MotionManagementBrake`
 
@@ -38,11 +38,11 @@ MotionManagement related to braking (both frictions brakes and contribution from
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `vehicle_force_distribution_front_maximum` | `int32` | `OPTIONAL` | `PERCENT` | Maximum distribution range request of FxWhlSum to front axle. 0% = Complete longitudinal brake force shall be shifted to rear axle. 50% = At most 50% shall be shifted to front axle. 100% = Complete longitudinal brake force may be shifted to front axle. |
-| `vehicle_force_distribution_front_minimum` | `int32` | `OPTIONAL` | `PERCENT` | Minimum distribution range request of FxWhlSum to front axle. 0% = Complete longitudinal brake force may be shifted to rear axle. 50% = At least 50% shall be shifted to front axle. 100% = Complete longitudinal brake force shall be shifted to front axle. |
-| `vehicle_force_electric` | `int32` | `OPTIONAL` | `NEWTON` | Regenerative brake force request (FxWhlSum). Sum of all tyre longitudinal forces. Brake Force < 0N. |
-| `vehicle_force_electric_minimum_arbitrated` | `int32` | `OUTPUT_ONLY` | `NEWTON` | Brake system internally calculated regenerative force limit at vehicle level for eAxle actuation. Brake Force < 0N. |
-| `vehicle_force_maximum` | `int32` | `OPTIONAL` | `NEWTON` | Maximum longitudinal brake force request (FxWhlSum). Sum of all tyre longitudinal forces. Brake Force < 0N. |
+| `vehicle_force_distribution_front_maximum` | `int32` | `OPTIONAL` | `percent` | Maximum distribution range request of FxWhlSum to front axle. 0% = Complete longitudinal brake force shall be shifted to rear axle. 50% = At most 50% shall be shifted to front axle. 100% = Complete longitudinal brake force may be shifted to front axle. |
+| `vehicle_force_distribution_front_minimum` | `int32` | `OPTIONAL` | `percent` | Minimum distribution range request of FxWhlSum to front axle. 0% = Complete longitudinal brake force may be shifted to rear axle. 50% = At least 50% shall be shifted to front axle. 100% = Complete longitudinal brake force shall be shifted to front axle. |
+| `vehicle_force_electric` | `int32` | `OPTIONAL` | `N` | Regenerative brake force request (FxWhlSum). Sum of all tyre longitudinal forces. Brake Force < 0N. |
+| `vehicle_force_electric_minimum_arbitrated` | `int32` | `OUTPUT_ONLY` | `N` | Brake system internally calculated regenerative force limit at vehicle level for eAxle actuation. Brake Force < 0N. |
+| `vehicle_force_maximum` | `int32` | `OPTIONAL` | `N` | Maximum longitudinal brake force request (FxWhlSum). Sum of all tyre longitudinal forces. Brake Force < 0N. |
 
 ### `Steering`
 
@@ -50,8 +50,8 @@ MotionManagement related to steering.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `axle` | `SteeringAxle` | `OPTIONAL` | — | — |
-| `steering_wheel` | `SteeringSteeringWheel` | `OPTIONAL` | — | — |
+| `axle` | `SteeringAxle` | `OPTIONAL` | — | Axle. |
+| `steering_wheel` | `SteeringSteeringWheel` | `OPTIONAL` | — | Steering wheel. |
 
 ### `SteeringAxle`
 
@@ -59,8 +59,8 @@ MotionManagement related to a specific axle.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `row1` | `Row1` | `OPTIONAL` | — | — |
-| `row2` | `Row2` | `OPTIONAL` | — | — |
+| `row1` | `Row1` | `OPTIONAL` | — | Row1. |
+| `row2` | `Row2` | `OPTIONAL` | — | Row2. |
 
 ### `Row1`
 
@@ -70,12 +70,12 @@ MotionManagement related to front axle.
 | --- | --- | --- | --- | --- |
 | `position_offset_target_mode` | `int32` | `OPTIONAL` | — | Mode used for controlling position offset interface of axle steering actuator. 0 indicates interface disabled. Other values activate vehicle specific modes. |
 | `position_target_mode` | `int32` | `OPTIONAL` | — | Mode used for controlling position interface of axle steering actuator. 0 indicates interface disabled. Other values activate vehicle specific modes. |
-| `rack_position` | `int32` | `OUTPUT_ONLY` | `MILLIMETER` | Represents the current position of the steering rack on axle steering actuator. Positive values leads to a left turn of the vehicle (based on ISO8855). |
-| `rack_position_offset_target` | `int32` | `OPTIONAL` | `MILLIMETER` | Rack position offset request to the axle steering actuator (for steer-by-wire), added to the actuator internal calculated set-point. Positive values without internal calculated set point change lead to a left movement of the vehicle (based on ISO8855). |
-| `rack_position_target` | `int32` | `OPTIONAL` | `MILLIMETER` | Rack position request to the axle steering actuator (external set-point). Positive values lead to a left turn of the vehicle (based on ISO8855). |
-| `steer_angle` | `int32` | `OUTPUT_ONLY` | `DEGREE` | Represents the current actuated steering angle of the steered wheels. Signal orientation according ISO8855, single track model. |
-| `steer_angle_offset_target` | `int32` | `OPTIONAL` | `DEGREE` | Steer angle offset request to the axle steering actuator (for steer-by-wire), added to the actuator internal calculated set-point. Signal orientation according ISO8855, single track model. |
-| `steer_angle_target` | `int32` | `OPTIONAL` | `DEGREE` | Steer angle request to the axle steering actuator (external set-point). Signal orientation according ISO8855, single track model. |
+| `rack_position` | `int32` | `OUTPUT_ONLY` | `mm` | Represents the current position of the steering rack on axle steering actuator. Positive values leads to a left turn of the vehicle (based on ISO8855). |
+| `rack_position_offset_target` | `int32` | `OPTIONAL` | `mm` | Rack position offset request to the axle steering actuator (for steer-by-wire), added to the actuator internal calculated set-point. Positive values without internal calculated set point change lead to a left movement of the vehicle (based on ISO8855). |
+| `rack_position_target` | `int32` | `OPTIONAL` | `mm` | Rack position request to the axle steering actuator (external set-point). Positive values lead to a left turn of the vehicle (based on ISO8855). |
+| `steer_angle` | `int32` | `OUTPUT_ONLY` | `deg` | Represents the current actuated steering angle of the steered wheels. Signal orientation according ISO8855, single track model. |
+| `steer_angle_offset_target` | `int32` | `OPTIONAL` | `deg` | Steer angle offset request to the axle steering actuator (for steer-by-wire), added to the actuator internal calculated set-point. Signal orientation according ISO8855, single track model. |
+| `steer_angle_target` | `int32` | `OPTIONAL` | `deg` | Steer angle request to the axle steering actuator (external set-point). Signal orientation according ISO8855, single track model. |
 
 ### `Row2`
 
@@ -83,9 +83,9 @@ MotionManagement related to rear axle.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `steer_angle` | `int32` | `OUTPUT_ONLY` | `DEGREE` | Represents the current actuated steering angle of the steered wheels on rear axle. Signal orientation according ISO8855, single track model. |
-| `steer_angle_target` | `int32` | `OPTIONAL` | `DEGREE` | Steer angle request to the rear axle steering actuator (external set-point). Signal orientation according ISO8855, single track model. |
-| `steer_angle_velocity_target` | `int32` | `OPTIONAL` | `DEGREE_PER_SECOND` | Requested velocity for steer angle change. Signal orientation according ISO8855. Optional signal to adapt rear wheel steering closed loop control gain. |
+| `steer_angle` | `int32` | `OUTPUT_ONLY` | `deg` | Represents the current actuated steering angle of the steered wheels on rear axle. Signal orientation according ISO8855, single track model. |
+| `steer_angle_target` | `int32` | `OPTIONAL` | `deg` | Steer angle request to the rear axle steering actuator (external set-point). Signal orientation according ISO8855, single track model. |
+| `steer_angle_velocity_target` | `int32` | `OPTIONAL` | `deg/s` | Requested velocity for steer angle change. Signal orientation according ISO8855. Optional signal to adapt rear wheel steering closed loop control gain. |
 
 ### `SteeringSteeringWheel`
 
@@ -93,13 +93,13 @@ MotionManagement related to steering wheel.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `angle` | `int32` | `OUTPUT_ONLY` | `DEGREE` | Represents the current input angle of the steering system, typically corresponds to angle applied by driver on the steering-wheel. Positive for angle in counterclockwise direction (based on ISO8855). |
-| `angle_target` | `int32` | `OPTIONAL` | `DEGREE` | Steering-wheel angle request to the steering actuator (external set-point for steer-by-wire). Positive sign for angle in counterclockwise direction (based on ISO8855). |
+| `angle` | `int32` | `OUTPUT_ONLY` | `deg` | Represents the current input angle of the steering system, typically corresponds to angle applied by driver on the steering-wheel. Positive for angle in counterclockwise direction (based on ISO8855). |
+| `angle_target` | `int32` | `OPTIONAL` | `deg` | Steering-wheel angle request to the steering actuator (external set-point for steer-by-wire). Positive sign for angle in counterclockwise direction (based on ISO8855). |
 | `angle_target_mode` | `int32` | `OPTIONAL` | — | Mode used for controlling Steering-wheel angle interface. 0 indicates interface disabled. Other values activate vehicle specific modes. |
-| `torque` | `int32` | `OUTPUT_ONLY` | `NEWTON_METER` | Represents the current input torque for steering system, typically corresponds to torque applied by driver on the steering wheel. Positive for torque in counterclockwise direction (based on ISO8855). |
-| `torque_offset_target` | `int32` | `OPTIONAL` | `NEWTON_METER` | Steering-wheel torque offset request to the steering actuator, added to the actuator internal calculated target value. Positive sign for torque in counterclockwise direction (based on ISO8855). |
+| `torque` | `int32` | `OUTPUT_ONLY` | `Nm` | Represents the current input torque for steering system, typically corresponds to torque applied by driver on the steering wheel. Positive for torque in counterclockwise direction (based on ISO8855). |
+| `torque_offset_target` | `int32` | `OPTIONAL` | `Nm` | Steering-wheel torque offset request to the steering actuator, added to the actuator internal calculated target value. Positive sign for torque in counterclockwise direction (based on ISO8855). |
 | `torque_offset_target_mode` | `int32` | `OPTIONAL` | — | Mode used for controlling steering-wheel torque offset interface. 0 indicates interface disabled. Other values activate vehicle specific modes. |
-| `torque_target` | `int32` | `OPTIONAL` | `NEWTON_METER` | Steering-wheel torque request to the steering actuator (external set-point for steer-by-wire). Positive sign for torque in counterclockwise direction (based on ISO8855). |
+| `torque_target` | `int32` | `OPTIONAL` | `Nm` | Steering-wheel torque request to the steering actuator (external set-point for steer-by-wire). Positive sign for torque in counterclockwise direction (based on ISO8855). |
 | `torque_target_mode` | `int32` | `OPTIONAL` | — | Mode used for controlling Steering-wheel torque interface. 0 indicates interface disabled. Other values activate vehicle specific modes. |
 
 ### `Suspension`
@@ -108,9 +108,9 @@ MotionManagement related to suspension.
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `damping_prio_target` | `int32` | `OPTIONAL` | `PERCENT` | Prioritization target for damping control 0% = damping control by damping actuator (e.g. base functions) 100% = damping control by VMM system (e.g. vehicle dynamics) |
-| `roll_prio_target` | `int32` | `OPTIONAL` | `PERCENT` | Prioritization target for anti-roll control 0% = anti-roll control by anti-roll actuator (e.g. base function) 100% = anti-roll control by VMM system (e.g. vehicle dynamics) |
-| `roll_torque_distribution_front_maximum` | `int32` | `OPTIONAL` | `PERCENT` | Maximum distribution range request of roll torque to front axle. 0% = Complete roll torque shall be shifted to rear axle 100% = Complete roll torque may be shifted to front axle |
-| `roll_torque_distribution_front_minimum` | `int32` | `OPTIONAL` | `PERCENT` | Minimum distribution range request of roll torque to front axle. 0% = Complete roll torque may be shifted to rear axle 100% = Complete roll torque shall be shifted to front axle |
-| `roll_torque_target` | `int32` | `OPTIONAL` | `NEWTON_METER` | Roll torque request on vehicle level. Signal orientation according to ISO8855. |
+| `damping_prio_target` | `int32` | `OPTIONAL` | `percent` | Prioritization target for damping control 0% = damping control by damping actuator (e.g. base functions) 100% = damping control by VMM system (e.g. vehicle dynamics) |
+| `roll_prio_target` | `int32` | `OPTIONAL` | `percent` | Prioritization target for anti-roll control 0% = anti-roll control by anti-roll actuator (e.g. base function) 100% = anti-roll control by VMM system (e.g. vehicle dynamics) |
+| `roll_torque_distribution_front_maximum` | `int32` | `OPTIONAL` | `percent` | Maximum distribution range request of roll torque to front axle. 0% = Complete roll torque shall be shifted to rear axle 100% = Complete roll torque may be shifted to front axle |
+| `roll_torque_distribution_front_minimum` | `int32` | `OPTIONAL` | `percent` | Minimum distribution range request of roll torque to front axle. 0% = Complete roll torque may be shifted to rear axle 100% = Complete roll torque shall be shifted to front axle |
+| `roll_torque_target` | `int32` | `OPTIONAL` | `Nm` | Roll torque request on vehicle level. Signal orientation according to ISO8855. |
 

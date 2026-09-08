@@ -35,36 +35,38 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 | `is_light_on` | `bool` | `OPTIONAL` | — | Is trunk light on |
 | `is_locked` | `bool` | `OPTIONAL` | — | Is item locked or unlocked. True = Locked. False = Unlocked. |
 | `is_open` | `bool` | `OPTIONAL` | — | Is item open or closed? True = Fully or partially open. False = Fully closed. |
-| `position` | `int32` | `OPTIONAL` | `PERCENT` | Item position. 0 = Start position 100 = End position. |
-| `switch_control` | `BodyTrunkSwitch` | `OPTIONAL` | — | Switch controlling sliding action such as window, sunroof, or blind. |
-| `instance_tag` | `TrunkInstanceTag` | `OPTIONAL` | — | — |
+| `position` | `int32` | `OPTIONAL` | `percent` | Item position. 0 = Start position 100 = End position. |
+| `switch_control` | `Switch` | `OPTIONAL` | — | Switch controlling sliding action such as window, sunroof, or blind. |
+| `instance_tag` | `TrunkInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `TrunkInstanceTag`
 
+TrunkInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `TrunkInstanceTagDimension1` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `BodyTrunkSwitch`
+### `Switch`
 
 Allowed values for Vehicle.Body.Trunk.Switch.
 
 | Value | Description |
 | --- | --- |
-| `INACTIVE` | — |
-| `CLOSE` | — |
-| `OPEN` | — |
-| `ONE_SHOT_CLOSE` | — |
-| `ONE_SHOT_OPEN` | — |
+| `SWITCH_INACTIVE` | Inactive. |
+| `SWITCH_CLOSE` | Close. |
+| `SWITCH_OPEN` | Open. |
+| `SWITCH_ONE_SHOT_CLOSE` | One shot close. |
+| `SWITCH_ONE_SHOT_OPEN` | One shot open. |
 
-### `TrunkInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `FRONT` | — |
-| `REAR` | — |
+| `DIMENSION1_FRONT` | Front. |
+| `DIMENSION1_REAR` | Rear. |
 

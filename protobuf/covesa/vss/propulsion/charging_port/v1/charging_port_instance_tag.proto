@@ -37,48 +37,48 @@ message ChargingPortInstanceTag {
 
   // Instance axis 1. VSS expands a branch across each axis in turn, so the
   // axes together name one instance.
-  ChargingPortInstanceTagDimension1 dimension1 = 1 [
+  Dimension1 dimension1 = 1 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true
   ];
 }
 // Dimensional enum for VSS instance dimension 1.
-enum ChargingPortInstanceTagDimension1 {
+enum Dimension1 {
   // Not specified.
-  CHARGING_PORT_INSTANCE_TAG_DIMENSION1_UNSPECIFIED = 0;
+  DIMENSION1_UNSPECIFIED = 0;
 
   // Front left.
   //
   // The source model spells this "FrontLeft".
-  CHARGING_PORT_INSTANCE_TAG_DIMENSION1_FRONT_LEFT = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "FrontLeft"}];
+  DIMENSION1_FRONT_LEFT = 1 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "FrontLeft"}];
 
   // Front middle.
   //
   // The source model spells this "FrontMiddle".
-  CHARGING_PORT_INSTANCE_TAG_DIMENSION1_FRONT_MIDDLE = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "FrontMiddle"}];
+  DIMENSION1_FRONT_MIDDLE = 2 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "FrontMiddle"}];
 
   // Front right.
   //
   // The source model spells this "FrontRight".
-  CHARGING_PORT_INSTANCE_TAG_DIMENSION1_FRONT_RIGHT = 3 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "FrontRight"}];
+  DIMENSION1_FRONT_RIGHT = 3 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "FrontRight"}];
 
   // Rear left.
   //
   // The source model spells this "RearLeft".
-  CHARGING_PORT_INSTANCE_TAG_DIMENSION1_REAR_LEFT = 4 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "RearLeft"}];
+  DIMENSION1_REAR_LEFT = 4 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "RearLeft"}];
 
   // Rear middle.
   //
   // The source model spells this "RearMiddle".
-  CHARGING_PORT_INSTANCE_TAG_DIMENSION1_REAR_MIDDLE = 5 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "RearMiddle"}];
+  DIMENSION1_REAR_MIDDLE = 5 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "RearMiddle"}];
 
   // Rear right.
   //
   // The source model spells this "RearRight".
-  CHARGING_PORT_INSTANCE_TAG_DIMENSION1_REAR_RIGHT = 6 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "RearRight"}];
+  DIMENSION1_REAR_RIGHT = 6 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "RearRight"}];
 
   // Any position.
   //
   // The source model spells this "AnyPosition".
-  CHARGING_PORT_INSTANCE_TAG_DIMENSION1_ANY_POSITION = 7 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "AnyPosition"}];
+  DIMENSION1_ANY_POSITION = 7 [(protobuf.covesa.vss.annotations.v1.allowed_value) = {source_spelling: "AnyPosition"}];
 }

@@ -28,7 +28,7 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `pitch` | `double` | `OUTPUT_ONLY` | `DEGREE_PER_SECOND` | Vehicle rotation rate along Y (lateral). |
-| `roll` | `double` | `OUTPUT_ONLY` | `DEGREE_PER_SECOND` | Vehicle rotation rate along X (longitudinal). |
-| `yaw` | `double` | `OUTPUT_ONLY` | `DEGREE_PER_SECOND` | Vehicle rotation rate along Z (vertical). |
+| `pitch` | `double` | `OUTPUT_ONLY` | `deg/s` | Vehicle rotation rate along Y (lateral). |
+| `roll` | `double` | `OUTPUT_ONLY` | `deg/s` | Vehicle rotation rate along X (longitudinal). |
+| `yaw` | `double` | `OUTPUT_ONLY` | `deg/s` | Vehicle rotation rate along Z (vertical). |
 

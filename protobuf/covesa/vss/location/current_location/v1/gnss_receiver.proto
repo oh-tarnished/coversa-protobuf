@@ -35,7 +35,7 @@ message GnssReceiver {
   // Fix status of GNSS receiver.
   //
   // VSS: Vehicle.CurrentLocation.GNSSReceiver.FixType (sensor).
-  CurrentLocationGnSsReceiverFixType fix_type = 1 [
+  FixType fix_type = 1 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -58,34 +58,34 @@ message GnssReceiver {
 // Allowed values for Vehicle.CurrentLocation.GNSSReceiver.FixType.
 //
 // VSS: Vehicle.CurrentLocation.GNSSReceiver.FixType.
-enum CurrentLocationGnSsReceiverFixType {
+enum FixType {
   // Not specified.
-  CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_UNSPECIFIED = 0;
+  FIX_TYPE_UNSPECIFIED = 0;
 
   // None.
-  CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_NONE = 1;
+  FIX_TYPE_NONE = 1;
 
   // Two d.
-  CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_TWO_D = 2;
+  FIX_TYPE_TWO_D = 2;
 
   // Two d satellite based augmentation.
-  CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_TWO_D_SATELLITE_BASED_AUGMENTATION = 3;
+  FIX_TYPE_TWO_D_SATELLITE_BASED_AUGMENTATION = 3;
 
   // Two d ground based augmentation.
-  CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_TWO_D_GROUND_BASED_AUGMENTATION = 4;
+  FIX_TYPE_TWO_D_GROUND_BASED_AUGMENTATION = 4;
 
   // Two d satellite and ground based augmentation.
-  CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_TWO_D_SATELLITE_AND_GROUND_BASED_AUGMENTATION = 5;
+  FIX_TYPE_TWO_D_SATELLITE_AND_GROUND_BASED_AUGMENTATION = 5;
 
   // Three d.
-  CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_THREE_D = 6;
+  FIX_TYPE_THREE_D = 6;
 
   // Three d satellite based augmentation.
-  CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_THREE_D_SATELLITE_BASED_AUGMENTATION = 7;
+  FIX_TYPE_THREE_D_SATELLITE_BASED_AUGMENTATION = 7;
 
   // Three d ground based augmentation.
-  CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_THREE_D_GROUND_BASED_AUGMENTATION = 8;
+  FIX_TYPE_THREE_D_GROUND_BASED_AUGMENTATION = 8;
 
   // Three d satellite and ground based augmentation.
-  CURRENT_LOCATION_GN_SS_RECEIVER_FIX_TYPE_THREE_D_SATELLITE_AND_GROUND_BASED_AUGMENTATION = 9;
+  FIX_TYPE_THREE_D_SATELLITE_AND_GROUND_BASED_AUGMENTATION = 9;
 }

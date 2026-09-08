@@ -35,25 +35,27 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 | `is_folded` | `bool` | `OPTIONAL` | — | Is mirror folded? True = Fully or partially folded. False = Fully unfolded. |
 | `is_heating_on` | `bool` | `OPTIONAL` | — | Mirror Heater on or off. True = Heater On. False = Heater Off. |
 | `is_locked` | `bool` | `OPTIONAL` | — | Is mirror movement locked? True = Locked, mirror will not react to Tilt/Pan change. False = Unlocked. |
-| `pan` | `int32` | `OPTIONAL` | `PERCENT` | Mirror pan as a percent. 0 = Center Position. 100 = Fully Left Position. -100 = Fully Right Position. |
-| `tilt` | `int32` | `OPTIONAL` | `PERCENT` | Mirror tilt as a percent. 0 = Center Position. 100 = Fully Upward Position. -100 = Fully Downward Position. |
-| `yaw` | `int32` | `OPTIONAL` | `PERCENT` | Relative mirror yaw angle, measured from the vehicle sprung mass X-axis as defined by ISO 23150:2023 to the mirror X-axis, around the vehicle Z-axis (right-hand rule). 0 = Mirror in default position. Exact position (yaw relative to vehicle X-axis) is vehicle dependent. 100 = Maximum yaw. Mirror rotated clockwise as much as possible around Z-axis. -100 = Minimum yaw. Mirror rotated counter-clockwise as much as possible around Z-axis. @range(min: -100, max: 100) |
-| `instance_tag` | `MirrorsInstanceTag` | `OPTIONAL` | — | — |
+| `pan` | `int32` | `OPTIONAL` | `percent` | Mirror pan as a percent. 0 = Center Position. 100 = Fully Left Position. -100 = Fully Right Position. |
+| `tilt` | `int32` | `OPTIONAL` | `percent` | Mirror tilt as a percent. 0 = Center Position. 100 = Fully Upward Position. -100 = Fully Downward Position. |
+| `yaw` | `int32` | `OPTIONAL` | `percent` | Relative mirror yaw angle, measured from the vehicle sprung mass X-axis as defined by ISO 23150:2023 to the mirror X-axis, around the vehicle Z-axis (right-hand rule). 0 = Mirror in default position. Exact position (yaw relative to vehicle X-axis) is vehicle dependent. 100 = Maximum yaw. Mirror rotated clockwise as much as possible around Z-axis. -100 = Minimum yaw. Mirror rotated counter-clockwise as much as possible around Z-axis. @range(min: -100, max: 100) |
+| `instance_tag` | `MirrorsInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `MirrorsInstanceTag`
 
+MirrorsInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `MirrorsInstanceTagDimension1` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `MirrorsInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `DRIVER_SIDE` | — |
-| `PASSENGER_SIDE` | — |
+| `DIMENSION1_DRIVER_SIDE` | Driver side. |
+| `DIMENSION1_PASSENGER_SIDE` | Passenger side. |
 

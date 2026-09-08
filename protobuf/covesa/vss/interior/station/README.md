@@ -32,47 +32,49 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `air_distribution` | `CabinHvacStationAirDistribution` | `OPTIONAL` | — | Direction of airstream |
-| `fan_speed` | `int32` | `OPTIONAL` | `PERCENT` | Fan Speed, 0 = off. 100 = max |
-| `temperature` | `double` | `OPTIONAL` | `DEGREE_CELSIUS` | Temperature |
-| `instance_tag` | `StationInstanceTag` | `OPTIONAL` | — | — |
+| `air_distribution` | `AirDistribution` | `OPTIONAL` | — | Direction of airstream |
+| `fan_speed` | `int32` | `OPTIONAL` | `percent` | Fan Speed, 0 = off. 100 = max |
+| `temperature` | `double` | `OPTIONAL` | `degC` | Temperature |
+| `instance_tag` | `StationInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `StationInstanceTag`
 
+StationInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `StationInstanceTagDimension1` | `OPTIONAL` | — | — |
-| `dimension2` | `StationInstanceTagDimension2` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
+| `dimension2` | `Dimension2` | `OPTIONAL` | — | Instance axis 2. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `CabinHvacStationAirDistribution`
+### `AirDistribution`
 
 Allowed values for Vehicle.Cabin.HVAC.Station.AirDistribution.
 
 | Value | Description |
 | --- | --- |
-| `UP` | — |
-| `MIDDLE` | — |
-| `DOWN` | — |
+| `AIR_DISTRIBUTION_UP` | Up. |
+| `AIR_DISTRIBUTION_MIDDLE` | Middle. |
+| `AIR_DISTRIBUTION_DOWN` | Down. |
 
-### `StationInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `ROW1` | — |
-| `ROW2` | — |
-| `ROW3` | — |
-| `ROW4` | — |
+| `DIMENSION1_ROW1` | Row1. |
+| `DIMENSION1_ROW2` | Row2. |
+| `DIMENSION1_ROW3` | Row3. |
+| `DIMENSION1_ROW4` | Row4. |
 
-### `StationInstanceTagDimension2`
+### `Dimension2`
 
 Dimensional enum for VSS instance dimension 2.
 
 | Value | Description |
 | --- | --- |
-| `DRIVER` | — |
-| `PASSENGER` | — |
+| `DIMENSION2_DRIVER` | Driver. |
+| `DIMENSION2_PASSENGER` | Passenger. |
 

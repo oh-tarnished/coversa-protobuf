@@ -34,22 +34,24 @@ Carries the AIP identity and lifecycle fields — `name`, `uid`, `etag` and the 
 | --- | --- | --- | --- | --- |
 | `is_defect` | `bool` | `OUTPUT_ONLY` | — | Indicates if light is defect. True = Light is defect. False = Light has no defect. |
 | `is_on` | `bool` | `OPTIONAL` | — | Indicates if light is on or off. True = On. False = Off. |
-| `instance_tag` | `BeamInstanceTag` | `OPTIONAL` | — | — |
+| `instance_tag` | `BeamInstanceTag` | `OPTIONAL` | — | Which instance of this branch the values belong to. |
 
 ### `BeamInstanceTag`
 
+BeamInstanceTag is a node of the COVESA Vehicle Signal Specification.
+
 | Field | Type | Behavior | Unit | Description |
 | --- | --- | --- | --- | --- |
-| `dimension1` | `BeamInstanceTagDimension1` | `OPTIONAL` | — | — |
+| `dimension1` | `Dimension1` | `OPTIONAL` | — | Instance axis 1. VSS expands a branch across each axis in turn, so the axes together name one instance. |
 
 ## Enums
 
-### `BeamInstanceTagDimension1`
+### `Dimension1`
 
 Dimensional enum for VSS instance dimension 1.
 
 | Value | Description |
 | --- | --- |
-| `LOW` | — |
-| `HIGH` | — |
+| `DIMENSION1_LOW` | Low. |
+| `DIMENSION1_HIGH` | High. |
 

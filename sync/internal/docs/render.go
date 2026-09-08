@@ -10,9 +10,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/model"
-	"github.com/the-protobuf-project/vdm/sync/internal/plan"
-	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+	"github.com/the-protobuf-project/vdm/sync/describe"
+	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/the-protobuf-project/vdm/sync/naming"
+	"github.com/the-protobuf-project/vdm/sync/plan"
+	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // method is one row of the service table.
@@ -78,7 +80,7 @@ func (g *Generator) renderMessages(pkg *model.Package, sb *strings.Builder) {
 	for _, t := range pkg.Types {
 		isRoot := t.Name == pkg.Root.Name
 		fmt.Fprintf(sb, "### `%s`\n\n", model.MessageName(t.Name))
-		if doc := firstParagraph(t.Doc); doc != "" {
+		if doc := firstParagraph(describe.Message(model.MessageName(t.Name), t)); doc != "" {
 			sb.WriteString(doc + "\n\n")
 		}
 		if isRoot {
@@ -126,10 +128,10 @@ func fieldRow(p plan.Field) string {
 	}
 	unit := "—"
 	if p.Unit != "" {
-		unit = "`" + strings.TrimPrefix(p.Unit, "UNIT_") + "`"
+		unit = "`" + describe.UnitSymbol(strings.TrimPrefix(p.Unit, "UNIT_")) + "`"
 	}
 	return fmt.Sprintf("| `%s` | `%s` | `%s` | %s | %s |",
-		p.Name, typ, strings.Join(p.Behavior, ", "), unit, cell(p.Doc))
+		p.Name, typ, strings.Join(p.Behavior, ", "), unit, cell(describe.Summary(p)))
 }
 
 // referenceRow renders a cross-package association, which is a resource name.
@@ -150,13 +152,19 @@ func (g *Generator) renderEnums(pkg *model.Package, sb *strings.Builder) {
 	sb.WriteString("## Enums\n\n")
 
 	for _, e := range pkg.Enums {
-		fmt.Fprintf(sb, "### `%s`\n\n", plan.EnumName(e.Name))
-		if doc := firstParagraph(e.Doc); doc != "" {
+		fmt.Fprintf(sb, "### `%s`\n\n", g.M.EnumName(e.Name))
+		if doc := firstParagraph(describe.Enum(g.M.EnumName(e.Name), e)); doc != "" {
 			sb.WriteString(doc + "\n\n")
 		}
+		name := g.M.EnumName(e.Name)
+		prefix := naming.Screaming(name)
+
 		sb.WriteString("| Value | Description |\n| --- | --- |\n")
-		for _, v := range e.Values {
-			fmt.Fprintf(sb, "| `%s` | %s |\n", v.Name, cell(v.Doc))
+		for i, v := range e.Values {
+			// The emitted constant, not the source spelling: this table
+			// documents the schema, and the schema is what a consumer holds.
+			fmt.Fprintf(sb, "| `%s` | %s |\n",
+				plan.EnumValueName(prefix, v, i), cell(describe.EnumValue(v, i)))
 		}
 		sb.WriteString("\n")
 	}

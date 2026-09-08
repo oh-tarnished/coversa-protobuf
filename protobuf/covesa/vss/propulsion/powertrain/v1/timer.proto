@@ -41,7 +41,7 @@ message Timer {
   // 'starttime' or 'endtime' and Charging.Timer.Time is a time in the past.
   //
   // VSS: Vehicle.Powertrain.TractionBattery.Charging.Timer.Mode (actuator).
-  PowertrainTractionBatteryChargingTimerMode mode = 1 [
+  TimerMode mode = 1 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).enum.defined_only = true,
     (protobuf.covesa.vss.annotations.v1.signal) = {
@@ -66,16 +66,16 @@ message Timer {
 // Allowed values for Vehicle.Powertrain.TractionBattery.Charging.Timer.Mode.
 //
 // VSS: Vehicle.Powertrain.TractionBattery.Charging.Timer.Mode.
-enum PowertrainTractionBatteryChargingTimerMode {
+enum TimerMode {
   // Not specified.
-  POWERTRAIN_TRACTION_BATTERY_CHARGING_TIMER_MODE_UNSPECIFIED = 0;
+  TIMER_MODE_UNSPECIFIED = 0;
 
   // Inactive.
-  POWERTRAIN_TRACTION_BATTERY_CHARGING_TIMER_MODE_INACTIVE = 1;
+  TIMER_MODE_INACTIVE = 1;
 
   // Start time.
-  POWERTRAIN_TRACTION_BATTERY_CHARGING_TIMER_MODE_START_TIME = 2;
+  TIMER_MODE_START_TIME = 2;
 
   // End time.
-  POWERTRAIN_TRACTION_BATTERY_CHARGING_TIMER_MODE_END_TIME = 3;
+  TIMER_MODE_END_TIME = 3;
 }
