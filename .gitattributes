@@ -3,7 +3,6 @@
 # wins is a compatibility decision -- so git must not guess by merging lines.
 buffers.lock -merge
 
-# Generated trees are excluded from language statistics and collapsed in
-# diffs. They are still reviewed; they are just not what the repository is.
-protobuf/** linguist-generated=true
-schema/** linguist-generated=true
+*.proto  linguist-detectable=true
+*.fbs    linguist-detectable=true
+*.capnp  linguist-detectable=true
