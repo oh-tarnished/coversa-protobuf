@@ -2,6 +2,7 @@
 #
 # Common flows:
 #   just sync     # regenerate protobuf/ from the pinned spec revision
+#   just docs     # regenerate the Markdown reference beside the protos
 #   just lint     # what CI checks: format, buf lint, build, api-linter
 #   just schema   # FlatBuffers + Cap'n Proto, then compile both
 #   just ci       # everything CI runs
@@ -25,8 +26,14 @@ _default:
 # Regenerate protobuf/ from the pinned specification revision.
 [doc("Regenerate every .proto from the pinned spec. Nothing under protobuf/ is hand-written.")]
 sync:
-    go run sync/*.go
+    go run ./sync/cmd/sync
     buf format -w
+    @just docs
+
+# Render the Markdown reference: one README per package, plus an index.
+[doc("Regenerate the Markdown reference from the pinned spec.")]
+docs:
+    @go run ./sync/cmd/docs
 
 # Check sync/spec.yaml against the specification actually checked out.
 [doc("Verify the spec revision pin matches the vdm working tree.")]
@@ -36,15 +43,22 @@ spec:
 # Report what the generator parsed, and every field name tripping an AIP rule.
 [doc("Survey the parsed model and its AIP naming traps.")]
 survey:
-    @go run sync/*.go -survey
+    @go run ./sync/cmd/sync -survey
 
 # Format Go sources in place.
 fmt:
     gofmt -w sync
 
+# Build and test the generator.
+[doc("Build and vet the generator, and run its tests.")]
+test:
+    go build ./sync/...
+    go vet ./sync/...
+    go test ./sync/...
+
 # Everything the Lint job checks. Mutates nothing.
 [doc("Format check, buf lint, buf build, api-linter, and the hand-written line cap.")]
-lint: spec aip
+lint: spec aip test
     @test -z "$(gofmt -l sync)" || { echo "unformatted Go (run: just fmt):"; gofmt -l sync; exit 1; }
     buf format --diff --exit-code
     buf lint
@@ -66,24 +80,33 @@ aip:
 # Two exemptions, both because the cap's remedy is to *split* and splitting is
 # unavailable rather than merely inconvenient:
 #
-#   protobuf/  generated, and protobuf cannot continue a message across files
+#   protobuf/  generated -- both the .proto files, which protobuf cannot
+#              continue across files, and the READMEs beside them
 #   README.md  the entry document. Its length is diagrams, and a reader who
 #              has to follow a link to see how the thing works has been given
 #              a worse README, not a shorter one.
 #
 # Everything else is capped. See CLAUDE.md rule 2.
-[doc("Check the 250-line cap on hand-written files.")]
+[doc("Check the line caps: 200 for Go, 250 for Markdown.")]
 cap:
     #!/usr/bin/env sh
     over=0
     for f in $(find . -path ./gen -prune -o -path ./build -prune -o -path ./schema -prune \
-        -o -path ./vdm -prune -o -path ./.git -prune -o -name 'README.md' -prune \
+        -o -path ./vdm -prune -o -path ./.git -prune -o -path ./protobuf -prune \
+        -o -name 'README.md' -prune \
         -o \( -name '*.md' -o -name '*.go' \) -print); do
         n=$(wc -l <"$f")
-        [ "$n" -gt 250 ] && { echo "$f: $n lines, over the 250-line cap"; over=1; }
+        # Go is capped tighter than prose: a 200-line file is one a reader can
+        # hold in their head, and the generator is decomposed by *stage*, so a
+        # file over the cap usually means two stages have merged.
+        case "$f" in
+            *.go) cap=200 ;;
+            *)    cap=250 ;;
+        esac
+        [ "$n" -gt "$cap" ] && { echo "$f: $n lines, over the $cap-line cap"; over=1; }
     done
     [ "$over" -eq 0 ] || { echo "Split the files above; do not compress them."; exit 1; }
-    echo "All hand-written files within the 250-line cap."
+    echo "All hand-written files within their line cap."
 
 # Verify the committed tree matches what the generator produces.
 [doc("Fail if protobuf/ is stale relative to the pinned spec.")]
@@ -122,6 +145,16 @@ langs:
         echo "==> $l"
         just lang "$l"
     done
+
+# Compile the generated Go, proving the schema produces buildable code.
+#
+# GOWORK=off because gen/go is not a workspace member: go.work names only
+# ./sync, and a build inside a non-member module fails while the workspace is
+# active. See the comment in go.work.
+[doc("Generate Go and compile it, the way CI does.")]
+build-go: (lang "go")
+    cp sandbox/go/go.mod gen/go/go.mod
+    cd gen/go && GOWORK=off GOFLAGS=-mod=mod go mod tidy && GOWORK=off go build ./...
 
 # Remove every generated artefact. buffers.lock is kept: it is committed.
 [doc("Remove gen/, schema/, build/ and the descriptor set.")]

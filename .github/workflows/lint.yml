@@ -51,9 +51,14 @@ jobs:
       - name: Build Descriptor Set
         run: buf build
 
-      - name: Check Go Formatting
+      # The workspace at the repository root makes ./sync/... resolve without
+      # a per-directory module dance; see go.work.
+      - name: Build And Test The Generator
         run: |
           test -z "$(gofmt -l sync)" || { gofmt -l sync; exit 1; }
+          go build ./sync/...
+          go vet ./sync/...
+          go test ./sync/...
 
       # Resolves buf.yaml deps itself, so googleapis and protovalidate are
       # available without a hand-built descriptor set. ignore-comment-disables
@@ -82,25 +87,31 @@ jobs:
           [ "$missing" -eq 0 ] || { echo "Add the two-line Apache-2.0 header."; exit 1; }
           echo "All files carry an SPDX header."
 
-      # The 250-line cap, on files a person writes.
+      # Line caps, on files a person writes: 200 for Go, 250 for prose.
+      #
+      # Go is capped tighter because the generator is decomposed by stage, and
+      # a file over the cap usually means two stages have merged.
       #
       # Two exemptions, both because the cap's remedy is to *split* and
-      # splitting is unavailable rather than merely inconvenient: generated
-      # protos, because protobuf cannot continue a message across files; and
-      # README.md, whose length is diagrams that belong where a reader starts.
-      # See CLAUDE.md rule 2.
-      - name: Check File Length Cap
+      # splitting is unavailable rather than merely inconvenient: everything
+      # under protobuf/, which is generated; and README.md, whose length is
+      # diagrams that belong where a reader starts. See CLAUDE.md rule 2.
+      - name: Check File Length Caps
         run: |
           over=0
           while IFS= read -r file; do
+            case "$file" in
+              *.go) cap=200 ;;
+              *)    cap=250 ;;
+            esac
             lines=$(wc -l <"$file")
-            if [ "$lines" -gt 250 ]; then
-              echo "::error file=$file::$lines lines, over the 250-line cap"
+            if [ "$lines" -gt "$cap" ]; then
+              echo "::error file=$file::$lines lines, over the $cap-line cap"
               over=1
             fi
           done < <(find . -path ./gen -prune -o -path ./build -prune \
                      -o -path ./schema -prune -o -path ./vdm -prune -o -path ./.git -prune \
-                     -o -name 'README.md' -prune \
+                     -o -path ./protobuf -prune -o -name 'README.md' -prune \
                      -o \( -name '*.md' -o -name '*.go' \) -print)
           [ "$over" -eq 0 ] || { echo "Split the files above; do not compress them."; exit 1; }
-          echo "All hand-written files within the cap."
+          echo "All hand-written files within their line cap."

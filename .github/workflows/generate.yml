@@ -78,8 +78,13 @@ jobs:
           buf generate --template buf/${{ matrix.template }}.yaml $extra
 
       # Compile only. Nothing is run, packaged or published.
+      # GOWORK=off because gen/go is not a workspace member: go.work names
+      # only ./sync, and a build inside a non-member module fails while the
+      # workspace is active. See the comment in go.work.
       - name: Build Go
         if: matrix.language == 'Go'
+        env:
+          GOWORK: "off"
         run: |
           cp sandbox/go/go.mod gen/go/go.mod
           cd gen/go

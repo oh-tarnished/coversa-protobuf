@@ -35,10 +35,14 @@ jobs:
         with:
           setup_only: true
 
+      # Both generated artefacts: the schema and the Markdown reference beside
+      # it. The docs are generated from the same model rather than parsed back
+      # out of the protos, so a drift in either shows up here.
       - name: Regenerate
         run: |
-          go run sync/*.go
+          go run ./sync/cmd/sync
           buf format -w
+          go run ./sync/cmd/docs
 
       # A diff here means someone edited an emitted file. The next `just sync`
       # would silently revert it, so it is caught now rather than lost later.

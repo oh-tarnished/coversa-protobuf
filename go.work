@@ -1,0 +1,21 @@
+// Go workspace for this repository.
+//
+// There are two modules and they are not peers:
+//
+//	sync/         the generator. Real code, built and vetted here.
+//	sandbox/go/   a go.mod *template*, copied over gen/go in CI so the
+//	              generated protobuf Go can be compiled. It holds no
+//	              packages of its own.
+//
+// Only the generator is a workspace member. The template is deliberately
+// left out: adding it would put a module in the workspace that has nothing
+// to build, and the tree it describes -- gen/go -- does not exist until
+// `buf generate` has run.
+//
+// That omission has a consequence worth knowing. Once a go.work exists at the
+// repository root, a `go build` run *inside* gen/go resolves this workspace
+// and fails, because gen/go is not a member. CI and the justfile therefore
+// set GOWORK=off for that build; see .github/workflows/generate.yml.
+go 1.24
+
+use ./sync

@@ -1,0 +1,133 @@
+// Copyright 2026 The Protobuf Project authors.
+// SPDX-License-Identifier: Apache-2.0
+
+package emit
+
+// doc.go holds the comment machinery: wrapping, the message documentation
+// block, and the unit symbol table field comments read from.
+
+import (
+	"strings"
+
+	"github.com/the-protobuf-project/vdm/sync/internal/model"
+	"github.com/the-protobuf-project/vdm/sync/internal/sdl"
+)
+
+// docWidth is the column comment text wraps at, leaving room for the `// `
+// prefix and an indent inside a message.
+const docWidth = 74
+
+// docBlock renders text as a `//` comment block at the given indent.
+func docBlock(text, indent string) string {
+	if strings.TrimSpace(text) == "" {
+		return ""
+	}
+	var out strings.Builder
+	for _, para := range strings.Split(text, "\n") {
+		if para = strings.TrimSpace(para); para == "" {
+			out.WriteString(indent + "//\n")
+			continue
+		}
+		for _, line := range wrap(para, docWidth-len(indent)) {
+			out.WriteString(indent + "// " + line + "\n")
+		}
+	}
+	return out.String()
+}
+
+// wrap breaks a paragraph into lines of at most width characters, never
+// splitting a word.
+func wrap(s string, width int) []string {
+	words := strings.Fields(s)
+	if len(words) == 0 {
+		return nil
+	}
+	lines := []string{}
+	cur := words[0]
+	for _, w := range words[1:] {
+		if len(cur)+1+len(w) > width {
+			lines = append(lines, cur)
+			cur = w
+			continue
+		}
+		cur += " " + w
+	}
+	return append(lines, cur)
+}
+
+// trimTrailingBlank removes trailing newlines from a builder and restores a
+// single one, so a block closes immediately after its last member.
+func trimTrailingBlank(sb *strings.Builder) {
+	out := strings.TrimRight(sb.String(), "\n")
+	sb.Reset()
+	sb.WriteString(out + "\n")
+}
+
+// messageDoc builds a message's comment: the source description, what it is
+// in VSS terms, and what it is in AIP terms.
+func (e *Emitter) messageDoc(pkg *model.Package, t *sdl.Def, root bool) string {
+	doc := t.Doc
+	if doc == "" {
+		doc = model.MessageName(t.Name) + " is a node of the COVESA Vehicle Signal Specification."
+	}
+
+	var notes []string
+	if v, ok := t.Directive("vspec"); ok {
+		if fqn, ok := v.Arg("fqn"); ok {
+			notes = append(notes, "VSS: "+fqn+".")
+		}
+	}
+	if _, isTag := t.Directive("instanceTag"); isTag {
+		notes = append(notes, "An S2DM instance tag: it says which member of a repeated "+
+			"branch a value belongs to, and carries no signal of its own.")
+	}
+	if root {
+		notes = append(notes, resourceNote(pkg))
+	}
+	if len(notes) > 0 {
+		doc += "\n\n" + strings.Join(notes, "\n\n")
+	}
+	return doc + "\n\nReference: COVESA Vehicle Signal Specification.\n" +
+		"https://covesa.github.io/vehicle_signal_specification/"
+}
+
+// resourceNote says what kind of resource a package root is.
+func resourceNote(pkg *model.Package) string {
+	switch {
+	case pkg.TopLevel() && pkg.Family == model.FamilyVSS:
+		return "The root resource of the vehicle tree, named \"" + pkg.Pattern + "\".\n\n" +
+			"It carries only its own signals. Each branch beneath it -- the cabin, " +
+			"the powertrain, the chassis -- is a resource of its own in its own " +
+			"package, because AIP-215 <https://aip.dev/215> forbids a field naming " +
+			"a message in another package. Navigate to one by resource name."
+	case pkg.Parent != nil:
+		kind := "A child resource of " + model.MessageName(pkg.Parent.Root.Name)
+		if pkg.Singleton() {
+			kind = "A singleton child resource of " +
+				model.MessageName(pkg.Parent.Root.Name) +
+				", AIP-156 <https://aip.dev/156>"
+		}
+		return kind + ", named \"" + pkg.Pattern + "\". Its parent is a declared " +
+			"resource in " + pkg.Parent.ProtoPackage() + ", which is what makes " +
+			"this pattern legal rather than a reference to a collection nothing " +
+			"can create."
+	default:
+		return "A root resource, named \"" + pkg.Pattern + "\"."
+	}
+}
+
+// unitSymbols maps a Unit enum value onto the symbol VSS writes for it.
+//
+// Filled by the vocabulary emitter from the same table it renders the enum
+// from, so a comment and the enum cannot disagree about what a unit is
+// called.
+var unitSymbols = map[string]string{}
+
+// unitSymbol renders a Unit enum value as its written symbol, falling back to
+// a readable form of the constant when the table has no entry.
+func unitSymbol(u string) string {
+	if s, ok := unitSymbols[u]; ok {
+		return s
+	}
+	return strings.ToLower(strings.ReplaceAll(strings.TrimPrefix(u, "UNIT_"), "_", " "))
+}
