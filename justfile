@@ -1,4 +1,4 @@
-# vdm-protobuf dev tasks — run `just` (or `just --list`) to see recipes.
+# coversa-protobuf dev tasks — run `just` (or `just --list`) to see recipes.
 #
 # Common flows:
 #   just sync     # regenerate protobuf/ from the pinned spec revision

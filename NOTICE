@@ -1,4 +1,4 @@
-vdm-protobuf
+coversa-protobuf
 Copyright 2026 Srikanth Kandarpa.
 
 The schemas in protobuf/, and the FlatBuffers and Cap'n Proto schemas in

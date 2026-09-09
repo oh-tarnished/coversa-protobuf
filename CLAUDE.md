@@ -1,4 +1,4 @@
-# vdm-protobuf — working conditions
+# coversa-protobuf — working conditions
 
 Protobuf types for COVESA's Vehicle Signal Specification and Vehicle Data
 Model, and the FlatBuffers and Cap'n Proto schemas derived from them. Every

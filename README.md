@@ -1,4 +1,4 @@
-<h1 align="center">vdm-protobuf</h1>
+<h1 align="center">coversa-protobuf</h1>
 
 <p align="center">
   <strong>COVESA's Vehicle Signal Specification and Vehicle Data Model, as
