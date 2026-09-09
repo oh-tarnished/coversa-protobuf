@@ -1,4 +1,4 @@
-// Copyright 2026 The Protobuf Project authors.
+// Copyright 2026 Srikanth Kandarpa.
 // SPDX-License-Identifier: Apache-2.0
 
 // Package plan maps one specification node onto one protobuf field: its name,

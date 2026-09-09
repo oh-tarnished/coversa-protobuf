@@ -1,9 +1,18 @@
 vdm-protobuf
-Copyright 2026 The Protobuf Project authors.
+Copyright 2026 Srikanth Kandarpa.
 
-This product includes software developed at The Protobuf Project.
+The schemas in protobuf/, and the FlatBuffers and Cap'n Proto schemas in
+schema/, are generated from two COVESA specifications: the Vehicle Signal
+Specification (https://github.com/COVESA/vehicle_signal_specification) and the
+Vehicle Data Model (https://github.com/COVESA/vdm). Those specifications are
+the property of COVESA and are subject to their own terms.
 
-The schemas in protobuf/ are generated from the COVESA Vehicle Data Model
-(https://github.com/COVESA/vdm), which incorporates the COVESA Vehicle Signal
-Specification (https://github.com/COVESA/vehicle_signal_specification). Those
-specifications are the property of COVESA and are subject to their own terms.
+The generated schemas carry vocabulary, structure and documentation taken from
+those specifications. The generator in sync/, and the decisions it encodes
+about how that vocabulary maps onto AIP-shaped protobuf, are this
+repository's own.
+
+This product is built on protoc-gen-buffers
+(https://github.com/the-protobuf-project/buffers) and follows the conventions
+of protobuf-rfc (https://github.com/the-protobuf-project/protobuf-rfc), both
+of which carry their own licences.

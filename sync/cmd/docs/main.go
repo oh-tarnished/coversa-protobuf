@@ -1,4 +1,4 @@
-// Copyright 2026 The Protobuf Project authors.
+// Copyright 2026 Srikanth Kandarpa.
 // SPDX-License-Identifier: Apache-2.0
 
 // Command docs renders the generated schema as Markdown reference
