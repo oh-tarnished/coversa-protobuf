@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Compile-only project for the generated Java, copied over gen/java in CI.
+
+  Not an artifact anyone depends on: it exists so a schema producing code
+  javac rejects is caught here rather than by the first consumer. `buf lint`
+  cannot tell you whether a schema produces code that compiles.
+
+  It also sits at sandbox/java/pom.xml so actions/setup-java's Maven cache has
+  a descriptor to key on at checkout time — gen/java does not exist yet when
+  that step runs.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.github.ohtarnished</groupId>
+  <artifactId>coversa-protobuf-gen-java</artifactId>
+  <version>0.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- Nothing here is packaged or published; compile is the whole gate. -->
+    <maven.install.skip>true</maven.install.skip>
+    <maven.deploy.skip>true</maven.deploy.skip>
+    <grpc.version>1.76.0</grpc.version>
+  </properties>
+
+  <dependencies>
+    <!-- The messages. 4.31 or newer: the BSR's protoc-gen-java emits
+         com.google.protobuf.Generated and GeneratedFile, which older runtimes
+         do not carry, and the failure is a wall of "cannot find symbol". -->
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+      <version>4.33.0</version>
+    </dependency>
+
+    <!-- google.api.* and google.type.*, which every resource file imports.
+         Supplied as a published artifact rather than generated, so the build
+         proves the schema agrees with the canonical descriptors. -->
+    <dependency>
+      <groupId>com.google.api.grpc</groupId>
+      <artifactId>proto-google-common-protos</artifactId>
+      <version>2.60.0</version>
+    </dependency>
+
+    <!-- The service stubs. protoc-gen-grpc-java emits io.grpc.stub and
+         io.grpc.protobuf types for all 51 services. -->
+    <dependency>
+      <groupId>io.grpc</groupId>
+      <artifactId>grpc-stub</artifactId>
+      <version>${grpc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.grpc</groupId>
+      <artifactId>grpc-protobuf</artifactId>
+      <version>${grpc.version}</version>
+    </dependency>
+
+    <!-- protovalidate's buf.validate options, which every constrained field
+         references. -->
+    <dependency>
+      <groupId>build.buf</groupId>
+      <artifactId>protovalidate</artifactId>
+      <version>0.5.0</version>
+    </dependency>
+
+    <!-- javax.annotation.Generated, which the gRPC stubs carry and Java 21
+         no longer ships. -->
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>annotations-api</artifactId>
+      <version>6.0.53</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <!-- protoc-gen-java writes the package tree directly into gen/java. -->
+    <sourceDirectory>.</sourceDirectory>
+  </build>
+</project>

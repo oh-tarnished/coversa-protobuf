@@ -1,0 +1,18 @@
+# Runtime dependencies for the generated Python, installed by CI before it
+# imports every generated module.
+#
+# Not a package anyone installs: it exists so a schema producing code the
+# descriptor pool rejects is caught here rather than by the first consumer.
+# Compiling the files would not catch it -- the pool is only built at import.
+#
+# protobuf is pinned to a major line because the generated code carries a
+# `runtime_version` guard and refuses a runtime older than the plugin that
+# wrote it.
+protobuf>=5.29,<7
+
+# google.api and google.type come from here. The generated tree contains its
+# own copies -- the template generates with --include-imports, since generated
+# Python does `from buf.validate import validate_pb2`, a path no PyPI package
+# exposes -- and CI removes gen/python/google before importing, so the
+# installed distribution is what resolves.
+googleapis-common-protos>=1.66

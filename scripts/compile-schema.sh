@@ -20,6 +20,28 @@ trap 'rm -rf "$tmp"' EXIT
 fail=0
 total=0
 
+# Where capnp's own schema files live.
+#
+# Every emitted .capnp opens with `using Cxx = import "/capnp/c++.capnp"`, an
+# absolute import resolved against the import path rather than the file's
+# directory. Homebrew's capnp has its include directory compiled in and finds
+# it unaided; Debian and Ubuntu split the compiler (`capnproto`) from the
+# schema files (`libcapnp-dev`), so a runner with only the first fails every
+# file with "Import failed: /capnp/c++.capnp" -- 267 identical errors that say
+# nothing about the schema.
+#
+# So it is located rather than assumed, and its absence is reported as the
+# missing package it is.
+capnp_include=""
+for dir in \
+	"$(dirname "$(command -v capnp 2>/dev/null || echo /nonexistent)")/../include" \
+	/usr/include /usr/local/include /opt/homebrew/include; do
+	if [ -f "$dir/capnp/c++.capnp" ]; then
+		capnp_include=$(CDPATH= cd -- "$dir" && pwd)
+		break
+	fi
+done
+
 if [ -d schema/flatbuffers ]; then
 	cd schema/flatbuffers
 	for f in $(find . -name '*.fbs'); do
@@ -34,10 +56,17 @@ if [ -d schema/flatbuffers ]; then
 fi
 
 if [ -d schema/capnp ]; then
+	if [ -z "$capnp_include" ]; then
+		echo "error: capnp/c++.capnp not found on any include path." >&2
+		echo "       Install the schema files: apt install libcapnp-dev," >&2
+		echo "       or brew install capnp." >&2
+		exit 1
+	fi
+
 	cd schema/capnp
 	for f in $(find . -name '*.capnp'); do
 		total=$((total + 1))
-		if ! capnp compile -I. -o- "$f" >/dev/null 2>"$tmp/err"; then
+		if ! capnp compile -I. -I"$capnp_include" -o- "$f" >/dev/null 2>"$tmp/err"; then
 			fail=$((fail + 1))
 			echo "capnp: $f" >&2
 			sed 's/^/    /' "$tmp/err" >&2

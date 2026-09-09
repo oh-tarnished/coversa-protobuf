@@ -39,7 +39,12 @@ jobs:
       - name: Install Schema Compilers
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends flatbuffers-compiler capnproto
+          # libcapnp-dev, not just capnproto: Debian splits the compiler from
+          # capnp's own schema files, and every emitted .capnp imports
+          # /capnp/c++.capnp. Without it all 267 fail identically on an import
+          # that says nothing about the schema.
+          sudo apt-get install -y --no-install-recommends \
+            flatbuffers-compiler capnproto libcapnp-dev
           flatc --version
           capnp --version
 
