@@ -1,0 +1,78 @@
+# Dependency updates.
+#
+# Six ecosystems, because the repository has six places a version is pinned
+# and they fail differently. A stale action is a CI break; a stale Java or
+# Python runtime floor is a *generated-code* break, since the BSR plugins emit
+# code that refuses a runtime older than the gencode that wrote it -- which is
+# exactly how the Generate workflow failed before those floors were raised.
+#
+# The generator's own module is deliberately last in interest: it has one
+# dependency, and docs/generator.md says that require block should stay empty.
+version: 2
+
+updates:
+  # The workflows. Grouped: a bump to one action almost never conflicts with
+  # a bump to another, and six separate PRs for a routine week is noise.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      actions:
+        patterns: ["*"]
+    labels: [dependencies, ci]
+
+  # The generator. One dependency, gopkg.in/yaml.v3, added deliberately for
+  # .vspec parsing.
+  - package-ecosystem: gomod
+    directory: /sync
+    schedule:
+      interval: weekly
+      day: monday
+    labels: [dependencies, go]
+
+  # The codec, which reads the generator's model.
+  - package-ecosystem: gomod
+    directory: /codec
+    schedule:
+      interval: weekly
+      day: monday
+    labels: [dependencies, go]
+
+  # The compile-only templates copied over gen/ in CI. These are what prove
+  # the schema produces code a consumer can build, so their runtime versions
+  # are the ones that matter most.
+  - package-ecosystem: gomod
+    directory: /sandbox/go
+    schedule:
+      interval: weekly
+      day: monday
+    labels: [dependencies, go, generated-code]
+
+  - package-ecosystem: npm
+    directory: /sandbox/ts
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      typescript:
+        patterns: ["*"]
+    labels: [dependencies, generated-code]
+
+  - package-ecosystem: maven
+    directory: /sandbox/java
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      java:
+        patterns: ["*"]
+    labels: [dependencies, generated-code]
+
+  - package-ecosystem: pip
+    directory: /sandbox/python
+    schedule:
+      interval: weekly
+      day: monday
+    labels: [dependencies, generated-code]

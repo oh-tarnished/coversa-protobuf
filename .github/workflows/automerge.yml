@@ -1,0 +1,59 @@
+name: Automerge
+
+# Turns on GitHub's auto-merge for a Dependabot pull request, so it merges
+# itself once every required check has passed.
+#
+# Auto-merge, not "merge now". This workflow never merges anything: it sets a
+# flag, and GitHub merges only when the branch protection rules are satisfied.
+# That distinction is the whole safety argument -- the gate is the same set of
+# checks a human PR must pass (lint, sync, schema, generate, breaking), and
+# this cannot bypass them. A red check leaves the PR sitting open.
+#
+# What is *not* automatic: a major version bump. Those are the ones that move
+# a runtime floor or change a plugin's output, and this repository has already
+# been broken twice that way -- protobuf-java below 4.31 and a Python runtime
+# below the gencode version both produce a schema that lints clean and does
+# not build. Those wait for a person.
+
+on: pull_request_target
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  Automerge:
+    name: Enable Auto-merge
+    runs-on: ubuntu-latest
+    # pull_request_target runs with a writable token against the base repo, so
+    # it must never run for a branch a stranger controls. Dependabot's own PRs
+    # are the only ones admitted, and no step here checks out or executes the
+    # PR's code.
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: Read Update Metadata
+        id: meta
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # A patch or minor bump merges itself once CI is green. A major one is
+      # left open with a note saying why.
+      - name: Enable Auto-merge
+        if: steps.meta.outputs.update-type != 'version-update:semver-major'
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Flag Major Version For Review
+        if: steps.meta.outputs.update-type == 'version-update:semver-major'
+        run: |
+          gh pr comment "$PR_URL" --body \
+            "Major version bump — not auto-merged. A major bump can move a runtime
+          floor or change what a code generator emits, which produces a schema that
+          lints clean and does not build. Check the Generate workflow's four
+          language jobs before merging."
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
