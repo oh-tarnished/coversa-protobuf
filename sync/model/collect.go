@@ -6,7 +6,7 @@ package model
 // collect.go assigns the embedded messages a promoted branch reaches to its
 // package.
 
-import "github.com/the-protobuf-project/vdm/sync/vspec"
+import "github.com/oh-tarnished/coversa-protobuf/sync/vspec"
 
 // collect walks a branch subtree, assigning every grouping node that was not
 // promoted to pkg as an embedded message.

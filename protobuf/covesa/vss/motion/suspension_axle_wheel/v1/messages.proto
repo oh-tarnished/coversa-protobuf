@@ -21,7 +21,7 @@ import "protobuf/covesa/vss/motion/suspension_axle_wheel/v1/wheel.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "MessagesProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.motion.suspension_axle_wheel.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.motion.suspension_axle_wheel.v1";
 
 // Request message for Wheels.GetWheel, AIP-131 <https://aip.dev/131>.
 message GetWheelRequest {

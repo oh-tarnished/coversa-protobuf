@@ -19,7 +19,7 @@ import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "InteractiveLightBarProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.interior.cabin.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.interior.cabin.v1";
 
 // Decorative coloured light bar that supports effects, usually mounted on
 // the dashboard (e.g. BMW i7 Interactive bar).

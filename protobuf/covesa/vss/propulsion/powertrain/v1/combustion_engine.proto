@@ -24,7 +24,7 @@ import "protobuf/covesa/vss/propulsion/powertrain/v1/engine_oil.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "CombustionEngineProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.propulsion.powertrain.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.propulsion.powertrain.v1";
 
 // Engine-specific data, stopping at the bell housing.
 //

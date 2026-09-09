@@ -20,7 +20,7 @@ import "protobuf/covesa/vss/interior/driver/v1/messages.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ServiceProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.interior.driver.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.interior.driver.v1";
 
 // Drivers manages the Driver branch of a vehicle.
 //

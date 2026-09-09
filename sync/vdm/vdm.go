@@ -28,8 +28,8 @@ package vdm
 import (
 	"fmt"
 
-	"github.com/the-protobuf-project/vdm/sync/sdl"
-	"github.com/the-protobuf-project/vdm/sync/vspec"
+	"github.com/oh-tarnished/coversa-protobuf/sync/sdl"
+	"github.com/oh-tarnished/coversa-protobuf/sync/vspec"
 )
 
 // Roots are the resources VDM declares outside the vehicle tree, in the order

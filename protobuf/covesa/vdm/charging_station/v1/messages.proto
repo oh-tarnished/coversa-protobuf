@@ -21,7 +21,7 @@ import "protobuf/covesa/vdm/charging_station/v1/charging_station.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "MessagesProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vdm.charging_station.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vdm.charging_station.v1";
 
 // Request message for ChargingStations.GetChargingStation, AIP-131
 // <https://aip.dev/131>.

@@ -14,8 +14,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/model"
-	"github.com/the-protobuf-project/vdm/sync/naming"
+	"github.com/oh-tarnished/coversa-protobuf/sync/model"
+	"github.com/oh-tarnished/coversa-protobuf/sync/naming"
 )
 
 // Messages renders messages.proto for a package.

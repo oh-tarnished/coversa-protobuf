@@ -10,12 +10,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/catalog"
-	"github.com/the-protobuf-project/vdm/sync/describe"
-	"github.com/the-protobuf-project/vdm/sync/model"
-	"github.com/the-protobuf-project/vdm/sync/naming"
-	"github.com/the-protobuf-project/vdm/sync/plan"
-	"github.com/the-protobuf-project/vdm/sync/vspec"
+	"github.com/oh-tarnished/coversa-protobuf/sync/catalog"
+	"github.com/oh-tarnished/coversa-protobuf/sync/describe"
+	"github.com/oh-tarnished/coversa-protobuf/sync/model"
+	"github.com/oh-tarnished/coversa-protobuf/sync/naming"
+	"github.com/oh-tarnished/coversa-protobuf/sync/plan"
+	"github.com/oh-tarnished/coversa-protobuf/sync/vspec"
 )
 
 // recordImports notes every file a planned field's type pulls in.

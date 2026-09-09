@@ -20,9 +20,9 @@ package describe
 import (
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/naming"
-	"github.com/the-protobuf-project/vdm/sync/plan"
-	"github.com/the-protobuf-project/vdm/sync/vspec"
+	"github.com/oh-tarnished/coversa-protobuf/sync/naming"
+	"github.com/oh-tarnished/coversa-protobuf/sync/plan"
+	"github.com/oh-tarnished/coversa-protobuf/sync/vspec"
 )
 
 // Field is the full documentation for one planned field: its description, the

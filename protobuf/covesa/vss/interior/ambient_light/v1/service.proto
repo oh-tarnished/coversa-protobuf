@@ -21,7 +21,7 @@ import "protobuf/covesa/vss/interior/ambient_light/v1/messages.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ServiceProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.interior.ambient_light.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.interior.ambient_light.v1";
 
 // AmbientLights manages the AmbientLight branch of a vehicle.
 //

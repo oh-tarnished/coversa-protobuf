@@ -31,7 +31,7 @@ import "protobuf/covesa/vss/assistance/adas/v1/tcs.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "AdasProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.assistance.adas.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.assistance.adas.v1";
 
 // All Advanced Driver Assist Systems data.
 //

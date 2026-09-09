@@ -20,7 +20,7 @@ import "protobuf/covesa/vss/location/current_location/v1/messages.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ServiceProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.location.current_location.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.location.current_location.v1";
 
 // CurrentLocations manages the CurrentLocation branch of a vehicle.
 //

@@ -15,7 +15,7 @@ package protobuf.covesa.vss.exterior.windshield.v1;
 
 option java_multiple_files = true;
 option java_outer_classname = "SystemTypesProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.exterior.windshield.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.exterior.windshield.v1";
 
 // Requested mode of wiper system. STOP_HOLD means that the wipers shall move
 // to position given by TargetPosition and then hold the position. WIPE means

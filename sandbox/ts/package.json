@@ -1,5 +1,5 @@
 {
-  "name": "@the-protobuf-project/vdm-gen-typescript",
+  "name": "@oh-tarnished/coversa-protobuf-gen-typescript",
   "version": "0.0.0",
   "private": true,
   "description": "Compile-only project for the generated TypeScript, copied over gen/typescript in CI. Not published: it exists so a schema producing code tsc rejects is caught here rather than by the first consumer.",

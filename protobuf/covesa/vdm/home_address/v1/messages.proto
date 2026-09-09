@@ -21,7 +21,7 @@ import "protobuf/covesa/vdm/home_address/v1/home_address.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "MessagesProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vdm.home_address.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vdm.home_address.v1";
 
 // Request message for HomeAddresses.GetHomeAddress, AIP-131
 // <https://aip.dev/131>.

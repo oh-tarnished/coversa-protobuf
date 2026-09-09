@@ -19,7 +19,7 @@ import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "AirQualityProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.exterior.exterior.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.exterior.exterior.v1";
 
 // Signals describing the composition of the ambient air outside the vehicle.
 //

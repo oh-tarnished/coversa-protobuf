@@ -35,7 +35,7 @@ package model
 import (
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/naming"
+	"github.com/oh-tarnished/coversa-protobuf/sync/naming"
 )
 
 // disambiguate renames every package whose leaf name another package shares.

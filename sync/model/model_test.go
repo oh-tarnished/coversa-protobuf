@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/the-protobuf-project/vdm/sync/vspec"
+	"github.com/oh-tarnished/coversa-protobuf/sync/vspec"
 )
 
 // fixture is a vehicle small enough to reason about, exercising the shapes

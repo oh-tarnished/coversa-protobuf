@@ -18,7 +18,7 @@ import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "DcdcProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.propulsion.powertrain.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.propulsion.powertrain.v1";
 
 // Properties related to DC/DC converter converting high voltage (from high
 // voltage battery) to vehicle low voltage (supply voltage, typically 12

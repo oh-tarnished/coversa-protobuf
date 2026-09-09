@@ -21,7 +21,7 @@ import "protobuf/covesa/vss/propulsion/charging_port/v1/messages.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ServiceProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.propulsion.charging_port.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.propulsion.charging_port.v1";
 
 // ChargingPorts manages the ChargingPort branch of a vehicle.
 //

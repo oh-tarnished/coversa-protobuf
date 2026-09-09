@@ -31,7 +31,7 @@ import "protobuf/covesa/vss/interior/cabin/v1/sunroof.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "CabinProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.interior.cabin.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.interior.cabin.v1";
 
 // All in-cabin components, including doors.
 //

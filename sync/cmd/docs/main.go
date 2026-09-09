@@ -22,8 +22,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/the-protobuf-project/vdm/sync/internal/docs"
-	"github.com/the-protobuf-project/vdm/sync/load"
+	"github.com/oh-tarnished/coversa-protobuf/sync/internal/docs"
+	"github.com/oh-tarnished/coversa-protobuf/sync/load"
 )
 
 func main() {

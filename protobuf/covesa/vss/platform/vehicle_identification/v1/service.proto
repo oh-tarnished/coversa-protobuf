@@ -20,7 +20,7 @@ import "protobuf/covesa/vss/platform/vehicle_identification/v1/vehicle_identific
 
 option java_multiple_files = true;
 option java_outer_classname = "ServiceProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.platform.vehicle_identification.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.platform.vehicle_identification.v1";
 
 // VehicleIdentificationService manages the VehicleIdentification branch of a
 // vehicle.

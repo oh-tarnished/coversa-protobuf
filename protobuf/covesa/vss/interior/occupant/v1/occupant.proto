@@ -25,7 +25,7 @@ import "protobuf/covesa/vss/interior/occupant/v1/mid_eye_gaze.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "OccupantProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.interior.occupant.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.interior.occupant.v1";
 
 // Occupant (Driver or Passenger) data.
 //

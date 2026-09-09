@@ -23,7 +23,7 @@ import "protobuf/covesa/vss/platform/control_unit/v1/health.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ControlUnitProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.platform.control_unit.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.platform.control_unit.v1";
 
 // Root of the control unit branch
 //

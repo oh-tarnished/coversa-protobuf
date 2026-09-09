@@ -22,9 +22,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/describe"
-	"github.com/the-protobuf-project/vdm/sync/model"
-	"github.com/the-protobuf-project/vdm/sync/plan"
+	"github.com/oh-tarnished/coversa-protobuf/sync/describe"
+	"github.com/oh-tarnished/coversa-protobuf/sync/model"
+	"github.com/oh-tarnished/coversa-protobuf/sync/plan"
 )
 
 // Generator renders documentation for one model.

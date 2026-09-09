@@ -22,7 +22,7 @@ import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "AccelerationProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.motion.acceleration.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.motion.acceleration.v1";
 
 // Spatial acceleration. Axis definitions according to ISO 8855.
 //

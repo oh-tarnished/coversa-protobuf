@@ -15,7 +15,7 @@ package protobuf.covesa.vss.assistance.adas.v1;
 
 option java_multiple_files = true;
 option java_outer_classname = "AdasTypesProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.assistance.adas.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.assistance.adas.v1";
 
 // Indicates the currently active level of driving automation according to
 // the SAE J3016 (Taxonomy and Definitions for Terms Related to Driving

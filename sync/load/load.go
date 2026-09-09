@@ -18,11 +18,11 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/model"
-	"github.com/the-protobuf-project/vdm/sync/sdl"
-	"github.com/the-protobuf-project/vdm/sync/spec"
-	"github.com/the-protobuf-project/vdm/sync/vdm"
-	"github.com/the-protobuf-project/vdm/sync/vspec"
+	"github.com/oh-tarnished/coversa-protobuf/sync/model"
+	"github.com/oh-tarnished/coversa-protobuf/sync/sdl"
+	"github.com/oh-tarnished/coversa-protobuf/sync/spec"
+	"github.com/oh-tarnished/coversa-protobuf/sync/vdm"
+	"github.com/oh-tarnished/coversa-protobuf/sync/vspec"
 )
 
 // Model reads the pins at path and returns the model they describe.

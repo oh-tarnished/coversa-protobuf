@@ -21,7 +21,7 @@ import "protobuf/covesa/vdm/person/v1/person.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ServiceProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vdm.person.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vdm.person.v1";
 
 // People manages the Person branch of a vehicle.
 //

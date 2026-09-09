@@ -20,7 +20,7 @@ import "protobuf/covesa/vdm/name/v1/name.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ServiceProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vdm.name.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vdm.name.v1";
 
 // Names manages the Name branch of a vehicle.
 //

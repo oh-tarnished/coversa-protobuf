@@ -23,7 +23,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/oh-tarnished/coversa-protobuf/sync/model"
 )
 
 // dependencies renders the import figure.

@@ -24,7 +24,7 @@ import "protobuf/covesa/vss/interior/cabin/v1/smartphone_screen_mirroring.proto"
 
 option java_multiple_files = true;
 option java_outer_classname = "InfotainmentProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.interior.cabin.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.interior.cabin.v1";
 
 // Infotainment system.
 //

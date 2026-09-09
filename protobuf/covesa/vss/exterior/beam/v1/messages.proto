@@ -21,7 +21,7 @@ import "protobuf/covesa/vss/exterior/beam/v1/beam.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "MessagesProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.exterior.beam.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.exterior.beam.v1";
 
 // Request message for Beams.GetBeam, AIP-131 <https://aip.dev/131>.
 message GetBeamRequest {

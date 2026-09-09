@@ -15,7 +15,7 @@ package protobuf.covesa.vss.interior.cabin.v1;
 
 option java_multiple_files = true;
 option java_outer_classname = "HmiTypesProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.interior.cabin.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.interior.cabin.v1";
 
 // Font size used in the current HMI
 //

@@ -5,10 +5,12 @@
 # descriptor pool rejects is caught here rather than by the first consumer.
 # Compiling the files would not catch it -- the pool is only built at import.
 #
-# protobuf is pinned to a major line because the generated code carries a
-# `runtime_version` guard and refuses a runtime older than the plugin that
-# wrote it.
-protobuf>=5.29,<7
+# The floor tracks the BSR plugin, not taste. Generated Python opens with
+# `ValidateProtobufRuntimeVersion`, which refuses a runtime older than the
+# gencode that wrote it: protoc-gen-python currently emits gencode 7.36, so a
+# 6.x runtime fails every module with a VersionError before a single
+# descriptor is built. Raise this when the plugin moves.
+protobuf>=7.36,<8
 
 # google.api and google.type come from here. The generated tree contains its
 # own copies -- the template generates with --include-imports, since generated

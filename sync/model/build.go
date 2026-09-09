@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/the-protobuf-project/vdm/sync/naming"
-	"github.com/the-protobuf-project/vdm/sync/vspec"
+	"github.com/oh-tarnished/coversa-protobuf/sync/naming"
+	"github.com/oh-tarnished/coversa-protobuf/sync/vspec"
 )
 
 // Build partitions the specification trees into packages.

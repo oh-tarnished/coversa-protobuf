@@ -6,8 +6,8 @@ package vdm
 import (
 	"testing"
 
-	"github.com/the-protobuf-project/vdm/sync/sdl"
-	"github.com/the-protobuf-project/vdm/sync/vspec"
+	"github.com/oh-tarnished/coversa-protobuf/sync/sdl"
+	"github.com/oh-tarnished/coversa-protobuf/sync/vspec"
 )
 
 const source = `

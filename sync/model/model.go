@@ -24,9 +24,9 @@ package model
 import (
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/catalog"
-	"github.com/the-protobuf-project/vdm/sync/spec"
-	"github.com/the-protobuf-project/vdm/sync/vspec"
+	"github.com/oh-tarnished/coversa-protobuf/sync/catalog"
+	"github.com/oh-tarnished/coversa-protobuf/sync/spec"
+	"github.com/oh-tarnished/coversa-protobuf/sync/vspec"
 )
 
 // Family is the specification a package comes from.

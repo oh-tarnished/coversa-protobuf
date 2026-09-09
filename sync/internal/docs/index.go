@@ -11,7 +11,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/oh-tarnished/coversa-protobuf/sync/model"
 )
 
 // index renders the top-level reference index.

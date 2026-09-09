@@ -19,7 +19,7 @@ import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "HoodProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.exterior.body.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.exterior.body.v1";
 
 // Hood status. Start position for Hood is Closed.
 //

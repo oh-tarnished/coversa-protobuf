@@ -22,7 +22,7 @@ import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "DirectionIndicatorProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.exterior.direction_indicator.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.exterior.direction_indicator.v1";
 
 // Indicator lights.
 //

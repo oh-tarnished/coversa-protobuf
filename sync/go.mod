@@ -12,7 +12,7 @@
 // Everything else stays hand-written. `#include` resolution and instance
 // expansion are VSS's own preprocessor, not YAML, and no library implements
 // them.
-module github.com/the-protobuf-project/vdm/sync
+module github.com/oh-tarnished/coversa-protobuf/sync
 
 go 1.24
 

@@ -25,7 +25,7 @@ managed:
       module: buf.build/bufbuild/protovalidate
   override:
     - file_option: go_package_prefix
-      value: github.com/the-protobuf-project/vdm/gen/go
+      value: github.com/oh-tarnished/coversa-protobuf/gen/go
 plugins:
   - remote: buf.build/protocolbuffers/go
     out: gen/go

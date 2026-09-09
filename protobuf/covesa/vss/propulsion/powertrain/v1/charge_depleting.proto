@@ -19,7 +19,7 @@ import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ChargeDepletingProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.propulsion.powertrain.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.propulsion.powertrain.v1";
 
 // Signals related to Charge Depleting (CD) mode operation.
 //

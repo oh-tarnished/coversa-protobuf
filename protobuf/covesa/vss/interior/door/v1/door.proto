@@ -24,7 +24,7 @@ import "protobuf/covesa/vss/interior/door/v1/window.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "DoorProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.interior.door.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.interior.door.v1";
 
 // All doors, including windows and switches.
 //

@@ -27,7 +27,7 @@ import "protobuf/covesa/vss/propulsion/powertrain/v1/transmission.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "PowertrainProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.propulsion.powertrain.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.propulsion.powertrain.v1";
 
 // Powertrain data for battery management, etc.
 //

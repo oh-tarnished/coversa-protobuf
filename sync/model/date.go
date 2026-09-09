@@ -16,8 +16,8 @@ package model
 // Timestamp and Duration, silently. See docs/decisions.md.
 
 import (
-	"github.com/the-protobuf-project/vdm/sync/naming"
-	"github.com/the-protobuf-project/vdm/sync/vspec"
+	"github.com/oh-tarnished/coversa-protobuf/sync/naming"
+	"github.com/oh-tarnished/coversa-protobuf/sync/vspec"
 )
 
 // placeDates gives a Date message to every package with a date-valued signal.

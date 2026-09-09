@@ -22,7 +22,7 @@ import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "StationProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.interior.station.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.interior.station.v1";
 
 // HVAC for single station in the vehicle
 //

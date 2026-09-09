@@ -19,7 +19,7 @@ import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "MassageProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.interior.seat.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.interior.seat.v1";
 
 // Massage related information for the seat.
 //

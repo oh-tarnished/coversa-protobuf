@@ -22,7 +22,7 @@ import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "TrunkProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.exterior.trunk.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.exterior.trunk.v1";
 
 // Trunk status. Start position for Trunk is Closed.
 //

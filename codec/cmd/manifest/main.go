@@ -23,8 +23,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/the-protobuf-project/vdm/codec/vss"
-	"github.com/the-protobuf-project/vdm/sync/load"
+	"github.com/oh-tarnished/coversa-protobuf/codec/vss"
+	"github.com/oh-tarnished/coversa-protobuf/sync/load"
 )
 
 func main() {

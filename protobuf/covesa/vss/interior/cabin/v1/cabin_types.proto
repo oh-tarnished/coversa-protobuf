@@ -15,7 +15,7 @@ package protobuf.covesa.vss.interior.cabin.v1;
 
 option java_multiple_files = true;
 option java_outer_classname = "CabinTypesProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.interior.cabin.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.interior.cabin.v1";
 
 // The position of the driver seat in row 1.
 //

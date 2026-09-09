@@ -8,7 +8,7 @@ package model
 import (
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/naming"
+	"github.com/oh-tarnished/coversa-protobuf/sync/naming"
 )
 
 // CovesaRoot is the import prefix every emitted file lives under, matching
@@ -16,7 +16,7 @@ import (
 const CovesaRoot = "protobuf/covesa"
 
 // javaBase is the Java package prefix, per AIP-191.
-const javaBase = "io.github.theprotobufproject.protobuf.covesa"
+const javaBase = "io.github.ohtarnished.protobuf.covesa"
 
 // VocabName is the directory and package segment the VSS annotation
 // vocabulary lives under.

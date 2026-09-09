@@ -20,7 +20,7 @@ import "protobuf/covesa/vss/motion/motion_management/v1/motion_management.proto"
 
 option java_multiple_files = true;
 option java_outer_classname = "ServiceProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.motion.motion_management.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.motion.motion_management.v1";
 
 // MotionManagementService manages the MotionManagement branch of a vehicle.
 //

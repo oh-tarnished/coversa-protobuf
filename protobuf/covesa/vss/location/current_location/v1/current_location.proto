@@ -23,7 +23,7 @@ import "protobuf/covesa/vss/location/current_location/v1/gnss_receiver.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "CurrentLocationProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.location.current_location.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.location.current_location.v1";
 
 // The current latitude and longitude of the vehicle.
 //

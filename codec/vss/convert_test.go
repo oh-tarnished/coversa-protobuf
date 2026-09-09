@@ -8,7 +8,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/the-protobuf-project/vdm/codec/vss"
+	"github.com/oh-tarnished/coversa-protobuf/codec/vss"
 )
 
 // load reads the committed manifest, which is what a third party would.

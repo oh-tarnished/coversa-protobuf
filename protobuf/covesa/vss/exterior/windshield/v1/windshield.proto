@@ -24,7 +24,7 @@ import "protobuf/covesa/vss/exterior/windshield/v1/wiping.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "WindshieldProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.exterior.windshield.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.exterior.windshield.v1";
 
 // Windshield signals.
 //

@@ -22,7 +22,7 @@ import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "AmbientLightProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.interior.ambient_light.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.interior.ambient_light.v1";
 
 // Decorative coloured light inside the cabin, usually mounted on the door,
 // ceiling, etc.

@@ -19,7 +19,7 @@ import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "CruiseControlProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.assistance.adas.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.assistance.adas.v1";
 
 // Signals from Cruise Control system.
 //

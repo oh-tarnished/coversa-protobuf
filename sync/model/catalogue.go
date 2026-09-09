@@ -25,7 +25,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/catalog"
+	"github.com/oh-tarnished/coversa-protobuf/sync/catalog"
 )
 
 // CheckCatalogue reports every resolution table entry naming no node.

@@ -148,6 +148,12 @@ verify-schema:
     buffers verify --config buffers.yaml
 
 # Generate one language: `just lang go`, `just lang python`.
+#
+# The output directory is removed first. `buf generate` writes over what it
+# produces but never deletes what it no longer produces, so a file for a
+# message the schema dropped survives every later run -- and then fails the
+# build with an import nothing provides, long after the change that caused it.
+# CI checks out fresh and never sees this; a working copy does.
 [doc("Generate one language from buf/<name>.yaml.")]
 lang name:
     #!/usr/bin/env sh
@@ -156,6 +162,7 @@ lang name:
         *" {{name}} "*) extra=--include-imports ;;
         *) extra= ;;
     esac
+    rm -rf gen/{{name}}
     buf generate --template buf/{{name}}.yaml $extra
 
 # Generate every language under buf/.

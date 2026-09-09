@@ -19,7 +19,7 @@ import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "DateProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.platform.vehicle_identification.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.platform.vehicle_identification.v1";
 
 // Date is a calendar date: a year, a month and a day.
 //

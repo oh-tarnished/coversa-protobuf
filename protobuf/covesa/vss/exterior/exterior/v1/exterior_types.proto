@@ -15,7 +15,7 @@ package protobuf.covesa.vss.exterior.exterior.v1;
 
 option java_multiple_files = true;
 option java_outer_classname = "ExteriorTypesProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.exterior.exterior.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.exterior.exterior.v1";
 
 // Assessed condition of the road surface beneath or ahead of the vehicle.
 //

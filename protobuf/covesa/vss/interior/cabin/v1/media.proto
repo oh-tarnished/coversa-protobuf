@@ -20,7 +20,7 @@ import "protobuf/covesa/vss/interior/cabin/v1/played.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "MediaProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.interior.cabin.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.interior.cabin.v1";
 
 // All Media actions
 //

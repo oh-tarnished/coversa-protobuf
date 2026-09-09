@@ -9,9 +9,9 @@ package emit
 import (
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/describe"
-	"github.com/the-protobuf-project/vdm/sync/model"
-	"github.com/the-protobuf-project/vdm/sync/vspec"
+	"github.com/oh-tarnished/coversa-protobuf/sync/describe"
+	"github.com/oh-tarnished/coversa-protobuf/sync/model"
+	"github.com/oh-tarnished/coversa-protobuf/sync/vspec"
 )
 
 // docWidth is the column comment text wraps at, leaving room for the `// `

@@ -15,7 +15,7 @@ package protobuf.covesa.vss.vehicle.v1;
 
 option java_multiple_files = true;
 option java_outer_classname = "VehicleTypesProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.vehicle.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.vehicle.v1";
 
 // State of the supply voltage of the control units (usually 12V).
 //

@@ -9,8 +9,8 @@ package model
 import (
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/catalog"
-	"github.com/the-protobuf-project/vdm/sync/naming"
+	"github.com/oh-tarnished/coversa-protobuf/sync/catalog"
+	"github.com/oh-tarnished/coversa-protobuf/sync/naming"
 )
 
 // MessageName renders a source object type as a protobuf message name.

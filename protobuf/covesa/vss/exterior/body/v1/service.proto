@@ -20,7 +20,7 @@ import "protobuf/covesa/vss/exterior/body/v1/messages.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ServiceProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.exterior.body.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.exterior.body.v1";
 
 // Bodies manages the Body branch of a vehicle.
 //

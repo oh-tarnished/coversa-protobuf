@@ -18,7 +18,7 @@ import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "IdentifierProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.interior.occupant.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.interior.occupant.v1";
 
 // Identifier attributes based on OAuth 2.0.
 //

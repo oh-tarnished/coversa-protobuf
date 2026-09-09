@@ -23,7 +23,7 @@ import "protobuf/covesa/vss/assistance/safety/v1/safety_types.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "SafetyProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.assistance.safety.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.assistance.safety.v1";
 
 // Safety-related derived signals for crash detection and emergency response.
 //

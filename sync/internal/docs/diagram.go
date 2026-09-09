@@ -19,7 +19,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/oh-tarnished/coversa-protobuf/sync/model"
 )
 
 // erMax is how many children of one parent the relationship diagram draws

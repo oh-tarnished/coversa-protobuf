@@ -21,7 +21,7 @@ import "protobuf/covesa/vss/motion/motion_management/v1/motion_management.proto"
 
 option java_multiple_files = true;
 option java_outer_classname = "MessagesProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.motion.motion_management.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.motion.motion_management.v1";
 
 // Request message for MotionManagementService.GetMotionManagement, AIP-131
 // <https://aip.dev/131>.

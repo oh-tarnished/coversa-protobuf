@@ -9,7 +9,7 @@ version: v2
 # holds without a redundant directory inside it.
 modules:
   - path: .
-    name: buf.build/the-protobuf-project/vdm
+    name: buf.build/oh-tarnished/coversa-protobuf
     # build/ holds the exported dependency trees the buffers CLI compiles
     # against, written by scripts/export-protos.sh. They are copies of
     # googleapis, protovalidate and the well-known types, so compiling them

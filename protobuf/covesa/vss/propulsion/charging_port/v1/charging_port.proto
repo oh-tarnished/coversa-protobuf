@@ -22,7 +22,7 @@ import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ChargingPortProto";
-option java_package = "io.github.theprotobufproject.protobuf.covesa.vss.propulsion.charging_port.v1";
+option java_package = "io.github.ohtarnished.protobuf.covesa.vss.propulsion.charging_port.v1";
 
 // Properties related to a particular charging port available in the vehicle.
 //

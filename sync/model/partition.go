@@ -10,8 +10,8 @@ package model
 // package; deeper down, only a branch whose members have identity.
 
 import (
-	"github.com/the-protobuf-project/vdm/sync/naming"
-	"github.com/the-protobuf-project/vdm/sync/vspec"
+	"github.com/oh-tarnished/coversa-protobuf/sync/naming"
+	"github.com/oh-tarnished/coversa-protobuf/sync/vspec"
 )
 
 // spawn promotes a branch's child resources into packages of their own, then
