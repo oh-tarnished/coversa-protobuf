@@ -17,4 +17,4 @@ protobuf>=7.36.1,<8
 # Python does `from buf.validate import validate_pb2`, a path no PyPI package
 # exposes -- and CI removes gen/python/google before importing, so the
 # installed distribution is what resolves.
-googleapis-common-protos>=1.66
+googleapis-common-protos>=1.75.3
