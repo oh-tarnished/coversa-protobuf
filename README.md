@@ -1,17 +1,18 @@
 <h1 align="center">vdm-protobuf</h1>
 
 <p align="center">
-  <strong>COVESA's Vehicle Data Model, as AIP-shaped protobuf — and as
-  FlatBuffers and Cap'n Proto.</strong><br>
-  Generated from the GraphQL specification, linted by two linters with no rule
-  disabled, and compiled by three toolchains.
+  <strong>COVESA's Vehicle Signal Specification and Vehicle Data Model, as
+  AIP-shaped protobuf — and as FlatBuffers and Cap'n Proto.</strong><br>
+  Generated from the specifications themselves, linted by two linters with no
+  rule disabled, and compiled by three toolchains.
 </p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" alt="License: Apache 2.0"></a>
   <img src="https://img.shields.io/badge/AIP-clean-34A853" alt="api-linter clean">
   <img src="https://img.shields.io/badge/buf-lint%20clean-161EDE" alt="buf lint clean">
-  <img src="https://img.shields.io/badge/spec-2026--07--24-0B6B5B" alt="spec revision 2026-07-24">
+  <img src="https://img.shields.io/badge/VSS-2026--09--02-0B6B5B" alt="VSS revision 2026-09-02">
+  <img src="https://img.shields.io/badge/VDM-2026--07--24-0B6B5B" alt="VDM revision 2026-07-24">
 </p>
 
 ## Contents
@@ -31,37 +32,45 @@
 
 ## What this is
 
-[COVESA's Vehicle Data Model](https://github.com/COVESA/vdm) is authored in
-GraphQL SDL, following the [S2DM](https://covesa.github.io/s2dm/) approach.
-That is a good way to write a domain model and not a way to move bytes: there
-is no wire format, no service surface, and no path to the languages a vehicle
-platform is actually built in.
+COVESA publishes the vehicle in two pieces. The
+[Vehicle Signal Specification](https://github.com/COVESA/vehicle_signal_specification)
+describes the tree — every signal, its unit, its bounds, whether a vehicle
+reports it or accepts it — in its own `.vspec` format. The
+[Vehicle Data Model](https://github.com/COVESA/vdm) describes what surrounds
+it — people, charging stations, sessions — in GraphQL SDL, following the
+[S2DM](https://covesa.github.io/s2dm/) approach.
 
-This repository compiles it into one.
+Both are good ways to write a domain model and neither is a way to move bytes:
+there is no wire format, no service surface, and no path to the languages a
+vehicle platform is actually built in.
+
+This repository compiles them into one.
 
 | | |
 |---|---|
-| Protos | 277 |
-| Messages / enums | 407 / 98 |
-| Resources / services / RPCs | 46 / 46 / 204 |
-| FlatBuffers / Cap'n Proto | 228 / 274 |
+| Protos | 270 |
+| Messages / enums | 399 / 78 |
+| Resources / services / RPCs | 50 / 51 / 214 |
+| FlatBuffers / Cap'n Proto | 216 / 267 |
 | Languages | 12 |
-| Annotated signals | 713 |
+| Annotated signals | 690 |
 
 ```mermaid
 flowchart LR
-  SDL["COVESA VDM<br/>spec 2026-07-24"]
+  VSS["COVESA VSS<br/>.vspec · 2026-09-02"]
+  VDM["COVESA VDM<br/>GraphQL SDL · 2026-07-24"]
   GEN["sync<br/>the generator"]
-  PB["protobuf/<br/>277 .proto"]
+  PB["protobuf/<br/>270 .proto"]
   DESC["descriptor set"]
-  FB[".fbs<br/>228 schemas"]
-  CP[".capnp<br/>274 schemas"]
+  FB[".fbs<br/>216 schemas"]
+  CP[".capnp<br/>267 schemas"]
   LANG["12 languages<br/>Go, Java, TS, Python, …"]
   FLATC["flatc"]
   CAPNP["capnp"]
   LOCK[("buffers.lock<br/>ordinal ledger")]
 
-  SDL -->|"pinned in sync/spec.yaml"| GEN
+  VSS -->|"pinned in sync/spec.yaml"| GEN
+  VDM -->|"pinned in sync/spec.yaml"| GEN
   GEN -->|"emit, never edited by hand"| PB
   PB -->|"buf generate"| LANG
   PB -->|"buf build"| DESC
@@ -132,7 +141,7 @@ flowchart TD
   VDM --> VDMX["person, chargingStation,<br/>chargingPoint, chargingSession"]
 ```
 
-> **47 packages, one per resource plus the vocabulary.** The path is the
+> **51 packages, one per resource plus the vocabulary.** The path is the
 > package name: `protobuf/covesa/vss/interior/seat/v1` is
 > `protobuf.covesa.vss.interior.seat.v1`, so buf's directory-match rule holds
 > with no lookup table.
@@ -200,13 +209,13 @@ flowchart TD
   class C1,C2,C3,C4,CN,W1,CP multi;
 ```
 
-> **18 singletons (amber), 28 collections (indigo).** A branch a vehicle holds
+> **23 singletons (amber), 24 collections (indigo).** A branch a vehicle holds
 > one of is a singleton — its name ends in a literal and nothing can create a
-> second. A branch whose members carry an `@instanceTag` is a collection: that
-> tag is the specification stating the members have identity.
+> second. A branch VSS gives `instances` to is a collection: that declaration
+> is the specification stating the members have identity.
 
-A seat is reachable on its own, which it was not when the instance-tagged
-branches were still embedded messages:
+A seat is reachable on its own, which it was not when the instanced branches
+were still embedded messages:
 
 ```http
 PATCH /v1/vehicles/{vehicle}/seats/{seat}
@@ -321,12 +330,13 @@ flowchart LR
 
 ## Where units live
 
-A `double` does not say kilometres per hour. The source model states it as a
-GraphQL field argument, and protobuf has no such thing.
+A `double` does not say kilometres per hour. VSS states the unit beside the
+signal and ships a catalogue defining each one; protobuf has nowhere to put
+either.
 
 ```mermaid
 flowchart TD
-  SRC["speed(unit: VelocityUnitEnum = KILOMETER_PER_HOUR): Float"]
+  SRC["Vehicle.Speed<br/>datatype: float · unit: km/h"]
 
   R1["a unit field beside the value"]
   R2["a value + unit wrapper message"]
@@ -449,60 +459,62 @@ generator's named tables, not in an emitted file.
 flowchart LR
   subgraph READ["sync — read"]
     direction TB
-    SDLF["sdl.go"]
-    SCAN["scan.go"]
-    PARSE["parse.go"]
+    VSPEC["vspec/ — the .vspec tree"]
+    SDLP["sdl/ + vdm/ — the GraphQL half"]
+    UNITS["vspec/units.go"]
   end
 
   subgraph SHAPE["sync — decide shape"]
     direction TB
-    MODEL["model.go"]
-    PART["partition.go"]
-    DOM["domains.go"]
+    PART["model/partition.go"]
+    DIS["model/disambiguate.go"]
+    DOM["model/domains.go"]
   end
 
   subgraph MAP["sync — map each field"]
     direction TB
-    PLAN["plan.go"]
-    REN["renames.go"]
-    TYP["types.go"]
+    PLAN["plan/plan.go"]
+    CAT["catalog/ — the renames"]
+    TYP["plan/types.go"]
   end
 
   subgraph WRITE["sync — write"]
     direction TB
-    REND["render.go"]
-    FIELD["field.go"]
-    SVC["service.go + rpc.go"]
-    VOC["vocab.go"]
+    MSG["emit/message.go"]
+    FIELD["emit/field.go"]
+    SVC["emit/service.go"]
+    VOC["emit/vocab.go"]
   end
 
-  READ -->|"302 typed definitions"| SHAPE
-  SHAPE -->|"46 packages, parent links"| MAP
+  READ -->|"831 nodes, 75 units"| SHAPE
+  SHAPE -->|"51 packages, parent links"| MAP
   MAP -->|"name, type, annotations"| WRITE
-  WRITE -->|"277 files, each banner<br/>naming the spec revision"| OUT["protobuf/"]
+  WRITE -->|"270 files, each banner<br/>naming both revisions"| OUT["protobuf/"]
 
   DOM -.->|"the only asserted table"| SHAPE
-  REN -.->|"AIP collisions"| MAP
+  CAT -.->|"AIP collisions"| MAP
 ```
 
 > **It refuses rather than guesses.** An unknown SDL construct is an error, not
 > a skipped field; a source field colliding with a resource's own AIP fields
-> names itself and stops the build. A parser that quietly accepts an unfamiliar
-> shape produces a schema wrong in a way no linter catches.
+> names itself and stops the build; a rename naming a signal the specification
+> dropped stops it too. A parser that quietly accepts an unfamiliar shape
+> produces a schema wrong in a way no linter catches.
 
 | Change | Where it goes |
 |---|---|
-| a field name a linter rejects | `FieldRenames` in `sync/internal/catalog` |
-| a message name a linter rejects | `TypeRenames`, same package |
-| a plural English gets wrong | `irregularPlurals` in `sync/internal/naming` |
-| which functional area a branch belongs to | `domains` in `sync/internal/model` |
-| an enum better modelled as a scalar | `ScalarEnums` in `sync/internal/catalog` |
-| a value type shared across packages | `sharedValueTypes` in `sync/internal/model` |
-| which specification revision to read | `sync/spec.yaml`, then `just sync` |
+| a field name a linter rejects | `FieldRenames` in `sync/catalog` |
+| a field name a linter flags but that is right as it stands | `AcceptedTraps`, same file |
+| a message name a linter rejects | `TypeRenames`, same file |
+| an enum better modelled as a scalar | `ScalarEnums` in `sync/catalog` |
+| a plural English gets wrong | `irregularPlurals` in `sync/naming` |
+| which functional area a branch belongs to | `domains` in `sync/model` |
+| a value type shared across packages | `sharedValueTypes` in `sync/model` |
+| which specification revisions to read | `sync/spec.yaml`, then `just sync` |
 
 ## The gates
 
-Five workflows, one per concern, so a failure names what broke rather than
+Six workflows, one per concern, so a failure names what broke rather than
 burying it in a matrix. No lint rule is disabled anywhere in the repository,
 and the two linters are given non-overlapping jobs because where they overlap
 they contradict.
@@ -521,12 +533,14 @@ flowchart TD
   G7["buffers.lock diff<br/>a field slot moved"]
   G8["build Go, Java, TS, Python<br/>code a consumer can compile"]
   G9["buf breaking<br/>against the base commit"]
+  G10["scripts/check-links.sh<br/>a rotted reference"]
 
   PR --> G0 --> G2 --> G3 --> G4
   PR --> G1
   PR --> G5 --> G6 --> G7
   PR --> G8
   PR --> G9
+  PR --> G10
 
   G6 --> W1["a dangling include;<br/>a name the target reserves"]
   G8 --> W2["a schema that lints<br/>but nobody can build"]
@@ -547,6 +561,7 @@ flowchart TD
 | `schema` | `.fbs` and `.capnp` emitted, compiled, and slot-stable |
 | `generate` | four languages generated and built |
 | `breaking` | wire compatibility against the base commit |
+| `links` | every URL in the reference index still resolves |
 
 ## Getting started
 
@@ -555,10 +570,11 @@ just              # list every recipe
 just sync         # regenerate protobuf/ from the pinned spec revision
 just docs         # regenerate the Markdown reference beside the protos
 just test         # build, vet and test the generator
-just spec         # check the pin against the vdm checkout
+just spec         # check both pins against the checkouts in modules/
 just lint         # buf format, buf lint, buf build, api-linter
 just schema       # emit .fbs and .capnp, then compile both
 just lang go      # generate one language
+just links        # check the reference index resolves
 just ci           # everything CI runs
 ```
 
@@ -573,7 +589,7 @@ additionally need `flatc`, `capnp` and
 - [`docs/conventions.md`](docs/conventions.md) — what goes inside a file, and the full rename catalogue
 - [`docs/decisions.md`](docs/decisions.md) — what was deliberately not done
 - [`docs/generator.md`](docs/generator.md) — how `sync/` is laid out, and why
-- [`docs/spec.md`](docs/spec.md) — which specification revision, and how to bump it
+- [`docs/spec.md`](docs/spec.md) — which specification revisions, and how to bump them
 - [`docs/references.md`](docs/references.md) — a link-checked index
 
 ## License

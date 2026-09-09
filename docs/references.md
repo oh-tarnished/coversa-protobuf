@@ -1,8 +1,12 @@
 # References
 
-A checked link index. CI verifies every URL here resolves, because
-`CLAUDE.md` points at this file instead of working from memory -- and AIP rule
-semantics have been guessed wrong here more than once.
+A checked link index. `scripts/check-links.sh` verifies every URL here
+resolves — on change, and weekly, because a link rots without anyone touching
+the repository. Run it with `just links`.
+
+The check exists because `CLAUDE.md` points at this file instead of working
+from memory, and AIP rule semantics have been guessed wrong here more than
+once. A dead entry sends the reader back to guessing.
 
 ## The source model
 
@@ -13,6 +17,11 @@ semantics have been guessed wrong here more than once.
 - VSS unit catalogue — https://github.com/COVESA/vehicle_signal_specification/blob/master/spec/units.yaml
 - VSS quantity catalogue — https://github.com/COVESA/vehicle_signal_specification/blob/master/spec/quantities.yaml
 - GraphQL specification (the SDL the model is written in) — https://spec.graphql.org
+
+Read, but not generated from — see [`decisions.md`](decisions.md):
+
+- Vehicle Information Service Specification (VISS), an access protocol rather than a data model — https://github.com/COVESA/vehicle-information-service-specification
+- Commercial Vehicle Information Specifications (CVIS), `.vspec` trees for bus, truck and trailer — https://github.com/COVESA/commercial-vehicle-information-specifications
 
 ## The projects this is built on
 
@@ -50,6 +59,10 @@ The rules cited in the schema, and the linter page for each.
 | https://aip.dev/216 | States | https://linter.aip.dev/216/ |
 
 - The linter itself — https://github.com/googleapis/api-linter
+
+The VS Code Google API Linter extension reads `workspace.protobuf.yaml` rather
+than the CLI's arguments, so it may report differently from `just aip`. The
+workflow is the authority.
 
 ## Tooling
 

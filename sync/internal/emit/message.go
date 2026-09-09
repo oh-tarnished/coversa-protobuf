@@ -10,17 +10,13 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/catalog"
 	"github.com/the-protobuf-project/vdm/sync/model"
-	"github.com/the-protobuf-project/vdm/sync/sdl"
+	"github.com/the-protobuf-project/vdm/sync/vspec"
 )
 
 // firstSignalFieldNumber leaves 8-15 free below it for AIP identity fields a
 // future revision may add, so adding one never renumbers a signal.
 const firstSignalFieldNumber = 16
-
-// isScalarEnum reports whether an enum is replaced by a documented scalar.
-func isScalarEnum(name string) bool { return catalog.IsScalarEnum(name) }
 
 // renderFile produces the complete text of one file.
 func (e *Emitter) renderFile(pkg *model.Package, f *File, fileOf map[string]string) (string, error) {
@@ -84,8 +80,8 @@ func (e *Emitter) renderMessage(pkg *model.Package, f *File, sb *strings.Builder
 	if f.Root {
 		num = firstSignalFieldNumber
 	}
-	for _, field := range t.Fields {
-		written, err := e.renderOneField(pkg, f, t, field, num, sb, fileOf)
+	for _, child := range t.Children {
+		written, err := e.renderOneField(pkg, f, t, child, num, sb, fileOf)
 		if err != nil {
 			return err
 		}
@@ -108,22 +104,11 @@ var resourceImports = []string{
 }
 
 // renderBranchOption writes the VSS branch annotation, when the type has one.
-func (e *Emitter) renderBranchOption(f *File, t *sdl.Def, sb *strings.Builder) {
-	v, ok := t.Directive("vspec")
-	if !ok {
-		return
-	}
-	element, _ := v.Arg("element")
-	if element == "" {
-		return
-	}
-
+func (e *Emitter) renderBranchOption(f *File, t *vspec.Node, sb *strings.Builder) {
 	f.Imports[model.VocabRoot+"/annotations.proto"] = true
 	sb.WriteString("  option (" + model.VocabPackage + ".branch) = {\n")
-	sb.WriteString("    element: ELEMENT_" + element + "\n")
-	if fqn, ok := v.Arg("fqn"); ok && fqn != "" {
-		sb.WriteString("    fqn: \"" + fqn + "\"\n")
-	}
+	sb.WriteString("    element: ELEMENT_" + strings.ToUpper(string(t.Kind)) + "\n")
+	sb.WriteString("    fqn: \"" + t.FQN + "\"\n")
 	sb.WriteString("  };\n\n")
 }
 
@@ -133,22 +118,22 @@ func (e *Emitter) renderBranchOption(f *File, t *sdl.Def, sb *strings.Builder) {
 // AIP-215 forbids it. There are two cases and they resolve differently -- a
 // child resource is dropped, because its name is derivable from this one; a
 // genuine association becomes the resource name.
-func (e *Emitter) renderOneField(pkg *model.Package, f *File, owner *sdl.Def, field sdl.Field, num int, sb *strings.Builder, fileOf map[string]string) (int, error) {
-	if _, isObject := e.M.Types[field.Type.Name]; isObject && !pkg.Holds(field.Type.Name) {
-		other := e.M.PackageOf(field.Type.Name)
-		if other == nil || other.Parent == pkg {
-			return 0, nil
-		}
-		f.Imports["google/api/resource.proto"] = true
-		e.renderReference(owner, field, other, num, sb)
-		return 1, nil
+func (e *Emitter) renderOneField(pkg *model.Package, f *File, owner, child *vspec.Node, num int, sb *strings.Builder, fileOf map[string]string) (int, error) {
+	// A branch promoted to a resource of its own is reachable by a name
+	// derived from this one, so restating it as a field would be redundant
+	// and could disagree with the real name.
+	if child.Kind == vspec.KindBranch && child.Ref == "" && !pkg.Holds(child.FQN) {
+		return 0, nil
 	}
 
-	p, err := e.Planner.Field(owner, field, f.Root)
+	p, err := e.Planner.Field(owner, child, f.Root)
 	if err != nil {
 		return 0, err
 	}
-	e.recordImports(pkg, f, p, field, fileOf)
-	renderField(p, num, sb)
+	if p.Ref != "" {
+		f.Imports["google/api/resource.proto"] = true
+	}
+	e.recordImports(pkg, f, p, child, fileOf)
+	e.renderField(p, num, sb)
 	return 1, nil
 }

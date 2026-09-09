@@ -20,6 +20,9 @@ var domains = map[string]string{
 	"AngularVelocity":  "motion",
 	"MotionManagement": "motion",
 	"Chassis":          "motion",
+	// Spatial orientation, ISO 8855 axes. Motion rather than location: it is
+	// which way the vehicle is pointing, not where it is.
+	"Orientation": "motion",
 
 	// What moves it, and what stores the energy.
 	"Powertrain":        "propulsion",
@@ -35,8 +38,10 @@ var domains = map[string]string{
 	"Exterior": "exterior",
 	"Trailer":  "exterior",
 
-	// Driver assistance and automated control.
-	"ADAS": "assistance",
+	// Driver assistance, automated control, and the derived signals that
+	// report a crash.
+	"ADAS":   "assistance",
+	"Safety": "assistance",
 
 	// Where the vehicle is.
 	"CurrentLocation": "location",
@@ -92,3 +97,10 @@ var skipTypes = map[string]bool{
 // vdmRoots are the resources VDM declares outside the vehicle tree, in
 // declaration order. Each becomes a package of its own.
 var vdmRoots = []string{"Person", "ChargingStation", "ChargingSession"}
+
+// DomainNamed reports whether the table names a branch, so a survey can list
+// the ones falling through to the default.
+func DomainNamed(branch string) bool {
+	_, ok := domains[branch]
+	return ok
+}

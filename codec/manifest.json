@@ -1,28 +1,37 @@
 {
-  "version": "2026-07-24",
-  "commit": "36bc93936eab097647b52eea377a3374bcf926f5",
+  "spec": {
+    "vss": {
+      "version": "2026-09-02",
+      "commit": "cd4bc50ba4aae74fad2172ee34f71acbeab79837"
+    },
+    "vdm": {
+      "version": "2026-07-24",
+      "commit": "36bc93936eab097647b52eea377a3374bcf926f5"
+    }
+  },
   "resources": {
-    "protobuf.covesa.vdm.charging_point.v1.Address": {
+    "protobuf.covesa.vdm.charging_points.v1.ChargingPoints": {
+      "fqn": "ChargingStation.ChargingPoints",
+      "pattern": "chargingStations/{chargingStation}/chargingPointses/{charging_points}",
       "fields": {
-        "city": {},
-        "region_code": {
-          "source": "country"
+        "instance_tag": {
+          "fqn": "ChargingStation.ChargingPoints.InstanceTag",
+          "element": "branch",
+          "message": "protobuf.covesa.vdm.charging_points.v1.InstanceTag"
         },
-        "state": {},
-        "street": {},
-        "zip_code": {}
+        "location": {
+          "fqn": "ChargingStation.ChargingPoints.Location",
+          "element": "branch",
+          "message": "protobuf.covesa.vdm.charging_points.v1.Location"
+        }
       }
     },
-    "protobuf.covesa.vdm.charging_point.v1.ChargingPoint": {
-      "pattern": "chargingStations/{charging_station}/chargingPoints/{charging_point}",
-      "fields": {
-        "instance_tag": {},
-        "location": {}
-      }
-    },
-    "protobuf.covesa.vdm.charging_point.v1.ChargingPointInstanceTag": {
+    "protobuf.covesa.vdm.charging_points.v1.InstanceTag": {
+      "fqn": "ChargingStation.ChargingPoints.InstanceTag",
       "fields": {
         "area": {
+          "fqn": "ChargingStation.ChargingPoints.InstanceTag.Area",
+          "element": "actuator",
           "enum": "AreaInStation",
           "values": {
             "AREA_IN_STATION_OUTDOOR": "OUTDOOR",
@@ -30,6 +39,8 @@
           }
         },
         "label": {
+          "fqn": "ChargingStation.ChargingPoints.InstanceTag.Label",
+          "element": "actuator",
           "enum": "ChargingPointLabel",
           "values": {
             "CHARGING_POINT_LABEL_POINT_A": "POINT_A",
@@ -39,45 +50,145 @@
         }
       }
     },
-    "protobuf.covesa.vdm.charging_session.v1.ChargingSession": {
-      "pattern": "chargingSessions/{charging_session}",
+    "protobuf.covesa.vdm.charging_points.v1.Location": {
+      "fqn": "ChargingStation.ChargingPoints.Location",
       "fields": {
-        "end_time": {},
-        "start_time": {}
+        "administrative_area": {
+          "fqn": "ChargingStation.ChargingPoints.Location.State",
+          "source": "state",
+          "element": "actuator"
+        },
+        "city": {
+          "fqn": "ChargingStation.ChargingPoints.Location.City",
+          "element": "actuator"
+        },
+        "region_code": {
+          "fqn": "ChargingStation.ChargingPoints.Location.Country",
+          "source": "country",
+          "element": "actuator"
+        },
+        "street": {
+          "fqn": "ChargingStation.ChargingPoints.Location.Street",
+          "element": "actuator"
+        },
+        "zip_code": {
+          "fqn": "ChargingStation.ChargingPoints.Location.ZipCode",
+          "element": "actuator"
+        }
       }
     },
-    "protobuf.covesa.vdm.charging_station.v1.Address": {
+    "protobuf.covesa.vdm.charging_session.v1.ChargingSession": {
+      "fqn": "ChargingSession",
+      "pattern": "chargingSessions/{chargingSession}",
       "fields": {
-        "city": {},
-        "region_code": {
-          "source": "country"
+        "charging_point": {
+          "fqn": "ChargingSession.ChargingPoint",
+          "element": "actuator"
         },
-        "state": {},
-        "street": {},
-        "zip_code": {}
+        "customer": {
+          "fqn": "ChargingSession.Customer",
+          "element": "actuator"
+        },
+        "end_time": {
+          "fqn": "ChargingSession.EndTime",
+          "element": "actuator"
+        },
+        "start_time": {
+          "fqn": "ChargingSession.StartTime",
+          "element": "actuator"
+        },
+        "vehicle": {
+          "fqn": "ChargingSession.Vehicle",
+          "element": "actuator"
+        }
       }
     },
     "protobuf.covesa.vdm.charging_station.v1.ChargingStation": {
-      "pattern": "chargingStations/{charging_station}",
+      "fqn": "ChargingStation",
+      "pattern": "chargingStations/{chargingStation}",
+      "fields": {}
+    },
+    "protobuf.covesa.vdm.home_address.v1.HomeAddress": {
+      "fqn": "Person.HomeAddress",
+      "pattern": "people/{person}/homeAddress",
       "fields": {
-        "location": {}
+        "administrative_area": {
+          "fqn": "Person.HomeAddress.State",
+          "source": "state",
+          "element": "actuator"
+        },
+        "city": {
+          "fqn": "Person.HomeAddress.City",
+          "element": "actuator"
+        },
+        "region_code": {
+          "fqn": "Person.HomeAddress.Country",
+          "source": "country",
+          "element": "actuator"
+        },
+        "street": {
+          "fqn": "Person.HomeAddress.Street",
+          "element": "actuator"
+        },
+        "zip_code": {
+          "fqn": "Person.HomeAddress.ZipCode",
+          "element": "actuator"
+        }
       }
     },
-    "protobuf.covesa.vdm.person.v1.Address": {
+    "protobuf.covesa.vdm.location.v1.Location": {
+      "fqn": "ChargingStation.Location",
+      "pattern": "chargingStations/{chargingStation}/location",
       "fields": {
-        "city": {},
-        "region_code": {
-          "source": "country"
+        "administrative_area": {
+          "fqn": "ChargingStation.Location.State",
+          "source": "state",
+          "element": "actuator"
         },
-        "state": {},
-        "street": {},
-        "zip_code": {}
+        "city": {
+          "fqn": "ChargingStation.Location.City",
+          "element": "actuator"
+        },
+        "region_code": {
+          "fqn": "ChargingStation.Location.Country",
+          "source": "country",
+          "element": "actuator"
+        },
+        "street": {
+          "fqn": "ChargingStation.Location.Street",
+          "element": "actuator"
+        },
+        "zip_code": {
+          "fqn": "ChargingStation.Location.ZipCode",
+          "element": "actuator"
+        }
+      }
+    },
+    "protobuf.covesa.vdm.name.v1.Name": {
+      "fqn": "Person.Name",
+      "pattern": "people/{person}/name",
+      "fields": {
+        "first": {
+          "fqn": "Person.Name.First",
+          "element": "actuator"
+        },
+        "last": {
+          "fqn": "Person.Name.Last",
+          "element": "actuator"
+        },
+        "middle": {
+          "fqn": "Person.Name.Middle",
+          "element": "actuator"
+        }
       }
     },
     "protobuf.covesa.vdm.person.v1.Person": {
+      "fqn": "Person",
       "pattern": "people/{person}",
       "fields": {
         "age_range": {
+          "fqn": "Person.AgeRange",
+          "element": "actuator",
           "enum": "AgeRange",
           "values": {
             "AGE_RANGE_ADULT": "ADULT",
@@ -86,20 +197,11 @@
             "AGE_RANGE_TEEN": "TEEN"
           }
         },
-        "home_address": {},
-        "name_components": {
-          "source": "name"
-        },
         "vdm_uid": {
-          "source": "id"
+          "fqn": "Person.Id",
+          "source": "id",
+          "element": "actuator"
         }
-      }
-    },
-    "protobuf.covesa.vdm.person.v1.PersonName": {
-      "fields": {
-        "first": {},
-        "last": {},
-        "middle": {}
       }
     },
     "protobuf.covesa.vss.assistance.adas.v1.Abs": {
@@ -125,7 +227,8 @@
       "fields": {
         "abs": {
           "fqn": "Vehicle.ADAS.ABS",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.assistance.adas.v1.Abs"
         },
         "active_autonomy_level": {
           "fqn": "Vehicle.ADAS.ActiveAutonomyLevel",
@@ -146,23 +249,28 @@
         },
         "cruise_control": {
           "fqn": "Vehicle.ADAS.CruiseControl",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.assistance.adas.v1.CruiseControl"
         },
         "dms": {
           "fqn": "Vehicle.ADAS.DMS",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.assistance.adas.v1.Dms"
         },
         "eba": {
           "fqn": "Vehicle.ADAS.EBA",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.assistance.adas.v1.Eba"
         },
         "ebd": {
           "fqn": "Vehicle.ADAS.EBD",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.assistance.adas.v1.Ebd"
         },
         "esc": {
           "fqn": "Vehicle.ADAS.ESC",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.assistance.adas.v1.Esc"
         },
         "is_auto_power_optimize": {
           "fqn": "Vehicle.ADAS.IsAutoPowerOptimize",
@@ -170,7 +278,8 @@
         },
         "lane_departure_detection": {
           "fqn": "Vehicle.ADAS.LaneDepartureDetection",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.assistance.adas.v1.LaneDepartureDetection"
         },
         "power_optimize_level": {
           "fqn": "Vehicle.ADAS.PowerOptimizeLevel",
@@ -191,7 +300,8 @@
         },
         "tcs": {
           "fqn": "Vehicle.ADAS.TCS",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.assistance.adas.v1.Tcs"
         }
       }
     },
@@ -304,7 +414,8 @@
         },
         "road_friction": {
           "fqn": "Vehicle.ADAS.ESC.RoadFriction",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.assistance.adas.v1.RoadFriction"
         }
       }
     },
@@ -368,16 +479,23 @@
     "protobuf.covesa.vss.assistance.obstacle_detection.v1.ObstacleDetection": {
       "fqn": "Vehicle.ADAS.ObstacleDetection",
       "pattern": "vehicles/{vehicle}/obstacleDetections/{obstacle_detection}",
+      "instances": [
+        [
+          "Front",
+          "Rear"
+        ],
+        [
+          "Left",
+          "Center",
+          "Right"
+        ]
+      ],
       "fields": {
         "distance": {
           "fqn": "Vehicle.ADAS.ObstacleDetection.Distance",
           "element": "sensor",
           "unit": "m",
           "quantity": "length"
-        },
-        "instance_tag": {
-          "fqn": "Vehicle.ADAS.ObstacleDetection.InstanceTag",
-          "element": "instance_axis"
         },
         "is_enabled": {
           "fqn": "Vehicle.ADAS.ObstacleDetection.IsEnabled",
@@ -404,31 +522,54 @@
           "values": {
             "WARNING_TYPE_BLIND_SPOT": "BLIND_SPOT",
             "WARNING_TYPE_CROSS_TRAFFIC": "CROSS_TRAFFIC",
-            "WARNING_TYPE_UNSPECIFIED": "UNDEFINED"
+            "WARNING_TYPE_UNDEFINED": "UNDEFINED"
           }
         }
       }
     },
-    "protobuf.covesa.vss.assistance.obstacle_detection.v1.ObstacleDetectionInstanceTag": {
-      "fqn": "Vehicle.ADAS.ObstacleDetection",
+    "protobuf.covesa.vss.assistance.safety.v1.Safety": {
+      "fqn": "Vehicle.Safety",
+      "pattern": "vehicles/{vehicle}/safety",
       "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.ADAS.ObstacleDetection.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
+        "is_fire": {
+          "fqn": "Vehicle.Safety.IsFire",
+          "element": "sensor"
+        },
+        "is_submersed": {
+          "fqn": "Vehicle.Safety.IsSubmersed",
+          "element": "sensor"
+        },
+        "road_icing_state": {
+          "fqn": "Vehicle.Safety.RoadIcingState",
+          "element": "sensor",
+          "enum": "RoadIcingState",
           "values": {
-            "DIMENSION1_FRONT": "Front",
-            "DIMENSION1_REAR": "Rear"
+            "ROAD_ICING_STATE_DETECTED": "DETECTED",
+            "ROAD_ICING_STATE_NONE": "NONE",
+            "ROAD_ICING_STATE_RISK": "RISK",
+            "ROAD_ICING_STATE_UNKNOWN": "UNKNOWN"
           }
         },
-        "dimension2": {
-          "fqn": "Vehicle.ADAS.ObstacleDetection.Dimension2",
-          "element": "instance_axis",
-          "enum": "Dimension2",
+        "rollover": {
+          "fqn": "Vehicle.Safety.Rollover",
+          "element": "sensor",
+          "enum": "Rollover",
           "values": {
-            "DIMENSION2_CENTER": "Center",
-            "DIMENSION2_LEFT": "Left",
-            "DIMENSION2_RIGHT": "Right"
+            "ROLLOVER_DETECTED": "DETECTED",
+            "ROLLOVER_NONE": "NONE",
+            "ROLLOVER_RISK": "RISK",
+            "ROLLOVER_UNKNOWN": "UNKNOWN"
+          }
+        },
+        "visibility_impairment": {
+          "fqn": "Vehicle.Safety.VisibilityImpairment",
+          "element": "sensor",
+          "enum": "VisibilityImpairment",
+          "values": {
+            "VISIBILITY_IMPAIRMENT_DETECTED": "DETECTED",
+            "VISIBILITY_IMPAIRMENT_NONE": "NONE",
+            "VISIBILITY_IMPAIRMENT_RISK": "RISK",
+            "VISIBILITY_IMPAIRMENT_UNKNOWN": "UNKNOWN"
           }
         }
       }
@@ -436,11 +577,13 @@
     "protobuf.covesa.vss.exterior.beam.v1.Beam": {
       "fqn": "Vehicle.Body.Lights.Beam",
       "pattern": "vehicles/{vehicle}/beams/{beam}",
+      "instances": [
+        [
+          "Low",
+          "High"
+        ]
+      ],
       "fields": {
-        "instance_tag": {
-          "fqn": "Vehicle.Body.Lights.Beam.InstanceTag",
-          "element": "instance_axis"
-        },
         "is_defect": {
           "fqn": "Vehicle.Body.Lights.Beam.IsDefect",
           "element": "sensor"
@@ -448,20 +591,6 @@
         "is_on": {
           "fqn": "Vehicle.Body.Lights.Beam.IsOn",
           "element": "actuator"
-        }
-      }
-    },
-    "protobuf.covesa.vss.exterior.beam.v1.BeamInstanceTag": {
-      "fqn": "Vehicle.Body.Lights.Beam",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Body.Lights.Beam.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_HIGH": "High",
-            "DIMENSION1_LOW": "Low"
-          }
         }
       }
     },
@@ -488,11 +617,13 @@
         },
         "hood": {
           "fqn": "Vehicle.Body.Hood",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.exterior.body.v1.Hood"
         },
         "horn": {
           "fqn": "Vehicle.Body.Horn",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.exterior.body.v1.Horn"
         },
         "is_auto_power_optimize": {
           "fqn": "Vehicle.Body.IsAutoPowerOptimize",
@@ -500,7 +631,8 @@
         },
         "lights": {
           "fqn": "Vehicle.Body.Lights",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.exterior.body.v1.Lights"
         },
         "power_optimize_level": {
           "fqn": "Vehicle.Body.PowerOptimizeLevel",
@@ -508,13 +640,33 @@
         },
         "raindetection": {
           "fqn": "Vehicle.Body.Raindetection",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.exterior.body.v1.Raindetection"
         },
         "rear_main_spoiler_position": {
           "fqn": "Vehicle.Body.RearMainSpoilerPosition",
           "element": "actuator",
           "unit": "percent",
           "quantity": "relation"
+        }
+      }
+    },
+    "protobuf.covesa.vss.exterior.body.v1.Brake": {
+      "fqn": "Vehicle.Body.Lights.Brake",
+      "fields": {
+        "is_active": {
+          "fqn": "Vehicle.Body.Lights.Brake.IsActive",
+          "element": "actuator",
+          "enum": "IsActive",
+          "values": {
+            "IS_ACTIVE_ACTIVE": "ACTIVE",
+            "IS_ACTIVE_ADAPTIVE": "ADAPTIVE",
+            "IS_ACTIVE_INACTIVE": "INACTIVE"
+          }
+        },
+        "is_defect": {
+          "fqn": "Vehicle.Body.Lights.Brake.IsDefect",
+          "element": "sensor"
         }
       }
     },
@@ -546,7 +698,7 @@
         },
         "switch_control": {
           "fqn": "Vehicle.Body.Hood.Switch",
-          "source": "switch",
+          "source": "Switch",
           "element": "actuator",
           "enum": "Switch",
           "values": {
@@ -586,15 +738,18 @@
       "fields": {
         "backup": {
           "fqn": "Vehicle.Body.Lights.Backup",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.exterior.body.v1.Backup"
         },
         "brake": {
           "fqn": "Vehicle.Body.Lights.Brake",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.exterior.body.v1.Brake"
         },
         "hazard": {
           "fqn": "Vehicle.Body.Lights.Hazard",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.exterior.body.v1.Hazard"
         },
         "is_high_beam_switch_on": {
           "fqn": "Vehicle.Body.Lights.IsHighBeamSwitchOn",
@@ -602,7 +757,8 @@
         },
         "license_plate": {
           "fqn": "Vehicle.Body.Lights.LicensePlate",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.exterior.body.v1.LicensePlate"
         },
         "light_switch": {
           "fqn": "Vehicle.Body.Lights.LightSwitch",
@@ -618,30 +774,13 @@
         },
         "parking": {
           "fqn": "Vehicle.Body.Lights.Parking",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.exterior.body.v1.Parking"
         },
         "running": {
           "fqn": "Vehicle.Body.Lights.Running",
-          "element": "branch"
-        }
-      }
-    },
-    "protobuf.covesa.vss.exterior.body.v1.LightsBrake": {
-      "fqn": "Vehicle.Body.Lights.Brake",
-      "fields": {
-        "is_active": {
-          "fqn": "Vehicle.Body.Lights.Brake.IsActive",
-          "element": "actuator",
-          "enum": "IsActive",
-          "values": {
-            "IS_ACTIVE_ACTIVE": "ACTIVE",
-            "IS_ACTIVE_ADAPTIVE": "ADAPTIVE",
-            "IS_ACTIVE_INACTIVE": "INACTIVE"
-          }
-        },
-        "is_defect": {
-          "fqn": "Vehicle.Body.Lights.Brake.IsDefect",
-          "element": "sensor"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.exterior.body.v1.Running"
         }
       }
     },
@@ -685,11 +824,13 @@
     "protobuf.covesa.vss.exterior.direction_indicator.v1.DirectionIndicator": {
       "fqn": "Vehicle.Body.Lights.DirectionIndicator",
       "pattern": "vehicles/{vehicle}/directionIndicators/{direction_indicator}",
+      "instances": [
+        [
+          "Left",
+          "Right"
+        ]
+      ],
       "fields": {
-        "instance_tag": {
-          "fqn": "Vehicle.Body.Lights.DirectionIndicator.InstanceTag",
-          "element": "instance_axis"
-        },
         "is_defect": {
           "fqn": "Vehicle.Body.Lights.DirectionIndicator.IsDefect",
           "element": "sensor"
@@ -700,17 +841,50 @@
         }
       }
     },
-    "protobuf.covesa.vss.exterior.direction_indicator.v1.DirectionIndicatorInstanceTag": {
-      "fqn": "Vehicle.Body.Lights.DirectionIndicator",
+    "protobuf.covesa.vss.exterior.exterior.v1.AirQuality": {
+      "fqn": "Vehicle.Exterior.AirQuality",
       "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Body.Lights.DirectionIndicator.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_LEFT": "Left",
-            "DIMENSION1_RIGHT": "Right"
-          }
+        "co2": {
+          "fqn": "Vehicle.Exterior.AirQuality.CO2",
+          "element": "sensor",
+          "unit": "ppm",
+          "quantity": "relation"
+        },
+        "no2": {
+          "fqn": "Vehicle.Exterior.AirQuality.NO2",
+          "element": "sensor",
+          "unit": "ppb",
+          "quantity": "relation"
+        },
+        "ozone": {
+          "fqn": "Vehicle.Exterior.AirQuality.Ozone",
+          "element": "sensor",
+          "unit": "ppb",
+          "quantity": "relation"
+        },
+        "pm1": {
+          "fqn": "Vehicle.Exterior.AirQuality.PM1",
+          "element": "sensor",
+          "unit": "ug/m^3",
+          "quantity": "mass-per-volume"
+        },
+        "pm10": {
+          "fqn": "Vehicle.Exterior.AirQuality.PM10",
+          "element": "sensor",
+          "unit": "ug/m^3",
+          "quantity": "mass-per-volume"
+        },
+        "pm25": {
+          "fqn": "Vehicle.Exterior.AirQuality.PM25",
+          "element": "sensor",
+          "unit": "ug/m^3",
+          "quantity": "mass-per-volume"
+        },
+        "tvoc": {
+          "fqn": "Vehicle.Exterior.AirQuality.TVOC",
+          "element": "sensor",
+          "unit": "ppb",
+          "quantity": "relation"
         }
       }
     },
@@ -718,10 +892,21 @@
       "fqn": "Vehicle.Exterior",
       "pattern": "vehicles/{vehicle}/exterior",
       "fields": {
+        "air_pressure": {
+          "fqn": "Vehicle.Exterior.AirPressure",
+          "element": "sensor",
+          "unit": "hPa",
+          "quantity": "pressure"
+        },
+        "air_quality": {
+          "fqn": "Vehicle.Exterior.AirQuality",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.exterior.exterior.v1.AirQuality"
+        },
         "air_temperature": {
           "fqn": "Vehicle.Exterior.AirTemperature",
           "element": "sensor",
-          "unit": "degC",
+          "unit": "Celsius",
           "quantity": "temperature"
         },
         "humidity": {
@@ -735,17 +920,123 @@
           "element": "sensor",
           "unit": "percent",
           "quantity": "relation"
+        },
+        "precipitation_intensity": {
+          "fqn": "Vehicle.Exterior.PrecipitationIntensity",
+          "element": "sensor",
+          "unit": "mm/h",
+          "quantity": "precipitation-rate"
+        },
+        "precipitation_type": {
+          "fqn": "Vehicle.Exterior.PrecipitationType",
+          "element": "sensor",
+          "enum": "PrecipitationType",
+          "values": {
+            "PRECIPITATION_TYPE_HAIL": "HAIL",
+            "PRECIPITATION_TYPE_MIXED_RAIN_SNOW": "MIXED_RAIN_SNOW",
+            "PRECIPITATION_TYPE_NONE": "NONE",
+            "PRECIPITATION_TYPE_RAIN": "RAIN",
+            "PRECIPITATION_TYPE_SNOW": "SNOW",
+            "PRECIPITATION_TYPE_UNKNOWN": "UNKNOWN"
+          }
+        },
+        "road_obstruction": {
+          "fqn": "Vehicle.Exterior.RoadObstruction",
+          "element": "sensor",
+          "enum": "RoadObstruction",
+          "values": {
+            "ROAD_OBSTRUCTION_ANIMAL": "ANIMAL",
+            "ROAD_OBSTRUCTION_ANIMAL_HERD": "ANIMAL_HERD",
+            "ROAD_OBSTRUCTION_ANIMAL_LARGE": "ANIMAL_LARGE",
+            "ROAD_OBSTRUCTION_AVALANCHE": "AVALANCHE",
+            "ROAD_OBSTRUCTION_FLOODING": "FLOODING",
+            "ROAD_OBSTRUCTION_LAND_SLIP": "LAND_SLIP",
+            "ROAD_OBSTRUCTION_NONE": "NONE",
+            "ROAD_OBSTRUCTION_ROCKFALLS": "ROCKFALLS",
+            "ROAD_OBSTRUCTION_SHED_LOAD": "SHED_LOAD",
+            "ROAD_OBSTRUCTION_TREE": "TREE",
+            "ROAD_OBSTRUCTION_UNKNOWN": "UNKNOWN"
+          }
+        },
+        "road_surface_condition": {
+          "fqn": "Vehicle.Exterior.RoadSurfaceCondition",
+          "element": "sensor",
+          "enum": "RoadSurfaceCondition",
+          "values": {
+            "ROAD_SURFACE_CONDITION_DRY": "DRY",
+            "ROAD_SURFACE_CONDITION_ICE": "ICE",
+            "ROAD_SURFACE_CONDITION_LOOSE_GRAVEL": "LOOSE_GRAVEL",
+            "ROAD_SURFACE_CONDITION_SLUSH": "SLUSH",
+            "ROAD_SURFACE_CONDITION_SNOW": "SNOW",
+            "ROAD_SURFACE_CONDITION_UNKNOWN": "UNKNOWN",
+            "ROAD_SURFACE_CONDITION_WET": "WET",
+            "ROAD_SURFACE_CONDITION_WET_ICE": "WET_ICE"
+          }
+        },
+        "road_surface_contaminant": {
+          "fqn": "Vehicle.Exterior.RoadSurfaceContaminant",
+          "element": "sensor",
+          "enum": "RoadSurfaceContaminant",
+          "values": {
+            "ROAD_SURFACE_CONTAMINANT_CHIPPINGS": "CHIPPINGS",
+            "ROAD_SURFACE_CONTAMINANT_FUEL": "FUEL",
+            "ROAD_SURFACE_CONTAMINANT_MUD": "MUD",
+            "ROAD_SURFACE_CONTAMINANT_NONE": "NONE",
+            "ROAD_SURFACE_CONTAMINANT_OIL": "OIL",
+            "ROAD_SURFACE_CONTAMINANT_UNKNOWN": "UNKNOWN"
+          }
+        },
+        "road_surface_temperature": {
+          "fqn": "Vehicle.Exterior.RoadSurfaceTemperature",
+          "element": "sensor",
+          "unit": "Celsius",
+          "quantity": "temperature"
+        },
+        "visibility_condition": {
+          "fqn": "Vehicle.Exterior.VisibilityCondition",
+          "element": "sensor",
+          "enum": "VisibilityCondition",
+          "values": {
+            "VISIBILITY_CONDITION_CLEAR": "CLEAR",
+            "VISIBILITY_CONDITION_LOW_FOG": "LOW_FOG",
+            "VISIBILITY_CONDITION_LOW_HEAVY_RAIN": "LOW_HEAVY_RAIN",
+            "VISIBILITY_CONDITION_LOW_HEAVY_SNOW": "LOW_HEAVY_SNOW",
+            "VISIBILITY_CONDITION_LOW_SMOKE": "LOW_SMOKE",
+            "VISIBILITY_CONDITION_LOW_SUN_GLARE": "LOW_SUN_GLARE",
+            "VISIBILITY_CONDITION_MIST": "MIST",
+            "VISIBILITY_CONDITION_UNKNOWN": "UNKNOWN"
+          }
+        },
+        "visibility_distance": {
+          "fqn": "Vehicle.Exterior.VisibilityDistance",
+          "element": "sensor",
+          "unit": "m",
+          "quantity": "length"
+        },
+        "wind_direction": {
+          "fqn": "Vehicle.Exterior.WindDirection",
+          "element": "sensor",
+          "unit": "degrees",
+          "quantity": "angle"
+        },
+        "wind_speed": {
+          "fqn": "Vehicle.Exterior.WindSpeed",
+          "element": "sensor",
+          "unit": "m/s",
+          "quantity": "velocity"
         }
       }
     },
     "protobuf.covesa.vss.exterior.fog.v1.Fog": {
       "fqn": "Vehicle.Body.Lights.Fog",
       "pattern": "vehicles/{vehicle}/fogs/{fog}",
+      "instances": [
+        [
+          "Rear",
+          "Front"
+        ]
+      ],
       "fields": {
-        "instance_tag": {
-          "fqn": "Vehicle.Body.Lights.Fog.InstanceTag",
-          "element": "instance_axis"
-        },
         "is_defect": {
           "fqn": "Vehicle.Body.Lights.Fog.IsDefect",
           "element": "sensor"
@@ -756,28 +1047,16 @@
         }
       }
     },
-    "protobuf.covesa.vss.exterior.fog.v1.FogInstanceTag": {
-      "fqn": "Vehicle.Body.Lights.Fog",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Body.Lights.Fog.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_FRONT": "Front",
-            "DIMENSION1_REAR": "Rear"
-          }
-        }
-      }
-    },
     "protobuf.covesa.vss.exterior.mirrors.v1.Mirrors": {
       "fqn": "Vehicle.Body.Mirrors",
       "pattern": "vehicles/{vehicle}/mirrors/{mirrors}",
+      "instances": [
+        [
+          "DriverSide",
+          "PassengerSide"
+        ]
+      ],
       "fields": {
-        "instance_tag": {
-          "fqn": "Vehicle.Body.Mirrors.InstanceTag",
-          "element": "instance_axis"
-        },
         "is_folded": {
           "fqn": "Vehicle.Body.Mirrors.IsFolded",
           "element": "actuator"
@@ -810,20 +1089,6 @@
         }
       }
     },
-    "protobuf.covesa.vss.exterior.mirrors.v1.MirrorsInstanceTag": {
-      "fqn": "Vehicle.Body.Mirrors",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Body.Mirrors.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_DRIVER_SIDE": "DriverSide",
-            "DIMENSION1_PASSENGER_SIDE": "PassengerSide"
-          }
-        }
-      }
-    },
     "protobuf.covesa.vss.exterior.trailer.v1.Trailer": {
       "fqn": "Vehicle.Trailer",
       "pattern": "vehicles/{vehicle}/trailer",
@@ -837,11 +1102,13 @@
     "protobuf.covesa.vss.exterior.trunk.v1.Trunk": {
       "fqn": "Vehicle.Body.Trunk",
       "pattern": "vehicles/{vehicle}/trunks/{trunk}",
+      "instances": [
+        [
+          "Front",
+          "Rear"
+        ]
+      ],
       "fields": {
-        "instance_tag": {
-          "fqn": "Vehicle.Body.Trunk.InstanceTag",
-          "element": "instance_axis"
-        },
         "is_light_on": {
           "fqn": "Vehicle.Body.Trunk.IsLightOn",
           "element": "actuator"
@@ -862,7 +1129,7 @@
         },
         "switch_control": {
           "fqn": "Vehicle.Body.Trunk.Switch",
-          "source": "switch",
+          "source": "Switch",
           "element": "actuator",
           "enum": "Switch",
           "values": {
@@ -875,34 +1142,20 @@
         }
       }
     },
-    "protobuf.covesa.vss.exterior.trunk.v1.TrunkInstanceTag": {
-      "fqn": "Vehicle.Body.Trunk",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Body.Trunk.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_FRONT": "Front",
-            "DIMENSION1_REAR": "Rear"
-          }
-        }
-      }
-    },
     "protobuf.covesa.vss.exterior.windshield.v1.System": {
       "fqn": "Vehicle.Body.Windshield.Wiping.System",
       "fields": {
         "actual_position": {
           "fqn": "Vehicle.Body.Windshield.Wiping.System.ActualPosition",
           "element": "actuator",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "drive_current": {
           "fqn": "Vehicle.Body.Windshield.Wiping.System.DriveCurrent",
           "element": "sensor",
           "unit": "A",
-          "quantity": "electric_current"
+          "quantity": "electric-current"
         },
         "frequency": {
           "fqn": "Vehicle.Body.Windshield.Wiping.System.Frequency",
@@ -948,7 +1201,7 @@
         "target_position": {
           "fqn": "Vehicle.Body.Windshield.Wiping.System.TargetPosition",
           "element": "actuator",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         }
       }
@@ -971,36 +1224,26 @@
     "protobuf.covesa.vss.exterior.windshield.v1.Windshield": {
       "fqn": "Vehicle.Body.Windshield",
       "pattern": "vehicles/{vehicle}/windshields/{windshield}",
+      "instances": [
+        [
+          "Front",
+          "Rear"
+        ]
+      ],
       "fields": {
-        "instance_tag": {
-          "fqn": "Vehicle.Body.Windshield.InstanceTag",
-          "element": "instance_axis"
-        },
         "is_heating_on": {
           "fqn": "Vehicle.Body.Windshield.IsHeatingOn",
           "element": "actuator"
         },
         "washer_fluid": {
           "fqn": "Vehicle.Body.Windshield.WasherFluid",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.exterior.windshield.v1.WasherFluid"
         },
         "wiping": {
           "fqn": "Vehicle.Body.Windshield.Wiping",
-          "element": "branch"
-        }
-      }
-    },
-    "protobuf.covesa.vss.exterior.windshield.v1.WindshieldInstanceTag": {
-      "fqn": "Vehicle.Body.Windshield",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Body.Windshield.Dimension1",
-          "element": "instance_axis",
-          "enum": "InstanceTagDimension1",
-          "values": {
-            "INSTANCE_TAG_DIMENSION1_FRONT": "Front",
-            "INSTANCE_TAG_DIMENSION1_REAR": "Rear"
-          }
+          "element": "branch",
+          "message": "protobuf.covesa.vss.exterior.windshield.v1.Wiping"
         }
       }
     },
@@ -1030,7 +1273,8 @@
         },
         "system": {
           "fqn": "Vehicle.Body.Windshield.Wiping.System",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.exterior.windshield.v1.System"
         },
         "wiper_wear": {
           "fqn": "Vehicle.Body.Windshield.Wiping.WiperWear",
@@ -1043,14 +1287,20 @@
     "protobuf.covesa.vss.interior.ambient_light.v1.AmbientLight": {
       "fqn": "Vehicle.Cabin.Light.AmbientLight",
       "pattern": "vehicles/{vehicle}/ambientLights/{ambient_light}",
+      "instances": [
+        [
+          "Row1",
+          "Row2"
+        ],
+        [
+          "DriverSide",
+          "PassengerSide"
+        ]
+      ],
       "fields": {
         "color": {
           "fqn": "Vehicle.Cabin.Light.AmbientLight.Color",
           "element": "actuator"
-        },
-        "instance_tag": {
-          "fqn": "Vehicle.Cabin.Light.AmbientLight.InstanceTag",
-          "element": "instance_axis"
         },
         "intensity": {
           "fqn": "Vehicle.Cabin.Light.AmbientLight.Intensity",
@@ -1064,26 +1314,50 @@
         }
       }
     },
-    "protobuf.covesa.vss.interior.ambient_light.v1.AmbientLightInstanceTag": {
-      "fqn": "Vehicle.Cabin.Light.AmbientLight",
+    "protobuf.covesa.vss.interior.cabin.v1.AirQuality": {
+      "fqn": "Vehicle.Cabin.AirQuality",
       "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Cabin.Light.AmbientLight.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_ROW1": "Row1",
-            "DIMENSION1_ROW2": "Row2"
-          }
+        "co2": {
+          "fqn": "Vehicle.Cabin.AirQuality.CO2",
+          "element": "sensor",
+          "unit": "ppm",
+          "quantity": "relation"
         },
-        "dimension2": {
-          "fqn": "Vehicle.Cabin.Light.AmbientLight.Dimension2",
-          "element": "instance_axis",
-          "enum": "Dimension2",
-          "values": {
-            "DIMENSION2_DRIVER_SIDE": "DriverSide",
-            "DIMENSION2_PASSENGER_SIDE": "PassengerSide"
-          }
+        "no2": {
+          "fqn": "Vehicle.Cabin.AirQuality.NO2",
+          "element": "sensor",
+          "unit": "ppb",
+          "quantity": "relation"
+        },
+        "ozone": {
+          "fqn": "Vehicle.Cabin.AirQuality.Ozone",
+          "element": "sensor",
+          "unit": "ppb",
+          "quantity": "relation"
+        },
+        "pm1": {
+          "fqn": "Vehicle.Cabin.AirQuality.PM1",
+          "element": "sensor",
+          "unit": "ug/m^3",
+          "quantity": "mass-per-volume"
+        },
+        "pm10": {
+          "fqn": "Vehicle.Cabin.AirQuality.PM10",
+          "element": "sensor",
+          "unit": "ug/m^3",
+          "quantity": "mass-per-volume"
+        },
+        "pm25": {
+          "fqn": "Vehicle.Cabin.AirQuality.PM25",
+          "element": "sensor",
+          "unit": "ug/m^3",
+          "quantity": "mass-per-volume"
+        },
+        "tvoc": {
+          "fqn": "Vehicle.Cabin.AirQuality.TVOC",
+          "element": "sensor",
+          "unit": "ppb",
+          "quantity": "relation"
         }
       }
     },
@@ -1091,9 +1365,15 @@
       "fqn": "Vehicle.Cabin",
       "pattern": "vehicles/{vehicle}/cabin",
       "fields": {
+        "air_quality": {
+          "fqn": "Vehicle.Cabin.AirQuality",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.AirQuality"
+        },
         "convertible": {
           "fqn": "Vehicle.Cabin.Convertible",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.Convertible"
         },
         "door_count": {
           "fqn": "Vehicle.Cabin.DoorCount",
@@ -1102,20 +1382,22 @@
         "driver_position": {
           "fqn": "Vehicle.Cabin.DriverPosition",
           "element": "attribute",
-          "enum": "CabinDriverPosition",
+          "enum": "VehicleCabinDriverPosition",
           "values": {
-            "CABIN_DRIVER_POSITION_LEFT": "LEFT",
-            "CABIN_DRIVER_POSITION_MIDDLE": "MIDDLE",
-            "CABIN_DRIVER_POSITION_RIGHT": "RIGHT"
+            "VEHICLE_CABIN_DRIVER_POSITION_LEFT": "LEFT",
+            "VEHICLE_CABIN_DRIVER_POSITION_MIDDLE": "MIDDLE",
+            "VEHICLE_CABIN_DRIVER_POSITION_RIGHT": "RIGHT"
           }
         },
         "hvac": {
           "fqn": "Vehicle.Cabin.HVAC",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.Hvac"
         },
         "infotainment": {
           "fqn": "Vehicle.Cabin.Infotainment",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.Infotainment"
         },
         "is_auto_power_optimize": {
           "fqn": "Vehicle.Cabin.IsAutoPowerOptimize",
@@ -1127,7 +1409,8 @@
         },
         "light": {
           "fqn": "Vehicle.Cabin.Light",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.Light"
         },
         "power_optimize_level": {
           "fqn": "Vehicle.Cabin.PowerOptimizeLevel",
@@ -1135,11 +1418,13 @@
         },
         "rear_shade": {
           "fqn": "Vehicle.Cabin.RearShade",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.RearShade"
         },
         "rearview_mirror": {
           "fqn": "Vehicle.Cabin.RearviewMirror",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.RearviewMirror"
         },
         "seat_pos_count": {
           "fqn": "Vehicle.Cabin.SeatPosCount",
@@ -1151,7 +1436,8 @@
         },
         "sunroof": {
           "fqn": "Vehicle.Cabin.Sunroof",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.Sunroof"
         }
       }
     },
@@ -1160,7 +1446,7 @@
       "fields": {
         "roof_position": {
           "fqn": "Vehicle.Cabin.Convertible.Status",
-          "source": "status",
+          "source": "Status",
           "element": "sensor",
           "enum": "CabinConvertibleState",
           "values": {
@@ -1169,8 +1455,25 @@
             "CABIN_CONVERTIBLE_STATE_OPEN": "OPEN",
             "CABIN_CONVERTIBLE_STATE_OPENING": "OPENING",
             "CABIN_CONVERTIBLE_STATE_STALLED": "STALLED",
-            "CABIN_CONVERTIBLE_STATE_UNSPECIFIED": "UNDEFINED"
+            "CABIN_CONVERTIBLE_STATE_UNDEFINED": "UNDEFINED"
           }
+        }
+      }
+    },
+    "protobuf.covesa.vss.interior.cabin.v1.Date": {
+      "fqn": "Vehicle.Cabin.Date",
+      "fields": {
+        "day": {
+          "fqn": "Vehicle.Cabin.Date.Day",
+          "element": "attribute"
+        },
+        "month": {
+          "fqn": "Vehicle.Cabin.Date.Month",
+          "element": "attribute"
+        },
+        "year": {
+          "fqn": "Vehicle.Cabin.Date.Year",
+          "element": "attribute"
         }
       }
     },
@@ -1180,13 +1483,13 @@
         "latitude": {
           "fqn": "Vehicle.Cabin.Infotainment.Navigation.DestinationSet.Latitude",
           "element": "actuator",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "longitude": {
           "fqn": "Vehicle.Cabin.Infotainment.Navigation.DestinationSet.Longitude",
           "element": "actuator",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         }
       }
@@ -1241,7 +1544,7 @@
             "INFOTAINMENT_HMI_DISTANCE_UNIT_MILES": "MILES"
           }
         },
-        "eveconomy_units": {
+        "ev_economy_units": {
           "fqn": "Vehicle.Cabin.Infotainment.HMI.EVEconomyUnits",
           "element": "actuator",
           "enum": "InfotainmentHmiEvEconomyUnits",
@@ -1254,7 +1557,7 @@
             "INFOTAINMENT_HMI_EV_ECONOMY_UNITS_WATT_HOURS_PER_MILE": "WATT_HOURS_PER_MILE"
           }
         },
-        "evenergy_units": {
+        "ev_energy_units": {
           "fqn": "Vehicle.Cabin.Infotainment.HMI.EVEnergyUnits",
           "element": "actuator",
           "enum": "InfotainmentHmiEvEnergyUnits",
@@ -1302,7 +1605,9 @@
         },
         "last_action_time": {
           "fqn": "Vehicle.Cabin.Infotainment.HMI.LastActionTime",
-          "element": "sensor"
+          "element": "sensor",
+          "unit": "iso8601",
+          "quantity": "datetime"
         },
         "speed_unit": {
           "fqn": "Vehicle.Cabin.Infotainment.HMI.SpeedUnit",
@@ -1350,7 +1655,7 @@
         "ambient_air_temperature": {
           "fqn": "Vehicle.Cabin.HVAC.AmbientAirTemperature",
           "element": "sensor",
-          "unit": "degC",
+          "unit": "Celsius",
           "quantity": "temperature"
         },
         "is_air_conditioning_active": {
@@ -1384,7 +1689,8 @@
       "fields": {
         "hmi": {
           "fqn": "Vehicle.Cabin.Infotainment.HMI",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.Hmi"
         },
         "is_auto_power_optimize": {
           "fqn": "Vehicle.Cabin.Infotainment.IsAutoPowerOptimize",
@@ -1392,11 +1698,13 @@
         },
         "media": {
           "fqn": "Vehicle.Cabin.Infotainment.Media",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.Media"
         },
         "navigation": {
           "fqn": "Vehicle.Cabin.Infotainment.Navigation",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.Navigation"
         },
         "power_optimize_level": {
           "fqn": "Vehicle.Cabin.Infotainment.PowerOptimizeLevel",
@@ -1404,11 +1712,13 @@
         },
         "smartphone_projection": {
           "fqn": "Vehicle.Cabin.Infotainment.SmartphoneProjection",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.SmartphoneProjection"
         },
         "smartphone_screen_mirroring": {
           "fqn": "Vehicle.Cabin.Infotainment.SmartphoneScreenMirroring",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.SmartphoneScreenMirroring"
         }
       }
     },
@@ -1440,7 +1750,8 @@
       "fields": {
         "interactive_light_bar": {
           "fqn": "Vehicle.Cabin.Light.InteractiveLightBar",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.InteractiveLightBar"
         },
         "is_dome_on": {
           "fqn": "Vehicle.Cabin.Light.IsDomeOn",
@@ -1490,7 +1801,8 @@
         },
         "played": {
           "fqn": "Vehicle.Cabin.Infotainment.Media.Played",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.Played"
         },
         "selected_uri": {
           "fqn": "Vehicle.Cabin.Infotainment.Media.SelectedURI",
@@ -1509,7 +1821,8 @@
       "fields": {
         "destination_set": {
           "fqn": "Vehicle.Cabin.Infotainment.Navigation.DestinationSet",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.DestinationSet"
         },
         "guidance_voice": {
           "fqn": "Vehicle.Cabin.Infotainment.Navigation.GuidanceVoice",
@@ -1523,8 +1836,9 @@
         },
         "map_control": {
           "fqn": "Vehicle.Cabin.Infotainment.Navigation.Map",
-          "source": "map",
-          "element": "branch"
+          "source": "Map",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.Map"
         },
         "mute": {
           "fqn": "Vehicle.Cabin.Infotainment.Navigation.Mute",
@@ -1610,7 +1924,7 @@
         },
         "switch_control": {
           "fqn": "Vehicle.Cabin.RearShade.Switch",
-          "source": "switch",
+          "source": "Switch",
           "element": "actuator",
           "enum": "CabinRearShadeSwitch",
           "values": {
@@ -1631,6 +1945,34 @@
           "element": "actuator",
           "unit": "percent",
           "quantity": "relation"
+        }
+      }
+    },
+    "protobuf.covesa.vss.interior.cabin.v1.Shade": {
+      "fqn": "Vehicle.Cabin.Sunroof.Shade",
+      "fields": {
+        "is_open": {
+          "fqn": "Vehicle.Cabin.Sunroof.Shade.IsOpen",
+          "element": "actuator"
+        },
+        "position": {
+          "fqn": "Vehicle.Cabin.Sunroof.Shade.Position",
+          "element": "actuator",
+          "unit": "percent",
+          "quantity": "relation"
+        },
+        "switch_control": {
+          "fqn": "Vehicle.Cabin.Sunroof.Shade.Switch",
+          "source": "Switch",
+          "element": "actuator",
+          "enum": "SunroofShadeSwitch",
+          "values": {
+            "SUNROOF_SHADE_SWITCH_CLOSE": "CLOSE",
+            "SUNROOF_SHADE_SWITCH_INACTIVE": "INACTIVE",
+            "SUNROOF_SHADE_SWITCH_ONE_SHOT_CLOSE": "ONE_SHOT_CLOSE",
+            "SUNROOF_SHADE_SWITCH_ONE_SHOT_OPEN": "ONE_SHOT_OPEN",
+            "SUNROOF_SHADE_SWITCH_OPEN": "OPEN"
+          }
         }
       }
     },
@@ -1706,11 +2048,12 @@
         },
         "shade": {
           "fqn": "Vehicle.Cabin.Sunroof.Shade",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.cabin.v1.Shade"
         },
         "switch_control": {
           "fqn": "Vehicle.Cabin.Sunroof.Switch",
-          "source": "switch",
+          "source": "Switch",
           "element": "actuator",
           "enum": "CabinSunroofSwitch",
           "values": {
@@ -1725,42 +2068,20 @@
         }
       }
     },
-    "protobuf.covesa.vss.interior.cabin.v1.SunroofShade": {
-      "fqn": "Vehicle.Cabin.Sunroof.Shade",
-      "fields": {
-        "is_open": {
-          "fqn": "Vehicle.Cabin.Sunroof.Shade.IsOpen",
-          "element": "actuator"
-        },
-        "position": {
-          "fqn": "Vehicle.Cabin.Sunroof.Position",
-          "element": "sensor",
-          "unit": "percent",
-          "quantity": "relation"
-        },
-        "switch_control": {
-          "fqn": "Vehicle.Cabin.Sunroof.Switch",
-          "source": "switch",
-          "element": "actuator",
-          "enum": "SunroofShadeSwitch",
-          "values": {
-            "SUNROOF_SHADE_SWITCH_CLOSE": "CLOSE",
-            "SUNROOF_SHADE_SWITCH_INACTIVE": "INACTIVE",
-            "SUNROOF_SHADE_SWITCH_ONE_SHOT_CLOSE": "ONE_SHOT_CLOSE",
-            "SUNROOF_SHADE_SWITCH_ONE_SHOT_OPEN": "ONE_SHOT_OPEN",
-            "SUNROOF_SHADE_SWITCH_OPEN": "OPEN"
-          }
-        }
-      }
-    },
     "protobuf.covesa.vss.interior.door.v1.Door": {
       "fqn": "Vehicle.Cabin.Door",
       "pattern": "vehicles/{vehicle}/doors/{door}",
+      "instances": [
+        [
+          "Row1",
+          "Row2"
+        ],
+        [
+          "DriverSide",
+          "PassengerSide"
+        ]
+      ],
       "fields": {
-        "instance_tag": {
-          "fqn": "Vehicle.Cabin.Door.InstanceTag",
-          "element": "instance_axis"
-        },
         "is_child_lock_active": {
           "fqn": "Vehicle.Cabin.Door.IsChildLockActive",
           "element": "sensor"
@@ -1781,11 +2102,12 @@
         },
         "shade": {
           "fqn": "Vehicle.Cabin.Door.Shade",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.door.v1.Shade"
         },
         "switch_control": {
           "fqn": "Vehicle.Cabin.Door.Switch",
-          "source": "switch",
+          "source": "Switch",
           "element": "actuator",
           "enum": "DoorSwitch",
           "values": {
@@ -1798,49 +2120,27 @@
         },
         "window": {
           "fqn": "Vehicle.Cabin.Door.Window",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.door.v1.Window"
         }
       }
     },
-    "protobuf.covesa.vss.interior.door.v1.DoorInstanceTag": {
-      "fqn": "Vehicle.Cabin.Door",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Cabin.Door.Dimension1",
-          "element": "instance_axis",
-          "enum": "InstanceTagDimension1",
-          "values": {
-            "INSTANCE_TAG_DIMENSION1_ROW1": "Row1",
-            "INSTANCE_TAG_DIMENSION1_ROW2": "Row2"
-          }
-        },
-        "dimension2": {
-          "fqn": "Vehicle.Cabin.Door.Dimension2",
-          "element": "instance_axis",
-          "enum": "InstanceTagDimension2",
-          "values": {
-            "INSTANCE_TAG_DIMENSION2_DRIVER_SIDE": "DriverSide",
-            "INSTANCE_TAG_DIMENSION2_PASSENGER_SIDE": "PassengerSide"
-          }
-        }
-      }
-    },
-    "protobuf.covesa.vss.interior.door.v1.DoorShade": {
+    "protobuf.covesa.vss.interior.door.v1.Shade": {
       "fqn": "Vehicle.Cabin.Door.Shade",
       "fields": {
         "is_open": {
-          "fqn": "Vehicle.Cabin.Door.IsOpen",
+          "fqn": "Vehicle.Cabin.Door.Shade.IsOpen",
           "element": "actuator"
         },
         "position": {
-          "fqn": "Vehicle.Cabin.Door.Position",
+          "fqn": "Vehicle.Cabin.Door.Shade.Position",
           "element": "actuator",
           "unit": "percent",
           "quantity": "relation"
         },
         "switch_control": {
-          "fqn": "Vehicle.Cabin.Door.Switch",
-          "source": "switch",
+          "fqn": "Vehicle.Cabin.Door.Shade.Switch",
+          "source": "Switch",
           "element": "actuator",
           "enum": "ShadeSwitch",
           "values": {
@@ -1868,7 +2168,7 @@
         },
         "switch_control": {
           "fqn": "Vehicle.Cabin.Door.Window.Switch",
-          "source": "switch",
+          "source": "Switch",
           "element": "actuator",
           "enum": "WindowSwitch",
           "values": {
@@ -1925,13 +2225,13 @@
         "pitch": {
           "fqn": "Vehicle.Occupant.HeadPosition.Pitch",
           "element": "sensor",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "roll": {
           "fqn": "Vehicle.Occupant.HeadPosition.Roll",
           "element": "sensor",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "x": {
@@ -1949,7 +2249,7 @@
         "yaw": {
           "fqn": "Vehicle.Occupant.HeadPosition.Yaw",
           "element": "sensor",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "z": {
@@ -1979,13 +2279,13 @@
         "azimuth": {
           "fqn": "Vehicle.Occupant.MidEyeGaze.Azimuth",
           "element": "sensor",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "elevation": {
           "fqn": "Vehicle.Occupant.MidEyeGaze.Elevation",
           "element": "sensor",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         }
       }
@@ -1993,47 +2293,33 @@
     "protobuf.covesa.vss.interior.occupant.v1.Occupant": {
       "fqn": "Vehicle.Occupant",
       "pattern": "vehicles/{vehicle}/occupants/{occupant}",
+      "instances": [
+        [
+          "Row1",
+          "Row2"
+        ],
+        [
+          "DriverSide",
+          "Middle",
+          "PassengerSide"
+        ]
+      ],
       "fields": {
         "head_position": {
           "fqn": "Vehicle.Occupant.HeadPosition",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.occupant.v1.HeadPosition"
         },
         "identity": {
           "fqn": "Vehicle.Occupant.Identifier",
-          "source": "identifier",
-          "element": "branch"
-        },
-        "instance_tag": {
-          "fqn": "Vehicle.Occupant.InstanceTag",
-          "element": "instance_axis"
+          "source": "Identifier",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.occupant.v1.Identity"
         },
         "mid_eye_gaze": {
           "fqn": "Vehicle.Occupant.MidEyeGaze",
-          "element": "branch"
-        }
-      }
-    },
-    "protobuf.covesa.vss.interior.occupant.v1.OccupantInstanceTag": {
-      "fqn": "Vehicle.Occupant",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Occupant.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_ROW1": "Row1",
-            "DIMENSION1_ROW2": "Row2"
-          }
-        },
-        "dimension2": {
-          "fqn": "Vehicle.Occupant.Dimension2",
-          "element": "instance_axis",
-          "enum": "Dimension2",
-          "values": {
-            "DIMENSION2_DRIVER_SIDE": "DriverSide",
-            "DIMENSION2_MIDDLE": "Middle",
-            "DIMENSION2_PASSENGER_SIDE": "PassengerSide"
-          }
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.occupant.v1.MidEyeGaze"
         }
       }
     },
@@ -2118,7 +2404,7 @@
         "recline": {
           "fqn": "Vehicle.Cabin.Seat.Backrest.Recline",
           "element": "actuator",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "side_bolster_support": {
@@ -2159,7 +2445,7 @@
         "angle": {
           "fqn": "Vehicle.Cabin.Seat.Headrest.Angle",
           "element": "actuator",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "height": {
@@ -2191,7 +2477,7 @@
       "fields": {
         "activation": {
           "fqn": "Vehicle.Cabin.Seat.Massage.Status",
-          "source": "status",
+          "source": "Status",
           "element": "sensor",
           "enum": "State",
           "values": {
@@ -2239,18 +2525,32 @@
     "protobuf.covesa.vss.interior.seat.v1.Seat": {
       "fqn": "Vehicle.Cabin.Seat",
       "pattern": "vehicles/{vehicle}/seats/{seat}",
+      "instances": [
+        [
+          "Row1",
+          "Row2"
+        ],
+        [
+          "DriverSide",
+          "Middle",
+          "PassengerSide"
+        ]
+      ],
       "fields": {
         "airbag": {
           "fqn": "Vehicle.Cabin.Seat.Airbag",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.seat.v1.Airbag"
         },
         "backrest": {
           "fqn": "Vehicle.Cabin.Seat.Backrest",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.seat.v1.Backrest"
         },
         "headrest": {
           "fqn": "Vehicle.Cabin.Seat.Headrest",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.seat.v1.Headrest"
         },
         "heating_cooling": {
           "fqn": "Vehicle.Cabin.Seat.HeatingCooling",
@@ -2263,10 +2563,6 @@
           "element": "actuator",
           "unit": "mm",
           "quantity": "length"
-        },
-        "instance_tag": {
-          "fqn": "Vehicle.Cabin.Seat.InstanceTag",
-          "element": "instance_axis"
         },
         "is_backward_switch_engaged": {
           "fqn": "Vehicle.Cabin.Seat.IsBackwardSwitchEngaged",
@@ -2314,11 +2610,13 @@
         },
         "massage": {
           "fqn": "Vehicle.Cabin.Seat.Massage",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.seat.v1.Massage"
         },
         "neck_scarf": {
           "fqn": "Vehicle.Cabin.Seat.NeckScarf",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.seat.v1.NeckScarf"
         },
         "occupancy_status": {
           "fqn": "Vehicle.Cabin.Seat.OccupancyStatus",
@@ -2344,37 +2642,14 @@
         },
         "seating": {
           "fqn": "Vehicle.Cabin.Seat.Seating",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.interior.seat.v1.Seating"
         },
         "tilt": {
           "fqn": "Vehicle.Cabin.Seat.Tilt",
           "element": "actuator",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
-        }
-      }
-    },
-    "protobuf.covesa.vss.interior.seat.v1.SeatInstanceTag": {
-      "fqn": "Vehicle.Cabin.Seat",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Cabin.Seat.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_ROW1": "Row1",
-            "DIMENSION1_ROW2": "Row2"
-          }
-        },
-        "dimension2": {
-          "fqn": "Vehicle.Cabin.Seat.Dimension2",
-          "element": "instance_axis",
-          "enum": "Dimension2",
-          "values": {
-            "DIMENSION2_DRIVER_SIDE": "DriverSide",
-            "DIMENSION2_MIDDLE": "Middle",
-            "DIMENSION2_PASSENGER_SIDE": "PassengerSide"
-          }
         }
       }
     },
@@ -2382,17 +2657,17 @@
       "fqn": "Vehicle.Cabin.Seat.Seating",
       "fields": {
         "heating_cooling": {
-          "fqn": "Vehicle.Cabin.Seat.HeatingCooling",
+          "fqn": "Vehicle.Cabin.Seat.Seating.HeatingCooling",
           "element": "actuator",
           "unit": "percent",
           "quantity": "relation"
         },
         "is_backward_switch_engaged": {
-          "fqn": "Vehicle.Cabin.Seat.IsBackwardSwitchEngaged",
+          "fqn": "Vehicle.Cabin.Seat.Seating.IsBackwardSwitchEngaged",
           "element": "actuator"
         },
         "is_forward_switch_engaged": {
-          "fqn": "Vehicle.Cabin.Seat.IsForwardSwitchEngaged",
+          "fqn": "Vehicle.Cabin.Seat.Seating.IsForwardSwitchEngaged",
           "element": "actuator"
         },
         "length": {
@@ -2418,14 +2693,22 @@
     "protobuf.covesa.vss.interior.spotlight.v1.Spotlight": {
       "fqn": "Vehicle.Cabin.Light.Spotlight",
       "pattern": "vehicles/{vehicle}/spotlights/{spotlight}",
+      "instances": [
+        [
+          "Row1",
+          "Row2",
+          "Row3",
+          "Row4"
+        ],
+        [
+          "DriverSide",
+          "PassengerSide"
+        ]
+      ],
       "fields": {
         "color": {
           "fqn": "Vehicle.Cabin.Light.Spotlight.Color",
           "element": "actuator"
-        },
-        "instance_tag": {
-          "fqn": "Vehicle.Cabin.Light.Spotlight.InstanceTag",
-          "element": "instance_axis"
         },
         "intensity": {
           "fqn": "Vehicle.Cabin.Light.Spotlight.Intensity",
@@ -2439,34 +2722,21 @@
         }
       }
     },
-    "protobuf.covesa.vss.interior.spotlight.v1.SpotlightInstanceTag": {
-      "fqn": "Vehicle.Cabin.Light.Spotlight",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Cabin.Light.Spotlight.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_ROW1": "Row1",
-            "DIMENSION1_ROW2": "Row2",
-            "DIMENSION1_ROW3": "Row3",
-            "DIMENSION1_ROW4": "Row4"
-          }
-        },
-        "dimension2": {
-          "fqn": "Vehicle.Cabin.Light.Spotlight.Dimension2",
-          "element": "instance_axis",
-          "enum": "Dimension2",
-          "values": {
-            "DIMENSION2_DRIVER_SIDE": "DriverSide",
-            "DIMENSION2_PASSENGER_SIDE": "PassengerSide"
-          }
-        }
-      }
-    },
     "protobuf.covesa.vss.interior.station.v1.Station": {
       "fqn": "Vehicle.Cabin.HVAC.Station",
       "pattern": "vehicles/{vehicle}/stations/{station}",
+      "instances": [
+        [
+          "Row1",
+          "Row2",
+          "Row3",
+          "Row4"
+        ],
+        [
+          "Driver",
+          "Passenger"
+        ]
+      ],
       "fields": {
         "air_distribution": {
           "fqn": "Vehicle.Cabin.HVAC.Station.AirDistribution",
@@ -2484,40 +2754,11 @@
           "unit": "percent",
           "quantity": "relation"
         },
-        "instance_tag": {
-          "fqn": "Vehicle.Cabin.HVAC.Station.InstanceTag",
-          "element": "instance_axis"
-        },
         "temperature": {
           "fqn": "Vehicle.Cabin.HVAC.Station.Temperature",
           "element": "actuator",
-          "unit": "degC",
+          "unit": "Celsius",
           "quantity": "temperature"
-        }
-      }
-    },
-    "protobuf.covesa.vss.interior.station.v1.StationInstanceTag": {
-      "fqn": "Vehicle.Cabin.HVAC.Station",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Cabin.HVAC.Station.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_ROW1": "Row1",
-            "DIMENSION1_ROW2": "Row2",
-            "DIMENSION1_ROW3": "Row3",
-            "DIMENSION1_ROW4": "Row4"
-          }
-        },
-        "dimension2": {
-          "fqn": "Vehicle.Cabin.HVAC.Station.Dimension2",
-          "element": "instance_axis",
-          "enum": "Dimension2",
-          "values": {
-            "DIMENSION2_DRIVER": "Driver",
-            "DIMENSION2_PASSENGER": "Passenger"
-          }
         }
       }
     },
@@ -2531,14 +2772,15 @@
           "unit": "m",
           "quantity": "length"
         },
-        "gnssreceiver": {
+        "gnss_receiver": {
           "fqn": "Vehicle.CurrentLocation.GNSSReceiver",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.location.current_location.v1.GnssReceiver"
         },
         "heading": {
           "fqn": "Vehicle.CurrentLocation.Heading",
           "element": "sensor",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "horizontal_accuracy": {
@@ -2550,19 +2792,21 @@
         "latitude": {
           "fqn": "Vehicle.CurrentLocation.Latitude",
           "element": "sensor",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "longitude": {
           "fqn": "Vehicle.CurrentLocation.Longitude",
           "element": "sensor",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "observation_time": {
           "fqn": "Vehicle.CurrentLocation.Timestamp",
-          "source": "timestamp",
-          "element": "sensor"
+          "source": "Timestamp",
+          "element": "sensor",
+          "unit": "iso8601",
+          "quantity": "datetime"
         },
         "vertical_accuracy": {
           "fqn": "Vehicle.CurrentLocation.VerticalAccuracy",
@@ -2593,7 +2837,8 @@
         },
         "mounting_position": {
           "fqn": "Vehicle.CurrentLocation.GNSSReceiver.MountingPosition",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.location.current_location.v1.MountingPosition"
         }
       }
     },
@@ -2651,139 +2896,33 @@
         "pitch": {
           "fqn": "Vehicle.AngularVelocity.Pitch",
           "element": "sensor",
-          "unit": "deg/s",
-          "quantity": "angular_speed"
+          "unit": "degrees/s",
+          "quantity": "angular-speed"
         },
         "roll": {
           "fqn": "Vehicle.AngularVelocity.Roll",
           "element": "sensor",
-          "unit": "deg/s",
-          "quantity": "angular_speed"
+          "unit": "degrees/s",
+          "quantity": "angular-speed"
         },
         "yaw": {
           "fqn": "Vehicle.AngularVelocity.Yaw",
           "element": "sensor",
-          "unit": "deg/s",
-          "quantity": "angular_speed"
+          "unit": "degrees/s",
+          "quantity": "angular-speed"
         }
       }
     },
-    "protobuf.covesa.vss.motion.axle_wheel.v1.AxleWheel": {
-      "fqn": "Vehicle.Chassis.Axle.Wheel",
-      "pattern": "vehicles/{vehicle}/chassisAxles/{chassis_axle}/axleWheels/{axle_wheel}",
-      "fields": {
-        "angular_speed": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.AngularSpeed",
-          "element": "sensor",
-          "unit": "deg/s",
-          "quantity": "angular_speed"
-        },
-        "brake": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Brake",
-          "element": "branch"
-        },
-        "instance_tag": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.InstanceTag",
-          "element": "instance_axis"
-        },
-        "speed": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Speed",
-          "element": "sensor",
-          "unit": "km/h",
-          "quantity": "velocity"
-        },
-        "tire": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Tire",
-          "element": "branch"
-        },
-        "torque": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Torque",
-          "element": "sensor",
-          "unit": "Nm",
-          "quantity": "torque"
-        }
-      }
-    },
-    "protobuf.covesa.vss.motion.axle_wheel.v1.AxleWheelInstanceTag": {
-      "fqn": "Vehicle.Chassis.Axle.Wheel",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_LEFT": "Left",
-            "DIMENSION1_RIGHT": "Right"
-          }
-        }
-      }
-    },
-    "protobuf.covesa.vss.motion.axle_wheel.v1.Tire": {
-      "fqn": "Vehicle.Chassis.Axle.Wheel.Tire",
-      "fields": {
-        "air_temperature": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Tire.AirTemperature",
-          "element": "sensor",
-          "unit": "degC",
-          "quantity": "temperature"
-        },
-        "is_pressure_low": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Tire.IsPressureLow",
-          "element": "sensor"
-        },
-        "pressure": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Tire.Pressure",
-          "element": "sensor",
-          "unit": "kPa",
-          "quantity": "pressure"
-        },
-        "rubber_temperature": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Tire.RubberTemperature",
-          "element": "sensor",
-          "unit": "degC",
-          "quantity": "temperature"
-        },
-        "temperature": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Tire.Temperature",
-          "element": "sensor",
-          "unit": "degC",
-          "quantity": "temperature"
-        }
-      }
-    },
-    "protobuf.covesa.vss.motion.axle_wheel.v1.WheelBrake": {
-      "fqn": "Vehicle.Chassis.Axle.Wheel.Brake",
-      "fields": {
-        "fluid_level": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Brake.FluidLevel",
-          "element": "sensor",
-          "unit": "percent",
-          "quantity": "relation"
-        },
-        "is_brakes_worn": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Brake.IsBrakesWorn",
-          "element": "sensor"
-        },
-        "is_fluid_level_low": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Brake.IsFluidLevelLow",
-          "element": "sensor"
-        },
-        "pad_wear": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Brake.PadWear",
-          "element": "sensor",
-          "unit": "percent",
-          "quantity": "relation"
-        }
-      }
-    },
-    "protobuf.covesa.vss.motion.brake_axle.v1.BrakeAxle": {
+    "protobuf.covesa.vss.motion.brake_axle.v1.Axle": {
       "fqn": "Vehicle.MotionManagement.Brake.Axle",
       "pattern": "vehicles/{vehicle}/brakeAxles/{brake_axle}",
+      "instances": [
+        [
+          "Row1",
+          "Row2"
+        ]
+      ],
       "fields": {
-        "instance_tag": {
-          "fqn": "Vehicle.MotionManagement.Brake.Axle.InstanceTag",
-          "element": "instance_axis"
-        },
         "torque_distribution_friction_right_maximum": {
           "fqn": "Vehicle.MotionManagement.Brake.Axle.TorqueDistributionFrictionRightMaximum",
           "element": "actuator",
@@ -2810,39 +2949,27 @@
         }
       }
     },
-    "protobuf.covesa.vss.motion.brake_axle.v1.BrakeAxleInstanceTag": {
-      "fqn": "Vehicle.MotionManagement.Brake.Axle",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.MotionManagement.Brake.Axle.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_ROW1": "Row1",
-            "DIMENSION1_ROW2": "Row2"
-          }
-        }
-      }
-    },
-    "protobuf.covesa.vss.motion.brake_axle_wheel.v1.BrakeAxleWheel": {
+    "protobuf.covesa.vss.motion.brake_axle_wheel.v1.Wheel": {
       "fqn": "Vehicle.MotionManagement.Brake.Axle.Wheel",
-      "pattern": "vehicles/{vehicle}/brakeAxles/{brake_axle}/brakeAxleWheels/{brake_axle_wheel}",
+      "pattern": "vehicles/{vehicle}/brakeAxles/{brake_axle}/wheels/{wheel}",
+      "instances": [
+        [
+          "Left",
+          "Right"
+        ]
+      ],
       "fields": {
-        "instance_tag": {
-          "fqn": "Vehicle.MotionManagement.Brake.Axle.Wheel.InstanceTag",
-          "element": "instance_axis"
-        },
         "omega_lower": {
           "fqn": "Vehicle.MotionManagement.Brake.Axle.Wheel.OmegaLower",
           "element": "actuator",
           "unit": "rad/s",
-          "quantity": "angular_speed"
+          "quantity": "angular-speed"
         },
         "omega_upper": {
           "fqn": "Vehicle.MotionManagement.Brake.Axle.Wheel.OmegaUpper",
           "element": "actuator",
           "unit": "rad/s",
-          "quantity": "angular_speed"
+          "quantity": "angular-speed"
         },
         "torque": {
           "fqn": "Vehicle.MotionManagement.Brake.Axle.Wheel.Torque",
@@ -2870,20 +2997,6 @@
         }
       }
     },
-    "protobuf.covesa.vss.motion.brake_axle_wheel.v1.BrakeAxleWheelInstanceTag": {
-      "fqn": "Vehicle.MotionManagement.Brake.Axle.Wheel",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.MotionManagement.Brake.Axle.Wheel.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_LEFT": "Left",
-            "DIMENSION1_RIGHT": "Right"
-          }
-        }
-      }
-    },
     "protobuf.covesa.vss.motion.chassis.v1.Accelerator": {
       "fqn": "Vehicle.Chassis.Accelerator",
       "fields": {
@@ -2895,39 +3008,7 @@
         }
       }
     },
-    "protobuf.covesa.vss.motion.chassis.v1.Chassis": {
-      "fqn": "Vehicle.Chassis",
-      "pattern": "vehicles/{vehicle}/chassis",
-      "fields": {
-        "accelerator": {
-          "fqn": "Vehicle.Chassis.Accelerator",
-          "element": "branch"
-        },
-        "axle_count": {
-          "fqn": "Vehicle.Chassis.AxleCount",
-          "element": "attribute"
-        },
-        "brake": {
-          "fqn": "Vehicle.Chassis.Brake",
-          "element": "branch"
-        },
-        "parking_brake": {
-          "fqn": "Vehicle.Chassis.ParkingBrake",
-          "element": "branch"
-        },
-        "steering_wheel": {
-          "fqn": "Vehicle.Chassis.SteeringWheel",
-          "element": "branch"
-        },
-        "wheelbase": {
-          "fqn": "Vehicle.Chassis.Wheelbase",
-          "element": "attribute",
-          "unit": "mm",
-          "quantity": "length"
-        }
-      }
-    },
-    "protobuf.covesa.vss.motion.chassis.v1.ChassisBrake": {
+    "protobuf.covesa.vss.motion.chassis.v1.Brake": {
       "fqn": "Vehicle.Chassis.Brake",
       "fields": {
         "is_driver_emergency_braking_detected": {
@@ -2942,13 +3023,62 @@
         }
       }
     },
-    "protobuf.covesa.vss.motion.chassis.v1.ChassisSteeringWheel": {
+    "protobuf.covesa.vss.motion.chassis.v1.Chassis": {
+      "fqn": "Vehicle.Chassis",
+      "pattern": "vehicles/{vehicle}/chassis",
+      "fields": {
+        "accelerator": {
+          "fqn": "Vehicle.Chassis.Accelerator",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.motion.chassis.v1.Accelerator"
+        },
+        "axle_count": {
+          "fqn": "Vehicle.Chassis.AxleCount",
+          "element": "attribute"
+        },
+        "brake": {
+          "fqn": "Vehicle.Chassis.Brake",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.motion.chassis.v1.Brake"
+        },
+        "parking_brake": {
+          "fqn": "Vehicle.Chassis.ParkingBrake",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.motion.chassis.v1.ParkingBrake"
+        },
+        "steering_wheel": {
+          "fqn": "Vehicle.Chassis.SteeringWheel",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.motion.chassis.v1.SteeringWheel"
+        },
+        "wheelbase": {
+          "fqn": "Vehicle.Chassis.Wheelbase",
+          "element": "attribute",
+          "unit": "mm",
+          "quantity": "length"
+        }
+      }
+    },
+    "protobuf.covesa.vss.motion.chassis.v1.ParkingBrake": {
+      "fqn": "Vehicle.Chassis.ParkingBrake",
+      "fields": {
+        "is_auto_apply_enabled": {
+          "fqn": "Vehicle.Chassis.ParkingBrake.IsAutoApplyEnabled",
+          "element": "actuator"
+        },
+        "is_engaged": {
+          "fqn": "Vehicle.Chassis.ParkingBrake.IsEngaged",
+          "element": "actuator"
+        }
+      }
+    },
+    "protobuf.covesa.vss.motion.chassis.v1.SteeringWheel": {
       "fqn": "Vehicle.Chassis.SteeringWheel",
       "fields": {
         "angle": {
           "fqn": "Vehicle.Chassis.SteeringWheel.Angle",
           "element": "sensor",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "extension": {
@@ -2971,22 +3101,15 @@
         }
       }
     },
-    "protobuf.covesa.vss.motion.chassis.v1.ParkingBrake": {
-      "fqn": "Vehicle.Chassis.ParkingBrake",
-      "fields": {
-        "is_auto_apply_enabled": {
-          "fqn": "Vehicle.Chassis.ParkingBrake.IsAutoApplyEnabled",
-          "element": "actuator"
-        },
-        "is_engaged": {
-          "fqn": "Vehicle.Chassis.ParkingBrake.IsEngaged",
-          "element": "actuator"
-        }
-      }
-    },
-    "protobuf.covesa.vss.motion.chassis_axle.v1.ChassisAxle": {
+    "protobuf.covesa.vss.motion.chassis_axle.v1.Axle": {
       "fqn": "Vehicle.Chassis.Axle",
       "pattern": "vehicles/{vehicle}/chassisAxles/{chassis_axle}",
+      "instances": [
+        [
+          "Row1",
+          "Row2"
+        ]
+      ],
       "fields": {
         "axle_width": {
           "fqn": "Vehicle.Chassis.Axle.AxleWidth",
@@ -2994,14 +3117,10 @@
           "unit": "mm",
           "quantity": "length"
         },
-        "instance_tag": {
-          "fqn": "Vehicle.Chassis.Axle.InstanceTag",
-          "element": "instance_axis"
-        },
         "steering_angle": {
           "fqn": "Vehicle.Chassis.Axle.SteeringAngle",
           "element": "sensor",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "tire_aspect_ratio": {
@@ -3013,7 +3132,7 @@
         "tire_diameter": {
           "fqn": "Vehicle.Chassis.Axle.TireDiameter",
           "element": "attribute",
-          "unit": "in",
+          "unit": "inch",
           "quantity": "length"
         },
         "tire_width": {
@@ -3047,62 +3166,158 @@
         "wheel_diameter": {
           "fqn": "Vehicle.Chassis.Axle.WheelDiameter",
           "element": "attribute",
-          "unit": "in",
+          "unit": "inch",
           "quantity": "length"
         },
         "wheel_width": {
           "fqn": "Vehicle.Chassis.Axle.WheelWidth",
           "element": "attribute",
-          "unit": "in",
+          "unit": "inch",
           "quantity": "length"
         }
       }
     },
-    "protobuf.covesa.vss.motion.chassis_axle.v1.ChassisAxleInstanceTag": {
-      "fqn": "Vehicle.Chassis.Axle",
+    "protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Brake": {
+      "fqn": "Vehicle.Chassis.Axle.Wheel.Brake",
       "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Chassis.Axle.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
+        "fluid_level": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Brake.FluidLevel",
+          "element": "sensor",
+          "unit": "percent",
+          "quantity": "relation"
+        },
+        "is_brakes_worn": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Brake.IsBrakesWorn",
+          "element": "sensor"
+        },
+        "is_fluid_level_low": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Brake.IsFluidLevelLow",
+          "element": "sensor"
+        },
+        "pad_wear": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Brake.PadWear",
+          "element": "sensor",
+          "unit": "percent",
+          "quantity": "relation"
+        }
+      }
+    },
+    "protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Tire": {
+      "fqn": "Vehicle.Chassis.Axle.Wheel.Tire",
+      "fields": {
+        "air_temperature": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Tire.AirTemperature",
+          "element": "sensor",
+          "unit": "Celsius",
+          "quantity": "temperature"
+        },
+        "is_pressure_low": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Tire.IsPressureLow",
+          "element": "sensor"
+        },
+        "pressure": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Tire.Pressure",
+          "element": "sensor",
+          "unit": "kPa",
+          "quantity": "pressure"
+        },
+        "rubber_temperature": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Tire.RubberTemperature",
+          "element": "sensor",
+          "unit": "Celsius",
+          "quantity": "temperature"
+        },
+        "temperature": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Tire.Temperature",
+          "element": "sensor",
+          "unit": "Celsius",
+          "quantity": "temperature"
+        },
+        "winter_status": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Tire.WinterStatus",
+          "element": "attribute",
+          "enum": "WinterState",
           "values": {
-            "DIMENSION1_ROW1": "Row1",
-            "DIMENSION1_ROW2": "Row2"
+            "WINTER_STATE_NON_WINTER": "NON_WINTER",
+            "WINTER_STATE_UNKNOWN": "UNKNOWN",
+            "WINTER_STATE_WINTER": "WINTER"
           }
+        }
+      }
+    },
+    "protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Wheel": {
+      "fqn": "Vehicle.Chassis.Axle.Wheel",
+      "pattern": "vehicles/{vehicle}/chassisAxles/{chassis_axle}/wheels/{wheel}",
+      "instances": [
+        [
+          "Left",
+          "Right"
+        ]
+      ],
+      "fields": {
+        "angular_speed": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.AngularSpeed",
+          "element": "sensor",
+          "unit": "degrees/s",
+          "quantity": "angular-speed"
+        },
+        "brake": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Brake",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Brake"
+        },
+        "speed": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Speed",
+          "element": "sensor",
+          "unit": "km/h",
+          "quantity": "velocity"
+        },
+        "tire": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Tire",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Tire"
+        },
+        "torque": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Torque",
+          "element": "sensor",
+          "unit": "Nm",
+          "quantity": "torque"
         }
       }
     },
     "protobuf.covesa.vss.motion.electric_axle.v1.ElectricAxle": {
       "fqn": "Vehicle.MotionManagement.ElectricAxle",
       "pattern": "vehicles/{vehicle}/electricAxles/{electric_axle}",
+      "instances": [
+        [
+          "Row1",
+          "Row2"
+        ]
+      ],
       "fields": {
-        "instance_tag": {
-          "fqn": "Vehicle.MotionManagement.ElectricAxle.InstanceTag",
-          "element": "instance_axis"
-        },
         "rotational_speed": {
           "fqn": "Vehicle.MotionManagement.ElectricAxle.RotationalSpeed",
           "element": "sensor",
           "unit": "rpm",
-          "quantity": "rotational_speed"
+          "quantity": "rotational-speed"
         },
         "rotational_speed_maximum_limit": {
           "fqn": "Vehicle.MotionManagement.ElectricAxle.RotationalSpeedMaximumLimit",
           "element": "actuator",
           "unit": "rpm",
-          "quantity": "rotational_speed"
+          "quantity": "rotational-speed"
         },
         "rotational_speed_minimum_limit": {
           "fqn": "Vehicle.MotionManagement.ElectricAxle.RotationalSpeedMinimumLimit",
           "element": "actuator",
           "unit": "rpm",
-          "quantity": "rotational_speed"
+          "quantity": "rotational-speed"
         },
         "rotational_speed_target": {
           "fqn": "Vehicle.MotionManagement.ElectricAxle.RotationalSpeedTarget",
           "element": "actuator",
           "unit": "rpm",
-          "quantity": "rotational_speed"
+          "quantity": "rotational-speed"
         },
         "torque": {
           "fqn": "Vehicle.MotionManagement.ElectricAxle.Torque",
@@ -3142,39 +3357,22 @@
         }
       }
     },
-    "protobuf.covesa.vss.motion.electric_axle.v1.ElectricAxleInstanceTag": {
-      "fqn": "Vehicle.MotionManagement.ElectricAxle",
+    "protobuf.covesa.vss.motion.motion_management.v1.Axle": {
+      "fqn": "Vehicle.MotionManagement.Steering.Axle",
       "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.MotionManagement.ElectricAxle.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_ROW1": "Row1",
-            "DIMENSION1_ROW2": "Row2"
-          }
+        "row1": {
+          "fqn": "Vehicle.MotionManagement.Steering.Axle.Row1",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.motion.motion_management.v1.Row1"
+        },
+        "row2": {
+          "fqn": "Vehicle.MotionManagement.Steering.Axle.Row2",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.motion.motion_management.v1.Row2"
         }
       }
     },
-    "protobuf.covesa.vss.motion.motion_management.v1.MotionManagement": {
-      "fqn": "Vehicle.MotionManagement",
-      "pattern": "vehicles/{vehicle}/motionManagement",
-      "fields": {
-        "brake": {
-          "fqn": "Vehicle.MotionManagement.Brake",
-          "element": "branch"
-        },
-        "steering": {
-          "fqn": "Vehicle.MotionManagement.Steering",
-          "element": "branch"
-        },
-        "suspension": {
-          "fqn": "Vehicle.MotionManagement.Suspension",
-          "element": "branch"
-        }
-      }
-    },
-    "protobuf.covesa.vss.motion.motion_management.v1.MotionManagementBrake": {
+    "protobuf.covesa.vss.motion.motion_management.v1.Brake": {
       "fqn": "Vehicle.MotionManagement.Brake",
       "fields": {
         "vehicle_force_distribution_front_maximum": {
@@ -3206,6 +3404,27 @@
           "element": "actuator",
           "unit": "N",
           "quantity": "force"
+        }
+      }
+    },
+    "protobuf.covesa.vss.motion.motion_management.v1.MotionManagement": {
+      "fqn": "Vehicle.MotionManagement",
+      "pattern": "vehicles/{vehicle}/motionManagement",
+      "fields": {
+        "brake": {
+          "fqn": "Vehicle.MotionManagement.Brake",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.motion.motion_management.v1.Brake"
+        },
+        "steering": {
+          "fqn": "Vehicle.MotionManagement.Steering",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.motion.motion_management.v1.Steering"
+        },
+        "suspension": {
+          "fqn": "Vehicle.MotionManagement.Suspension",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.motion.motion_management.v1.Suspension"
         }
       }
     },
@@ -3241,19 +3460,19 @@
         "steer_angle": {
           "fqn": "Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngle",
           "element": "sensor",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "steer_angle_offset_target": {
           "fqn": "Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngleOffsetTarget",
           "element": "actuator",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "steer_angle_target": {
           "fqn": "Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngleTarget",
           "element": "actuator",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         }
       }
@@ -3264,20 +3483,20 @@
         "steer_angle": {
           "fqn": "Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngle",
           "element": "sensor",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "steer_angle_target": {
           "fqn": "Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngleTarget",
           "element": "actuator",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "steer_angle_velocity_target": {
           "fqn": "Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngleVelocityTarget",
           "element": "actuator",
-          "unit": "deg/s",
-          "quantity": "angular_speed"
+          "unit": "degrees/s",
+          "quantity": "angular-speed"
         }
       }
     },
@@ -3286,40 +3505,29 @@
       "fields": {
         "axle": {
           "fqn": "Vehicle.MotionManagement.Steering.Axle",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.motion.motion_management.v1.Axle"
         },
         "steering_wheel": {
           "fqn": "Vehicle.MotionManagement.Steering.SteeringWheel",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.motion.motion_management.v1.SteeringWheel"
         }
       }
     },
-    "protobuf.covesa.vss.motion.motion_management.v1.SteeringAxle": {
-      "fqn": "Vehicle.MotionManagement.Steering.Axle",
-      "fields": {
-        "row1": {
-          "fqn": "Vehicle.MotionManagement.Steering.Axle.Row1",
-          "element": "branch"
-        },
-        "row2": {
-          "fqn": "Vehicle.MotionManagement.Steering.Axle.Row2",
-          "element": "branch"
-        }
-      }
-    },
-    "protobuf.covesa.vss.motion.motion_management.v1.SteeringSteeringWheel": {
+    "protobuf.covesa.vss.motion.motion_management.v1.SteeringWheel": {
       "fqn": "Vehicle.MotionManagement.Steering.SteeringWheel",
       "fields": {
         "angle": {
           "fqn": "Vehicle.MotionManagement.Steering.SteeringWheel.Angle",
           "element": "sensor",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "angle_target": {
           "fqn": "Vehicle.MotionManagement.Steering.SteeringWheel.AngleTarget",
           "element": "actuator",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "angle_target_mode": {
@@ -3389,14 +3597,40 @@
         }
       }
     },
-    "protobuf.covesa.vss.motion.suspension_axle.v1.SuspensionAxle": {
+    "protobuf.covesa.vss.motion.orientation.v1.Orientation": {
+      "fqn": "Vehicle.Orientation",
+      "pattern": "vehicles/{vehicle}/orientation",
+      "fields": {
+        "pitch": {
+          "fqn": "Vehicle.Orientation.Pitch",
+          "element": "sensor",
+          "unit": "degrees",
+          "quantity": "angle"
+        },
+        "roll": {
+          "fqn": "Vehicle.Orientation.Roll",
+          "element": "sensor",
+          "unit": "degrees",
+          "quantity": "angle"
+        },
+        "yaw": {
+          "fqn": "Vehicle.Orientation.Yaw",
+          "element": "sensor",
+          "unit": "degrees",
+          "quantity": "angle"
+        }
+      }
+    },
+    "protobuf.covesa.vss.motion.suspension_axle.v1.Axle": {
       "fqn": "Vehicle.MotionManagement.Suspension.Axle",
       "pattern": "vehicles/{vehicle}/suspensionAxles/{suspension_axle}",
+      "instances": [
+        [
+          "Row1",
+          "Row2"
+        ]
+      ],
       "fields": {
-        "instance_tag": {
-          "fqn": "Vehicle.MotionManagement.Suspension.Axle.InstanceTag",
-          "element": "instance_axis"
-        },
         "roll_torque": {
           "fqn": "Vehicle.MotionManagement.Suspension.Axle.RollTorque",
           "element": "sensor",
@@ -3405,23 +3639,15 @@
         }
       }
     },
-    "protobuf.covesa.vss.motion.suspension_axle.v1.SuspensionAxleInstanceTag": {
-      "fqn": "Vehicle.MotionManagement.Suspension.Axle",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.MotionManagement.Suspension.Axle.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_ROW1": "Row1",
-            "DIMENSION1_ROW2": "Row2"
-          }
-        }
-      }
-    },
-    "protobuf.covesa.vss.motion.suspension_axle_wheel.v1.SuspensionAxleWheel": {
+    "protobuf.covesa.vss.motion.suspension_axle_wheel.v1.Wheel": {
       "fqn": "Vehicle.MotionManagement.Suspension.Axle.Wheel",
-      "pattern": "vehicles/{vehicle}/suspensionAxles/{suspension_axle}/suspensionAxleWheels/{suspension_axle_wheel}",
+      "pattern": "vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}",
+      "instances": [
+        [
+          "Left",
+          "Right"
+        ]
+      ],
       "fields": {
         "damping_force": {
           "fqn": "Vehicle.MotionManagement.Suspension.Axle.Wheel.DampingForce",
@@ -3446,24 +3672,6 @@
           "element": "actuator",
           "unit": "percent",
           "quantity": "relation"
-        },
-        "instance_tag": {
-          "fqn": "Vehicle.MotionManagement.Suspension.Axle.Wheel.InstanceTag",
-          "element": "instance_axis"
-        }
-      }
-    },
-    "protobuf.covesa.vss.motion.suspension_axle_wheel.v1.SuspensionAxleWheelInstanceTag": {
-      "fqn": "Vehicle.MotionManagement.Suspension.Axle.Wheel",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.MotionManagement.Suspension.Axle.Wheel.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_LEFT": "Left",
-            "DIMENSION1_RIGHT": "Right"
-          }
         }
       }
     },
@@ -3489,37 +3697,26 @@
     "protobuf.covesa.vss.platform.control_unit.v1.ControlUnit": {
       "fqn": "Vehicle.ControlUnit",
       "pattern": "vehicles/{vehicle}/controlUnits/{control_unit}",
+      "instances": [
+        [
+          "Central",
+          "FrontLeft",
+          "FrontRight",
+          "RearLeft1",
+          "RearLeft2",
+          "Trunk"
+        ]
+      ],
       "fields": {
         "control_unit_id": {
           "fqn": "Vehicle.ControlUnit.ID",
-          "source": "id",
+          "source": "ID",
           "element": "attribute"
         },
         "health": {
           "fqn": "Vehicle.ControlUnit.Health",
-          "element": "branch"
-        },
-        "instance_tag": {
-          "fqn": "Vehicle.ControlUnit.InstanceTag",
-          "element": "instance_axis"
-        }
-      }
-    },
-    "protobuf.covesa.vss.platform.control_unit.v1.ControlUnitInstanceTag": {
-      "fqn": "Vehicle.ControlUnit",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.ControlUnit.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_CENTRAL": "Central",
-            "DIMENSION1_FRONT_LEFT": "FrontLeft",
-            "DIMENSION1_FRONT_RIGHT": "FrontRight",
-            "DIMENSION1_REAR_LEFT1": "RearLeft1",
-            "DIMENSION1_REAR_LEFT2": "RearLeft2",
-            "DIMENSION1_TRUNK": "Trunk"
-          }
+          "element": "branch",
+          "message": "protobuf.covesa.vss.platform.control_unit.v1.Health"
         }
       }
     },
@@ -3537,15 +3734,18 @@
       "fields": {
         "network": {
           "fqn": "Vehicle.ControlUnit.Health.Network",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.platform.control_unit.v1.Network"
         },
         "resources": {
           "fqn": "Vehicle.ControlUnit.Health.Resources",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.platform.control_unit.v1.Resources"
         },
-        "swsupervision": {
+        "sw_supervision": {
           "fqn": "Vehicle.ControlUnit.Health.SWSupervision",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.platform.control_unit.v1.SwSupervision"
         }
       }
     },
@@ -3554,11 +3754,13 @@
       "fields": {
         "can": {
           "fqn": "Vehicle.ControlUnit.Health.Network.CAN",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.platform.control_unit.v1.Can"
         },
         "eth": {
           "fqn": "Vehicle.ControlUnit.Health.Network.ETH",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.platform.control_unit.v1.Eth"
         }
       }
     },
@@ -3574,12 +3776,13 @@
         "temperature": {
           "fqn": "Vehicle.ControlUnit.Health.Resources.Temperature",
           "element": "sensor",
-          "unit": "degC",
+          "unit": "Celsius",
           "quantity": "temperature"
         },
         "utilization": {
           "fqn": "Vehicle.ControlUnit.Health.Resources.Utilization",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.platform.control_unit.v1.Utilization"
         }
       }
     },
@@ -3625,11 +3828,11 @@
       "fqn": "Vehicle.Diagnostics",
       "pattern": "vehicles/{vehicle}/diagnostics",
       "fields": {
-        "dtccount": {
+        "dtc_count": {
           "fqn": "Vehicle.Diagnostics.DTCCount",
           "element": "sensor"
         },
-        "dtclist": {
+        "dtc_list": {
           "fqn": "Vehicle.Diagnostics.DTCList",
           "element": "sensor"
         }
@@ -3645,23 +3848,35 @@
         },
         "service_distance": {
           "fqn": "Vehicle.Service.DistanceToService",
-          "source": "distanceToService",
+          "source": "DistanceToService",
           "element": "sensor",
           "unit": "km",
           "quantity": "length"
         },
         "service_duration": {
           "fqn": "Vehicle.Service.TimeToService",
-          "source": "timeToService",
-          "element": "sensor"
+          "source": "TimeToService",
+          "element": "sensor",
+          "unit": "s",
+          "quantity": "duration"
         }
       }
     },
     "protobuf.covesa.vss.platform.vehicle_identification.v1.Date": {
+      "fqn": "Vehicle.VehicleIdentification.Date",
       "fields": {
-        "day": {},
-        "month": {},
-        "year": {}
+        "day": {
+          "fqn": "Vehicle.VehicleIdentification.Date.Day",
+          "element": "attribute"
+        },
+        "month": {
+          "fqn": "Vehicle.VehicleIdentification.Date.Month",
+          "element": "attribute"
+        },
+        "year": {
+          "fqn": "Vehicle.VehicleIdentification.Date.Year",
+          "element": "attribute"
+        }
       }
     },
     "protobuf.covesa.vss.platform.vehicle_identification.v1.VehicleIdentification": {
@@ -3673,8 +3888,8 @@
           "element": "attribute"
         },
         "body_type": {
-          "fqn": "Vehicle.Body",
-          "element": "branch"
+          "fqn": "Vehicle.VehicleIdentification.BodyType",
+          "element": "attribute"
         },
         "brand": {
           "fqn": "Vehicle.VehicleIdentification.Brand",
@@ -3682,8 +3897,10 @@
         },
         "first_registration": {
           "fqn": "Vehicle.VehicleIdentification.DateVehicleFirstRegistered",
-          "source": "dateVehicleFirstRegistered",
-          "element": "attribute"
+          "source": "DateVehicleFirstRegistered",
+          "element": "attribute",
+          "unit": "iso8601",
+          "quantity": "datetime"
         },
         "known_vehicle_damages": {
           "fqn": "Vehicle.VehicleIdentification.KnownVehicleDamages",
@@ -3703,8 +3920,10 @@
         },
         "model_release": {
           "fqn": "Vehicle.VehicleIdentification.VehicleModelDate",
-          "source": "vehicleModelDate",
-          "element": "attribute"
+          "source": "VehicleModelDate",
+          "element": "attribute",
+          "unit": "iso8601",
+          "quantity": "datetime"
         },
         "optional_extras": {
           "fqn": "Vehicle.VehicleIdentification.OptionalExtras",
@@ -3712,13 +3931,17 @@
         },
         "production": {
           "fqn": "Vehicle.VehicleIdentification.ProductionDate",
-          "source": "productionDate",
-          "element": "attribute"
+          "source": "ProductionDate",
+          "element": "attribute",
+          "unit": "iso8601",
+          "quantity": "datetime"
         },
         "purchase": {
           "fqn": "Vehicle.VehicleIdentification.PurchaseDate",
-          "source": "purchaseDate",
-          "element": "attribute"
+          "source": "PurchaseDate",
+          "element": "attribute",
+          "unit": "iso8601",
+          "quantity": "datetime"
         },
         "vehicle_config": {
           "fqn": "Vehicle.VehicleIdentification.VehicleConfiguration",
@@ -3783,13 +4006,20 @@
     "protobuf.covesa.vss.propulsion.charging_port.v1.ChargingPort": {
       "fqn": "Vehicle.Powertrain.TractionBattery.Charging.ChargingPort",
       "pattern": "vehicles/{vehicle}/chargingPorts/{charging_port}",
+      "instances": [
+        [
+          "FrontLeft",
+          "FrontMiddle",
+          "FrontRight",
+          "RearLeft",
+          "RearMiddle",
+          "RearRight",
+          "AnyPosition"
+        ]
+      ],
       "fields": {
-        "instance_tag": {
-          "fqn": "Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.InstanceTag",
-          "element": "instance_axis"
-        },
         "is_charging_cable_connected": {
-          "fqn": "Vehicle.Powertrain.TractionBattery.Charging.IsCharging",
+          "fqn": "Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.IsChargingCableConnected",
           "element": "sensor"
         },
         "is_charging_cable_locked": {
@@ -3821,28 +4051,19 @@
         }
       }
     },
-    "protobuf.covesa.vss.propulsion.charging_port.v1.ChargingPortInstanceTag": {
-      "fqn": "Vehicle.Powertrain.TractionBattery.Charging.ChargingPort",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_ANY_POSITION": "AnyPosition",
-            "DIMENSION1_FRONT_LEFT": "FrontLeft",
-            "DIMENSION1_FRONT_MIDDLE": "FrontMiddle",
-            "DIMENSION1_FRONT_RIGHT": "FrontRight",
-            "DIMENSION1_REAR_LEFT": "RearLeft",
-            "DIMENSION1_REAR_MIDDLE": "RearMiddle",
-            "DIMENSION1_REAR_RIGHT": "RearRight"
-          }
-        }
-      }
-    },
     "protobuf.covesa.vss.propulsion.electric_motor.v1.ElectricMotor": {
       "fqn": "Vehicle.Powertrain.ElectricMotor",
       "pattern": "vehicles/{vehicle}/electricMotors/{electric_motor}",
+      "instances": [
+        [
+          "Front",
+          "Rear",
+          "FrontLeft",
+          "FrontRight",
+          "RearLeft",
+          "RearRight"
+        ]
+      ],
       "fields": {
         "engine_code": {
           "fqn": "Vehicle.Powertrain.ElectricMotor.EngineCode",
@@ -3850,11 +4071,8 @@
         },
         "engine_coolant": {
           "fqn": "Vehicle.Powertrain.ElectricMotor.EngineCoolant",
-          "element": "branch"
-        },
-        "instance_tag": {
-          "fqn": "Vehicle.Powertrain.ElectricMotor.InstanceTag",
-          "element": "instance_axis"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.electric_motor.v1.EngineCoolant"
         },
         "max_power": {
           "fqn": "Vehicle.Powertrain.ElectricMotor.MaxPower",
@@ -3890,12 +4108,12 @@
           "fqn": "Vehicle.Powertrain.ElectricMotor.Speed",
           "element": "sensor",
           "unit": "rpm",
-          "quantity": "rotational_speed"
+          "quantity": "rotational-speed"
         },
         "temperature": {
           "fqn": "Vehicle.Powertrain.ElectricMotor.Temperature",
           "element": "sensor",
-          "unit": "degC",
+          "unit": "Celsius",
           "quantity": "temperature"
         },
         "torque": {
@@ -3906,12 +4124,14 @@
         },
         "usage_duration": {
           "fqn": "Vehicle.Powertrain.ElectricMotor.TimeInUse",
-          "source": "timeInUse",
-          "element": "sensor"
+          "source": "TimeInUse",
+          "element": "sensor",
+          "unit": "h",
+          "quantity": "duration"
         }
       }
     },
-    "protobuf.covesa.vss.propulsion.electric_motor.v1.ElectricMotorEngineCoolant": {
+    "protobuf.covesa.vss.propulsion.electric_motor.v1.EngineCoolant": {
       "fqn": "Vehicle.Powertrain.ElectricMotor.EngineCoolant",
       "fields": {
         "capacity": {
@@ -3937,28 +4157,10 @@
           "quantity": "duration"
         },
         "temperature": {
-          "fqn": "Vehicle.Powertrain.ElectricMotor.Temperature",
+          "fqn": "Vehicle.Powertrain.ElectricMotor.EngineCoolant.Temperature",
           "element": "sensor",
-          "unit": "degC",
+          "unit": "Celsius",
           "quantity": "temperature"
-        }
-      }
-    },
-    "protobuf.covesa.vss.propulsion.electric_motor.v1.ElectricMotorInstanceTag": {
-      "fqn": "Vehicle.Powertrain.ElectricMotor",
-      "fields": {
-        "dimension1": {
-          "fqn": "Vehicle.Powertrain.ElectricMotor.Dimension1",
-          "element": "instance_axis",
-          "enum": "Dimension1",
-          "values": {
-            "DIMENSION1_FRONT": "Front",
-            "DIMENSION1_FRONT_LEFT": "FrontLeft",
-            "DIMENSION1_FRONT_RIGHT": "FrontRight",
-            "DIMENSION1_REAR": "Rear",
-            "DIMENSION1_REAR_LEFT": "RearLeft",
-            "DIMENSION1_REAR_RIGHT": "RearRight"
-          }
         }
       }
     },
@@ -3970,7 +4172,7 @@
           "fqn": "Vehicle.LowVoltageBattery.CurrentCurrent",
           "element": "sensor",
           "unit": "A",
-          "quantity": "electric_current"
+          "quantity": "electric-current"
         },
         "current_voltage": {
           "fqn": "Vehicle.LowVoltageBattery.CurrentVoltage",
@@ -3982,7 +4184,7 @@
           "fqn": "Vehicle.LowVoltageBattery.NominalCapacity",
           "element": "attribute",
           "unit": "Ah",
-          "quantity": "electric_charge"
+          "quantity": "electric-charge"
         },
         "nominal_voltage": {
           "fqn": "Vehicle.LowVoltageBattery.NominalVoltage",
@@ -4015,17 +4217,21 @@
         },
         "start_time": {
           "fqn": "Vehicle.Powertrain.TractionBattery.BatteryConditioning.StartTime",
-          "element": "actuator"
+          "element": "actuator",
+          "unit": "iso8601",
+          "quantity": "datetime"
         },
         "target_temperature": {
           "fqn": "Vehicle.Powertrain.TractionBattery.BatteryConditioning.TargetTemperature",
           "element": "actuator",
-          "unit": "degC",
+          "unit": "Celsius",
           "quantity": "temperature"
         },
         "target_time": {
           "fqn": "Vehicle.Powertrain.TractionBattery.BatteryConditioning.TargetTime",
-          "element": "actuator"
+          "element": "actuator",
+          "unit": "iso8601",
+          "quantity": "datetime"
         }
       }
     },
@@ -4065,25 +4271,25 @@
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.ChargeCurrent.DC",
           "element": "sensor",
           "unit": "A",
-          "quantity": "electric_current"
+          "quantity": "electric-current"
         },
         "phase1": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.ChargeCurrent.Phase1",
           "element": "sensor",
           "unit": "A",
-          "quantity": "electric_current"
+          "quantity": "electric-current"
         },
         "phase2": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.ChargeCurrent.Phase2",
           "element": "sensor",
           "unit": "A",
-          "quantity": "electric_current"
+          "quantity": "electric-current"
         },
         "phase3": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.ChargeCurrent.Phase3",
           "element": "sensor",
           "unit": "A",
-          "quantity": "electric_current"
+          "quantity": "electric-current"
         }
       }
     },
@@ -4094,11 +4300,11 @@
           "fqn": "Vehicle.Powertrain.RangeExtender.ChargeDepleting.EnergyConsumption",
           "element": "sensor",
           "unit": "kWh/100km",
-          "quantity": "energy_consumption_per_distance"
+          "quantity": "energy-consumption-per-distance"
         },
         "range_control": {
           "fqn": "Vehicle.Powertrain.RangeExtender.ChargeDepleting.Range",
-          "source": "range",
+          "source": "Range",
           "element": "sensor",
           "unit": "m",
           "quantity": "length"
@@ -4112,11 +4318,11 @@
           "fqn": "Vehicle.Powertrain.RangeExtender.ChargeSustaining.FuelEconomy",
           "element": "sensor",
           "unit": "km/l",
-          "quantity": "distance_per_volume"
+          "quantity": "distance-per-volume"
         },
         "range_control": {
           "fqn": "Vehicle.Powertrain.RangeExtender.ChargeSustaining.Range",
-          "source": "range",
+          "source": "Range",
           "element": "sensor",
           "unit": "m",
           "quantity": "length"
@@ -4163,7 +4369,8 @@
         },
         "charge_current": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.ChargeCurrent",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.ChargeCurrent"
         },
         "charge_limit": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.ChargeLimit",
@@ -4179,12 +4386,15 @@
         },
         "charge_voltage": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.ChargeVoltage",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.ChargeVoltage"
         },
         "completion_duration": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.TimeToComplete",
-          "source": "timeToComplete",
-          "element": "sensor"
+          "source": "TimeToComplete",
+          "element": "sensor",
+          "unit": "s",
+          "quantity": "duration"
         },
         "evse_id": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.EvseId",
@@ -4200,7 +4410,8 @@
         },
         "location": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.Location",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.Location"
         },
         "max_power": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.MaxPower",
@@ -4210,7 +4421,8 @@
         },
         "maximum_charging_current": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.MaximumChargingCurrent",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.MaximumChargingCurrent"
         },
         "power_loss": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.PowerLoss",
@@ -4230,12 +4442,13 @@
         "temperature": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.Temperature",
           "element": "sensor",
-          "unit": "degC",
+          "unit": "Celsius",
           "quantity": "temperature"
         },
         "timer": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.Timer",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.Timer"
         }
       }
     },
@@ -4284,21 +4497,23 @@
         },
         "cylinder_count": {
           "fqn": "Vehicle.Powertrain.CombustionEngine.NumberOfCylinders",
-          "source": "numberOfCylinders",
+          "source": "NumberOfCylinders",
           "element": "attribute"
         },
         "cylinder_valve_count": {
           "fqn": "Vehicle.Powertrain.CombustionEngine.NumberOfValvesPerCylinder",
-          "source": "numberOfValvesPerCylinder",
+          "source": "NumberOfValvesPerCylinder",
           "element": "attribute"
         },
         "diesel_exhaust_fluid": {
           "fqn": "Vehicle.Powertrain.CombustionEngine.DieselExhaustFluid",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.DieselExhaustFluid"
         },
         "diesel_particulate_filter": {
           "fqn": "Vehicle.Powertrain.CombustionEngine.DieselParticulateFilter",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.DieselParticulateFilter"
         },
         "displacement": {
           "fqn": "Vehicle.Powertrain.CombustionEngine.Displacement",
@@ -4312,7 +4527,8 @@
         },
         "engine_coolant": {
           "fqn": "Vehicle.Powertrain.CombustionEngine.EngineCoolant",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.EngineCoolant"
         },
         "engine_hours": {
           "fqn": "Vehicle.Powertrain.CombustionEngine.EngineHours",
@@ -4322,7 +4538,8 @@
         },
         "engine_oil": {
           "fqn": "Vehicle.Powertrain.CombustionEngine.EngineOil",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.EngineOil"
         },
         "eop": {
           "fqn": "Vehicle.Powertrain.CombustionEngine.EOP",
@@ -4344,11 +4561,11 @@
           "fqn": "Vehicle.Powertrain.CombustionEngine.MAF",
           "element": "sensor",
           "unit": "g/s",
-          "quantity": "mass_per_time"
+          "quantity": "mass-per-time"
         },
         "map_control": {
           "fqn": "Vehicle.Powertrain.CombustionEngine.MAP",
-          "source": "map",
+          "source": "MAP",
           "element": "sensor",
           "unit": "kPa",
           "quantity": "pressure"
@@ -4375,7 +4592,7 @@
           "fqn": "Vehicle.Powertrain.CombustionEngine.Speed",
           "element": "sensor",
           "unit": "rpm",
-          "quantity": "rotational_speed"
+          "quantity": "rotational-speed"
         },
         "stroke_length": {
           "fqn": "Vehicle.Powertrain.CombustionEngine.StrokeLength",
@@ -4397,7 +4614,92 @@
         }
       }
     },
-    "protobuf.covesa.vss.propulsion.powertrain.v1.CombustionEngineEngineCoolant": {
+    "protobuf.covesa.vss.propulsion.powertrain.v1.Date": {
+      "fqn": "Vehicle.Powertrain.Date",
+      "fields": {
+        "day": {
+          "fqn": "Vehicle.Powertrain.Date.Day",
+          "element": "attribute"
+        },
+        "month": {
+          "fqn": "Vehicle.Powertrain.Date.Month",
+          "element": "attribute"
+        },
+        "year": {
+          "fqn": "Vehicle.Powertrain.Date.Year",
+          "element": "attribute"
+        }
+      }
+    },
+    "protobuf.covesa.vss.propulsion.powertrain.v1.Dcdc": {
+      "fqn": "Vehicle.Powertrain.TractionBattery.DCDC",
+      "fields": {
+        "power_loss": {
+          "fqn": "Vehicle.Powertrain.TractionBattery.DCDC.PowerLoss",
+          "element": "sensor",
+          "unit": "W",
+          "quantity": "power"
+        },
+        "temperature": {
+          "fqn": "Vehicle.Powertrain.TractionBattery.DCDC.Temperature",
+          "element": "sensor",
+          "unit": "Celsius",
+          "quantity": "temperature"
+        }
+      }
+    },
+    "protobuf.covesa.vss.propulsion.powertrain.v1.DieselExhaustFluid": {
+      "fqn": "Vehicle.Powertrain.CombustionEngine.DieselExhaustFluid",
+      "fields": {
+        "capacity": {
+          "fqn": "Vehicle.Powertrain.CombustionEngine.DieselExhaustFluid.Capacity",
+          "element": "attribute",
+          "unit": "l",
+          "quantity": "volume"
+        },
+        "is_level_low": {
+          "fqn": "Vehicle.Powertrain.CombustionEngine.DieselExhaustFluid.IsLevelLow",
+          "element": "sensor"
+        },
+        "level": {
+          "fqn": "Vehicle.Powertrain.CombustionEngine.DieselExhaustFluid.Level",
+          "element": "sensor",
+          "unit": "percent",
+          "quantity": "relation"
+        },
+        "range_control": {
+          "fqn": "Vehicle.Powertrain.CombustionEngine.DieselExhaustFluid.Range",
+          "source": "Range",
+          "element": "sensor",
+          "unit": "m",
+          "quantity": "length"
+        }
+      }
+    },
+    "protobuf.covesa.vss.propulsion.powertrain.v1.DieselParticulateFilter": {
+      "fqn": "Vehicle.Powertrain.CombustionEngine.DieselParticulateFilter",
+      "fields": {
+        "delta_pressure": {
+          "fqn": "Vehicle.Powertrain.CombustionEngine.DieselParticulateFilter.DeltaPressure",
+          "element": "sensor",
+          "unit": "Pa",
+          "quantity": "pressure"
+        },
+        "inlet_temperature": {
+          "fqn": "Vehicle.Powertrain.CombustionEngine.DieselParticulateFilter.InletTemperature",
+          "element": "sensor",
+          "unit": "Celsius",
+          "quantity": "temperature"
+        },
+        "outlet_temperature": {
+          "fqn": "Vehicle.Powertrain.CombustionEngine.DieselParticulateFilter.OutletTemperature",
+          "element": "sensor",
+          "unit": "Celsius",
+          "quantity": "temperature"
+        }
+      }
+    },
+    "protobuf.covesa.vss.propulsion.powertrain.v1.EngineCoolant": {
       "fqn": "Vehicle.Powertrain.CombustionEngine.EngineCoolant",
       "fields": {
         "capacity": {
@@ -4425,82 +4727,7 @@
         "temperature": {
           "fqn": "Vehicle.Powertrain.CombustionEngine.EngineCoolant.Temperature",
           "element": "sensor",
-          "unit": "degC",
-          "quantity": "temperature"
-        }
-      }
-    },
-    "protobuf.covesa.vss.propulsion.powertrain.v1.Date": {
-      "fields": {
-        "day": {},
-        "month": {},
-        "year": {}
-      }
-    },
-    "protobuf.covesa.vss.propulsion.powertrain.v1.Dcdc": {
-      "fqn": "Vehicle.Powertrain.TractionBattery.DCDC",
-      "fields": {
-        "power_loss": {
-          "fqn": "Vehicle.Powertrain.TractionBattery.DCDC.PowerLoss",
-          "element": "sensor",
-          "unit": "W",
-          "quantity": "power"
-        },
-        "temperature": {
-          "fqn": "Vehicle.Powertrain.TractionBattery.DCDC.Temperature",
-          "element": "sensor",
-          "unit": "degC",
-          "quantity": "temperature"
-        }
-      }
-    },
-    "protobuf.covesa.vss.propulsion.powertrain.v1.DieselExhaustFluid": {
-      "fqn": "Vehicle.Powertrain.CombustionEngine.DieselExhaustFluid",
-      "fields": {
-        "capacity": {
-          "fqn": "Vehicle.Powertrain.CombustionEngine.DieselExhaustFluid.Capacity",
-          "element": "attribute",
-          "unit": "l",
-          "quantity": "volume"
-        },
-        "is_level_low": {
-          "fqn": "Vehicle.Powertrain.CombustionEngine.DieselExhaustFluid.IsLevelLow",
-          "element": "sensor"
-        },
-        "level": {
-          "fqn": "Vehicle.Powertrain.CombustionEngine.DieselExhaustFluid.Level",
-          "element": "sensor",
-          "unit": "percent",
-          "quantity": "relation"
-        },
-        "range_control": {
-          "fqn": "Vehicle.Powertrain.CombustionEngine.DieselExhaustFluid.Range",
-          "source": "range",
-          "element": "sensor",
-          "unit": "m",
-          "quantity": "length"
-        }
-      }
-    },
-    "protobuf.covesa.vss.propulsion.powertrain.v1.DieselParticulateFilter": {
-      "fqn": "Vehicle.Powertrain.CombustionEngine.DieselParticulateFilter",
-      "fields": {
-        "delta_pressure": {
-          "fqn": "Vehicle.Powertrain.CombustionEngine.DieselParticulateFilter.DeltaPressure",
-          "element": "sensor",
-          "unit": "Pa",
-          "quantity": "pressure"
-        },
-        "inlet_temperature": {
-          "fqn": "Vehicle.Powertrain.CombustionEngine.DieselParticulateFilter.InletTemperature",
-          "element": "sensor",
-          "unit": "degC",
-          "quantity": "temperature"
-        },
-        "outlet_temperature": {
-          "fqn": "Vehicle.Powertrain.CombustionEngine.DieselParticulateFilter.OutletTemperature",
-          "element": "sensor",
-          "unit": "degC",
+          "unit": "Celsius",
           "quantity": "temperature"
         }
       }
@@ -4532,10 +4759,21 @@
           "unit": "s",
           "quantity": "duration"
         },
+        "pressure_status": {
+          "fqn": "Vehicle.Powertrain.CombustionEngine.EngineOil.PressureStatus",
+          "element": "sensor",
+          "enum": "EngineOilPressureState",
+          "values": {
+            "ENGINE_OIL_PRESSURE_STATE_ALERT": "ALERT",
+            "ENGINE_OIL_PRESSURE_STATE_ERROR": "ERROR",
+            "ENGINE_OIL_PRESSURE_STATE_NORMAL": "NORMAL",
+            "ENGINE_OIL_PRESSURE_STATE_WARNING": "WARNING"
+          }
+        },
         "temperature": {
           "fqn": "Vehicle.Powertrain.CombustionEngine.EngineOil.Temperature",
           "element": "sensor",
-          "unit": "degC",
+          "unit": "Celsius",
           "quantity": "temperature"
         }
       }
@@ -4553,33 +4791,33 @@
           "fqn": "Vehicle.Powertrain.FuelSystem.AverageConsumption",
           "element": "sensor",
           "unit": "l/100km",
-          "quantity": "volume_per_distance"
+          "quantity": "volume-per-distance"
         },
         "cumulative_fuel_economy": {
           "fqn": "Vehicle.Powertrain.FuelSystem.CumulativeFuelEconomy",
           "element": "sensor",
           "unit": "km/l",
-          "quantity": "distance_per_volume"
+          "quantity": "distance-per-volume"
         },
         "current_tank_consumption": {
           "fqn": "Vehicle.Powertrain.FuelSystem.ConsumptionSinceLastRefuel",
-          "source": "consumptionSinceLastRefuel",
+          "source": "ConsumptionSinceLastRefuel",
           "element": "sensor",
           "unit": "l",
           "quantity": "volume"
         },
         "current_tank_fuel_economy": {
           "fqn": "Vehicle.Powertrain.FuelSystem.AfterRefuelingFuelEconomy",
-          "source": "afterRefuelingFuelEconomy",
+          "source": "AfterRefuelingFuelEconomy",
           "element": "sensor",
           "unit": "km/l",
-          "quantity": "distance_per_volume"
+          "quantity": "distance-per-volume"
         },
         "drive_fuel_economy": {
           "fqn": "Vehicle.Powertrain.FuelSystem.DriveFuelEconomy",
           "element": "sensor",
           "unit": "km/l",
-          "quantity": "distance_per_volume"
+          "quantity": "distance-per-volume"
         },
         "hybrid_type": {
           "fqn": "Vehicle.Powertrain.FuelSystem.HybridType",
@@ -4598,13 +4836,19 @@
           "fqn": "Vehicle.Powertrain.FuelSystem.InstantConsumption",
           "element": "sensor",
           "unit": "l/100km",
-          "quantity": "volume_per_distance"
+          "quantity": "volume-per-distance"
+        },
+        "instant_fuel_economy": {
+          "fqn": "Vehicle.Powertrain.FuelSystem.InstantFuelEconomy",
+          "element": "sensor",
+          "unit": "km/l",
+          "quantity": "distance-per-volume"
         },
         "instantant_fuel_economy": {
           "fqn": "Vehicle.Powertrain.FuelSystem.InstantantFuelEconomy",
           "element": "sensor",
           "unit": "km/l",
-          "quantity": "distance_per_volume"
+          "quantity": "distance-per-volume"
         },
         "is_engine_stop_start_enabled": {
           "fqn": "Vehicle.Powertrain.FuelSystem.IsEngineStopStartEnabled",
@@ -4624,7 +4868,7 @@
         },
         "range_control": {
           "fqn": "Vehicle.Powertrain.FuelSystem.Range",
-          "source": "range",
+          "source": "Range",
           "element": "sensor",
           "unit": "m",
           "quantity": "length"
@@ -4706,7 +4950,7 @@
         },
         "trip_consumption": {
           "fqn": "Vehicle.Powertrain.FuelSystem.ConsumptionSinceStart",
-          "source": "consumptionSinceStart",
+          "source": "ConsumptionSinceStart",
           "element": "sensor",
           "unit": "l",
           "quantity": "volume"
@@ -4725,13 +4969,13 @@
         "latitude": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.Location.Latitude",
           "element": "sensor",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         },
         "longitude": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.Location.Longitude",
           "element": "sensor",
-          "unit": "deg",
+          "unit": "degrees",
           "quantity": "angle"
         }
       }
@@ -4743,25 +4987,25 @@
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.MaximumChargingCurrent.DC",
           "element": "sensor",
           "unit": "A",
-          "quantity": "electric_current"
+          "quantity": "electric-current"
         },
         "phase1": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.MaximumChargingCurrent.Phase1",
           "element": "sensor",
           "unit": "A",
-          "quantity": "electric_current"
+          "quantity": "electric-current"
         },
         "phase2": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.MaximumChargingCurrent.Phase2",
           "element": "sensor",
           "unit": "A",
-          "quantity": "electric_current"
+          "quantity": "electric-current"
         },
         "phase3": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.MaximumChargingCurrent.Phase3",
           "element": "sensor",
           "unit": "A",
-          "quantity": "electric_current"
+          "quantity": "electric-current"
         }
       }
     },
@@ -4777,11 +5021,13 @@
         },
         "combustion_engine": {
           "fqn": "Vehicle.Powertrain.CombustionEngine",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.CombustionEngine"
         },
         "fuel_system": {
           "fqn": "Vehicle.Powertrain.FuelSystem",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.FuelSystem"
         },
         "is_auto_power_optimize": {
           "fqn": "Vehicle.Powertrain.IsAutoPowerOptimize",
@@ -4793,14 +5039,15 @@
         },
         "range_control": {
           "fqn": "Vehicle.Powertrain.Range",
-          "source": "range",
+          "source": "Range",
           "element": "sensor",
           "unit": "m",
           "quantity": "length"
         },
         "range_extender": {
           "fqn": "Vehicle.Powertrain.RangeExtender",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.RangeExtender"
         },
         "time_remaining": {
           "fqn": "Vehicle.Powertrain.TimeRemaining",
@@ -4810,15 +5057,17 @@
         },
         "traction_battery": {
           "fqn": "Vehicle.Powertrain.TractionBattery",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.TractionBattery"
         },
         "transmission": {
           "fqn": "Vehicle.Powertrain.Transmission",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.Transmission"
         },
         "type_control": {
           "fqn": "Vehicle.Powertrain.Type",
-          "source": "type",
+          "source": "Type",
           "element": "attribute",
           "enum": "PowertrainType",
           "values": {
@@ -4834,17 +5083,19 @@
       "fields": {
         "charge_depleting": {
           "fqn": "Vehicle.Powertrain.RangeExtender.ChargeDepleting",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.ChargeDepleting"
         },
         "charge_sustaining": {
           "fqn": "Vehicle.Powertrain.RangeExtender.ChargeSustaining",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.ChargeSustaining"
         },
         "combined_fuel_economy": {
           "fqn": "Vehicle.Powertrain.RangeExtender.CombinedFuelEconomy",
           "element": "sensor",
           "unit": "km/l",
-          "quantity": "distance_per_volume"
+          "quantity": "distance-per-volume"
         },
         "operating_mode": {
           "fqn": "Vehicle.Powertrain.RangeExtender.OperatingMode",
@@ -4887,7 +5138,7 @@
         "average": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Temperature.Average",
           "element": "sensor",
-          "unit": "degC",
+          "unit": "Celsius",
           "quantity": "temperature"
         },
         "cell_temperature": {
@@ -4897,13 +5148,13 @@
         "max": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Temperature.Max",
           "element": "sensor",
-          "unit": "degC",
+          "unit": "Celsius",
           "quantity": "temperature"
         },
         "min": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Temperature.Min",
           "element": "sensor",
-          "unit": "degC",
+          "unit": "Celsius",
           "quantity": "temperature"
         }
       }
@@ -4913,8 +5164,10 @@
       "fields": {
         "action_time": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.Timer.Time",
-          "source": "time",
-          "element": "actuator"
+          "source": "Time",
+          "element": "actuator",
+          "unit": "iso8601",
+          "quantity": "datetime"
         },
         "mode": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging.Timer.Mode",
@@ -4941,7 +5194,7 @@
           "fqn": "Vehicle.Powertrain.TractionBattery.AccumulatedChargedThroughput",
           "element": "sensor",
           "unit": "Ah",
-          "quantity": "electric_charge"
+          "quantity": "electric-charge"
         },
         "accumulated_consumed_energy": {
           "fqn": "Vehicle.Powertrain.TractionBattery.AccumulatedConsumedEnergy",
@@ -4953,30 +5206,34 @@
           "fqn": "Vehicle.Powertrain.TractionBattery.AccumulatedConsumedThroughput",
           "element": "sensor",
           "unit": "Ah",
-          "quantity": "electric_charge"
+          "quantity": "electric-charge"
         },
         "battery_conditioning": {
           "fqn": "Vehicle.Powertrain.TractionBattery.BatteryConditioning",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.BatteryConditioning"
         },
         "cell_voltage": {
           "fqn": "Vehicle.Powertrain.TractionBattery.CellVoltage",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.CellVoltage"
         },
         "charge_state": {
           "fqn": "Vehicle.Powertrain.TractionBattery.StateOfCharge",
-          "source": "stateOfCharge",
-          "element": "branch"
+          "source": "StateOfCharge",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.StateOfCharge"
         },
         "charging": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Charging",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.Charging"
         },
         "current_current": {
           "fqn": "Vehicle.Powertrain.TractionBattery.CurrentCurrent",
           "element": "sensor",
           "unit": "A",
-          "quantity": "electric_current"
+          "quantity": "electric-current"
         },
         "current_power": {
           "fqn": "Vehicle.Powertrain.TractionBattery.CurrentPower",
@@ -4992,7 +5249,8 @@
         },
         "dcdc": {
           "fqn": "Vehicle.Powertrain.TractionBattery.DCDC",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.Dcdc"
         },
         "error_codes": {
           "fqn": "Vehicle.Powertrain.TractionBattery.ErrorCodes",
@@ -5006,7 +5264,7 @@
         },
         "health_state": {
           "fqn": "Vehicle.Powertrain.TractionBattery.StateOfHealth",
-          "source": "stateOfHealth",
+          "source": "StateOfHealth",
           "element": "sensor",
           "unit": "percent",
           "quantity": "relation"
@@ -5049,19 +5307,22 @@
         },
         "production": {
           "fqn": "Vehicle.Powertrain.TractionBattery.ProductionDate",
-          "source": "productionDate",
-          "element": "attribute"
+          "source": "ProductionDate",
+          "element": "attribute",
+          "unit": "iso8601",
+          "quantity": "datetime"
         },
         "range_control": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Range",
-          "source": "range",
+          "source": "Range",
           "element": "sensor",
           "unit": "m",
           "quantity": "length"
         },
         "temperature": {
           "fqn": "Vehicle.Powertrain.TractionBattery.Temperature",
-          "element": "branch"
+          "element": "branch",
+          "message": "protobuf.covesa.vss.propulsion.powertrain.v1.Temperature"
         },
         "time_remaining": {
           "fqn": "Vehicle.Powertrain.TractionBattery.TimeRemaining",
@@ -5157,7 +5418,7 @@
         "temperature": {
           "fqn": "Vehicle.Powertrain.Transmission.Temperature",
           "element": "sensor",
-          "unit": "degC",
+          "unit": "Celsius",
           "quantity": "temperature"
         },
         "torque_distribution": {
@@ -5174,7 +5435,7 @@
         },
         "type_control": {
           "fqn": "Vehicle.Powertrain.Transmission.Type",
-          "source": "type",
+          "source": "Type",
           "element": "attribute",
           "enum": "TransmissionType",
           "values": {
@@ -5220,7 +5481,7 @@
           "fqn": "Vehicle.EmissionsCO2",
           "element": "attribute",
           "unit": "g/km",
-          "quantity": "mass_per_distance"
+          "quantity": "mass-per-distance"
         },
         "gross_weight": {
           "fqn": "Vehicle.GrossWeight",
@@ -5262,7 +5523,7 @@
             "LOW_VOLTAGE_SYSTEM_STATE_OFF": "OFF",
             "LOW_VOLTAGE_SYSTEM_STATE_ON_VALUE": "ON",
             "LOW_VOLTAGE_SYSTEM_STATE_START": "START",
-            "LOW_VOLTAGE_SYSTEM_STATE_UNSPECIFIED": "UNDEFINED"
+            "LOW_VOLTAGE_SYSTEM_STATE_UNDEFINED": "UNDEFINED"
           }
         },
         "max_tow_ball_weight": {
@@ -5295,7 +5556,9 @@
         },
         "start_time": {
           "fqn": "Vehicle.StartTime",
-          "element": "attribute"
+          "element": "attribute",
+          "unit": "iso8601",
+          "quantity": "datetime"
         },
         "traveled_distance": {
           "fqn": "Vehicle.TraveledDistance",
@@ -5317,7 +5580,7 @@
         },
         "trip_traveled_distance": {
           "fqn": "Vehicle.TraveledDistanceSinceStart",
-          "source": "traveledDistanceSinceStart",
+          "source": "TraveledDistanceSinceStart",
           "element": "sensor",
           "unit": "m",
           "quantity": "length"
@@ -5342,7 +5605,7 @@
         },
         "width_mirrors_included": {
           "fqn": "Vehicle.WidthIncludingMirrors",
-          "source": "widthIncludingMirrors",
+          "source": "WidthIncludingMirrors",
           "element": "attribute",
           "unit": "mm",
           "quantity": "length"

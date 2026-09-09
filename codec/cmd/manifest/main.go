@@ -24,8 +24,7 @@ import (
 	"os"
 
 	"github.com/the-protobuf-project/vdm/codec/vss"
-	"github.com/the-protobuf-project/vdm/sync/model"
-	"github.com/the-protobuf-project/vdm/sync/spec"
+	"github.com/the-protobuf-project/vdm/sync/load"
 )
 
 func main() {
@@ -42,20 +41,10 @@ func main() {
 
 // run builds the manifest and writes or verifies it.
 func run(pin, out string, check bool) error {
-	s, err := spec.Load(pin)
+	m, err := load.Model(pin)
 	if err != nil {
 		return err
 	}
-	defs, err := loadTree(s.Path)
-	if err != nil {
-		return err
-	}
-
-	m, err := model.Build(defs)
-	if err != nil {
-		return err
-	}
-	m.Spec = s
 
 	// Indented and newline-terminated: this file is committed and reviewed,
 	// and a one-line JSON blob makes every change look like a rewrite.
@@ -77,6 +66,7 @@ func run(pin, out string, check bool) error {
 	if err := os.WriteFile(out, body, 0o644); err != nil {
 		return err
 	}
-	fmt.Printf("manifest: spec %s (%s) -> %s\n", s.Version, s.Short(), out)
+	fmt.Printf("manifest: vss %s (%s) + vdm %s (%s) -> %s\n",
+		m.Spec.VSS.Version, m.Spec.VSS.Short(), m.Spec.VDM.Version, m.Spec.VDM.Short(), out)
 	return nil
 }

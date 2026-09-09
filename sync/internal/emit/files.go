@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"github.com/the-protobuf-project/vdm/sync/model"
-	"github.com/the-protobuf-project/vdm/sync/sdl"
+	"github.com/the-protobuf-project/vdm/sync/vspec"
 )
 
 // lineCap is the per-file line limit. A file over it is split, never
@@ -19,10 +19,10 @@ const lineCap = 250
 
 // File is one planned .proto file.
 type File struct {
-	Base  string     // file name, e.g. "cabin.proto"
-	Type  *sdl.Def   // the object type it holds
-	Enums []*sdl.Def // enums that belong with it
-	Root  bool       // it holds the package's resource
+	Base  string        // file name, e.g. "cabin.proto"
+	Type  *vspec.Node   // the message it holds
+	Enums []*vspec.Node // signals whose allowed values become enums
+	Root  bool          // it holds the package's resource
 
 	// TypesOnly marks a file holding only the enums split out of another.
 	TypesOnly bool
@@ -37,20 +37,26 @@ type File struct {
 
 // planFiles assigns types to files, renders each and returns them.
 func (e *Emitter) planFiles(pkg *model.Package) ([]*File, error) {
+	// Indexed twice, by fully qualified name and by emitted message name.
+	// A field usually names the node it points at, but one promoted to
+	// another type -- a date string becoming a Date -- names only the type,
+	// and the import has to resolve either way.
 	fileOf := map[string]string{}
 	for _, t := range pkg.Types {
-		fileOf[t.Name] = model.TypeFile(t.Name)
+		base := model.TypeFile(t.Name)
+		fileOf[t.FQN] = base
+		fileOf[model.MessageName(t.Name)] = base
 	}
 	byFile := e.placeEnums(pkg, fileOf)
 
 	var files []*File
 	for _, t := range pkg.Types {
-		base := fileOf[t.Name]
+		base := fileOf[t.FQN]
 		f := &File{
 			Base:    base,
 			Type:    t,
 			Enums:   byFile[base],
-			Root:    t.Name == pkg.Root.Name,
+			Root:    t.FQN == pkg.Root.FQN,
 			Imports: map[string]bool{},
 		}
 		body, err := e.renderFile(pkg, f, fileOf)
@@ -74,32 +80,19 @@ func (e *Emitter) planFiles(pkg *model.Package) ([]*File, error) {
 
 // placeEnums decides which file each enum is written into.
 //
-// An enum belongs with the first message that names it, which for VSS is
-// always the only message that names it: an allowed-value enum is generated
-// per signal. An enum nothing names -- one reached only through the package
-// root -- goes with the root.
-func (e *Emitter) placeEnums(pkg *model.Package, fileOf map[string]string) map[string][]*sdl.Def {
-	placed := map[string]bool{}
-	byFile := map[string][]*sdl.Def{}
-
+// An enum belongs with the message whose signal declares it, which for VSS is
+// always exactly one message: an allowed-value set is written on the signal
+// it constrains.
+func (e *Emitter) placeEnums(pkg *model.Package, fileOf map[string]string) map[string][]*vspec.Node {
+	byFile := map[string][]*vspec.Node{}
 	for _, t := range pkg.Types {
-		for _, f := range t.Fields {
-			enum, ok := e.M.Enums[f.Type.Name]
-			if !ok || !e.emits(enum.Name) || placed[enum.Name] {
+		for _, c := range t.Children {
+			if !model.HasEnum(c) {
 				continue
 			}
-			placed[enum.Name] = true
-			base := fileOf[t.Name]
-			byFile[base] = append(byFile[base], enum)
+			base := fileOf[t.FQN]
+			byFile[base] = append(byFile[base], c)
 		}
-	}
-	for _, enum := range pkg.Enums {
-		if placed[enum.Name] {
-			continue
-		}
-		placed[enum.Name] = true
-		base := model.TypeFile(pkg.Root.Name)
-		byFile[base] = append(byFile[base], enum)
 	}
 	return byFile
 }
@@ -135,12 +128,6 @@ func (e *Emitter) splitEnums(pkg *model.Package, f *File, fileOf map[string]stri
 	f.Imports = map[string]bool{}
 	f.EnumFile = types.Base
 	return types, nil
-}
-
-// emits reports whether an enum becomes a protobuf enum here, rather than an
-// annotation or a documented scalar.
-func (e *Emitter) emits(name string) bool {
-	return !model.IsUnitEnum(name) && !isScalarEnum(name)
 }
 
 // countLines counts the lines in a rendered file.

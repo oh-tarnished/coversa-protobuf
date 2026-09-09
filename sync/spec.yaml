@@ -1,19 +1,38 @@
-# The specification revision this schema is generated from.
+# The specification revisions this schema is generated from.
+#
+# Two, because the schema has two sources and they are not interchangeable:
+#
+#   vss  the Vehicle Signal Specification, in its own `.vspec` format. The
+#        vehicle tree -- every signal, unit, bound and allowed-value set --
+#        is read from here.
+#   vdm  the Vehicle Data Model, in GraphQL SDL. Read only for what COVESA
+#        defines *outside* the vehicle: people, charging stations, sessions.
+#
+# VSS was not always the source. The generator first read VDM's GraphQL
+# translation of it, which is lossy: 181 `comment` fields, most `default`
+# values, every `pattern` and every numbered enum are dropped in translation,
+# and names are damaged by case-splitting. Reading VSS directly recovers all
+# of it. See docs/decisions.md.
 #
 # Dated rather than numbered, the way the Model Context Protocol versions its
-# specification. The upstream model publishes no release numbers -- COVESA's
-# vdm repository carries one placeholder tag and nothing else -- so a version
-# invented here would mean nothing to a reader. A date does: it is directly
-# comparable against the commit history at the source below, and it sorts.
+# specification: neither upstream publishes release numbers a reader could
+# place, and a date is directly comparable against the source history.
 #
-# `commit` is the authority and `version` is the date of that commit. The
-# version is what every generated file's banner carries, because a date is
-# what a person can place; the commit is what `just spec` checks against the
-# working tree, so this file cannot quietly drift from what was actually read.
+# `commit` is the authority and `version` is that commit's date.
+# scripts/check-spec.sh verifies both against the checked-out submodule.
 #
-# Bumping it is a deliberate act: update the vdm checkout, run `just sync`,
-# and record what moved in docs/spec.md.
-version: 2026-07-24
-commit: 36bc93936eab097647b52eea377a3374bcf926f5
-source: https://github.com/COVESA/vdm
-path: vdm/spec
+# `path` is relative to the repository root, and names a file for VSS and a
+# directory for VDM. Both live under modules/, which holds every upstream
+# checkout and nothing this repository writes.
+
+vss:
+  version: 2026-09-02
+  commit: cd4bc50ba4aae74fad2172ee34f71acbeab79837
+  source: https://github.com/COVESA/vehicle_signal_specification
+  path: modules/vss/spec/VehicleSignalSpecification.vspec
+
+vdm:
+  version: 2026-07-24
+  commit: 36bc93936eab097647b52eea377a3374bcf926f5
+  source: https://github.com/COVESA/vdm
+  path: modules/vdm/spec

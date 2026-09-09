@@ -17,6 +17,12 @@ modules:
     # files into a module that targets proto3.
     excludes:
       - build
+      # modules/ holds the upstream specification checkouts. Neither ships a
+      # .proto today, but VSS carries protobuf exporters and a later revision
+      # may vendor one -- which would enter this module silently, be linted
+      # against rules it was never written for, and be published to the BSR
+      # as though this repository wrote it.
+      - modules
 deps:
   - buf.build/bufbuild/protovalidate
   - buf.build/googleapis/googleapis

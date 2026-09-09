@@ -14,7 +14,7 @@ import (
 	"github.com/the-protobuf-project/vdm/sync/model"
 	"github.com/the-protobuf-project/vdm/sync/naming"
 	"github.com/the-protobuf-project/vdm/sync/plan"
-	"github.com/the-protobuf-project/vdm/sync/sdl"
+	"github.com/the-protobuf-project/vdm/sync/vspec"
 )
 
 // lifecycleFields are the server-owned fields every resource carries, in
@@ -76,42 +76,25 @@ func (e *Emitter) renderResourceHeader(pkg *model.Package, sb *strings.Builder) 
 
 // renderEnum writes one enum, its values prefixed with the enum name so they
 // do not collide in the package scope proto3 gives them.
-func (e *Emitter) renderEnum(f *File, enum *sdl.Def, sb *strings.Builder) {
-	name := e.M.EnumName(enum.Name)
+func (e *Emitter) renderEnum(f *File, signal *vspec.Node, sb *strings.Builder) {
+	name := e.M.EnumName(signal.FQN)
 	prefix := naming.Screaming(name)
 
-	sb.WriteString(docBlock(describe.Enum(name, enum), ""))
+	sb.WriteString(docBlock(describe.Enum(name, signal), ""))
 	sb.WriteString("enum " + name + " {\n")
 
-	// AIP-126 requires a zero value meaning "unspecified". Where the source
-	// model already opens with UNDEFINED, that value *is* the zero rather
-	// than a second spelling of it.
-	num := 0
-	if len(enum.Values) == 0 || enum.Values[0].Name != "UNDEFINED" {
+	// AIP-126 requires a zero value meaning "unspecified". Where the
+	// specification numbers its own values and starts at zero, that value
+	// *is* the zero rather than a second spelling of it.
+	values := plan.EnumValues(signal)
+	if len(values) == 0 || values[0].Number != 0 {
 		sb.WriteString("  // Not specified.\n")
 		sb.WriteString("  " + prefix + "_UNSPECIFIED = 0;\n\n")
-		num = 1
 	}
-	for i, v := range enum.Values {
-		e.renderEnumValue(f, v, prefix, i, num, sb)
-		num++
+	for i, v := range values {
+		sb.WriteString(docBlock(describe.EnumValue(v.Name, i), "  "))
+		fmt.Fprintf(sb, "  %s = %d;\n\n", plan.EnumValueName(prefix, v.Name), v.Number)
 	}
 	trimTrailingBlank(sb)
 	sb.WriteString("}\n")
-}
-
-// renderEnumValue writes one enumerant, recording the source spelling where
-// the sanitised name differs from it.
-func (e *Emitter) renderEnumValue(f *File, v sdl.EnumValue, prefix string, index, num int, sb *strings.Builder) {
-	source, hasSource := describe.SourceSpelling(v)
-	sb.WriteString(docBlock(describe.EnumValue(v, index), "  "))
-
-	value := plan.EnumValueName(prefix, v, index)
-	if hasSource {
-		f.Imports[model.VocabRoot+"/annotations.proto"] = true
-		fmt.Fprintf(sb, "  %s = %d [(%s.allowed_value) = {source_spelling: %q}];\n\n",
-			value, num, model.VocabPackage, source)
-		return
-	}
-	fmt.Fprintf(sb, "  %s = %d;\n\n", value, num)
 }

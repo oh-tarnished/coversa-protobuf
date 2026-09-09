@@ -92,25 +92,60 @@ func TestRoundTrip(t *testing.T) {
 }
 
 // TestEnumValuesUseSourceSpelling is the half of the mapping a consumer
-// cannot derive: VSS writes "Row1" where the schema emits
-// DIMENSION1_ROW1, and a peer expecting the former cannot read the latter.
+// cannot derive: VSS writes "ON" where the schema emits STATE_ON_VALUE, and a
+// peer expecting the former cannot read the latter.
+//
+// The suffix is not decoration. Cap'n Proto strips an enum's name prefix off
+// its values, which leaves `on` -- one of its keywords -- so the constant is
+// spelled to survive that and the manifest is the only record of what it was.
 func TestEnumValuesUseSourceSpelling(t *testing.T) {
-	m := load(t)
-	const tag = "protobuf.covesa.vss.interior.seat.v1.SeatInstanceTag"
+	const massage = "protobuf.covesa.vss.interior.seat.v1.Massage"
 
-	got, err := m.ToVSS(tag, []byte(`{"dimension1":"DIMENSION1_ROW1"}`))
+	got, err := load(t).ToVSS(massage, []byte(`{"activation":"STATE_ON_VALUE"}`))
 	if err != nil {
 		t.Fatalf("ToVSS: %v", err)
 	}
-	if got["Vehicle.Cabin.Seat.Dimension1"] != "Row1" &&
-		got["Vehicle.Cabin.Seat"] != "Row1" {
-		// The tag's own fqn varies; assert the value was translated at all.
-		for _, v := range got {
-			if v == "Row1" {
-				return
-			}
-		}
-		t.Errorf("enum was not translated to its source spelling: %v", got)
+	if got["Vehicle.Cabin.Seat.Massage.Status"] != "ON" {
+		t.Errorf("Status = %v, want ON", got["Vehicle.Cabin.Seat.Massage.Status"])
+	}
+}
+
+// TestNestedMessagesAreRecursed checks the translation reaches past the first
+// boundary. A converter that stops at an embedded message hands back the
+// protobuf spelling of everything inside it, which is not the VSS shape.
+func TestNestedMessagesAreRecursed(t *testing.T) {
+	got, err := load(t).ToVSS(seat, []byte(`{"massage":{"activation":"STATE_OFF","level":50}}`))
+	if err != nil {
+		t.Fatalf("ToVSS: %v", err)
+	}
+	nested, ok := got["Vehicle.Cabin.Seat.Massage"].(map[string]any)
+	if !ok {
+		t.Fatalf("Massage = %#v, want a nested map", got["Vehicle.Cabin.Seat.Massage"])
+	}
+	if nested["activation"] != "OFF" {
+		t.Errorf("nested activation = %v, want OFF", nested["activation"])
+	}
+	if nested["level"] != float64(50) {
+		t.Errorf("nested level = %v, want 50", nested["level"])
+	}
+}
+
+// TestInstanceAxesAreRecorded is what replaced the instance-tag message: a
+// seat is addressed as `vehicles/{v}/seats/row1DriverSide`, and nothing in
+// the protobuf says that id is two VSS path segments joined.
+func TestInstanceAxesAreRecorded(t *testing.T) {
+	r, ok := load(t).Resources[seat]
+	if !ok {
+		t.Fatal("no mapping for the seat")
+	}
+	if len(r.Instances) != 2 {
+		t.Fatalf("Instances = %v, want two axes", r.Instances)
+	}
+	if r.Instances[0][0] != "Row1" || r.Instances[1][0] != "DriverSide" {
+		t.Errorf("Instances = %v, want rows then sides", r.Instances)
+	}
+	if r.Pattern != "vehicles/{vehicle}/seats/{seat}" {
+		t.Errorf("Pattern = %q", r.Pattern)
 	}
 }
 
@@ -124,6 +159,10 @@ func TestUnknownMessageIsAnError(t *testing.T) {
 
 // TestManifestRecordsRenames checks the renames are present, since a consumer
 // mapping back to VSS vocabulary has no other way to learn them.
+//
+// The source spelling is the VSS path segment, PascalCase: the specification
+// writes `Vehicle.VehicleIdentification.ProductionDate`, and a peer joining
+// on that name needs the segment as it appears in the path.
 func TestManifestRecordsRenames(t *testing.T) {
 	m := load(t)
 	const vid = "protobuf.covesa.vss.platform.vehicle_identification.v1.VehicleIdentification"
@@ -132,7 +171,24 @@ func TestManifestRecordsRenames(t *testing.T) {
 	if !ok {
 		t.Fatal("no mapping for production")
 	}
-	if f.Source != "productionDate" {
-		t.Errorf("production source = %q, want productionDate", f.Source)
+	if f.Source != "ProductionDate" {
+		t.Errorf("production source = %q, want ProductionDate", f.Source)
+	}
+	if f.FQN != "Vehicle.VehicleIdentification.ProductionDate" {
+		t.Errorf("production fqn = %q", f.FQN)
+	}
+}
+
+// TestManifestNamesBothRevisions checks a consumer can tell which
+// specifications the mapping describes. A manifest and a message from
+// different revisions disagree silently otherwise: a signal added upstream is
+// simply absent here, and the conversion drops it without a word.
+func TestManifestNamesBothRevisions(t *testing.T) {
+	s := load(t).Spec
+	if s.VSS.Version == "" || s.VSS.Commit == "" {
+		t.Errorf("vss revision = %+v", s.VSS)
+	}
+	if s.VDM.Version == "" || s.VDM.Commit == "" {
+		t.Errorf("vdm revision = %+v", s.VDM)
 	}
 }

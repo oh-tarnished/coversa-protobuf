@@ -9,24 +9,25 @@ package vss
 // emitted .proto files, for the reason the docs generator does: the mapping
 // records decisions the generator *made* -- which field was renamed, which
 // unit was pinned -- and recovering them from the output would mean deriving
-// them a second time.
+// them a second time, from text, and getting a different answer the first
+// time the two drifted.
 
 import (
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/catalog"
-	"github.com/the-protobuf-project/vdm/sync/describe"
 	"github.com/the-protobuf-project/vdm/sync/model"
 	"github.com/the-protobuf-project/vdm/sync/naming"
 	"github.com/the-protobuf-project/vdm/sync/plan"
-	"github.com/the-protobuf-project/vdm/sync/sdl"
+	"github.com/the-protobuf-project/vdm/sync/vspec"
 )
 
 // Build extracts the manifest from a built model.
 func Build(m *model.Model) *Manifest {
 	out := &Manifest{
-		Version:   m.Spec.Version,
-		Commit:    m.Spec.Commit,
+		Spec: Spec{
+			VSS: Revision{Version: m.Spec.VSS.Version, Commit: m.Spec.VSS.Commit},
+			VDM: Revision{Version: m.Spec.VDM.Version, Commit: m.Spec.VDM.Commit},
+		},
 		Resources: map[string]*Resource{},
 	}
 	planner := plan.New(m)
@@ -41,79 +42,80 @@ func Build(m *model.Model) *Manifest {
 }
 
 // resourceOf maps one message.
-func resourceOf(m *model.Model, planner *plan.Planner, pkg *model.Package, t *sdl.Def) *Resource {
-	r := &Resource{Fields: map[string]*Field{}}
-	if v, ok := t.Directive("vspec"); ok {
-		r.FQN, _ = v.Arg("fqn")
-	}
-	if t.Name == pkg.Root.Name {
+//
+// The package root is also a resource, so it carries the name pattern and the
+// instance axes a consumer needs to take an id apart. An embedded message
+// carries neither: it is addressed as part of its owner.
+func resourceOf(m *model.Model, planner *plan.Planner, pkg *model.Package, t *vspec.Node) *Resource {
+	r := &Resource{FQN: t.FQN, Fields: map[string]*Field{}}
+
+	isRoot := t == pkg.Root
+	if isRoot {
 		r.Pattern = pkg.Pattern
+		r.Instances = t.Instances
 	}
 
-	isRoot := t.Name == pkg.Root.Name
-	for _, f := range t.Fields {
-		// A field naming a resource in another package became a resource
-		// name, which carries no VSS signal of its own.
-		if _, isObject := m.Types[f.Type.Name]; isObject && !pkg.Holds(f.Type.Name) {
+	for _, child := range t.Children {
+		// A branch promoted to a resource of its own is not a field here: it
+		// is reachable by a name derived from this one, and the emitter drops
+		// it for the same reason. Mirrored rather than re-derived -- a
+		// manifest naming a field the schema does not emit is worse than no
+		// manifest, because a converter would trust it.
+		if child.Kind == vspec.KindBranch && child.Ref == "" && !pkg.Holds(child.FQN) {
 			continue
 		}
-		p, err := planner.Field(t, f, isRoot)
+		p, err := planner.Field(t, child, isRoot)
 		if err != nil {
 			continue
 		}
-		mapped := fieldOf(m, f, p)
-
-		// The instance-tag axes carry no @vspec, because VSS does not model
-		// an instance as a signal -- it expands the path, so a seat's height
-		// is `Vehicle.Cabin.Seat.Row1.DriverSide.Height`.
-		//
-		// They are still the only thing saying *which* seat a reading is
-		// from, so dropping them would make a converted message ambiguous.
-		// Each gets an address derived from the branch it identifies, marked
-		// as an axis rather than claimed to be a signal VSS declares.
-		if mapped.FQN == "" && r.FQN != "" {
-			mapped.FQN = r.FQN + "." + naming.Pascal(p.Name)
-			mapped.Element = "instance_axis"
-		}
-		r.Fields[p.Name] = mapped
+		r.Fields[p.Name] = fieldOf(m, pkg, child, p)
 	}
 	return r
 }
 
 // fieldOf maps one field.
-func fieldOf(m *model.Model, src sdl.Field, p plan.Field) *Field {
+func fieldOf(m *model.Model, pkg *model.Package, n *vspec.Node, p plan.Field) *Field {
 	out := &Field{
-		FQN:      p.FQN,
-		Element:  strings.ToLower(strings.TrimPrefix(p.Element, "ELEMENT_")),
-		Quantity: strings.ToLower(strings.TrimPrefix(p.Quantity, "QUANTITY_KIND_")),
+		FQN:     p.FQN,
+		Element: strings.ToLower(strings.TrimPrefix(p.Element, "ELEMENT_")),
+		Unit:    n.Unit,
 	}
-	if p.Unit != "" {
-		out.Unit = describe.UnitSymbol(strings.TrimPrefix(p.Unit, "UNIT_"))
+	if u, ok := m.Units.Units[n.Unit]; ok {
+		out.Quantity = u.Quantity
 	}
+
 	// Recorded only where the two differ: a mapping that restates the field's
 	// own name for 800 fields buries the ~30 that were actually renamed.
-	if source := naming.Snake(src.Name); source != p.Name {
-		out.Source = src.Name
+	if source := naming.Snake(n.Name); source != p.Name {
+		out.Source = n.Name
 	}
-	if e, ok := m.Enums[src.Type.Name]; ok && !catalog.IsScalarEnum(e.Name) && !model.IsUnitEnum(e.Name) {
-		out.Enum = m.EnumName(e.Name)
-		out.Values = enumValues(m, e)
+
+	switch {
+	case n.Kind == vspec.KindBranch && n.Ref == "":
+		// VSS models a branch as a node rather than as a signal, so there is
+		// no element kind to report and the schema supplies its own.
+		out.Element = "branch"
+		out.Message = pkg.ProtoPackage() + "." + model.MessageName(n.Name)
+	case model.HasEnum(n):
+		out.Enum = m.EnumName(n.FQN)
+		out.Values = enumValues(m, n)
 	}
 	return out
 }
 
 // enumValues maps each emitted constant to the spelling a VSS-native peer
 // sends.
-func enumValues(m *model.Model, e *sdl.Def) map[string]string {
-	prefix := naming.Screaming(m.EnumName(e.Name))
+//
+// Both halves come from the same two functions the emitter uses. Spelling the
+// constants a second time here is how the manifest would come to name values
+// no generated enum has.
+func enumValues(m *model.Model, n *vspec.Node) map[string]string {
+	prefix := naming.Screaming(m.EnumName(n.FQN))
+	values := plan.EnumValues(n)
 
-	out := make(map[string]string, len(e.Values))
-	for i, v := range e.Values {
-		source := v.Name
-		if s, ok := describe.SourceSpelling(v); ok {
-			source = s
-		}
-		out[plan.EnumValueName(prefix, v, i)] = source
+	out := make(map[string]string, len(values))
+	for _, v := range values {
+		out[plan.EnumValueName(prefix, v.Name)] = v.Name
 	}
 	return out
 }

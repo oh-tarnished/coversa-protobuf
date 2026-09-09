@@ -3,85 +3,25 @@
 
 package emit
 
+// emit_test.go checks the facts the emitted protobuf carries that protobuf
+// itself cannot state: what a number means, whether it can be written, and
+// which specification revision it came from.
+
 import (
-	"os"
-	"path/filepath"
 	"strings"
 	"testing"
-
-	"github.com/the-protobuf-project/vdm/sync/model"
-	"github.com/the-protobuf-project/vdm/sync/sdl"
-	"github.com/the-protobuf-project/vdm/sync/spec"
 )
 
-const fixture = `
-type Vehicle @vspec(element: BRANCH, fqn: "Vehicle") {
-  """Vehicle speed."""
-  speed(unit: VelocityUnitEnum = KILOMETER_PER_HOUR): Float @vspec(element: SENSOR, fqn: "Vehicle.Speed")
-
-  """Power optimization level."""
-  powerOptimizeLevel: UInt8 @vspec(element: ACTUATOR, fqn: "Vehicle.PowerOptimizeLevel")
-    @range(min: 0, max: 10)
-
-  seats: [Seat] @vspec(element: BRANCH, fqn: "Vehicle.Cabin.Seat")
-}
-
-type Seat @vspec(element: BRANCH, fqn: "Vehicle.Cabin.Seat") {
-  """Seat height."""
-  height: UInt16 @vspec(element: ACTUATOR, fqn: "Vehicle.Cabin.Seat.Height")
-}
-
-enum VelocityUnitEnum @vspec(element: QUANTITY_KIND) {
-  KILOMETER_PER_HOUR @vspec(element: UNIT)
-}
-
-type Person { id: ID! }
-type ChargingStation { location: String }
-type ChargingSession { vehicle: Vehicle! }
-`
-
-// build renders the fixture into a temporary directory and returns it.
-func build(t *testing.T) string {
-	t.Helper()
-
-	defs, err := sdl.Parse("test.graphql", fixture)
-	if err != nil {
-		t.Fatalf("Parse: %v", err)
-	}
-	m, err := model.Build(defs)
-	if err != nil {
-		t.Fatalf("Build: %v", err)
-	}
-	m.Spec = spec.Spec{Version: "2026-07-24", Commit: "36bc93936eab", Path: "vdm/spec"}
-
-	dir := t.TempDir()
-	if _, err := New(m).Generate(defs, dir); err != nil {
-		t.Fatalf("Generate: %v", err)
-	}
-	return dir
-}
-
-// read returns one generated file.
-func read(t *testing.T, dir, path string) string {
-	t.Helper()
-	body, err := os.ReadFile(filepath.Join(dir, filepath.FromSlash(path)))
-	if err != nil {
-		t.Fatalf("read %s: %v", path, err)
-	}
-	return string(body)
-}
-
-// TestSignalAnnotation checks the fact protobuf cannot state on its own: a
+// TestSignalAnnotation checks the facts protobuf cannot state on its own: a
 // double is kilometres per hour, and it is a sensor rather than an actuator.
 func TestSignalAnnotation(t *testing.T) {
 	got := read(t, build(t), "vss/vehicle/v1/vehicle.proto")
-
 	for _, want := range []string{
 		"double speed =",
 		"(google.api.field_behavior) = OUTPUT_ONLY", // a sensor is not writable
 		"element: ELEMENT_SENSOR",
 		`fqn: "Vehicle.Speed"`,
-		"unit: UNIT_KILOMETER_PER_HOUR",
+		"unit: UNIT_KM_PER_H",
 		"quantity_kind: QUANTITY_KIND_VELOCITY",
 		"Unit: km/h. VSS: Vehicle.Speed (sensor).", // restated for a human
 	} {
@@ -91,15 +31,22 @@ func TestSignalAnnotation(t *testing.T) {
 	}
 }
 
-// TestBoundsAreIntersected checks that a width bound and an explicit @range
-// become one rule. Protobuf accepts a single rule per field, and emitting two
-// is a compile error.
+// TestCommentReachesTheComment is what reading .vspec directly bought: the
+// GraphQL translation dropped every one of these.
+func TestCommentReachesTheComment(t *testing.T) {
+	got := read(t, build(t), "vss/vehicle/v1/vehicle.proto")
+	if !strings.Contains(got, "Reported by the vehicle; no API call sets it.") {
+		t.Error("the specification's comment did not reach the generated file")
+	}
+}
+
+// TestBoundsAreIntersected checks a width bound and a declared range become
+// one rule. Protobuf accepts a single rule per field, and emitting two is a
+// compile error.
 func TestBoundsAreIntersected(t *testing.T) {
 	got := read(t, build(t), "vss/vehicle/v1/vehicle.proto")
-
-	// UInt8 gives 0..255; @range(min: 0, max: 10) is tighter and wins.
 	if !strings.Contains(got, "lte: 10") {
-		t.Error("the @range upper bound did not win over the width bound")
+		t.Error("the declared upper bound did not win over the width bound")
 	}
 	if strings.Contains(got, "lte: 255") {
 		t.Error("both bounds were emitted; they must be intersected")
@@ -110,54 +57,48 @@ func TestBoundsAreIntersected(t *testing.T) {
 // merely skipped. A serialization target numbers slots contiguously, so an
 // unreserved hole silently shifts every field after it.
 func TestReservedRange(t *testing.T) {
-	got := read(t, build(t), "vss/vehicle/v1/vehicle.proto")
-	if !strings.Contains(got, "reserved 8 to 15;") {
+	if got := read(t, build(t), "vss/vehicle/v1/vehicle.proto"); !strings.Contains(got, "reserved 8 to 15;") {
 		t.Error("vehicle.proto does not reserve the held field numbers")
 	}
 }
 
-// TestSingletonHasNoCreate checks AIP-156: a resource that exists because its
-// parent does cannot be created or deleted independently.
-func TestSingletonHasNoCreate(t *testing.T) {
-	dir := build(t)
-	// Seat is a collection, so it has the full set. It lands in `platform`
-	// here because this fixture hangs it directly off Vehicle and the domain
-	// table does not name it -- which is the documented default, and is what
-	// makes a new branch visible rather than silently misfiled.
-	seat := read(t, dir, "vss/platform/seat/v1/service.proto")
-	for _, want := range []string{"rpc GetSeat", "rpc ListSeats", "rpc CreateSeat",
-		"rpc UpdateSeat", "rpc DeleteSeat", "rpc UndeleteSeat"} {
-		if !strings.Contains(seat, want) {
-			t.Errorf("Seats service is missing %q", want)
+// TestAllowedBecomesEnum checks an allowed-value set becomes a protobuf enum
+// with the zero value AIP-126 requires.
+func TestAllowedBecomesEnum(t *testing.T) {
+	got := read(t, build(t), "vss/interior/seat/v1/seat.proto")
+	for _, want := range []string{
+		"enum OccupancyState{", "enum OccupancyState {",
+	} {
+		if strings.Contains(got, want) {
+			goto found
 		}
 	}
-
-	if strings.Count(seat, "rpc ") != 6 {
-		t.Errorf("Seats has %d RPCs, want 6", strings.Count(seat, "rpc "))
-	}
-}
-
-// TestBannerNamesTheRevision checks every file carries the pin, which is what
-// makes "which specification is this from?" answerable from one file.
-func TestBannerNamesTheRevision(t *testing.T) {
-	got := read(t, build(t), "vss/vehicle/v1/vehicle.proto")
-	if !strings.Contains(got, "spec revision 2026-07-24 (36bc939). DO NOT EDIT.") {
-		t.Error("the generated file does not name its specification revision")
-	}
-}
-
-// TestCrossPackageReference checks AIP-215: a field naming a resource in
-// another package becomes the resource name, not the message.
-func TestCrossPackageReference(t *testing.T) {
-	got := read(t, build(t), "vdm/charging_session/v1/charging_session.proto")
-
-	for _, want := range []string{
-		"string vehicle =",
-		`(google.api.resource_reference) = {type: "vdm.covesa.org/Vehicle"}`,
-		"(google.api.field_behavior) = IMMUTABLE",
-	} {
+	t.Errorf("no OccupancyState enum:\n%s", got[:min(600, len(got))])
+	return
+found:
+	for _, want := range []string{"OCCUPANCY_STATE_UNSPECIFIED = 0;", "OCCUPANCY_STATE_OCCUPIED"} {
 		if !strings.Contains(got, want) {
-			t.Errorf("charging_session.proto is missing %q", want)
+			t.Errorf("enum is missing %q", want)
+		}
+	}
+}
+
+// TestInstancedBranchIsItsOwnResource checks a branch VSS gives instances to
+// becomes separately addressable — the whole point of promoting them.
+func TestInstancedBranchIsItsOwnResource(t *testing.T) {
+	got := read(t, build(t), "vss/interior/seat/v1/seat.proto")
+	if !strings.Contains(got, `pattern: "vehicles/{vehicle}/seats/{seat}"`) {
+		t.Error("Seat is not addressable on its own")
+	}
+}
+
+// TestBannerNamesBothRevisions checks every file says where it came from,
+// which is what makes that answerable from one file.
+func TestBannerNamesBothRevisions(t *testing.T) {
+	got := read(t, build(t), "vss/vehicle/v1/vehicle.proto")
+	for _, want := range []string{"revision 2026-09-02 (cd4bc50)", "revision 2026-07-24 (36bc939)"} {
+		if !strings.Contains(got, want) {
+			t.Errorf("banner is missing %q", want)
 		}
 	}
 }

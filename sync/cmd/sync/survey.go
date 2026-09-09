@@ -3,126 +3,87 @@
 
 package main
 
-// survey.go reports what the parser found and every field name that trips a
-// known AIP naming rule.
+// survey.go reports what the generator parsed: the two revisions, the shape
+// of the tree, and anything filed by fallback rather than by decision.
 //
-// This is how the rename catalogue in docs/conventions.md was built, and it
-// is kept so the catalogue can be *rechecked* after a specification bump
-// rather than trusted. A new signal name may hit a rule no existing field
-// does; this is what surfaces it before the linter does.
+// Run it after a specification bump. `buf breaking` catches a field that
+// moved; nothing else reports a branch that landed in a domain because the
+// table did not name it, which is a decision nobody made.
 
 import (
 	"fmt"
 	"sort"
 	"strings"
 
-	"github.com/the-protobuf-project/vdm/sync/naming"
-	"github.com/the-protobuf-project/vdm/sync/sdl"
+	"github.com/the-protobuf-project/vdm/sync/model"
+	"github.com/the-protobuf-project/vdm/sync/vspec"
 )
 
-// trap is one field name that hits a known AIP rule.
-type trap struct{ owner, field, rule string }
-
 // surveyModel prints the parsed model and its naming traps.
-func surveyModel(defs []sdl.Def) error {
-	printKinds(defs)
+func surveyModel(m *model.Model) error {
+	fmt.Printf("vss %s (%s), vdm %s (%s)\n\n",
+		m.Spec.VSS.Version, m.Spec.VSS.Short(),
+		m.Spec.VDM.Version, m.Spec.VDM.Short())
 
-	traps := findTraps(defs)
-	fmt.Printf("\nAIP naming traps: %d\n", len(traps))
-	for _, t := range traps {
-		fmt.Printf("  %-40s %-46s %s\n", t.owner, t.field, t.rule)
+	kinds := map[vspec.Kind]int{}
+	for _, root := range m.Roots {
+		root.Walk(func(n *vspec.Node) { kinds[n.Kind]++ })
 	}
+	for _, k := range []vspec.Kind{vspec.KindBranch, vspec.KindSensor,
+		vspec.KindActuator, vspec.KindAttribute, vspec.KindStruct, vspec.KindProperty} {
+		if kinds[k] > 0 {
+			fmt.Printf("%-12s %d\n", k, kinds[k])
+		}
+	}
+	fmt.Printf("%-12s %d\n%-12s %d\n", "packages", len(m.Packages), "units", len(m.Units.Units))
+
+	surveyDomains(m)
+	surveyTraps(m)
 	return nil
 }
 
-// printKinds reports how many definitions of each kind were parsed.
-func printKinds(defs []sdl.Def) {
-	counts := map[string]int{}
-	for _, d := range defs {
-		counts[d.Kind]++
-	}
-	kinds := make([]string, 0, len(counts))
-	for k := range counts {
-		kinds = append(kinds, k)
-	}
-	sort.Strings(kinds)
-	for _, k := range kinds {
-		fmt.Printf("%-14s %d\n", k, counts[k])
-	}
-}
-
-// findTraps collects every field whose name hits a known AIP rule.
-func findTraps(defs []sdl.Def) []trap {
-	var traps []trap
-	seen := map[string]bool{}
-
-	for _, d := range defs {
-		for _, f := range d.Fields {
-			n := naming.Snake(f.Name)
-			rule := ruleFor(n)
-			if rule == "" {
-				continue
-			}
-			if key := d.Name + "." + n + rule; !seen[key] {
-				seen[key] = true
-				traps = append(traps, trap{d.Name, f.Name + " -> " + n, rule})
-			}
+// surveyDomains reports the top-level branches the domain table does not name.
+//
+// One lands in platform, which is a fallback rather than a decision. Reported
+// so a VSS release adding a branch is visible rather than silently filed --
+// Orientation and Safety both arrived this way.
+func surveyDomains(m *model.Model) {
+	var unnamed []string
+	for _, p := range m.Packages {
+		if p.Family == model.FamilyVSS && p.Parent != nil &&
+			p.Parent.Parent == nil && !model.DomainNamed(p.Root.Name) {
+			unnamed = append(unnamed, p.Root.Name)
 		}
 	}
-	sort.Slice(traps, func(i, j int) bool {
-		if traps[i].rule != traps[j].rule {
-			return traps[i].rule < traps[j].rule
-		}
-		return traps[i].owner < traps[j].owner
-	})
-	return traps
-}
-
-// ruleFor names the AIP rule a snake_case field name trips, or "".
-func ruleFor(n string) string {
-	switch {
-	case n == "name":
-		return "AIP-122 bare `name` marks the message a resource"
-	case strings.HasSuffix(n, "_name") && !allowedNameSuffix[n]:
-		return "AIP-122 `_name` suffix"
-	case n == "state" || n == "status":
-		return "AIP-216 reserved"
-	case hasPreposition(n):
-		return "AIP-140 preposition"
-	case bareTimeUnits[n]:
-		return "AIP-142 bare time unit reads as a Timestamp"
-	case strings.HasSuffix(n, "_time") || strings.HasSuffix(n, "_date"):
-		return "AIP-142 `_time`/`_date` suffix implies Timestamp"
-	case strings.HasSuffix(n, "_id"):
-		return "AIP-122 `_id` suffix"
-	default:
-		return ""
+	if len(unnamed) == 0 {
+		return
 	}
+	sort.Strings(unnamed)
+	fmt.Printf("\ntop-level branches with no domain (filed under platform): %s\n",
+		strings.Join(unnamed, ", "))
 }
 
-// allowedNameSuffix are the three fields AIP-122 lets keep a `_name` suffix.
-var allowedNameSuffix = map[string]bool{
-	"display_name": true, "given_name": true, "family_name": true,
-}
+// surveyTraps prints the naming traps: resolved ones counted, unresolved ones
+// listed with what to do about each.
+func surveyTraps(m *model.Model) {
+	traps := findTraps(m)
 
-// bareTimeUnits are the names AIP-142 reads as a Timestamp field.
-var bareTimeUnits = map[string]bool{
-	"seconds": true, "minutes": true, "hours": true, "days": true,
-	"weeks": true, "months": true, "years": true, "time": true, "date": true,
-}
-
-// prepositions AIP-140 bans from the start of a field name.
-var prepositions = []string{
-	"and_", "at_", "before_", "after_", "by_", "for_", "from_", "in_", "of_",
-	"on_", "or_", "to_", "with_",
-}
-
-// hasPreposition reports whether a name begins with a banned preposition.
-func hasPreposition(n string) bool {
-	for _, p := range prepositions {
-		if strings.HasPrefix(n, p) {
-			return true
+	var open []trap
+	for _, t := range traps {
+		if !t.resolved {
+			open = append(open, t)
 		}
 	}
-	return false
+
+	fmt.Printf("\nAIP naming traps: %d found, %d resolved\n",
+		len(traps), len(traps)-len(open))
+	if len(open) == 0 {
+		return
+	}
+	fmt.Printf("\n%d unresolved. Add a rename to catalog.FieldRenames, or a reason to\n"+
+		"catalog.AcceptedTraps, and a row to the catalogue in docs/conventions.md:\n\n",
+		len(open))
+	for _, t := range open {
+		fmt.Printf("  %-46s %-24s %s\n", t.owner, t.field, t.rule)
+	}
 }

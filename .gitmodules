@@ -1,0 +1,6 @@
+[submodule "vdm"]
+	path = modules/vdm
+	url = https://github.com/COVESA/vdm.git
+[submodule "vss"]
+	path = modules/vss
+	url = https://github.com/COVESA/vehicle_signal_specification.git

@@ -34,12 +34,25 @@ also a row in the catalogue at the foot of [`conventions.md`](conventions.md).
 It is what a specification bump most often needs edited, so it is kept where
 it can be read without reading the code around it.
 
-## The 200-line cap
+## The line caps
 
 **Every Go file is capped at 200 lines**, tighter than the 250 prose gets, and
-CI checks it. The cap is a prompt: the generator is decomposed by stage, so a
-file over it usually means two stages have merged, and the fix is to find the
-seam rather than to compress.
+CI checks both. The cap is a prompt: the generator is decomposed by stage, so
+a file over it usually means two stages have merged, and the fix is to find
+the seam rather than to compress. The same holds for prose — move a passage to
+the document that owns it, do not squeeze it.
+
+Three things are exempt, each because the remedy the cap prescribes is
+unavailable rather than merely inconvenient:
+
+| Exempt | Why |
+|---|---|
+| everything under `protobuf/` | generated. Protobuf cannot continue a message across files, and the READMEs beside them are written by `docs`. Fifteen protos exceed 250 lines and each holds one message — `vehicle.proto` is 33 VSS signals with a comment and an annotation on each |
+| `README.md` | its length is diagrams. Moving half of it behind a link produces a worse entry document, not a shorter one |
+| `docs/sample-reference.md` | a specimen of generated output. Splitting it would misrepresent what a real page looks like |
+
+Every other hand-written file is capped, Markdown and Go alike. The list is in
+the `cap` recipe in the justfile, which is what CI runs.
 
 ## Why there is a workspace
 

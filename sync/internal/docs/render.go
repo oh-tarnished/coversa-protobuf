@@ -10,11 +10,12 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/the-protobuf-project/vdm/sync/catalog"
 	"github.com/the-protobuf-project/vdm/sync/describe"
 	"github.com/the-protobuf-project/vdm/sync/model"
 	"github.com/the-protobuf-project/vdm/sync/naming"
 	"github.com/the-protobuf-project/vdm/sync/plan"
-	"github.com/the-protobuf-project/vdm/sync/sdl"
+	"github.com/the-protobuf-project/vdm/sync/vspec"
 )
 
 // method is one row of the service table.
@@ -78,9 +79,9 @@ func (g *Generator) renderMessages(pkg *model.Package, sb *strings.Builder) {
 	sb.WriteString("## Messages\n\n")
 
 	for _, t := range pkg.Types {
-		isRoot := t.Name == pkg.Root.Name
+		isRoot := t.FQN == pkg.Root.FQN
 		fmt.Fprintf(sb, "### `%s`\n\n", model.MessageName(t.Name))
-		if doc := firstParagraph(describe.Message(model.MessageName(t.Name), t)); doc != "" {
+		if doc := firstParagraph(describe.Message(naming.Pascal(t.Name), t)); doc != "" {
 			sb.WriteString(doc + "\n\n")
 		}
 		if isRoot {
@@ -93,22 +94,19 @@ func (g *Generator) renderMessages(pkg *model.Package, sb *strings.Builder) {
 }
 
 // renderFields writes one message's field table.
-func (g *Generator) renderFields(pkg *model.Package, t *sdl.Def, isRoot bool, sb *strings.Builder) {
-	rows := make([]string, 0, len(t.Fields))
-	for _, f := range t.Fields {
-		// A field naming a resource in another package is a reference rather
-		// than an embedded value; the emitter turns it into a string.
-		if _, isObject := g.M.Types[f.Type.Name]; isObject && !pkg.Holds(f.Type.Name) {
-			if other := g.M.PackageOf(f.Type.Name); other != nil && other.Parent != pkg {
-				rows = append(rows, referenceRow(f, other))
-			}
+func (g *Generator) renderFields(pkg *model.Package, t *vspec.Node, isRoot bool, sb *strings.Builder) {
+	rows := make([]string, 0, len(t.Children))
+	for _, c := range t.Children {
+		// A branch promoted to a resource of its own is addressed by name,
+		// not carried as a field.
+		if c.Kind == vspec.KindBranch && c.Ref == "" && !pkg.Holds(c.FQN) {
 			continue
 		}
-		p, err := g.Planner.Field(t, f, isRoot)
+		p, err := g.Planner.Field(t, c, isRoot)
 		if err != nil {
 			continue
 		}
-		rows = append(rows, fieldRow(p))
+		rows = append(rows, g.fieldRow(p))
 	}
 	if len(rows) == 0 {
 		sb.WriteString("_No fields of its own._\n\n")
@@ -121,50 +119,42 @@ func (g *Generator) renderFields(pkg *model.Package, t *sdl.Def, isRoot bool, sb
 }
 
 // fieldRow renders one planned field as a table row.
-func fieldRow(p plan.Field) string {
+func (g *Generator) fieldRow(p plan.Field) string {
 	typ := p.Type
 	if p.Repeated {
 		typ = "repeated " + typ
 	}
 	unit := "—"
 	if p.Unit != "" {
-		unit = "`" + describe.UnitSymbol(strings.TrimPrefix(p.Unit, "UNIT_")) + "`"
+		unit = "`" + g.symbol(p.Unit) + "`"
 	}
 	return fmt.Sprintf("| `%s` | `%s` | `%s` | %s | %s |",
 		p.Name, typ, strings.Join(p.Behavior, ", "), unit, cell(describe.Summary(p)))
 }
 
-// referenceRow renders a cross-package association, which is a resource name.
-func referenceRow(f sdl.Field, other *model.Package) string {
-	behavior := "OPTIONAL"
-	if f.Type.NonNull {
-		behavior = "REQUIRED, IMMUTABLE"
-	}
-	return fmt.Sprintf("| `%s` | `string` | `%s` | — | Resource name of a `%s`, `%s`. |",
-		f.Name, behavior, other.ResourceName(), other.Pattern)
-}
-
 // renderEnums writes one table per enum in the package.
 func (g *Generator) renderEnums(pkg *model.Package, sb *strings.Builder) {
-	if len(pkg.Enums) == 0 {
+	enums := pkg.Enums()
+	if len(enums) == 0 {
 		return
 	}
 	sb.WriteString("## Enums\n\n")
 
-	for _, e := range pkg.Enums {
-		fmt.Fprintf(sb, "### `%s`\n\n", g.M.EnumName(e.Name))
-		if doc := firstParagraph(describe.Enum(g.M.EnumName(e.Name), e)); doc != "" {
+	for _, e := range enums {
+		name := g.M.EnumName(e.FQN)
+		fmt.Fprintf(sb, "### `%s`\n\n", name)
+		if doc := firstParagraph(describe.Enum(name, e)); doc != "" {
 			sb.WriteString(doc + "\n\n")
 		}
-		name := g.M.EnumName(e.Name)
 		prefix := naming.Screaming(name)
 
 		sb.WriteString("| Value | Description |\n| --- | --- |\n")
-		for i, v := range e.Values {
-			// The emitted constant, not the source spelling: this table
-			// documents the schema, and the schema is what a consumer holds.
+		for i, v := range plan.EnumValues(e) {
+			// The emitted constant, not the specification's bare name: this
+			// table documents the schema, and the schema is what a consumer
+			// holds.
 			fmt.Fprintf(sb, "| `%s` | %s |\n",
-				plan.EnumValueName(prefix, v, i), cell(describe.EnumValue(v, i)))
+				plan.EnumValueName(prefix, v.Name), cell(describe.EnumValue(v.Name, i)))
 		}
 		sb.WriteString("\n")
 	}
@@ -180,4 +170,17 @@ func cell(doc string) string {
 		return "—"
 	}
 	return strings.ReplaceAll(doc, "|", "\\|")
+}
+
+// symbol renders a unit constant back as the symbol VSS writes.
+func (g *Generator) symbol(constant string) string {
+	if constant == "" {
+		return ""
+	}
+	for s := range g.M.Units.Units {
+		if catalog.UnitConstant(s) == constant {
+			return s
+		}
+	}
+	return ""
 }

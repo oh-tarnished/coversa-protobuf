@@ -40,7 +40,7 @@ func (m *Manifest) ToVSS(message string, body []byte) (map[string]any, error) {
 
 	resource, ok := m.Resources[message]
 	if !ok {
-		return nil, fmt.Errorf("unknown message %q; is the manifest from spec %s?", message, m.Version)
+		return nil, fmt.Errorf("unknown message %q; is the manifest from %s?", message, m.Spec)
 	}
 
 	out := map[string]any{}
@@ -49,7 +49,7 @@ func (m *Manifest) ToVSS(message string, body []byte) (map[string]any, error) {
 		if !ok || field.FQN == "" {
 			continue
 		}
-		out[field.FQN] = toSourceValue(field, value)
+		out[field.FQN] = m.toSource(field, value)
 	}
 	return out, nil
 }
@@ -62,7 +62,7 @@ func (m *Manifest) ToVSS(message string, body []byte) (map[string]any, error) {
 func (m *Manifest) FromVSS(message string, signals map[string]any) ([]byte, error) {
 	resource, ok := m.Resources[message]
 	if !ok {
-		return nil, fmt.Errorf("unknown message %q; is the manifest from spec %s?", message, m.Version)
+		return nil, fmt.Errorf("unknown message %q; is the manifest from %s?", message, m.Spec)
 	}
 
 	byFQN := make(map[string]struct {
@@ -85,16 +85,24 @@ func (m *Manifest) FromVSS(message string, signals map[string]any) ([]byte, erro
 		if !ok {
 			continue
 		}
-		out[hit.name] = fromSourceValue(hit.field, value)
+		out[hit.name] = m.fromSource(hit.field, value)
 	}
 	return json.Marshal(out)
 }
 
-// toSourceValue renders one value the way the source model writes it.
+// toSource renders one value the way the source model writes it.
 //
-// Only enums differ: the schema emits SEAT_INSTANCE_TAG_DIMENSION1_ROW1 where
-// VSS writes "Row1", and a peer expecting the latter cannot read the former.
-func toSourceValue(f *Field, value any) any {
+// Three cases. An enum is translated: the schema emits STATE_ON_VALUE where
+// VSS writes "ON", and a peer expecting the latter cannot read the former.
+// A nested message is recursed into, so the translation reaches the whole
+// tree rather than stopping at the first boundary. Anything else passes
+// through -- a number is a number in both.
+func (m *Manifest) toSource(f *Field, value any) any {
+	if f.Message != "" {
+		if nested, ok := value.(map[string]any); ok {
+			return m.nest(f.Message, nested, m.toSource)
+		}
+	}
 	s, isString := value.(string)
 	if !isString || len(f.Values) == 0 {
 		return value
@@ -105,9 +113,14 @@ func toSourceValue(f *Field, value any) any {
 	return value
 }
 
-// fromSourceValue is the inverse: a source spelling becomes the constant the
-// schema emits.
-func fromSourceValue(f *Field, value any) any {
+// fromSource is the inverse: a source spelling becomes the constant the
+// schema emits, recursing the same way.
+func (m *Manifest) fromSource(f *Field, value any) any {
+	if f.Message != "" {
+		if nested, ok := value.(map[string]any); ok {
+			return m.nest(f.Message, nested, m.fromSource)
+		}
+	}
 	s, isString := value.(string)
 	if !isString || len(f.Values) == 0 {
 		return value
@@ -118,6 +131,29 @@ func fromSourceValue(f *Field, value any) any {
 		}
 	}
 	return value
+}
+
+// nest applies convert to every field of an embedded message.
+//
+// Keyed by the protobuf field name rather than the VSS name: an embedded
+// message is not a branch a VSS consumer addresses on its own, so flattening
+// it into fully qualified names would invent paths the specification does not
+// declare.
+func (m *Manifest) nest(message string, body map[string]any, convert func(*Field, any) any) map[string]any {
+	resource, ok := m.Resources[message]
+	if !ok {
+		return body
+	}
+	out := make(map[string]any, len(body))
+	for name, value := range body {
+		field, ok := resource.Fields[protoName(name)]
+		if !ok {
+			out[name] = value
+			continue
+		}
+		out[protoName(name)] = convert(field, value)
+	}
+	return out
 }
 
 // protoName normalises a protobuf JSON key to the field's declared name.

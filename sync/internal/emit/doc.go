@@ -11,7 +11,7 @@ import (
 
 	"github.com/the-protobuf-project/vdm/sync/describe"
 	"github.com/the-protobuf-project/vdm/sync/model"
-	"github.com/the-protobuf-project/vdm/sync/sdl"
+	"github.com/the-protobuf-project/vdm/sync/vspec"
 )
 
 // docWidth is the column comment text wraps at, leaving room for the `// `
@@ -66,18 +66,14 @@ func trimTrailingBlank(sb *strings.Builder) {
 
 // messageDoc builds a message's comment: the source description, what it is
 // in VSS terms, and what it is in AIP terms.
-func (e *Emitter) messageDoc(pkg *model.Package, t *sdl.Def, root bool) string {
+func (e *Emitter) messageDoc(pkg *model.Package, t *vspec.Node, root bool) string {
 	doc := describe.Message(model.MessageName(t.Name), t)
 
-	var notes []string
-	if v, ok := t.Directive("vspec"); ok {
-		if fqn, ok := v.Arg("fqn"); ok {
-			notes = append(notes, "VSS: "+fqn+".")
-		}
-	}
-	if _, isTag := t.Directive("instanceTag"); isTag {
-		notes = append(notes, "An S2DM instance tag: it says which member of a repeated "+
-			"branch a value belongs to, and carries no signal of its own.")
+	notes := []string{"VSS: " + t.FQN + "."}
+	if len(t.Instances) > 0 {
+		notes = append(notes, "Instanced: "+instanceNote(t)+
+			" The axes together name one occurrence, which is why each is a "+
+			"resource of its own rather than a repeated field.")
 	}
 	if root {
 		notes = append(notes, resourceNote(pkg))
@@ -112,4 +108,13 @@ func resourceNote(pkg *model.Package) string {
 	default:
 		return "A root resource, named \"" + pkg.Pattern + "\"."
 	}
+}
+
+// instanceNote spells out the axes a branch expands across.
+func instanceNote(n *vspec.Node) string {
+	axes := make([]string, 0, len(n.Instances))
+	for _, axis := range n.Instances {
+		axes = append(axes, strings.Join(axis, ", "))
+	}
+	return strings.Join(axes, " × ") + "."
 }

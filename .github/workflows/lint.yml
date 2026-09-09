@@ -92,10 +92,12 @@ jobs:
       # Go is capped tighter because the generator is decomposed by stage, and
       # a file over the cap usually means two stages have merged.
       #
-      # Two exemptions, both because the cap's remedy is to *split* and
+      # Three exemptions, each because the cap's remedy is to *split* and
       # splitting is unavailable rather than merely inconvenient: everything
-      # under protobuf/, which is generated; and README.md, whose length is
-      # diagrams that belong where a reader starts. See CLAUDE.md rule 2.
+      # under protobuf/, which is generated; README.md, whose length is
+      # diagrams that belong where a reader starts; and
+      # docs/sample-reference.md, a specimen of generated output.
+      # See CLAUDE.md rule 2.
       - name: Check File Length Caps
         run: |
           over=0
@@ -110,8 +112,9 @@ jobs:
               over=1
             fi
           done < <(find . -path ./gen -prune -o -path ./build -prune \
-                     -o -path ./schema -prune -o -path ./vdm -prune -o -path ./.git -prune \
+                     -o -path ./schema -prune -o -path ./modules -prune -o -path ./.git -prune \
                      -o -path ./protobuf -prune -o -name 'README.md' -prune \
+                     -o -name 'sample-reference.md' -prune \
                      -o \( -name '*.md' -o -name '*.go' \) -print)
           [ "$over" -eq 0 ] || { echo "Split the files above; do not compress them."; exit 1; }
           echo "All hand-written files within their line cap."

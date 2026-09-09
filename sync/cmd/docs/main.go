@@ -23,8 +23,7 @@ import (
 	"os"
 
 	"github.com/the-protobuf-project/vdm/sync/internal/docs"
-	"github.com/the-protobuf-project/vdm/sync/model"
-	"github.com/the-protobuf-project/vdm/sync/spec"
+	"github.com/the-protobuf-project/vdm/sync/load"
 )
 
 func main() {
@@ -38,27 +37,19 @@ func main() {
 	}
 }
 
-// run loads the pinned specification and renders its documentation.
+// run loads the pinned specifications and renders their documentation.
 func run(pin, out string) error {
-	s, err := spec.Load(pin)
+	m, err := load.Model(pin)
 	if err != nil {
 		return err
 	}
-	defs, err := loadTree(s.Path)
-	if err != nil {
-		return err
-	}
-
-	m, err := model.Build(defs)
-	if err != nil {
-		return err
-	}
-	m.Spec = s
 
 	written, err := docs.New(m).Generate(out)
 	if err != nil {
 		return err
 	}
-	fmt.Printf("docs: spec %s (%s) -> %d files\n", s.Version, s.Short(), written)
+	fmt.Printf("docs: vss %s (%s) + vdm %s (%s) -> %d files\n",
+		m.Spec.VSS.Version, m.Spec.VSS.Short(),
+		m.Spec.VDM.Version, m.Spec.VDM.Short(), written)
 	return nil
 }

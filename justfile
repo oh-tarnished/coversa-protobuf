@@ -47,8 +47,13 @@ manifest:
 verify-manifest:
     @go run ./codec/cmd/manifest -check
 
+# Check every URL in docs/references.md resolves. Needs network access.
+[doc("Check the reference link index.")]
+links:
+    ./scripts/check-links.sh
+
 # Check sync/spec.yaml against the specification actually checked out.
-[doc("Verify the spec revision pin matches the vdm working tree.")]
+[doc("Verify the spec revision pins match the checkouts under modules/.")]
 spec:
     ./scripts/check-spec.sh
 
@@ -97,6 +102,11 @@ aip:
 #   README.md  the entry document. Its length is diagrams, and a reader who
 #              has to follow a link to see how the thing works has been given
 #              a worse README, not a shorter one.
+#   docs/sample-reference.md
+#              a specimen of what the docs generator emits. Exempt for the
+#              same reason protobuf/ is: it stands in for generated output,
+#              and splitting it would misrepresent what a real page looks
+#              like.
 #
 # Everything else is capped. See CLAUDE.md rule 2.
 [doc("Check the line caps: 200 for Go, 250 for Markdown.")]
@@ -104,8 +114,8 @@ cap:
     #!/usr/bin/env sh
     over=0
     for f in $(find . -path ./gen -prune -o -path ./build -prune -o -path ./schema -prune \
-        -o -path ./vdm -prune -o -path ./.git -prune -o -path ./protobuf -prune \
-        -o -name 'README.md' -prune \
+        -o -path ./modules -prune -o -path ./.git -prune -o -path ./protobuf -prune \
+        -o -name 'README.md' -prune -o -name 'sample-reference.md' -prune \
         -o \( -name '*.md' -o -name '*.go' \) -print); do
         n=$(wc -l <"$f")
         # Go is capped tighter than prose: a 200-line file is one a reader can

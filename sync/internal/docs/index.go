@@ -20,7 +20,7 @@ func (g *Generator) index() string {
 
 	sb.WriteString("# COVESA protobuf reference\n\n")
 	fmt.Fprintf(&sb, "Generated from the COVESA Vehicle Data Model, spec revision `%s` (`%s`).\n\n",
-		g.M.Spec.Version, g.M.Spec.Short())
+		g.M.Spec.VSS.Version, g.M.Spec.VSS.Short())
 	sb.WriteString(g.banner())
 
 	counts := g.counts()
@@ -29,6 +29,9 @@ func (g *Generator) index() string {
 	fmt.Fprintf(&sb, "| Resources | %d |\n", len(g.M.Packages))
 	fmt.Fprintf(&sb, "| Collections / singletons | %d / %d |\n", counts.collections, counts.singletons)
 	fmt.Fprintf(&sb, "| RPCs | %d |\n\n", counts.rpcs)
+
+	g.relationships(&sb)
+	g.dependencies(&sb)
 
 	for _, group := range g.byDomain() {
 		fmt.Fprintf(&sb, "## %s\n\n", group.title)

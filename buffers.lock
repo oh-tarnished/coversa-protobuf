@@ -802,24 +802,7 @@ messages:
       - number: 1
         ordinal: 0
         name: violations
-  - message: protobuf.covesa.vdm.charging_point.v1.Address
-    fields:
-      - number: 1
-        ordinal: 0
-        name: street
-      - number: 2
-        ordinal: 1
-        name: city
-      - number: 3
-        ordinal: 2
-        name: state
-      - number: 4
-        ordinal: 3
-        name: region_code
-      - number: 5
-        ordinal: 4
-        name: zip_code
-  - message: protobuf.covesa.vdm.charging_point.v1.ChargingPoint
+  - message: protobuf.covesa.vdm.charging_points.v1.ChargingPoints
     fields:
       - number: 1
         ordinal: 0
@@ -848,7 +831,28 @@ messages:
       - number: 17
         ordinal: 16
         name: location
-  - message: protobuf.covesa.vdm.charging_point.v1.ChargingPointInstanceTag
+  - message: protobuf.covesa.vdm.charging_points.v1.CreateChargingPointsRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: parent
+      - number: 2
+        ordinal: 1
+        name: charging_points
+      - number: 3
+        ordinal: 2
+        name: charging_points_id
+  - message: protobuf.covesa.vdm.charging_points.v1.DeleteChargingPointsRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vdm.charging_points.v1.GetChargingPointsRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vdm.charging_points.v1.InstanceTag
     fields:
       - number: 1
         ordinal: 0
@@ -856,28 +860,7 @@ messages:
       - number: 2
         ordinal: 1
         name: label
-  - message: protobuf.covesa.vdm.charging_point.v1.CreateChargingPointRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: parent
-      - number: 2
-        ordinal: 1
-        name: charging_point
-      - number: 3
-        ordinal: 2
-        name: charging_point_id
-  - message: protobuf.covesa.vdm.charging_point.v1.DeleteChargingPointRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vdm.charging_point.v1.GetChargingPointRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vdm.charging_point.v1.ListChargingPointsRequest
+  - message: protobuf.covesa.vdm.charging_points.v1.ListChargingPointsesRequest
     fields:
       - number: 1
         ordinal: 0
@@ -894,24 +877,41 @@ messages:
       - number: 5
         ordinal: 4
         name: show_deleted
-  - message: protobuf.covesa.vdm.charging_point.v1.ListChargingPointsResponse
+  - message: protobuf.covesa.vdm.charging_points.v1.ListChargingPointsesResponse
     fields:
       - number: 1
         ordinal: 0
-        name: charging_points
+        name: charging_pointses
       - number: 2
         ordinal: 1
         name: next_page_token
-  - message: protobuf.covesa.vdm.charging_point.v1.UndeleteChargingPointRequest
+  - message: protobuf.covesa.vdm.charging_points.v1.Location
+    fields:
+      - number: 1
+        ordinal: 0
+        name: street
+      - number: 2
+        ordinal: 1
+        name: city
+      - number: 3
+        ordinal: 2
+        name: administrative_area
+      - number: 4
+        ordinal: 3
+        name: region_code
+      - number: 5
+        ordinal: 4
+        name: zip_code
+  - message: protobuf.covesa.vdm.charging_points.v1.UndeleteChargingPointsRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vdm.charging_point.v1.UpdateChargingPointRequest
+  - message: protobuf.covesa.vdm.charging_points.v1.UpdateChargingPointsRequest
     fields:
       - number: 1
         ordinal: 0
-        name: charging_point
+        name: charging_points
       - number: 2
         ordinal: 1
         name: update_mask
@@ -1006,23 +1006,6 @@ messages:
       - number: 2
         ordinal: 1
         name: update_mask
-  - message: protobuf.covesa.vdm.charging_station.v1.Address
-    fields:
-      - number: 1
-        ordinal: 0
-        name: street
-      - number: 2
-        ordinal: 1
-        name: city
-      - number: 3
-        ordinal: 2
-        name: state
-      - number: 4
-        ordinal: 3
-        name: region_code
-      - number: 5
-        ordinal: 4
-        name: zip_code
   - message: protobuf.covesa.vdm.charging_station.v1.ChargingStation
     fields:
       - number: 1
@@ -1046,9 +1029,6 @@ messages:
       - number: 7
         ordinal: 6
         name: update_time
-      - number: 16
-        ordinal: 15
-        name: location
   - message: protobuf.covesa.vdm.charging_station.v1.CreateChargingStationRequest
     fields:
       - number: 1
@@ -1102,23 +1082,153 @@ messages:
       - number: 2
         ordinal: 1
         name: update_mask
-  - message: protobuf.covesa.vdm.person.v1.Address
+  - message: protobuf.covesa.vdm.home_address.v1.GetHomeAddressRequest
     fields:
       - number: 1
         ordinal: 0
-        name: street
+        name: name
+  - message: protobuf.covesa.vdm.home_address.v1.HomeAddress
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
       - number: 2
         ordinal: 1
-        name: city
+        name: uid
       - number: 3
         ordinal: 2
-        name: state
+        name: etag
       - number: 4
         ordinal: 3
-        name: region_code
+        name: delete_time
       - number: 5
         ordinal: 4
+        name: expire_time
+      - number: 6
+        ordinal: 5
+        name: create_time
+      - number: 7
+        ordinal: 6
+        name: update_time
+      - number: 16
+        ordinal: 15
+        name: street
+      - number: 17
+        ordinal: 16
+        name: city
+      - number: 18
+        ordinal: 17
+        name: administrative_area
+      - number: 19
+        ordinal: 18
+        name: region_code
+      - number: 20
+        ordinal: 19
         name: zip_code
+  - message: protobuf.covesa.vdm.home_address.v1.UpdateHomeAddressRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: home_address
+      - number: 2
+        ordinal: 1
+        name: update_mask
+  - message: protobuf.covesa.vdm.location.v1.GetLocationRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vdm.location.v1.Location
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+      - number: 2
+        ordinal: 1
+        name: uid
+      - number: 3
+        ordinal: 2
+        name: etag
+      - number: 4
+        ordinal: 3
+        name: delete_time
+      - number: 5
+        ordinal: 4
+        name: expire_time
+      - number: 6
+        ordinal: 5
+        name: create_time
+      - number: 7
+        ordinal: 6
+        name: update_time
+      - number: 16
+        ordinal: 15
+        name: street
+      - number: 17
+        ordinal: 16
+        name: city
+      - number: 18
+        ordinal: 17
+        name: administrative_area
+      - number: 19
+        ordinal: 18
+        name: region_code
+      - number: 20
+        ordinal: 19
+        name: zip_code
+  - message: protobuf.covesa.vdm.location.v1.UpdateLocationRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: location
+      - number: 2
+        ordinal: 1
+        name: update_mask
+  - message: protobuf.covesa.vdm.name.v1.GetNameRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vdm.name.v1.Name
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+      - number: 2
+        ordinal: 1
+        name: uid
+      - number: 3
+        ordinal: 2
+        name: etag
+      - number: 4
+        ordinal: 3
+        name: delete_time
+      - number: 5
+        ordinal: 4
+        name: expire_time
+      - number: 6
+        ordinal: 5
+        name: create_time
+      - number: 7
+        ordinal: 6
+        name: update_time
+      - number: 16
+        ordinal: 15
+        name: first
+      - number: 17
+        ordinal: 16
+        name: middle
+      - number: 18
+        ordinal: 17
+        name: last
+  - message: protobuf.covesa.vdm.name.v1.UpdateNameRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+      - number: 2
+        ordinal: 1
+        name: update_mask
   - message: protobuf.covesa.vdm.person.v1.CreatePersonRequest
     fields:
       - number: 1
@@ -1187,24 +1297,7 @@ messages:
         name: vdm_uid
       - number: 17
         ordinal: 16
-        name: name_components
-      - number: 18
-        ordinal: 17
         name: age_range
-      - number: 19
-        ordinal: 18
-        name: home_address
-  - message: protobuf.covesa.vdm.person.v1.PersonName
-    fields:
-      - number: 1
-        ordinal: 0
-        name: first
-      - number: 2
-        ordinal: 1
-        name: middle
-      - number: 3
-        ordinal: 2
-        name: last
   - message: protobuf.covesa.vdm.person.v1.UndeletePersonRequest
     fields:
       - number: 1
@@ -1260,10 +1353,10 @@ messages:
         name: is_enabled
       - number: 2
         ordinal: 1
-        name: is_engaged
+        name: is_error
       - number: 3
         ordinal: 2
-        name: is_error
+        name: is_engaged
   - message: protobuf.covesa.vss.assistance.adas.v1.Adas
     fields:
       - number: 1
@@ -1292,60 +1385,60 @@ messages:
         name: active_autonomy_level
       - number: 17
         ordinal: 16
-        name: is_auto_power_optimize
+        name: supported_autonomy_level
       - number: 18
         ordinal: 17
-        name: power_optimize_level
+        name: cruise_control
       - number: 19
         ordinal: 18
-        name: supported_autonomy_level
+        name: lane_departure_detection
       - number: 20
         ordinal: 19
         name: abs
       - number: 21
         ordinal: 20
-        name: cruise_control
+        name: tcs
       - number: 22
         ordinal: 21
-        name: dms
+        name: esc
       - number: 23
         ordinal: 22
-        name: eba
+        name: ebd
       - number: 24
         ordinal: 23
-        name: ebd
+        name: eba
       - number: 25
         ordinal: 24
-        name: esc
+        name: dms
       - number: 26
         ordinal: 25
-        name: lane_departure_detection
+        name: power_optimize_level
       - number: 27
         ordinal: 26
-        name: tcs
+        name: is_auto_power_optimize
   - message: protobuf.covesa.vss.assistance.adas.v1.CruiseControl
     fields:
       - number: 1
         ordinal: 0
-        name: adaptive_distance_set
+        name: is_enabled
       - number: 2
         ordinal: 1
-        name: adaptive_interval_set
+        name: is_active
       - number: 3
         ordinal: 2
-        name: is_active
+        name: speed_set
       - number: 4
         ordinal: 3
-        name: is_adaptive
+        name: is_error
       - number: 5
         ordinal: 4
-        name: is_enabled
+        name: is_adaptive
       - number: 6
         ordinal: 5
-        name: is_error
+        name: adaptive_distance_set
       - number: 7
         ordinal: 6
-        name: speed_set
+        name: adaptive_interval_set
   - message: protobuf.covesa.vss.assistance.adas.v1.Dms
     fields:
       - number: 1
@@ -1353,10 +1446,10 @@ messages:
         name: is_enabled
       - number: 2
         ordinal: 1
-        name: is_error
+        name: is_warning
       - number: 3
         ordinal: 2
-        name: is_warning
+        name: is_error
   - message: protobuf.covesa.vss.assistance.adas.v1.Eba
     fields:
       - number: 1
@@ -1364,10 +1457,10 @@ messages:
         name: is_enabled
       - number: 2
         ordinal: 1
-        name: is_engaged
+        name: is_error
       - number: 3
         ordinal: 2
-        name: is_error
+        name: is_engaged
   - message: protobuf.covesa.vss.assistance.adas.v1.Ebd
     fields:
       - number: 1
@@ -1375,10 +1468,10 @@ messages:
         name: is_enabled
       - number: 2
         ordinal: 1
-        name: is_engaged
+        name: is_error
       - number: 3
         ordinal: 2
-        name: is_error
+        name: is_engaged
   - message: protobuf.covesa.vss.assistance.adas.v1.Esc
     fields:
       - number: 1
@@ -1386,10 +1479,10 @@ messages:
         name: is_enabled
       - number: 2
         ordinal: 1
-        name: is_engaged
+        name: is_error
       - number: 3
         ordinal: 2
-        name: is_error
+        name: is_engaged
       - number: 4
         ordinal: 3
         name: is_strong_cross_wind_detected
@@ -1408,18 +1501,18 @@ messages:
         name: is_enabled
       - number: 2
         ordinal: 1
-        name: is_error
+        name: is_warning
       - number: 3
         ordinal: 2
-        name: is_warning
+        name: is_error
   - message: protobuf.covesa.vss.assistance.adas.v1.RoadFriction
     fields:
       - number: 1
         ordinal: 0
-        name: lower_bound
+        name: most_probable
       - number: 2
         ordinal: 1
-        name: most_probable
+        name: lower_bound
       - number: 3
         ordinal: 2
         name: upper_bound
@@ -1430,10 +1523,10 @@ messages:
         name: is_enabled
       - number: 2
         ordinal: 1
-        name: is_engaged
+        name: is_error
       - number: 3
         ordinal: 2
-        name: is_error
+        name: is_engaged
   - message: protobuf.covesa.vss.assistance.adas.v1.UpdateAdasRequest
     fields:
       - number: 1
@@ -1513,33 +1606,22 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: distance
+        name: is_enabled
       - number: 17
         ordinal: 16
-        name: is_enabled
+        name: is_warning
       - number: 18
         ordinal: 17
         name: is_error
       - number: 19
         ordinal: 18
-        name: is_warning
+        name: distance
       - number: 20
         ordinal: 19
         name: time_gap
       - number: 21
         ordinal: 20
         name: warning_type
-      - number: 22
-        ordinal: 21
-        name: instance_tag
-  - message: protobuf.covesa.vss.assistance.obstacle_detection.v1.ObstacleDetectionInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
-      - number: 2
-        ordinal: 1
-        name: dimension2
   - message: protobuf.covesa.vss.assistance.obstacle_detection.v1.UndeleteObstacleDetectionRequest
     fields:
       - number: 1
@@ -1550,6 +1632,57 @@ messages:
       - number: 1
         ordinal: 0
         name: obstacle_detection
+      - number: 2
+        ordinal: 1
+        name: update_mask
+  - message: protobuf.covesa.vss.assistance.safety.v1.GetSafetyRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.assistance.safety.v1.Safety
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+      - number: 2
+        ordinal: 1
+        name: uid
+      - number: 3
+        ordinal: 2
+        name: etag
+      - number: 4
+        ordinal: 3
+        name: delete_time
+      - number: 5
+        ordinal: 4
+        name: expire_time
+      - number: 6
+        ordinal: 5
+        name: create_time
+      - number: 7
+        ordinal: 6
+        name: update_time
+      - number: 16
+        ordinal: 15
+        name: is_fire
+      - number: 17
+        ordinal: 16
+        name: is_submersed
+      - number: 18
+        ordinal: 17
+        name: rollover
+      - number: 19
+        ordinal: 18
+        name: visibility_impairment
+      - number: 20
+        ordinal: 19
+        name: road_icing_state
+  - message: protobuf.covesa.vss.assistance.safety.v1.UpdateSafetyRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: safety
       - number: 2
         ordinal: 1
         name: update_mask
@@ -1578,18 +1711,10 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: is_defect
+        name: is_on
       - number: 17
         ordinal: 16
-        name: is_on
-      - number: 18
-        ordinal: 17
-        name: instance_tag
-  - message: protobuf.covesa.vss.exterior.beam.v1.BeamInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
+        name: is_defect
   - message: protobuf.covesa.vss.exterior.beam.v1.CreateBeamRequest
     fields:
       - number: 1
@@ -1653,10 +1778,10 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: is_defect
+        name: is_on
       - number: 2
         ordinal: 1
-        name: is_on
+        name: is_defect
   - message: protobuf.covesa.vss.exterior.body.v1.Body
     fields:
       - number: 1
@@ -1685,25 +1810,33 @@ messages:
         name: body_type
       - number: 17
         ordinal: 16
-        name: is_auto_power_optimize
+        name: hood
       - number: 18
         ordinal: 17
-        name: power_optimize_level
+        name: horn
       - number: 19
         ordinal: 18
-        name: rear_main_spoiler_position
+        name: raindetection
       - number: 20
         ordinal: 19
-        name: hood
+        name: lights
       - number: 21
         ordinal: 20
-        name: horn
+        name: rear_main_spoiler_position
       - number: 22
         ordinal: 21
-        name: lights
+        name: power_optimize_level
       - number: 23
         ordinal: 22
-        name: raindetection
+        name: is_auto_power_optimize
+  - message: protobuf.covesa.vss.exterior.body.v1.Brake
+    fields:
+      - number: 1
+        ordinal: 0
+        name: is_active
+      - number: 2
+        ordinal: 1
+        name: is_defect
   - message: protobuf.covesa.vss.exterior.body.v1.GetBodyRequest
     fields:
       - number: 1
@@ -1713,10 +1846,10 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: is_defect
+        name: is_signaling
       - number: 2
         ordinal: 1
-        name: is_signaling
+        name: is_defect
   - message: protobuf.covesa.vss.exterior.body.v1.Hood
     fields:
       - number: 1
@@ -1737,52 +1870,44 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: is_defect
+        name: is_on
       - number: 2
         ordinal: 1
-        name: is_on
+        name: is_defect
   - message: protobuf.covesa.vss.exterior.body.v1.Lights
     fields:
       - number: 1
         ordinal: 0
-        name: is_high_beam_switch_on
+        name: light_switch
       - number: 2
         ordinal: 1
-        name: light_switch
+        name: is_high_beam_switch_on
       - number: 3
         ordinal: 2
-        name: backup
+        name: running
       - number: 4
         ordinal: 3
-        name: brake
+        name: backup
       - number: 5
         ordinal: 4
-        name: hazard
+        name: parking
       - number: 6
         ordinal: 5
         name: license_plate
       - number: 7
         ordinal: 6
-        name: parking
+        name: brake
       - number: 8
         ordinal: 7
-        name: running
-  - message: protobuf.covesa.vss.exterior.body.v1.LightsBrake
-    fields:
-      - number: 1
-        ordinal: 0
-        name: is_active
-      - number: 2
-        ordinal: 1
-        name: is_defect
+        name: hazard
   - message: protobuf.covesa.vss.exterior.body.v1.Parking
     fields:
       - number: 1
         ordinal: 0
-        name: is_defect
+        name: is_on
       - number: 2
         ordinal: 1
-        name: is_on
+        name: is_defect
   - message: protobuf.covesa.vss.exterior.body.v1.Raindetection
     fields:
       - number: 1
@@ -1792,10 +1917,10 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: is_defect
+        name: is_on
       - number: 2
         ordinal: 1
-        name: is_on
+        name: is_defect
   - message: protobuf.covesa.vss.exterior.body.v1.UpdateBodyRequest
     fields:
       - number: 1
@@ -1845,18 +1970,10 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: is_defect
+        name: is_signaling
       - number: 17
         ordinal: 16
-        name: is_signaling
-      - number: 18
-        ordinal: 17
-        name: instance_tag
-  - message: protobuf.covesa.vss.exterior.direction_indicator.v1.DirectionIndicatorInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
+        name: is_defect
   - message: protobuf.covesa.vss.exterior.direction_indicator.v1.GetDirectionIndicatorRequest
     fields:
       - number: 1
@@ -1900,6 +2017,29 @@ messages:
       - number: 2
         ordinal: 1
         name: update_mask
+  - message: protobuf.covesa.vss.exterior.exterior.v1.AirQuality
+    fields:
+      - number: 1
+        ordinal: 0
+        name: pm1
+      - number: 2
+        ordinal: 1
+        name: pm25
+      - number: 3
+        ordinal: 2
+        name: pm10
+      - number: 4
+        ordinal: 3
+        name: co2
+      - number: 5
+        ordinal: 4
+        name: no2
+      - number: 6
+        ordinal: 5
+        name: ozone
+      - number: 7
+        ordinal: 6
+        name: tvoc
   - message: protobuf.covesa.vss.exterior.exterior.v1.Exterior
     fields:
       - number: 1
@@ -1932,6 +2072,42 @@ messages:
       - number: 18
         ordinal: 17
         name: light_intensity
+      - number: 19
+        ordinal: 18
+        name: road_surface_condition
+      - number: 20
+        ordinal: 19
+        name: road_surface_temperature
+      - number: 21
+        ordinal: 20
+        name: road_surface_contaminant
+      - number: 22
+        ordinal: 21
+        name: road_obstruction
+      - number: 23
+        ordinal: 22
+        name: visibility_condition
+      - number: 24
+        ordinal: 23
+        name: visibility_distance
+      - number: 25
+        ordinal: 24
+        name: precipitation_type
+      - number: 26
+        ordinal: 25
+        name: precipitation_intensity
+      - number: 27
+        ordinal: 26
+        name: air_pressure
+      - number: 28
+        ordinal: 27
+        name: wind_speed
+      - number: 29
+        ordinal: 28
+        name: wind_direction
+      - number: 30
+        ordinal: 29
+        name: air_quality
   - message: protobuf.covesa.vss.exterior.exterior.v1.GetExteriorRequest
     fields:
       - number: 1
@@ -1986,18 +2162,10 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: is_defect
+        name: is_on
       - number: 17
         ordinal: 16
-        name: is_on
-      - number: 18
-        ordinal: 17
-        name: instance_tag
-  - message: protobuf.covesa.vss.exterior.fog.v1.FogInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
+        name: is_defect
   - message: protobuf.covesa.vss.exterior.fog.v1.GetFogRequest
     fields:
       - number: 1
@@ -2112,30 +2280,22 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: is_folded
+        name: tilt
       - number: 17
         ordinal: 16
-        name: is_heating_on
+        name: pan
       - number: 18
         ordinal: 17
-        name: is_locked
+        name: yaw
       - number: 19
         ordinal: 18
-        name: pan
+        name: is_heating_on
       - number: 20
         ordinal: 19
-        name: tilt
+        name: is_locked
       - number: 21
         ordinal: 20
-        name: yaw
-      - number: 22
-        ordinal: 21
-        name: instance_tag
-  - message: protobuf.covesa.vss.exterior.mirrors.v1.MirrorsInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
+        name: is_folded
   - message: protobuf.covesa.vss.exterior.mirrors.v1.UndeleteMirrorsRequest
     fields:
       - number: 1
@@ -2272,14 +2432,6 @@ messages:
       - number: 20
         ordinal: 19
         name: switch_control
-      - number: 21
-        ordinal: 20
-        name: instance_tag
-  - message: protobuf.covesa.vss.exterior.trunk.v1.TrunkInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
   - message: protobuf.covesa.vss.exterior.trunk.v1.UndeleteTrunkRequest
     fields:
       - number: 1
@@ -2343,37 +2495,37 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: actual_position
+        name: mode
       - number: 2
         ordinal: 1
-        name: drive_current
+        name: frequency
       - number: 3
         ordinal: 2
-        name: frequency
+        name: target_position
       - number: 4
         ordinal: 3
-        name: is_blocked
+        name: actual_position
       - number: 5
         ordinal: 4
-        name: is_ending_wipe_cycle
+        name: drive_current
       - number: 6
         ordinal: 5
-        name: is_overheated
+        name: is_wiping
       - number: 7
         ordinal: 6
-        name: is_position_reached
+        name: is_ending_wipe_cycle
       - number: 8
         ordinal: 7
         name: is_wiper_error
       - number: 9
         ordinal: 8
-        name: is_wiping
+        name: is_position_reached
       - number: 10
         ordinal: 9
-        name: mode
+        name: is_blocked
       - number: 11
         ordinal: 10
-        name: target_position
+        name: is_overheated
   - message: protobuf.covesa.vss.exterior.windshield.v1.UndeleteWindshieldRequest
     fields:
       - number: 1
@@ -2420,38 +2572,30 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: is_heating_on
+        name: wiping
       - number: 17
         ordinal: 16
-        name: washer_fluid
+        name: is_heating_on
       - number: 18
         ordinal: 17
-        name: wiping
-      - number: 19
-        ordinal: 18
-        name: instance_tag
-  - message: protobuf.covesa.vss.exterior.windshield.v1.WindshieldInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
+        name: washer_fluid
   - message: protobuf.covesa.vss.exterior.windshield.v1.Wiping
     fields:
       - number: 1
         ordinal: 0
-        name: intensity
+        name: mode
       - number: 2
         ordinal: 1
-        name: is_wipers_worn
+        name: intensity
       - number: 3
         ordinal: 2
-        name: mode
+        name: system
       - number: 4
         ordinal: 3
         name: wiper_wear
       - number: 5
         ordinal: 4
-        name: system
+        name: is_wipers_worn
   - message: protobuf.covesa.vss.interior.ambient_light.v1.AmbientLight
     fields:
       - number: 1
@@ -2477,24 +2621,13 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: color
+        name: is_light_on
       - number: 17
         ordinal: 16
         name: intensity
       - number: 18
         ordinal: 17
-        name: is_light_on
-      - number: 19
-        ordinal: 18
-        name: instance_tag
-  - message: protobuf.covesa.vss.interior.ambient_light.v1.AmbientLightInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
-      - number: 2
-        ordinal: 1
-        name: dimension2
+        name: color
   - message: protobuf.covesa.vss.interior.ambient_light.v1.CreateAmbientLightRequest
     fields:
       - number: 1
@@ -2554,6 +2687,29 @@ messages:
       - number: 2
         ordinal: 1
         name: update_mask
+  - message: protobuf.covesa.vss.interior.cabin.v1.AirQuality
+    fields:
+      - number: 1
+        ordinal: 0
+        name: pm1
+      - number: 2
+        ordinal: 1
+        name: pm25
+      - number: 3
+        ordinal: 2
+        name: pm10
+      - number: 4
+        ordinal: 3
+        name: co2
+      - number: 5
+        ordinal: 4
+        name: no2
+      - number: 6
+        ordinal: 5
+        name: ozone
+      - number: 7
+        ordinal: 6
+        name: tvoc
   - message: protobuf.covesa.vss.interior.cabin.v1.Cabin
     fields:
       - number: 1
@@ -2579,51 +2735,65 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: door_count
+        name: rear_shade
       - number: 17
         ordinal: 16
-        name: driver_position
+        name: hvac
       - number: 18
         ordinal: 17
-        name: is_auto_power_optimize
+        name: air_quality
       - number: 19
         ordinal: 18
-        name: is_window_child_lock_engaged
+        name: infotainment
       - number: 20
         ordinal: 19
-        name: power_optimize_level
+        name: sunroof
       - number: 21
         ordinal: 20
-        name: seat_pos_count
+        name: rearview_mirror
       - number: 22
         ordinal: 21
-        name: seat_row_count
+        name: light
       - number: 23
         ordinal: 22
-        name: convertible
+        name: door_count
       - number: 24
         ordinal: 23
-        name: hvac
+        name: is_window_child_lock_engaged
       - number: 25
         ordinal: 24
-        name: infotainment
+        name: driver_position
       - number: 26
         ordinal: 25
-        name: light
+        name: seat_row_count
       - number: 27
         ordinal: 26
-        name: rear_shade
+        name: seat_pos_count
       - number: 28
         ordinal: 27
-        name: rearview_mirror
+        name: convertible
       - number: 29
         ordinal: 28
-        name: sunroof
+        name: power_optimize_level
+      - number: 30
+        ordinal: 29
+        name: is_auto_power_optimize
   - message: protobuf.covesa.vss.interior.cabin.v1.Convertible
     fields:
       - number: 1
         ordinal: 0
         name: roof_position
+  - message: protobuf.covesa.vss.interior.cabin.v1.Date
+    fields:
+      - number: 1
+        ordinal: 0
+        name: year
+      - number: 2
+        ordinal: 1
+        name: month
+      - number: 3
+        ordinal: 2
+        name: day
   - message: protobuf.covesa.vss.interior.cabin.v1.DestinationSet
     fields:
       - number: 1
@@ -2641,123 +2811,123 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: brightness
+        name: current_language
       - number: 2
         ordinal: 1
-        name: current_language
+        name: font_size
       - number: 3
         ordinal: 2
         name: date_format
       - number: 4
         ordinal: 3
-        name: day_night_mode
+        name: time_format
       - number: 5
         ordinal: 4
-        name: display_off_duration
+        name: distance_unit
       - number: 6
         ordinal: 5
-        name: distance_unit
+        name: fuel_volume_unit
       - number: 7
         ordinal: 6
-        name: eveconomy_units
+        name: fuel_economy_units
       - number: 8
         ordinal: 7
-        name: evenergy_units
+        name: ev_economy_units
       - number: 9
         ordinal: 8
-        name: font_size
+        name: temperature_unit
       - number: 10
         ordinal: 9
-        name: fuel_economy_units
+        name: tire_pressure_unit
       - number: 11
         ordinal: 10
-        name: fuel_volume_unit
+        name: speed_unit
       - number: 12
         ordinal: 11
-        name: is_screen_always_on
+        name: ev_energy_units
       - number: 13
         ordinal: 12
-        name: last_action_time
+        name: brightness
       - number: 14
         ordinal: 13
-        name: speed_unit
+        name: day_night_mode
       - number: 15
         ordinal: 14
-        name: temperature_unit
+        name: is_screen_always_on
       - number: 16
         ordinal: 15
-        name: time_format
+        name: last_action_time
       - number: 17
         ordinal: 16
-        name: tire_pressure_unit
+        name: display_off_duration
   - message: protobuf.covesa.vss.interior.cabin.v1.Hvac
     fields:
       - number: 1
         ordinal: 0
-        name: ambient_air_temperature
+        name: is_recirculation_active
       - number: 2
         ordinal: 1
-        name: is_air_conditioning_active
+        name: is_front_defroster_active
       - number: 3
         ordinal: 2
-        name: is_auto_power_optimize
+        name: is_rear_defroster_active
       - number: 4
         ordinal: 3
-        name: is_front_defroster_active
+        name: is_air_conditioning_active
       - number: 5
         ordinal: 4
-        name: is_rear_defroster_active
+        name: ambient_air_temperature
       - number: 6
         ordinal: 5
-        name: is_recirculation_active
+        name: power_optimize_level
       - number: 7
         ordinal: 6
-        name: power_optimize_level
+        name: is_auto_power_optimize
   - message: protobuf.covesa.vss.interior.cabin.v1.Infotainment
     fields:
       - number: 1
         ordinal: 0
-        name: is_auto_power_optimize
+        name: media
       - number: 2
         ordinal: 1
-        name: power_optimize_level
+        name: navigation
       - number: 3
         ordinal: 2
         name: hmi
       - number: 4
         ordinal: 3
-        name: media
+        name: smartphone_projection
       - number: 5
         ordinal: 4
-        name: navigation
+        name: smartphone_screen_mirroring
       - number: 6
         ordinal: 5
-        name: smartphone_projection
+        name: power_optimize_level
       - number: 7
         ordinal: 6
-        name: smartphone_screen_mirroring
+        name: is_auto_power_optimize
   - message: protobuf.covesa.vss.interior.cabin.v1.InteractiveLightBar
     fields:
       - number: 1
         ordinal: 0
-        name: color
+        name: effect
       - number: 2
         ordinal: 1
-        name: effect
+        name: is_light_on
       - number: 3
         ordinal: 2
         name: intensity
       - number: 4
         ordinal: 3
-        name: is_light_on
+        name: color
   - message: protobuf.covesa.vss.interior.cabin.v1.Light
     fields:
       - number: 1
         ordinal: 0
-        name: is_dome_on
+        name: is_glove_box_on
       - number: 2
         ordinal: 1
-        name: is_glove_box_on
+        name: is_dome_on
       - number: 3
         ordinal: 2
         name: perceived_ambient_light
@@ -2776,21 +2946,21 @@ messages:
         name: action
       - number: 2
         ordinal: 1
-        name: declined_uri
+        name: played
       - number: 3
         ordinal: 2
-        name: selected_uri
+        name: declined_uri
       - number: 4
         ordinal: 3
-        name: volume
+        name: selected_uri
       - number: 5
         ordinal: 4
-        name: played
+        name: volume
   - message: protobuf.covesa.vss.interior.cabin.v1.Navigation
     fields:
       - number: 1
         ordinal: 0
-        name: guidance_voice
+        name: destination_set
       - number: 2
         ordinal: 1
         name: mute
@@ -2799,7 +2969,7 @@ messages:
         name: volume
       - number: 4
         ordinal: 3
-        name: destination_set
+        name: guidance_voice
       - number: 5
         ordinal: 4
         name: map_control
@@ -2807,25 +2977,25 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: album
+        name: source
       - number: 2
         ordinal: 1
-        name: artist
+        name: genre
       - number: 3
         ordinal: 2
-        name: genre
+        name: artist
       - number: 4
         ordinal: 3
-        name: playback_rate
+        name: album
       - number: 5
         ordinal: 4
-        name: source
+        name: track
       - number: 6
         ordinal: 5
-        name: track
+        name: uri
       - number: 7
         ordinal: 6
-        name: uri
+        name: playback_rate
   - message: protobuf.covesa.vss.interior.cabin.v1.RearShade
     fields:
       - number: 1
@@ -2842,6 +3012,17 @@ messages:
       - number: 1
         ordinal: 0
         name: dimming_level
+  - message: protobuf.covesa.vss.interior.cabin.v1.Shade
+    fields:
+      - number: 1
+        ordinal: 0
+        name: is_open
+      - number: 2
+        ordinal: 1
+        name: position
+      - number: 3
+        ordinal: 2
+        name: switch_control
   - message: protobuf.covesa.vss.interior.cabin.v1.SmartphoneProjection
     fields:
       - number: 1
@@ -2872,17 +3053,6 @@ messages:
       - number: 3
         ordinal: 2
         name: shade
-  - message: protobuf.covesa.vss.interior.cabin.v1.SunroofShade
-    fields:
-      - number: 1
-        ordinal: 0
-        name: is_open
-      - number: 2
-        ordinal: 1
-        name: position
-      - number: 3
-        ordinal: 2
-        name: switch_control
   - message: protobuf.covesa.vss.interior.cabin.v1.UpdateCabinRequest
     fields:
       - number: 1
@@ -2932,46 +3102,24 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: is_child_lock_active
+        name: window
       - number: 17
         ordinal: 16
-        name: is_locked
+        name: is_child_lock_active
       - number: 18
         ordinal: 17
-        name: is_open
+        name: shade
       - number: 19
         ordinal: 18
-        name: position
+        name: is_locked
       - number: 20
         ordinal: 19
-        name: switch_control
+        name: is_open
       - number: 21
         ordinal: 20
-        name: shade
+        name: position
       - number: 22
         ordinal: 21
-        name: window
-      - number: 23
-        ordinal: 22
-        name: instance_tag
-  - message: protobuf.covesa.vss.interior.door.v1.DoorInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
-      - number: 2
-        ordinal: 1
-        name: dimension2
-  - message: protobuf.covesa.vss.interior.door.v1.DoorShade
-    fields:
-      - number: 1
-        ordinal: 0
-        name: is_open
-      - number: 2
-        ordinal: 1
-        name: position
-      - number: 3
-        ordinal: 2
         name: switch_control
   - message: protobuf.covesa.vss.interior.door.v1.GetDoorRequest
     fields:
@@ -3003,6 +3151,17 @@ messages:
       - number: 2
         ordinal: 1
         name: next_page_token
+  - message: protobuf.covesa.vss.interior.door.v1.Shade
+    fields:
+      - number: 1
+        ordinal: 0
+        name: is_open
+      - number: 2
+        ordinal: 1
+        name: position
+      - number: 3
+        ordinal: 2
+        name: switch_control
   - message: protobuf.covesa.vss.interior.door.v1.UndeleteDoorRequest
     fields:
       - number: 1
@@ -3052,22 +3211,22 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: attentive_probability
+        name: distraction_level
       - number: 17
         ordinal: 16
-        name: distraction_level
+        name: is_eyes_on_road
       - number: 18
         ordinal: 17
-        name: fatigue_level
+        name: is_hands_on_wheel
       - number: 19
         ordinal: 18
-        name: heart_rate
+        name: attentive_probability
       - number: 20
         ordinal: 19
-        name: is_eyes_on_road
+        name: fatigue_level
       - number: 21
         ordinal: 20
-        name: is_hands_on_wheel
+        name: heart_rate
   - message: protobuf.covesa.vss.interior.driver.v1.GetDriverRequest
     fields:
       - number: 1
@@ -3106,30 +3265,30 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: pitch
+        name: x
       - number: 2
         ordinal: 1
-        name: roll
+        name: "y"
       - number: 3
         ordinal: 2
-        name: x
+        name: z
       - number: 4
         ordinal: 3
-        name: "y"
+        name: yaw
       - number: 5
         ordinal: 4
-        name: yaw
+        name: pitch
       - number: 6
         ordinal: 5
-        name: z
+        name: roll
   - message: protobuf.covesa.vss.interior.occupant.v1.Identity
     fields:
       - number: 1
         ordinal: 0
-        name: issuer
+        name: subject
       - number: 2
         ordinal: 1
-        name: subject
+        name: issuer
   - message: protobuf.covesa.vss.interior.occupant.v1.ListOccupantsRequest
     fields:
       - number: 1
@@ -3188,24 +3347,13 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: head_position
+        name: identity
       - number: 17
         ordinal: 16
-        name: identity
+        name: head_position
       - number: 18
         ordinal: 17
         name: mid_eye_gaze
-      - number: 19
-        ordinal: 18
-        name: instance_tag
-  - message: protobuf.covesa.vss.interior.occupant.v1.OccupantInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
-      - number: 2
-        ordinal: 1
-        name: dimension2
   - message: protobuf.covesa.vss.interior.occupant.v1.UndeleteOccupantRequest
     fields:
       - number: 1
@@ -3223,69 +3371,69 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: is_deployed
+        name: is_enabled
       - number: 2
         ordinal: 1
-        name: is_enabled
+        name: is_deployed
   - message: protobuf.covesa.vss.interior.seat.v1.Backrest
     fields:
       - number: 1
         ordinal: 0
-        name: bottom_lumbar_support
+        name: recline
       - number: 2
         ordinal: 1
-        name: heating_cooling
+        name: lumbar_support
       - number: 3
         ordinal: 2
-        name: is_less_lumbar_support_switch_engaged
+        name: top_lumbar_support
       - number: 4
         ordinal: 3
-        name: is_less_side_bolster_support_switch_engaged
+        name: mid_lumbar_support
       - number: 5
         ordinal: 4
-        name: is_lumbar_down_switch_engaged
+        name: bottom_lumbar_support
       - number: 6
         ordinal: 5
-        name: is_lumbar_up_switch_engaged
+        name: lumbar_height
       - number: 7
         ordinal: 6
-        name: is_more_lumbar_support_switch_engaged
+        name: side_bolster_support
       - number: 8
         ordinal: 7
-        name: is_more_side_bolster_support_switch_engaged
+        name: side_bolster_support_left
       - number: 9
         ordinal: 8
-        name: is_recline_backward_switch_engaged
+        name: side_bolster_support_right
       - number: 10
         ordinal: 9
-        name: is_recline_forward_switch_engaged
+        name: upper_shoulder_support
       - number: 11
         ordinal: 10
-        name: lumbar_height
+        name: is_recline_forward_switch_engaged
       - number: 12
         ordinal: 11
-        name: lumbar_support
+        name: is_recline_backward_switch_engaged
       - number: 13
         ordinal: 12
-        name: mid_lumbar_support
+        name: is_more_lumbar_support_switch_engaged
       - number: 14
         ordinal: 13
-        name: recline
+        name: is_less_lumbar_support_switch_engaged
       - number: 15
         ordinal: 14
-        name: side_bolster_support
+        name: is_lumbar_up_switch_engaged
       - number: 16
         ordinal: 15
-        name: side_bolster_support_left
+        name: is_lumbar_down_switch_engaged
       - number: 17
         ordinal: 16
-        name: side_bolster_support_right
+        name: is_more_side_bolster_support_switch_engaged
       - number: 18
         ordinal: 17
-        name: top_lumbar_support
+        name: is_less_side_bolster_support_switch_engaged
       - number: 19
         ordinal: 18
-        name: upper_shoulder_support
+        name: heating_cooling
   - message: protobuf.covesa.vss.interior.seat.v1.CreateSeatRequest
     fields:
       - number: 1
@@ -3311,13 +3459,13 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: angle
+        name: height
       - number: 2
         ordinal: 1
-        name: height
+        name: angle
       - number: 3
         ordinal: 2
-        name: is_backward_switch_engaged
+        name: is_up_switch_engaged
       - number: 4
         ordinal: 3
         name: is_down_switch_engaged
@@ -3326,7 +3474,7 @@ messages:
         name: is_forward_switch_engaged
       - number: 6
         ordinal: 5
-        name: is_up_switch_engaged
+        name: is_backward_switch_engaged
   - message: protobuf.covesa.vss.interior.seat.v1.ListSeatsRequest
     fields:
       - number: 1
@@ -3373,10 +3521,10 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: fan_speed
+        name: heating_cooling
       - number: 2
         ordinal: 1
-        name: heating_cooling
+        name: fan_speed
   - message: protobuf.covesa.vss.interior.seat.v1.Seat
     fields:
       - number: 1
@@ -3402,104 +3550,93 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: heating_cooling
+        name: occupancy_status
       - number: 17
         ordinal: 16
-        name: height
+        name: is_belted
       - number: 18
         ordinal: 17
-        name: is_backward_switch_engaged
+        name: seat_belt_height
       - number: 19
         ordinal: 18
-        name: is_belted
+        name: massage
       - number: 20
         ordinal: 19
-        name: is_cooler_switch_engaged
+        name: position
       - number: 21
         ordinal: 20
-        name: is_decrease_massage_level_switch_engaged
+        name: height
       - number: 22
         ordinal: 21
-        name: is_down_switch_engaged
+        name: tilt
       - number: 23
         ordinal: 22
-        name: is_forward_switch_engaged
+        name: backrest
       - number: 24
         ordinal: 23
-        name: is_increase_massage_level_switch_engaged
+        name: seating
       - number: 25
         ordinal: 24
-        name: is_tilt_backward_switch_engaged
+        name: headrest
       - number: 26
         ordinal: 25
-        name: is_tilt_forward_switch_engaged
+        name: airbag
       - number: 27
         ordinal: 26
-        name: is_up_switch_engaged
+        name: neck_scarf
       - number: 28
         ordinal: 27
         name: is_warmer_switch_engaged
       - number: 29
         ordinal: 28
-        name: occupancy_status
+        name: is_cooler_switch_engaged
       - number: 30
         ordinal: 29
-        name: position
+        name: is_forward_switch_engaged
       - number: 31
         ordinal: 30
-        name: seat_belt_height
+        name: is_backward_switch_engaged
       - number: 32
         ordinal: 31
-        name: tilt
+        name: is_up_switch_engaged
       - number: 33
         ordinal: 32
-        name: airbag
+        name: is_down_switch_engaged
       - number: 34
         ordinal: 33
-        name: backrest
+        name: is_tilt_forward_switch_engaged
       - number: 35
         ordinal: 34
-        name: headrest
+        name: is_tilt_backward_switch_engaged
       - number: 36
         ordinal: 35
-        name: massage
+        name: is_increase_massage_level_switch_engaged
       - number: 37
         ordinal: 36
-        name: neck_scarf
+        name: is_decrease_massage_level_switch_engaged
       - number: 38
         ordinal: 37
-        name: seating
-      - number: 39
-        ordinal: 38
-        name: instance_tag
-  - message: protobuf.covesa.vss.interior.seat.v1.SeatInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
-      - number: 2
-        ordinal: 1
-        name: dimension2
+        name: heating_cooling
   - message: protobuf.covesa.vss.interior.seat.v1.Seating
     fields:
       - number: 1
         ordinal: 0
-        name: heating_cooling
+        name: length
       - number: 2
         ordinal: 1
-        name: is_backward_switch_engaged
+        name: side_bolster_support_right
       - number: 3
         ordinal: 2
-        name: is_forward_switch_engaged
+        name: side_bolster_support_left
       - number: 4
         ordinal: 3
-        name: length
+        name: is_forward_switch_engaged
       - number: 5
         ordinal: 4
-        name: side_bolster_support_left
+        name: is_backward_switch_engaged
       - number: 6
         ordinal: 5
-        name: side_bolster_support_right
+        name: heating_cooling
   - message: protobuf.covesa.vss.interior.seat.v1.UndeleteSeatRequest
     fields:
       - number: 1
@@ -3584,24 +3721,13 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: color
+        name: is_light_on
       - number: 17
         ordinal: 16
         name: intensity
       - number: 18
         ordinal: 17
-        name: is_light_on
-      - number: 19
-        ordinal: 18
-        name: instance_tag
-  - message: protobuf.covesa.vss.interior.spotlight.v1.SpotlightInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
-      - number: 2
-        ordinal: 1
-        name: dimension2
+        name: color
   - message: protobuf.covesa.vss.interior.spotlight.v1.UndeleteSpotlightRequest
     fields:
       - number: 1
@@ -3686,24 +3812,13 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: air_distribution
+        name: fan_speed
       - number: 17
         ordinal: 16
-        name: fan_speed
+        name: temperature
       - number: 18
         ordinal: 17
-        name: temperature
-      - number: 19
-        ordinal: 18
-        name: instance_tag
-  - message: protobuf.covesa.vss.interior.station.v1.StationInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
-      - number: 2
-        ordinal: 1
-        name: dimension2
+        name: air_distribution
   - message: protobuf.covesa.vss.interior.station.v1.UndeleteStationRequest
     fields:
       - number: 1
@@ -3742,28 +3857,28 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: altitude
+        name: observation_time
       - number: 17
         ordinal: 16
-        name: heading
+        name: latitude
       - number: 18
         ordinal: 17
-        name: horizontal_accuracy
+        name: longitude
       - number: 19
         ordinal: 18
-        name: latitude
+        name: heading
       - number: 20
         ordinal: 19
-        name: longitude
+        name: horizontal_accuracy
       - number: 21
         ordinal: 20
-        name: observation_time
+        name: altitude
       - number: 22
         ordinal: 21
         name: vertical_accuracy
       - number: 23
         ordinal: 22
-        name: gnssreceiver
+        name: gnss_receiver
   - message: protobuf.covesa.vss.location.current_location.v1.GetCurrentLocationRequest
     fields:
       - number: 1
@@ -3821,10 +3936,10 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: lateral
+        name: longitudinal
       - number: 17
         ordinal: 16
-        name: longitudinal
+        name: lateral
       - number: 18
         ordinal: 17
         name: vertical
@@ -3866,10 +3981,10 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: pitch
+        name: roll
       - number: 17
         ordinal: 16
-        name: roll
+        name: pitch
       - number: 18
         ordinal: 17
         name: yaw
@@ -3886,7 +4001,7 @@ messages:
       - number: 2
         ordinal: 1
         name: update_mask
-  - message: protobuf.covesa.vss.motion.axle_wheel.v1.AxleWheel
+  - message: protobuf.covesa.vss.motion.brake_axle.v1.Axle
     fields:
       - number: 1
         ordinal: 0
@@ -3911,177 +4026,33 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: angular_speed
-      - number: 17
-        ordinal: 16
-        name: speed
-      - number: 18
-        ordinal: 17
-        name: torque
-      - number: 19
-        ordinal: 18
-        name: brake
-      - number: 20
-        ordinal: 19
-        name: tire
-      - number: 21
-        ordinal: 20
-        name: instance_tag
-  - message: protobuf.covesa.vss.motion.axle_wheel.v1.AxleWheelInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
-  - message: protobuf.covesa.vss.motion.axle_wheel.v1.CreateAxleWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: parent
-      - number: 2
-        ordinal: 1
-        name: axle_wheel
-      - number: 3
-        ordinal: 2
-        name: axle_wheel_id
-  - message: protobuf.covesa.vss.motion.axle_wheel.v1.DeleteAxleWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vss.motion.axle_wheel.v1.GetAxleWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vss.motion.axle_wheel.v1.ListAxleWheelsRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: parent
-      - number: 2
-        ordinal: 1
-        name: page_size
-      - number: 3
-        ordinal: 2
-        name: page_token
-      - number: 4
-        ordinal: 3
-        name: filter
-      - number: 5
-        ordinal: 4
-        name: show_deleted
-  - message: protobuf.covesa.vss.motion.axle_wheel.v1.ListAxleWheelsResponse
-    fields:
-      - number: 1
-        ordinal: 0
-        name: axle_wheels
-      - number: 2
-        ordinal: 1
-        name: next_page_token
-  - message: protobuf.covesa.vss.motion.axle_wheel.v1.Tire
-    fields:
-      - number: 1
-        ordinal: 0
-        name: air_temperature
-      - number: 2
-        ordinal: 1
-        name: is_pressure_low
-      - number: 3
-        ordinal: 2
-        name: pressure
-      - number: 4
-        ordinal: 3
-        name: rubber_temperature
-      - number: 5
-        ordinal: 4
-        name: temperature
-  - message: protobuf.covesa.vss.motion.axle_wheel.v1.UndeleteAxleWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vss.motion.axle_wheel.v1.UpdateAxleWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: axle_wheel
-      - number: 2
-        ordinal: 1
-        name: update_mask
-  - message: protobuf.covesa.vss.motion.axle_wheel.v1.WheelBrake
-    fields:
-      - number: 1
-        ordinal: 0
-        name: fluid_level
-      - number: 2
-        ordinal: 1
-        name: is_brakes_worn
-      - number: 3
-        ordinal: 2
-        name: is_fluid_level_low
-      - number: 4
-        ordinal: 3
-        name: pad_wear
-  - message: protobuf.covesa.vss.motion.brake_axle.v1.BrakeAxle
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-      - number: 2
-        ordinal: 1
-        name: uid
-      - number: 3
-        ordinal: 2
-        name: etag
-      - number: 4
-        ordinal: 3
-        name: delete_time
-      - number: 5
-        ordinal: 4
-        name: expire_time
-      - number: 6
-        ordinal: 5
-        name: create_time
-      - number: 7
-        ordinal: 6
-        name: update_time
-      - number: 16
-        ordinal: 15
-        name: torque_distribution_friction_right_maximum
-      - number: 17
-        ordinal: 16
-        name: torque_distribution_friction_right_minimum
-      - number: 18
-        ordinal: 17
         name: torque_electric_minimum
+      - number: 17
+        ordinal: 16
+        name: torque_friction_difference_maximum
+      - number: 18
+        ordinal: 17
+        name: torque_distribution_friction_right_maximum
       - number: 19
         ordinal: 18
-        name: torque_friction_difference_maximum
-      - number: 20
-        ordinal: 19
-        name: instance_tag
-  - message: protobuf.covesa.vss.motion.brake_axle.v1.BrakeAxleInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
-  - message: protobuf.covesa.vss.motion.brake_axle.v1.CreateBrakeAxleRequest
+        name: torque_distribution_friction_right_minimum
+  - message: protobuf.covesa.vss.motion.brake_axle.v1.CreateAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: parent
       - number: 2
         ordinal: 1
-        name: brake_axle
+        name: axle
       - number: 3
         ordinal: 2
-        name: brake_axle_id
-  - message: protobuf.covesa.vss.motion.brake_axle.v1.DeleteBrakeAxleRequest
+        name: axle_id
+  - message: protobuf.covesa.vss.motion.brake_axle.v1.DeleteAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vss.motion.brake_axle.v1.GetBrakeAxleRequest
+  - message: protobuf.covesa.vss.motion.brake_axle.v1.GetAxleRequest
     fields:
       - number: 1
         ordinal: 0
@@ -4111,20 +4082,79 @@ messages:
       - number: 2
         ordinal: 1
         name: next_page_token
-  - message: protobuf.covesa.vss.motion.brake_axle.v1.UndeleteBrakeAxleRequest
+  - message: protobuf.covesa.vss.motion.brake_axle.v1.UndeleteAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vss.motion.brake_axle.v1.UpdateBrakeAxleRequest
+  - message: protobuf.covesa.vss.motion.brake_axle.v1.UpdateAxleRequest
     fields:
       - number: 1
         ordinal: 0
-        name: brake_axle
+        name: axle
       - number: 2
         ordinal: 1
         name: update_mask
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.BrakeAxleWheel
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.CreateWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: parent
+      - number: 2
+        ordinal: 1
+        name: wheel
+      - number: 3
+        ordinal: 2
+        name: wheel_id
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.DeleteWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.GetWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.ListWheelsRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: parent
+      - number: 2
+        ordinal: 1
+        name: page_size
+      - number: 3
+        ordinal: 2
+        name: page_token
+      - number: 4
+        ordinal: 3
+        name: filter
+      - number: 5
+        ordinal: 4
+        name: show_deleted
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.ListWheelsResponse
+    fields:
+      - number: 1
+        ordinal: 0
+        name: wheels
+      - number: 2
+        ordinal: 1
+        name: next_page_token
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.UndeleteWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.UpdateWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: wheel
+      - number: 2
+        ordinal: 1
+        name: update_mask
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.Wheel
     fields:
       - number: 1
         ordinal: 0
@@ -4149,94 +4179,35 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: omega_lower
+        name: torque
       - number: 17
         ordinal: 16
-        name: omega_upper
+        name: torque_arbitrated
       - number: 18
         ordinal: 17
-        name: torque
+        name: torque_friction_maximum
       - number: 19
         ordinal: 18
-        name: torque_arbitrated
+        name: torque_friction_minimum
       - number: 20
         ordinal: 19
-        name: torque_friction_maximum
+        name: omega_upper
       - number: 21
         ordinal: 20
-        name: torque_friction_minimum
-      - number: 22
-        ordinal: 21
-        name: instance_tag
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.BrakeAxleWheelInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.CreateBrakeAxleWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: parent
-      - number: 2
-        ordinal: 1
-        name: brake_axle_wheel
-      - number: 3
-        ordinal: 2
-        name: brake_axle_wheel_id
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.DeleteBrakeAxleWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.GetBrakeAxleWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.ListBrakeAxleWheelsRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: parent
-      - number: 2
-        ordinal: 1
-        name: page_size
-      - number: 3
-        ordinal: 2
-        name: page_token
-      - number: 4
-        ordinal: 3
-        name: filter
-      - number: 5
-        ordinal: 4
-        name: show_deleted
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.ListBrakeAxleWheelsResponse
-    fields:
-      - number: 1
-        ordinal: 0
-        name: brake_axle_wheels
-      - number: 2
-        ordinal: 1
-        name: next_page_token
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.UndeleteBrakeAxleWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.UpdateBrakeAxleWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: brake_axle_wheel
-      - number: 2
-        ordinal: 1
-        name: update_mask
+        name: omega_lower
   - message: protobuf.covesa.vss.motion.chassis.v1.Accelerator
     fields:
       - number: 1
         ordinal: 0
         name: pedal_position
+  - message: protobuf.covesa.vss.motion.chassis.v1.Brake
+    fields:
+      - number: 1
+        ordinal: 0
+        name: pedal_position
+      - number: 2
+        ordinal: 1
+        name: is_driver_emergency_braking_detected
   - message: protobuf.covesa.vss.motion.chassis.v1.Chassis
     fields:
       - number: 1
@@ -4262,44 +4233,22 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: axle_count
+        name: wheelbase
       - number: 17
         ordinal: 16
-        name: wheelbase
+        name: axle_count
       - number: 18
         ordinal: 17
-        name: accelerator
+        name: parking_brake
       - number: 19
         ordinal: 18
-        name: brake
+        name: steering_wheel
       - number: 20
         ordinal: 19
-        name: parking_brake
+        name: accelerator
       - number: 21
         ordinal: 20
-        name: steering_wheel
-  - message: protobuf.covesa.vss.motion.chassis.v1.ChassisBrake
-    fields:
-      - number: 1
-        ordinal: 0
-        name: is_driver_emergency_braking_detected
-      - number: 2
-        ordinal: 1
-        name: pedal_position
-  - message: protobuf.covesa.vss.motion.chassis.v1.ChassisSteeringWheel
-    fields:
-      - number: 1
-        ordinal: 0
-        name: angle
-      - number: 2
-        ordinal: 1
-        name: extension
-      - number: 3
-        ordinal: 2
-        name: heating_cooling
-      - number: 4
-        ordinal: 3
-        name: tilt
+        name: brake
   - message: protobuf.covesa.vss.motion.chassis.v1.GetChassisRequest
     fields:
       - number: 1
@@ -4309,10 +4258,24 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: is_auto_apply_enabled
+        name: is_engaged
       - number: 2
         ordinal: 1
-        name: is_engaged
+        name: is_auto_apply_enabled
+  - message: protobuf.covesa.vss.motion.chassis.v1.SteeringWheel
+    fields:
+      - number: 1
+        ordinal: 0
+        name: angle
+      - number: 2
+        ordinal: 1
+        name: tilt
+      - number: 3
+        ordinal: 2
+        name: extension
+      - number: 4
+        ordinal: 3
+        name: heating_cooling
   - message: protobuf.covesa.vss.motion.chassis.v1.UpdateChassisRequest
     fields:
       - number: 1
@@ -4321,7 +4284,7 @@ messages:
       - number: 2
         ordinal: 1
         name: update_mask
-  - message: protobuf.covesa.vss.motion.chassis_axle.v1.ChassisAxle
+  - message: protobuf.covesa.vss.motion.chassis_axle.v1.Axle
     fields:
       - number: 1
         ordinal: 0
@@ -4346,62 +4309,54 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: axle_width
+        name: tread_width
       - number: 17
         ordinal: 16
-        name: steering_angle
+        name: track_width
       - number: 18
         ordinal: 17
-        name: tire_aspect_ratio
+        name: axle_width
       - number: 19
         ordinal: 18
-        name: tire_diameter
+        name: wheel_count
       - number: 20
         ordinal: 19
-        name: tire_width
+        name: wheel_diameter
       - number: 21
         ordinal: 20
-        name: torque
+        name: wheel_width
       - number: 22
         ordinal: 21
-        name: track_width
+        name: steering_angle
       - number: 23
         ordinal: 22
-        name: tread_width
+        name: tire_diameter
       - number: 24
         ordinal: 23
-        name: wheel_count
+        name: tire_width
       - number: 25
         ordinal: 24
-        name: wheel_diameter
+        name: tire_aspect_ratio
       - number: 26
         ordinal: 25
-        name: wheel_width
-      - number: 27
-        ordinal: 26
-        name: instance_tag
-  - message: protobuf.covesa.vss.motion.chassis_axle.v1.ChassisAxleInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
-  - message: protobuf.covesa.vss.motion.chassis_axle.v1.CreateChassisAxleRequest
+        name: torque
+  - message: protobuf.covesa.vss.motion.chassis_axle.v1.CreateAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: parent
       - number: 2
         ordinal: 1
-        name: chassis_axle
+        name: axle
       - number: 3
         ordinal: 2
-        name: chassis_axle_id
-  - message: protobuf.covesa.vss.motion.chassis_axle.v1.DeleteChassisAxleRequest
+        name: axle_id
+  - message: protobuf.covesa.vss.motion.chassis_axle.v1.DeleteAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vss.motion.chassis_axle.v1.GetChassisAxleRequest
+  - message: protobuf.covesa.vss.motion.chassis_axle.v1.GetAxleRequest
     fields:
       - number: 1
         ordinal: 0
@@ -4431,19 +4386,150 @@ messages:
       - number: 2
         ordinal: 1
         name: next_page_token
-  - message: protobuf.covesa.vss.motion.chassis_axle.v1.UndeleteChassisAxleRequest
+  - message: protobuf.covesa.vss.motion.chassis_axle.v1.UndeleteAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vss.motion.chassis_axle.v1.UpdateChassisAxleRequest
+  - message: protobuf.covesa.vss.motion.chassis_axle.v1.UpdateAxleRequest
     fields:
       - number: 1
         ordinal: 0
-        name: chassis_axle
+        name: axle
       - number: 2
         ordinal: 1
         name: update_mask
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Brake
+    fields:
+      - number: 1
+        ordinal: 0
+        name: fluid_level
+      - number: 2
+        ordinal: 1
+        name: is_fluid_level_low
+      - number: 3
+        ordinal: 2
+        name: pad_wear
+      - number: 4
+        ordinal: 3
+        name: is_brakes_worn
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.CreateWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: parent
+      - number: 2
+        ordinal: 1
+        name: wheel
+      - number: 3
+        ordinal: 2
+        name: wheel_id
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.DeleteWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.GetWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.ListWheelsRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: parent
+      - number: 2
+        ordinal: 1
+        name: page_size
+      - number: 3
+        ordinal: 2
+        name: page_token
+      - number: 4
+        ordinal: 3
+        name: filter
+      - number: 5
+        ordinal: 4
+        name: show_deleted
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.ListWheelsResponse
+    fields:
+      - number: 1
+        ordinal: 0
+        name: wheels
+      - number: 2
+        ordinal: 1
+        name: next_page_token
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Tire
+    fields:
+      - number: 1
+        ordinal: 0
+        name: pressure
+      - number: 2
+        ordinal: 1
+        name: is_pressure_low
+      - number: 3
+        ordinal: 2
+        name: temperature
+      - number: 4
+        ordinal: 3
+        name: rubber_temperature
+      - number: 5
+        ordinal: 4
+        name: air_temperature
+      - number: 6
+        ordinal: 5
+        name: winter_status
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.UndeleteWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.UpdateWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: wheel
+      - number: 2
+        ordinal: 1
+        name: update_mask
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Wheel
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+      - number: 2
+        ordinal: 1
+        name: uid
+      - number: 3
+        ordinal: 2
+        name: etag
+      - number: 4
+        ordinal: 3
+        name: delete_time
+      - number: 5
+        ordinal: 4
+        name: expire_time
+      - number: 6
+        ordinal: 5
+        name: create_time
+      - number: 7
+        ordinal: 6
+        name: update_time
+      - number: 16
+        ordinal: 15
+        name: brake
+      - number: 17
+        ordinal: 16
+        name: tire
+      - number: 18
+        ordinal: 17
+        name: speed
+      - number: 19
+        ordinal: 18
+        name: angular_speed
+      - number: 20
+        ordinal: 19
+        name: torque
   - message: protobuf.covesa.vss.motion.electric_axle.v1.CreateElectricAxleRequest
     fields:
       - number: 1
@@ -4485,42 +4571,34 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: rotational_speed
+        name: torque
       - number: 17
         ordinal: 16
-        name: rotational_speed_maximum_limit
+        name: torque_target
       - number: 18
         ordinal: 17
-        name: rotational_speed_minimum_limit
+        name: torque_maximum
       - number: 19
         ordinal: 18
-        name: rotational_speed_target
+        name: torque_minimum
       - number: 20
         ordinal: 19
-        name: torque
+        name: torque_maximum_limit
       - number: 21
         ordinal: 20
-        name: torque_maximum
+        name: torque_minimum_limit
       - number: 22
         ordinal: 21
-        name: torque_maximum_limit
+        name: rotational_speed
       - number: 23
         ordinal: 22
-        name: torque_minimum
+        name: rotational_speed_target
       - number: 24
         ordinal: 23
-        name: torque_minimum_limit
+        name: rotational_speed_maximum_limit
       - number: 25
         ordinal: 24
-        name: torque_target
-      - number: 26
-        ordinal: 25
-        name: instance_tag
-  - message: protobuf.covesa.vss.motion.electric_axle.v1.ElectricAxleInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
+        name: rotational_speed_minimum_limit
   - message: protobuf.covesa.vss.motion.electric_axle.v1.GetElectricAxleRequest
     fields:
       - number: 1
@@ -4564,6 +4642,31 @@ messages:
       - number: 2
         ordinal: 1
         name: update_mask
+  - message: protobuf.covesa.vss.motion.motion_management.v1.Axle
+    fields:
+      - number: 1
+        ordinal: 0
+        name: row1
+      - number: 2
+        ordinal: 1
+        name: row2
+  - message: protobuf.covesa.vss.motion.motion_management.v1.Brake
+    fields:
+      - number: 1
+        ordinal: 0
+        name: vehicle_force_maximum
+      - number: 2
+        ordinal: 1
+        name: vehicle_force_electric_minimum_arbitrated
+      - number: 3
+        ordinal: 2
+        name: vehicle_force_electric
+      - number: 4
+        ordinal: 3
+        name: vehicle_force_distribution_front_maximum
+      - number: 5
+        ordinal: 4
+        name: vehicle_force_distribution_front_minimum
   - message: protobuf.covesa.vss.motion.motion_management.v1.GetMotionManagementRequest
     fields:
       - number: 1
@@ -4601,49 +4704,32 @@ messages:
       - number: 18
         ordinal: 17
         name: suspension
-  - message: protobuf.covesa.vss.motion.motion_management.v1.MotionManagementBrake
-    fields:
-      - number: 1
-        ordinal: 0
-        name: vehicle_force_distribution_front_maximum
-      - number: 2
-        ordinal: 1
-        name: vehicle_force_distribution_front_minimum
-      - number: 3
-        ordinal: 2
-        name: vehicle_force_electric
-      - number: 4
-        ordinal: 3
-        name: vehicle_force_electric_minimum_arbitrated
-      - number: 5
-        ordinal: 4
-        name: vehicle_force_maximum
   - message: protobuf.covesa.vss.motion.motion_management.v1.Row1
     fields:
       - number: 1
         ordinal: 0
-        name: position_offset_target_mode
+        name: position_target_mode
       - number: 2
         ordinal: 1
-        name: position_target_mode
+        name: position_offset_target_mode
       - number: 3
         ordinal: 2
         name: rack_position
       - number: 4
         ordinal: 3
-        name: rack_position_offset_target
+        name: rack_position_target
       - number: 5
         ordinal: 4
-        name: rack_position_target
+        name: rack_position_offset_target
       - number: 6
         ordinal: 5
         name: steer_angle
       - number: 7
         ordinal: 6
-        name: steer_angle_offset_target
+        name: steer_angle_target
       - number: 8
         ordinal: 7
-        name: steer_angle_target
+        name: steer_angle_offset_target
   - message: protobuf.covesa.vss.motion.motion_management.v1.Row2
     fields:
       - number: 1
@@ -4659,19 +4745,11 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: axle
-      - number: 2
-        ordinal: 1
         name: steering_wheel
-  - message: protobuf.covesa.vss.motion.motion_management.v1.SteeringAxle
-    fields:
-      - number: 1
-        ordinal: 0
-        name: row1
       - number: 2
         ordinal: 1
-        name: row2
-  - message: protobuf.covesa.vss.motion.motion_management.v1.SteeringSteeringWheel
+        name: axle
+  - message: protobuf.covesa.vss.motion.motion_management.v1.SteeringWheel
     fields:
       - number: 1
         ordinal: 0
@@ -4684,19 +4762,19 @@ messages:
         name: angle_target_mode
       - number: 4
         ordinal: 3
-        name: torque
+        name: torque_offset_target
       - number: 5
         ordinal: 4
-        name: torque_offset_target
+        name: torque_offset_target_mode
       - number: 6
         ordinal: 5
-        name: torque_offset_target_mode
+        name: torque_target
       - number: 7
         ordinal: 6
-        name: torque_target
+        name: torque_target_mode
       - number: 8
         ordinal: 7
-        name: torque_target_mode
+        name: torque
   - message: protobuf.covesa.vss.motion.motion_management.v1.Suspension
     fields:
       - number: 1
@@ -4704,16 +4782,16 @@ messages:
         name: damping_prio_target
       - number: 2
         ordinal: 1
-        name: roll_prio_target
+        name: roll_torque_target
       - number: 3
         ordinal: 2
-        name: roll_torque_distribution_front_maximum
+        name: roll_prio_target
       - number: 4
         ordinal: 3
-        name: roll_torque_distribution_front_minimum
+        name: roll_torque_distribution_front_maximum
       - number: 5
         ordinal: 4
-        name: roll_torque_target
+        name: roll_torque_distribution_front_minimum
   - message: protobuf.covesa.vss.motion.motion_management.v1.UpdateMotionManagementRequest
     fields:
       - number: 1
@@ -4722,23 +4800,94 @@ messages:
       - number: 2
         ordinal: 1
         name: update_mask
-  - message: protobuf.covesa.vss.motion.suspension_axle.v1.CreateSuspensionAxleRequest
+  - message: protobuf.covesa.vss.motion.orientation.v1.GetOrientationRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.motion.orientation.v1.Orientation
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+      - number: 2
+        ordinal: 1
+        name: uid
+      - number: 3
+        ordinal: 2
+        name: etag
+      - number: 4
+        ordinal: 3
+        name: delete_time
+      - number: 5
+        ordinal: 4
+        name: expire_time
+      - number: 6
+        ordinal: 5
+        name: create_time
+      - number: 7
+        ordinal: 6
+        name: update_time
+      - number: 16
+        ordinal: 15
+        name: roll
+      - number: 17
+        ordinal: 16
+        name: pitch
+      - number: 18
+        ordinal: 17
+        name: yaw
+  - message: protobuf.covesa.vss.motion.orientation.v1.UpdateOrientationRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: orientation
+      - number: 2
+        ordinal: 1
+        name: update_mask
+  - message: protobuf.covesa.vss.motion.suspension_axle.v1.Axle
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+      - number: 2
+        ordinal: 1
+        name: uid
+      - number: 3
+        ordinal: 2
+        name: etag
+      - number: 4
+        ordinal: 3
+        name: delete_time
+      - number: 5
+        ordinal: 4
+        name: expire_time
+      - number: 6
+        ordinal: 5
+        name: create_time
+      - number: 7
+        ordinal: 6
+        name: update_time
+      - number: 16
+        ordinal: 15
+        name: roll_torque
+  - message: protobuf.covesa.vss.motion.suspension_axle.v1.CreateAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: parent
       - number: 2
         ordinal: 1
-        name: suspension_axle
+        name: axle
       - number: 3
         ordinal: 2
-        name: suspension_axle_id
-  - message: protobuf.covesa.vss.motion.suspension_axle.v1.DeleteSuspensionAxleRequest
+        name: axle_id
+  - message: protobuf.covesa.vss.motion.suspension_axle.v1.DeleteAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vss.motion.suspension_axle.v1.GetSuspensionAxleRequest
+  - message: protobuf.covesa.vss.motion.suspension_axle.v1.GetAxleRequest
     fields:
       - number: 1
         ordinal: 0
@@ -4768,75 +4917,41 @@ messages:
       - number: 2
         ordinal: 1
         name: next_page_token
-  - message: protobuf.covesa.vss.motion.suspension_axle.v1.SuspensionAxle
+  - message: protobuf.covesa.vss.motion.suspension_axle.v1.UndeleteAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-      - number: 2
-        ordinal: 1
-        name: uid
-      - number: 3
-        ordinal: 2
-        name: etag
-      - number: 4
-        ordinal: 3
-        name: delete_time
-      - number: 5
-        ordinal: 4
-        name: expire_time
-      - number: 6
-        ordinal: 5
-        name: create_time
-      - number: 7
-        ordinal: 6
-        name: update_time
-      - number: 16
-        ordinal: 15
-        name: roll_torque
-      - number: 17
-        ordinal: 16
-        name: instance_tag
-  - message: protobuf.covesa.vss.motion.suspension_axle.v1.SuspensionAxleInstanceTag
+  - message: protobuf.covesa.vss.motion.suspension_axle.v1.UpdateAxleRequest
     fields:
       - number: 1
         ordinal: 0
-        name: dimension1
-  - message: protobuf.covesa.vss.motion.suspension_axle.v1.UndeleteSuspensionAxleRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vss.motion.suspension_axle.v1.UpdateSuspensionAxleRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: suspension_axle
+        name: axle
       - number: 2
         ordinal: 1
         name: update_mask
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.CreateSuspensionAxleWheelRequest
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.CreateWheelRequest
     fields:
       - number: 1
         ordinal: 0
         name: parent
       - number: 2
         ordinal: 1
-        name: suspension_axle_wheel
+        name: wheel
       - number: 3
         ordinal: 2
-        name: suspension_axle_wheel_id
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.DeleteSuspensionAxleWheelRequest
+        name: wheel_id
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.DeleteWheelRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.GetSuspensionAxleWheelRequest
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.GetWheelRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.ListSuspensionAxleWheelsRequest
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.ListWheelsRequest
     fields:
       - number: 1
         ordinal: 0
@@ -4853,15 +4968,28 @@ messages:
       - number: 5
         ordinal: 4
         name: show_deleted
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.ListSuspensionAxleWheelsResponse
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.ListWheelsResponse
     fields:
       - number: 1
         ordinal: 0
-        name: suspension_axle_wheels
+        name: wheels
       - number: 2
         ordinal: 1
         name: next_page_token
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.SuspensionAxleWheel
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.UndeleteWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.UpdateWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: wheel
+      - number: 2
+        ordinal: 1
+        name: update_mask
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.Wheel
     fields:
       - number: 1
         ordinal: 0
@@ -4886,37 +5014,16 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: damping_force
+        name: damping_rate_target
       - number: 17
         ordinal: 16
-        name: damping_force_target
+        name: damping_rate
       - number: 18
         ordinal: 17
-        name: damping_rate
+        name: damping_force_target
       - number: 19
         ordinal: 18
-        name: damping_rate_target
-      - number: 20
-        ordinal: 19
-        name: instance_tag
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.SuspensionAxleWheelInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.UndeleteSuspensionAxleWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.UpdateSuspensionAxleWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: suspension_axle_wheel
-      - number: 2
-        ordinal: 1
-        name: update_mask
+        name: damping_force
   - message: protobuf.covesa.vss.platform.connectivity.v1.Connectivity
     fields:
       - number: 1
@@ -4986,18 +5093,10 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: control_unit_id
+        name: health
       - number: 17
         ordinal: 16
-        name: health
-      - number: 18
-        ordinal: 17
-        name: instance_tag
-  - message: protobuf.covesa.vss.platform.control_unit.v1.ControlUnitInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
+        name: control_unit_id
   - message: protobuf.covesa.vss.platform.control_unit.v1.CreateControlUnitRequest
     fields:
       - number: 1
@@ -5034,7 +5133,7 @@ messages:
         name: resources
       - number: 3
         ordinal: 2
-        name: swsupervision
+        name: sw_supervision
   - message: protobuf.covesa.vss.platform.control_unit.v1.ListControlUnitsRequest
     fields:
       - number: 1
@@ -5139,10 +5238,10 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: dtccount
+        name: dtc_count
       - number: 17
         ordinal: 16
-        name: dtclist
+        name: dtc_list
   - message: protobuf.covesa.vss.platform.diagnostics.v1.GetDiagnosticsRequest
     fields:
       - number: 1
@@ -5186,10 +5285,10 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: service_distance
+        name: is_service_due
       - number: 17
         ordinal: 16
-        name: is_service_due
+        name: service_distance
       - number: 18
         ordinal: 17
         name: service_duration
@@ -5250,67 +5349,67 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: acriss_code
+        name: vin
       - number: 17
         ordinal: 16
-        name: body_type
+        name: wmi
       - number: 18
         ordinal: 17
         name: brand
       - number: 19
         ordinal: 18
-        name: first_registration
+        name: model
       - number: 20
         ordinal: 19
-        name: known_vehicle_damages
+        name: year
       - number: 21
         ordinal: 20
-        name: license_plate
+        name: acriss_code
       - number: 22
         ordinal: 21
-        name: meets_emission_standard
+        name: body_type
       - number: 23
         ordinal: 22
-        name: model
+        name: first_registration
       - number: 24
         ordinal: 23
-        name: optional_extras
+        name: license_plate
       - number: 25
         ordinal: 24
-        name: production
+        name: meets_emission_standard
       - number: 26
         ordinal: 25
-        name: purchase
+        name: production
       - number: 27
         ordinal: 26
-        name: vin
+        name: purchase
       - number: 28
         ordinal: 27
-        name: vehicle_config
+        name: model_release
       - number: 29
         ordinal: 28
-        name: vehicle_exterior_color
+        name: vehicle_config
       - number: 30
         ordinal: 29
-        name: vehicle_interior_color
+        name: vehicle_seating_capacity
       - number: 31
         ordinal: 30
-        name: vehicle_interior_type
+        name: vehicle_special_usage
       - number: 32
         ordinal: 31
-        name: model_release
+        name: vehicle_exterior_color
       - number: 33
         ordinal: 32
-        name: vehicle_seating_capacity
+        name: vehicle_interior_color
       - number: 34
         ordinal: 33
-        name: vehicle_special_usage
+        name: vehicle_interior_type
       - number: 35
         ordinal: 34
-        name: wmi
+        name: known_vehicle_damages
       - number: 36
         ordinal: 35
-        name: year
+        name: optional_extras
   - message: protobuf.covesa.vss.platform.version_vss.v1.GetVersionVssRequest
     fields:
       - number: 1
@@ -5349,16 +5448,16 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: label
+        name: major
       - number: 17
         ordinal: 16
-        name: major
+        name: minor
       - number: 18
         ordinal: 17
-        name: minor
+        name: patch
       - number: 19
         ordinal: 18
-        name: patch
+        name: label
   - message: protobuf.covesa.vss.propulsion.charging_port.v1.ChargingPort
     fields:
       - number: 1
@@ -5384,24 +5483,16 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: is_charging_cable_connected
+        name: supported_inlet_types
       - number: 17
         ordinal: 16
-        name: is_charging_cable_locked
+        name: is_flap_open
       - number: 18
         ordinal: 17
-        name: is_flap_open
+        name: is_charging_cable_connected
       - number: 19
         ordinal: 18
-        name: supported_inlet_types
-      - number: 20
-        ordinal: 19
-        name: instance_tag
-  - message: protobuf.covesa.vss.propulsion.charging_port.v1.ChargingPortInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
+        name: is_charging_cable_locked
   - message: protobuf.covesa.vss.propulsion.charging_port.v1.CreateChargingPortRequest
     fields:
       - number: 1
@@ -5508,53 +5599,45 @@ messages:
         name: max_power
       - number: 18
         ordinal: 17
-        name: max_regen_power
+        name: max_torque
       - number: 19
         ordinal: 18
-        name: max_regen_torque
+        name: max_regen_power
       - number: 20
         ordinal: 19
-        name: max_torque
+        name: max_regen_torque
       - number: 21
         ordinal: 20
-        name: power
+        name: speed
       - number: 22
         ordinal: 21
-        name: speed
+        name: usage_duration
       - number: 23
         ordinal: 22
         name: temperature
       - number: 24
         ordinal: 23
-        name: usage_duration
+        name: engine_coolant
       - number: 25
         ordinal: 24
-        name: torque
+        name: power
       - number: 26
         ordinal: 25
-        name: engine_coolant
-      - number: 27
-        ordinal: 26
-        name: instance_tag
-  - message: protobuf.covesa.vss.propulsion.electric_motor.v1.ElectricMotorEngineCoolant
+        name: torque
+  - message: protobuf.covesa.vss.propulsion.electric_motor.v1.EngineCoolant
     fields:
       - number: 1
         ordinal: 0
         name: capacity
       - number: 2
         ordinal: 1
-        name: level
+        name: temperature
       - number: 3
         ordinal: 2
-        name: life_remaining
+        name: level
       - number: 4
         ordinal: 3
-        name: temperature
-  - message: protobuf.covesa.vss.propulsion.electric_motor.v1.ElectricMotorInstanceTag
-    fields:
-      - number: 1
-        ordinal: 0
-        name: dimension1
+        name: life_remaining
   - message: protobuf.covesa.vss.propulsion.electric_motor.v1.GetElectricMotorRequest
     fields:
       - number: 1
@@ -5628,16 +5711,16 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: current_current
+        name: nominal_voltage
       - number: 17
         ordinal: 16
-        name: current_voltage
+        name: nominal_capacity
       - number: 18
         ordinal: 17
-        name: nominal_capacity
+        name: current_voltage
       - number: 19
         ordinal: 18
-        name: nominal_voltage
+        name: current_current
   - message: protobuf.covesa.vss.propulsion.low_voltage_battery.v1.UpdateLowVoltageBatteryRequest
     fields:
       - number: 1
@@ -5662,27 +5745,27 @@ messages:
         name: start_time
       - number: 5
         ordinal: 4
-        name: target_temperature
+        name: target_time
       - number: 6
         ordinal: 5
-        name: target_time
+        name: target_temperature
   - message: protobuf.covesa.vss.propulsion.powertrain.v1.CellVoltage
     fields:
       - number: 1
         ordinal: 0
-        name: cell_voltages
+        name: min
       - number: 2
         ordinal: 1
-        name: id_max
+        name: id_min
       - number: 3
         ordinal: 2
-        name: id_min
+        name: max
       - number: 4
         ordinal: 3
-        name: max
+        name: id_max
       - number: 5
         ordinal: 4
-        name: min
+        name: cell_voltages
   - message: protobuf.covesa.vss.propulsion.powertrain.v1.ChargeCurrent
     fields:
       - number: 1
@@ -5731,49 +5814,49 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: average_power
+        name: charge_limit
       - number: 2
         ordinal: 1
-        name: charge_limit
+        name: maximum_charging_current
       - number: 3
         ordinal: 2
-        name: charge_rate
+        name: is_charging
       - number: 4
         ordinal: 3
-        name: evse_id
+        name: is_discharging
       - number: 5
         ordinal: 4
-        name: is_charging
+        name: start_stop_charging
       - number: 6
         ordinal: 5
-        name: is_discharging
+        name: charge_current
       - number: 7
         ordinal: 6
-        name: max_power
+        name: charge_voltage
       - number: 8
         ordinal: 7
-        name: power_loss
+        name: average_power
       - number: 9
         ordinal: 8
-        name: start_stop_charging
+        name: max_power
       - number: 10
         ordinal: 9
-        name: temperature
+        name: evse_id
       - number: 11
         ordinal: 10
-        name: completion_duration
+        name: location
       - number: 12
         ordinal: 11
-        name: charge_current
+        name: power_loss
       - number: 13
         ordinal: 12
-        name: charge_voltage
+        name: temperature
       - number: 14
         ordinal: 13
-        name: location
+        name: charge_rate
       - number: 15
         ordinal: 14
-        name: maximum_charging_current
+        name: completion_duration
       - number: 16
         ordinal: 15
         name: timer
@@ -5781,93 +5864,79 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: aspiration_type
+        name: engine_code
       - number: 2
         ordinal: 1
-        name: bore
+        name: displacement
       - number: 3
         ordinal: 2
-        name: compression_ratio
+        name: stroke_length
       - number: 4
         ordinal: 3
-        name: config
+        name: bore
       - number: 5
         ordinal: 4
-        name: displacement
+        name: config
       - number: 6
         ordinal: 5
-        name: eop
+        name: cylinder_count
       - number: 7
         ordinal: 6
-        name: engine_code
+        name: cylinder_valve_count
       - number: 8
         ordinal: 7
-        name: engine_hours
+        name: compression_ratio
       - number: 9
         ordinal: 8
-        name: idle_hours
+        name: max_power
       - number: 10
         ordinal: 9
-        name: is_running
+        name: max_torque
       - number: 11
         ordinal: 10
-        name: maf
+        name: aspiration_type
       - number: 12
         ordinal: 11
-        name: map_control
+        name: is_running
       - number: 13
         ordinal: 12
-        name: max_power
+        name: speed
       - number: 14
         ordinal: 13
-        name: max_torque
+        name: engine_hours
       - number: 15
         ordinal: 14
-        name: cylinder_count
+        name: idle_hours
       - number: 16
         ordinal: 15
-        name: cylinder_valve_count
+        name: engine_oil
       - number: 17
         ordinal: 16
-        name: power
+        name: engine_coolant
       - number: 18
         ordinal: 17
-        name: speed
+        name: map_control
       - number: 19
         ordinal: 18
-        name: stroke_length
+        name: maf
       - number: 20
         ordinal: 19
         name: tps
       - number: 21
         ordinal: 20
-        name: torque
+        name: eop
       - number: 22
         ordinal: 21
-        name: diesel_exhaust_fluid
+        name: power
       - number: 23
         ordinal: 22
-        name: diesel_particulate_filter
+        name: torque
       - number: 24
         ordinal: 23
-        name: engine_coolant
+        name: diesel_exhaust_fluid
       - number: 25
         ordinal: 24
-        name: engine_oil
-  - message: protobuf.covesa.vss.propulsion.powertrain.v1.CombustionEngineEngineCoolant
-    fields:
-      - number: 1
-        ordinal: 0
-        name: capacity
-      - number: 2
-        ordinal: 1
-        name: level
-      - number: 3
-        ordinal: 2
-        name: life_remaining
-      - number: 4
-        ordinal: 3
-        name: temperature
+        name: diesel_particulate_filter
   - message: protobuf.covesa.vss.propulsion.powertrain.v1.Date
     fields:
       - number: 1
@@ -5894,24 +5963,38 @@ messages:
         name: capacity
       - number: 2
         ordinal: 1
+        name: level
+      - number: 3
+        ordinal: 2
+        name: range_control
+      - number: 4
+        ordinal: 3
         name: is_level_low
+  - message: protobuf.covesa.vss.propulsion.powertrain.v1.DieselParticulateFilter
+    fields:
+      - number: 1
+        ordinal: 0
+        name: inlet_temperature
+      - number: 2
+        ordinal: 1
+        name: outlet_temperature
+      - number: 3
+        ordinal: 2
+        name: delta_pressure
+  - message: protobuf.covesa.vss.propulsion.powertrain.v1.EngineCoolant
+    fields:
+      - number: 1
+        ordinal: 0
+        name: capacity
+      - number: 2
+        ordinal: 1
+        name: temperature
       - number: 3
         ordinal: 2
         name: level
       - number: 4
         ordinal: 3
-        name: range_control
-  - message: protobuf.covesa.vss.propulsion.powertrain.v1.DieselParticulateFilter
-    fields:
-      - number: 1
-        ordinal: 0
-        name: delta_pressure
-      - number: 2
-        ordinal: 1
-        name: inlet_temperature
-      - number: 3
-        ordinal: 2
-        name: outlet_temperature
+        name: life_remaining
   - message: protobuf.covesa.vss.propulsion.powertrain.v1.EngineOil
     fields:
       - number: 1
@@ -5926,71 +6009,77 @@ messages:
       - number: 4
         ordinal: 3
         name: temperature
+      - number: 5
+        ordinal: 4
+        name: pressure_status
   - message: protobuf.covesa.vss.propulsion.powertrain.v1.FuelSystem
     fields:
       - number: 1
         ordinal: 0
-        name: absolute_level
+        name: supported_fuel_types
       - number: 2
         ordinal: 1
-        name: current_tank_fuel_economy
+        name: supported_fuel
       - number: 3
         ordinal: 2
-        name: average_consumption
+        name: hybrid_type
       - number: 4
         ordinal: 3
-        name: current_tank_consumption
+        name: tank_capacity
       - number: 5
         ordinal: 4
-        name: trip_consumption
+        name: absolute_level
       - number: 6
         ordinal: 5
-        name: cumulative_fuel_economy
+        name: relative_level
       - number: 7
         ordinal: 6
-        name: drive_fuel_economy
+        name: range_control
       - number: 8
         ordinal: 7
-        name: hybrid_type
+        name: time_remaining
       - number: 9
         ordinal: 8
         name: instant_consumption
       - number: 10
         ordinal: 9
-        name: instantant_fuel_economy
+        name: average_consumption
       - number: 11
         ordinal: 10
-        name: is_engine_stop_start_enabled
+        name: trip_consumption
       - number: 12
         ordinal: 11
-        name: is_fuel_level_empty
+        name: current_tank_consumption
       - number: 13
         ordinal: 12
-        name: is_fuel_level_low
+        name: is_engine_stop_start_enabled
       - number: 14
         ordinal: 13
-        name: is_fuel_port_flap_open
+        name: is_fuel_level_low
       - number: 15
         ordinal: 14
-        name: range_control
+        name: is_fuel_level_empty
       - number: 16
         ordinal: 15
         name: refuel_port_position
       - number: 17
         ordinal: 16
-        name: relative_level
+        name: is_fuel_port_flap_open
       - number: 18
         ordinal: 17
-        name: supported_fuel
+        name: instantant_fuel_economy
       - number: 19
         ordinal: 18
-        name: supported_fuel_types
+        name: instant_fuel_economy
       - number: 20
         ordinal: 19
-        name: tank_capacity
+        name: cumulative_fuel_economy
       - number: 21
         ordinal: 20
-        name: time_remaining
+        name: drive_fuel_economy
+      - number: 22
+        ordinal: 21
+        name: current_tank_fuel_economy
   - message: protobuf.covesa.vss.propulsion.powertrain.v1.GetPowertrainRequest
     fields:
       - number: 1
@@ -6000,13 +6089,13 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: altitude
+        name: latitude
       - number: 2
         ordinal: 1
-        name: latitude
+        name: longitude
       - number: 3
         ordinal: 2
-        name: longitude
+        name: altitude
   - message: protobuf.covesa.vss.propulsion.powertrain.v1.MaximumChargingCurrent
     fields:
       - number: 1
@@ -6046,51 +6135,51 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: accumulated_braking_energy
+        name: combustion_engine
       - number: 17
         ordinal: 16
-        name: is_auto_power_optimize
+        name: transmission
       - number: 18
         ordinal: 17
-        name: power_optimize_level
+        name: traction_battery
       - number: 19
         ordinal: 18
-        name: range_control
+        name: fuel_system
       - number: 20
         ordinal: 19
-        name: time_remaining
+        name: range_extender
       - number: 21
         ordinal: 20
-        name: type_control
+        name: accumulated_braking_energy
       - number: 22
         ordinal: 21
-        name: combustion_engine
+        name: range_control
       - number: 23
         ordinal: 22
-        name: fuel_system
+        name: time_remaining
       - number: 24
         ordinal: 23
-        name: range_extender
+        name: type_control
       - number: 25
         ordinal: 24
-        name: traction_battery
+        name: power_optimize_level
       - number: 26
         ordinal: 25
-        name: transmission
+        name: is_auto_power_optimize
   - message: protobuf.covesa.vss.propulsion.powertrain.v1.RangeExtender
     fields:
       - number: 1
         ordinal: 0
-        name: combined_fuel_economy
+        name: operating_mode
       - number: 2
         ordinal: 1
-        name: operating_mode
+        name: charge_depleting
       - number: 3
         ordinal: 2
-        name: charge_depleting
+        name: charge_sustaining
       - number: 4
         ordinal: 3
-        name: charge_sustaining
+        name: combined_fuel_economy
   - message: protobuf.covesa.vss.propulsion.powertrain.v1.StateOfCharge
     fields:
       - number: 1
@@ -6098,10 +6187,10 @@ messages:
         name: current
       - number: 2
         ordinal: 1
-        name: current_energy
+        name: displayed
       - number: 3
         ordinal: 2
-        name: displayed
+        name: current_energy
   - message: protobuf.covesa.vss.propulsion.powertrain.v1.Temperature
     fields:
       - number: 1
@@ -6109,13 +6198,13 @@ messages:
         name: average
       - number: 2
         ordinal: 1
-        name: cell_temperature
+        name: min
       - number: 3
         ordinal: 2
         name: max
       - number: 4
         ordinal: 3
-        name: min
+        name: cell_temperature
   - message: protobuf.covesa.vss.propulsion.powertrain.v1.Timer
     fields:
       - number: 1
@@ -6128,135 +6217,135 @@ messages:
     fields:
       - number: 1
         ordinal: 0
-        name: accumulated_charged_energy
+        name: id
       - number: 2
         ordinal: 1
-        name: accumulated_charged_throughput
+        name: production
       - number: 3
         ordinal: 2
-        name: accumulated_consumed_energy
+        name: error_codes
       - number: 4
         ordinal: 3
-        name: accumulated_consumed_throughput
+        name: is_power_connected
       - number: 5
         ordinal: 4
-        name: current_current
+        name: is_ground_connected
       - number: 6
         ordinal: 5
-        name: current_power
+        name: temperature
       - number: 7
         ordinal: 6
-        name: current_voltage
+        name: cell_voltage
       - number: 8
         ordinal: 7
-        name: error_codes
+        name: gross_capacity
       - number: 9
         ordinal: 8
-        name: gross_capacity
+        name: net_capacity
       - number: 10
         ordinal: 9
-        name: id
+        name: health_state
       - number: 11
         ordinal: 10
-        name: is_ground_connected
+        name: charge_state
       - number: 12
         ordinal: 11
-        name: is_power_connected
+        name: nominal_voltage
       - number: 13
         ordinal: 12
         name: max_voltage
       - number: 14
         ordinal: 13
-        name: net_capacity
+        name: current_voltage
       - number: 15
         ordinal: 14
-        name: nominal_voltage
+        name: current_current
       - number: 16
         ordinal: 15
-        name: power_loss
+        name: current_power
       - number: 17
         ordinal: 16
-        name: production
+        name: accumulated_charged_energy
       - number: 18
         ordinal: 17
-        name: range_control
+        name: accumulated_consumed_energy
       - number: 19
         ordinal: 18
-        name: health_state
+        name: accumulated_charged_throughput
       - number: 20
         ordinal: 19
-        name: time_remaining
+        name: accumulated_consumed_throughput
       - number: 21
         ordinal: 20
-        name: battery_conditioning
+        name: power_loss
       - number: 22
         ordinal: 21
-        name: cell_voltage
+        name: range_control
       - number: 23
         ordinal: 22
-        name: charging
+        name: time_remaining
       - number: 24
         ordinal: 23
-        name: dcdc
+        name: charging
       - number: 25
         ordinal: 24
-        name: charge_state
+        name: dcdc
       - number: 26
         ordinal: 25
-        name: temperature
+        name: battery_conditioning
   - message: protobuf.covesa.vss.propulsion.powertrain.v1.Transmission
     fields:
       - number: 1
         ordinal: 0
-        name: clutch_engagement
+        name: type_control
       - number: 2
         ordinal: 1
-        name: clutch_wear
+        name: gear_count
       - number: 3
         ordinal: 2
-        name: current_gear
+        name: drive_type
       - number: 4
         ordinal: 3
-        name: diff_lock_front_engagement
+        name: travelled_distance
       - number: 5
         ordinal: 4
-        name: diff_lock_rear_engagement
+        name: current_gear
       - number: 6
         ordinal: 5
-        name: drive_type
+        name: selected_gear
       - number: 7
         ordinal: 6
-        name: gear_change_mode
+        name: is_park_lock_engaged
       - number: 8
         ordinal: 7
-        name: gear_count
+        name: is_low_range_engaged
       - number: 9
         ordinal: 8
         name: is_electrical_powertrain_engaged
       - number: 10
         ordinal: 9
-        name: is_low_range_engaged
+        name: performance_mode
       - number: 11
         ordinal: 10
-        name: is_park_lock_engaged
+        name: gear_change_mode
       - number: 12
         ordinal: 11
-        name: performance_mode
+        name: temperature
       - number: 13
         ordinal: 12
-        name: selected_gear
+        name: clutch_engagement
       - number: 14
         ordinal: 13
-        name: temperature
+        name: clutch_wear
       - number: 15
         ordinal: 14
-        name: torque_distribution
+        name: diff_lock_front_engagement
       - number: 16
         ordinal: 15
-        name: travelled_distance
+        name: diff_lock_rear_engagement
       - number: 17
         ordinal: 16
-        name: type_control
+        name: torque_distribution
   - message: protobuf.covesa.vss.propulsion.powertrain.v1.UpdatePowertrainRequest
     fields:
       - number: 1
@@ -6343,82 +6432,82 @@ messages:
         name: update_time
       - number: 16
         ordinal: 15
-        name: average_speed
+        name: low_voltage_system_state
       - number: 17
         ordinal: 16
-        name: cargo_volume
+        name: speed
       - number: 18
         ordinal: 17
-        name: curb_weight
+        name: traveled_distance
       - number: 19
         ordinal: 18
-        name: current_overall_weight
+        name: trip_traveled_distance
       - number: 20
         ordinal: 19
-        name: emissions_co2
+        name: start_time
       - number: 21
         ordinal: 20
-        name: gross_weight
+        name: trip_duration
       - number: 22
         ordinal: 21
-        name: height
+        name: trip_meter_reading
       - number: 23
         ordinal: 22
-        name: is_auto_power_optimize
+        name: is_broken_down
       - number: 24
         ordinal: 23
-        name: is_broken_down
+        name: is_moving
       - number: 25
         ordinal: 24
-        name: is_moving
+        name: average_speed
       - number: 26
         ordinal: 25
-        name: length
+        name: roof_load
       - number: 27
         ordinal: 26
-        name: low_voltage_system_state
+        name: cargo_volume
       - number: 28
         ordinal: 27
-        name: max_tow_ball_weight
+        name: emissions_co2
       - number: 29
         ordinal: 28
-        name: max_tow_weight
+        name: current_overall_weight
       - number: 30
         ordinal: 29
-        name: power_optimize_level
+        name: curb_weight
       - number: 31
         ordinal: 30
-        name: roof_load
+        name: gross_weight
       - number: 32
         ordinal: 31
-        name: speed
+        name: max_tow_weight
       - number: 33
         ordinal: 32
-        name: start_time
+        name: max_tow_ball_weight
       - number: 34
         ordinal: 33
-        name: traveled_distance
+        name: length
       - number: 35
         ordinal: 34
-        name: trip_traveled_distance
+        name: height
       - number: 36
         ordinal: 35
-        name: trip_duration
+        name: width_excluding_mirrors
       - number: 37
         ordinal: 36
-        name: trip_meter_reading
+        name: width_mirrors_included
       - number: 38
         ordinal: 37
-        name: turning_diameter
+        name: width_folded_mirrors
       - number: 39
         ordinal: 38
-        name: width_excluding_mirrors
+        name: turning_diameter
       - number: 40
         ordinal: 39
-        name: width_folded_mirrors
+        name: power_optimize_level
       - number: 41
         ordinal: 40
-        name: width_mirrors_included
+        name: is_auto_power_optimize
 enums:
   - enum: buf.validate.Ignore
     values:
@@ -6442,7 +6531,7 @@ enums:
       - number: 2
         ordinal: 2
         name: KNOWN_REGEX_HTTP_HEADER_VALUE
-  - enum: protobuf.covesa.vdm.charging_point.v1.AreaInStation
+  - enum: protobuf.covesa.vdm.charging_points.v1.AreaInStation
     values:
       - number: 0
         ordinal: 0
@@ -6453,7 +6542,7 @@ enums:
       - number: 2
         ordinal: 2
         name: AREA_IN_STATION_OUTDOOR
-  - enum: protobuf.covesa.vdm.charging_point.v1.ChargingPointLabel
+  - enum: protobuf.covesa.vdm.charging_points.v1.ChargingPointLabel
     values:
       - number: 0
         ordinal: 0
@@ -6559,54 +6648,60 @@ enums:
         name: QUANTITY_KIND_LENGTH
       - number: 14
         ordinal: 14
-        name: QUANTITY_KIND_MASS_PER_DISTANCE
+        name: QUANTITY_KIND_MASS
       - number: 15
         ordinal: 15
-        name: QUANTITY_KIND_MASS_PER_TIME
+        name: QUANTITY_KIND_MASS_PER_DISTANCE
       - number: 16
         ordinal: 16
-        name: QUANTITY_KIND_MASS
+        name: QUANTITY_KIND_MASS_PER_TIME
       - number: 17
         ordinal: 17
-        name: QUANTITY_KIND_POWER
+        name: QUANTITY_KIND_MASS_PER_VOLUME
       - number: 18
         ordinal: 18
-        name: QUANTITY_KIND_PRESSURE
+        name: QUANTITY_KIND_POWER
       - number: 19
         ordinal: 19
-        name: QUANTITY_KIND_RATING
+        name: QUANTITY_KIND_PRECIPITATION_RATE
       - number: 20
         ordinal: 20
-        name: QUANTITY_KIND_RELATION
+        name: QUANTITY_KIND_PRESSURE
       - number: 21
         ordinal: 21
-        name: QUANTITY_KIND_RESISTANCE
+        name: QUANTITY_KIND_RATING
       - number: 22
         ordinal: 22
-        name: QUANTITY_KIND_ROTATIONAL_SPEED
+        name: QUANTITY_KIND_RELATION
       - number: 23
         ordinal: 23
-        name: QUANTITY_KIND_TEMPERATURE
+        name: QUANTITY_KIND_RESISTANCE
       - number: 24
         ordinal: 24
-        name: QUANTITY_KIND_TORQUE
+        name: QUANTITY_KIND_ROTATIONAL_SPEED
       - number: 25
         ordinal: 25
-        name: QUANTITY_KIND_VELOCITY
+        name: QUANTITY_KIND_TEMPERATURE
       - number: 26
         ordinal: 26
-        name: QUANTITY_KIND_VOLTAGE
+        name: QUANTITY_KIND_TORQUE
       - number: 27
         ordinal: 27
-        name: QUANTITY_KIND_VOLUME_FLOW_RATE
+        name: QUANTITY_KIND_VELOCITY
       - number: 28
         ordinal: 28
-        name: QUANTITY_KIND_VOLUME_PER_DISTANCE
+        name: QUANTITY_KIND_VOLTAGE
       - number: 29
         ordinal: 29
         name: QUANTITY_KIND_VOLUME
       - number: 30
         ordinal: 30
+        name: QUANTITY_KIND_VOLUME_FLOW_RATE
+      - number: 31
+        ordinal: 31
+        name: QUANTITY_KIND_VOLUME_PER_DISTANCE
+      - number: 32
+        ordinal: 32
         name: QUANTITY_KIND_WORK
   - enum: protobuf.covesa.vss.annotations.v1.Unit
     values:
@@ -6615,211 +6710,229 @@ enums:
         name: UNIT_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: UNIT_METERS_PER_SECOND_SQUARED
+        name: UNIT_CM_PER_S_POW_2
       - number: 2
         ordinal: 2
-        name: UNIT_CENTIMETERS_PER_SECOND_SQUARED
+        name: UNIT_M_PER_S_POW_2
       - number: 3
         ordinal: 3
-        name: UNIT_DEGREE
+        name: UNIT_DEGREES
       - number: 4
         ordinal: 4
-        name: UNIT_DEGREE_PER_SECOND
+        name: UNIT_DEGREES_PER_S
       - number: 5
         ordinal: 5
-        name: UNIT_RADIANS_PER_SECOND
+        name: UNIT_RAD_PER_S
       - number: 6
         ordinal: 6
-        name: UNIT_UNIX_TIMESTAMP
+        name: UNIT_ISO8601
       - number: 7
         ordinal: 7
-        name: UNIT_ISO_8601
+        name: UNIT_UNIX_TIME
       - number: 8
         ordinal: 8
-        name: UNIT_MILES_PER_US_GALLON
+        name: UNIT_KM_PER_L
       - number: 9
         ordinal: 9
-        name: UNIT_MILES_PER_IMPERIAL_GALLON
+        name: UNIT_MPG
       - number: 10
         ordinal: 10
-        name: UNIT_MILES_PER_US_GALLON_EQUIVALENT
+        name: UNIT_MPG_UK
       - number: 11
         ordinal: 11
-        name: UNIT_MILES_PER_US_GALLON_DEPRECATED
+        name: UNIT_MPG_US
       - number: 12
         ordinal: 12
-        name: UNIT_KILOMETERS_PER_LITER
+        name: UNIT_MPGE
       - number: 13
         ordinal: 13
-        name: UNIT_NANOSECOND
+        name: UNIT_DAY
       - number: 14
         ordinal: 14
-        name: UNIT_MILLISECOND
+        name: UNIT_H
       - number: 15
         ordinal: 15
-        name: UNIT_SECOND
+        name: UNIT_MIN
       - number: 16
         ordinal: 16
-        name: UNIT_MINUTE
+        name: UNIT_MONTHS
       - number: 17
         ordinal: 17
-        name: UNIT_HOUR
+        name: UNIT_MS
       - number: 18
         ordinal: 18
-        name: UNIT_DAYS
+        name: UNIT_NS
       - number: 19
         ordinal: 19
-        name: UNIT_WEEKS
+        name: UNIT_S
       - number: 20
         ordinal: 20
-        name: UNIT_MONTHS
+        name: UNIT_US
       - number: 21
         ordinal: 21
-        name: UNIT_YEARS
+        name: UNIT_WEEKS
       - number: 22
         ordinal: 22
-        name: UNIT_AMPERE_HOURS
+        name: UNIT_YEARS
       - number: 23
         ordinal: 23
-        name: UNIT_AMPERE
+        name: UNIT_AH
       - number: 24
         ordinal: 24
-        name: UNIT_KILOWATT_HOURS_PER_100_KILOMETERS
+        name: UNIT_A
       - number: 25
         ordinal: 25
-        name: UNIT_WATT_HOUR_PER_KM
+        name: UNIT_WH_PER_KM
       - number: 26
         ordinal: 26
-        name: UNIT_NEWTON
+        name: UNIT_KWH_PER_100KM
       - number: 27
         ordinal: 27
-        name: UNIT_KILO_NEWTON
+        name: UNIT_N
       - number: 28
         ordinal: 28
-        name: UNIT_HERTZ
+        name: UNIT_KN
       - number: 29
         ordinal: 29
-        name: UNIT_CYCLES_PER_MINUTE
+        name: UNIT_HZ
       - number: 30
         ordinal: 30
-        name: UNIT_BEATS_PER_MINUTE
+        name: UNIT_BPM
       - number: 31
         ordinal: 31
-        name: UNIT_LUX
+        name: UNIT_CPM
       - number: 32
         ordinal: 32
-        name: UNIT_MILLIMETER
+        name: UNIT_LX
       - number: 33
         ordinal: 33
-        name: UNIT_CENTIMETER
+        name: UNIT_CM
       - number: 34
         ordinal: 34
-        name: UNIT_METER
+        name: UNIT_INCH
       - number: 35
         ordinal: 35
-        name: UNIT_KILOMETER
+        name: UNIT_KM
       - number: 36
         ordinal: 36
-        name: UNIT_INCH
+        name: UNIT_M
       - number: 37
         ordinal: 37
-        name: UNIT_GRAMS_PER_KILOMETER
+        name: UNIT_MM
       - number: 38
         ordinal: 38
-        name: UNIT_GRAMS_PER_SECOND
+        name: UNIT_G
       - number: 39
         ordinal: 39
-        name: UNIT_GRAM
+        name: UNIT_KG
       - number: 40
         ordinal: 40
-        name: UNIT_KILOGRAM
+        name: UNIT_LBS
       - number: 41
         ordinal: 41
-        name: UNIT_POUND
+        name: UNIT_G_PER_KM
       - number: 42
         ordinal: 42
-        name: UNIT_WATT
+        name: UNIT_G_PER_S
       - number: 43
         ordinal: 43
-        name: UNIT_KILOWATT
+        name: UNIT_UG_PER_M_POW_3
       - number: 44
         ordinal: 44
-        name: UNIT_HORSEPOWER
+        name: UNIT_PS
       - number: 45
         ordinal: 45
-        name: UNIT_MILLIBAR
+        name: UNIT_W
       - number: 46
         ordinal: 46
-        name: UNIT_PASCAL
+        name: UNIT_KW
       - number: 47
         ordinal: 47
-        name: UNIT_KILOPASCAL
+        name: UNIT_MM_PER_H
       - number: 48
         ordinal: 48
-        name: UNIT_POUNDS_PER_SQUARE_INCH
+        name: UNIT_PA
       - number: 49
         ordinal: 49
-        name: UNIT_STARS
+        name: UNIT_HPA
       - number: 50
         ordinal: 50
-        name: UNIT_RATIO
+        name: UNIT_KPA
       - number: 51
         ordinal: 51
-        name: UNIT_PERCENT
+        name: UNIT_MBAR
       - number: 52
         ordinal: 52
-        name: UNIT_NANO_METER_PER_KILOMETER
+        name: UNIT_PSI
       - number: 53
         ordinal: 53
-        name: UNIT_DECIBEL_MILLIWATT
+        name: UNIT_STARS
       - number: 54
         ordinal: 54
-        name: UNIT_DECIBEL
+        name: UNIT_DB
       - number: 55
         ordinal: 55
-        name: UNIT_OHM
+        name: UNIT_DBM
       - number: 56
         ordinal: 56
-        name: UNIT_REVOLUTIONS_PER_MINUTE
+        name: UNIT_NM_PER_KM
       - number: 57
         ordinal: 57
-        name: UNIT_DEGREE_CELSIUS
+        name: UNIT_PERCENT
       - number: 58
         ordinal: 58
-        name: UNIT_DEGREE_FAHRENHEIT
+        name: UNIT_PPB
       - number: 59
         ordinal: 59
-        name: UNIT_NEWTON_METER
+        name: UNIT_PPM
       - number: 60
         ordinal: 60
-        name: UNIT_KILOMETER_PER_HOUR
+        name: UNIT_RATIO
       - number: 61
         ordinal: 61
-        name: UNIT_METERS_PER_SECOND
+        name: UNIT_OHM
       - number: 62
         ordinal: 62
-        name: UNIT_VOLT
+        name: UNIT_RPM
       - number: 63
         ordinal: 63
-        name: UNIT_LITER_PER_HOUR
+        name: UNIT_CELSIUS
       - number: 64
         ordinal: 64
-        name: UNIT_MILLILITER_PER_100_KILOMETERS
+        name: UNIT_FAHRENHEIT
       - number: 65
         ordinal: 65
-        name: UNIT_LITER_PER_100_KILOMETERS
+        name: UNIT_NM
       - number: 66
         ordinal: 66
-        name: UNIT_MILLILITER
+        name: UNIT_KM_PER_H
       - number: 67
         ordinal: 67
-        name: UNIT_LITER
+        name: UNIT_M_PER_S
       - number: 68
         ordinal: 68
-        name: UNIT_CUBIC_CENTIMETERS
+        name: UNIT_V
       - number: 69
         ordinal: 69
-        name: UNIT_KILOWATT_HOURS
+        name: UNIT_CM_POW_3
+      - number: 70
+        ordinal: 70
+        name: UNIT_L
+      - number: 71
+        ordinal: 71
+        name: UNIT_ML
+      - number: 72
+        ordinal: 72
+        name: UNIT_L_PER_H
+      - number: 73
+        ordinal: 73
+        name: UNIT_L_PER_100KM
+      - number: 74
+        ordinal: 74
+        name: UNIT_ML_PER_100KM
+      - number: 75
+        ordinal: 75
+        name: UNIT_KWH
   - enum: protobuf.covesa.vss.assistance.adas.v1.ActiveAutonomyLevel
     values:
       - number: 0
@@ -6878,31 +6991,6 @@ enums:
       - number: 6
         ordinal: 6
         name: SUPPORTED_AUTONOMY_LEVEL_SAE_5
-  - enum: protobuf.covesa.vss.assistance.obstacle_detection.v1.Dimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION1_FRONT
-      - number: 2
-        ordinal: 2
-        name: DIMENSION1_REAR
-  - enum: protobuf.covesa.vss.assistance.obstacle_detection.v1.Dimension2
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION2_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION2_LEFT
-      - number: 2
-        ordinal: 2
-        name: DIMENSION2_CENTER
-      - number: 3
-        ordinal: 3
-        name: DIMENSION2_RIGHT
   - enum: protobuf.covesa.vss.assistance.obstacle_detection.v1.WarningType
     values:
       - number: 0
@@ -6910,21 +6998,64 @@ enums:
         name: WARNING_TYPE_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: WARNING_TYPE_CROSS_TRAFFIC
+        name: WARNING_TYPE_UNDEFINED
       - number: 2
         ordinal: 2
+        name: WARNING_TYPE_CROSS_TRAFFIC
+      - number: 3
+        ordinal: 3
         name: WARNING_TYPE_BLIND_SPOT
-  - enum: protobuf.covesa.vss.exterior.beam.v1.Dimension1
+  - enum: protobuf.covesa.vss.assistance.safety.v1.RoadIcingState
     values:
       - number: 0
         ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
+        name: ROAD_ICING_STATE_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: DIMENSION1_LOW
+        name: ROAD_ICING_STATE_UNKNOWN
       - number: 2
         ordinal: 2
-        name: DIMENSION1_HIGH
+        name: ROAD_ICING_STATE_NONE
+      - number: 3
+        ordinal: 3
+        name: ROAD_ICING_STATE_RISK
+      - number: 4
+        ordinal: 4
+        name: ROAD_ICING_STATE_DETECTED
+  - enum: protobuf.covesa.vss.assistance.safety.v1.Rollover
+    values:
+      - number: 0
+        ordinal: 0
+        name: ROLLOVER_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: ROLLOVER_UNKNOWN
+      - number: 2
+        ordinal: 2
+        name: ROLLOVER_NONE
+      - number: 3
+        ordinal: 3
+        name: ROLLOVER_RISK
+      - number: 4
+        ordinal: 4
+        name: ROLLOVER_DETECTED
+  - enum: protobuf.covesa.vss.assistance.safety.v1.VisibilityImpairment
+    values:
+      - number: 0
+        ordinal: 0
+        name: VISIBILITY_IMPAIRMENT_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: VISIBILITY_IMPAIRMENT_UNKNOWN
+      - number: 2
+        ordinal: 2
+        name: VISIBILITY_IMPAIRMENT_NONE
+      - number: 3
+        ordinal: 3
+        name: VISIBILITY_IMPAIRMENT_RISK
+      - number: 4
+        ordinal: 4
+        name: VISIBILITY_IMPAIRMENT_DETECTED
   - enum: protobuf.covesa.vss.exterior.body.v1.IsActive
     values:
       - number: 0
@@ -6979,50 +7110,133 @@ enums:
       - number: 5
         ordinal: 5
         name: SWITCH_ONE_SHOT_OPEN
-  - enum: protobuf.covesa.vss.exterior.direction_indicator.v1.Dimension1
+  - enum: protobuf.covesa.vss.exterior.exterior.v1.PrecipitationType
     values:
       - number: 0
         ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
+        name: PRECIPITATION_TYPE_UNKNOWN
       - number: 1
         ordinal: 1
-        name: DIMENSION1_LEFT
+        name: PRECIPITATION_TYPE_NONE
       - number: 2
         ordinal: 2
-        name: DIMENSION1_RIGHT
-  - enum: protobuf.covesa.vss.exterior.fog.v1.Dimension1
+        name: PRECIPITATION_TYPE_RAIN
+      - number: 3
+        ordinal: 3
+        name: PRECIPITATION_TYPE_MIXED_RAIN_SNOW
+      - number: 4
+        ordinal: 4
+        name: PRECIPITATION_TYPE_SNOW
+      - number: 5
+        ordinal: 5
+        name: PRECIPITATION_TYPE_HAIL
+  - enum: protobuf.covesa.vss.exterior.exterior.v1.RoadObstruction
     values:
       - number: 0
         ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
+        name: ROAD_OBSTRUCTION_UNKNOWN
       - number: 1
         ordinal: 1
-        name: DIMENSION1_REAR
+        name: ROAD_OBSTRUCTION_TREE
       - number: 2
         ordinal: 2
-        name: DIMENSION1_FRONT
-  - enum: protobuf.covesa.vss.exterior.mirrors.v1.Dimension1
+        name: ROAD_OBSTRUCTION_AVALANCHE
+      - number: 3
+        ordinal: 3
+        name: ROAD_OBSTRUCTION_ROCKFALLS
+      - number: 4
+        ordinal: 4
+        name: ROAD_OBSTRUCTION_SHED_LOAD
+      - number: 5
+        ordinal: 5
+        name: ROAD_OBSTRUCTION_LAND_SLIP
+      - number: 6
+        ordinal: 6
+        name: ROAD_OBSTRUCTION_ANIMAL
+      - number: 7
+        ordinal: 7
+        name: ROAD_OBSTRUCTION_ANIMAL_LARGE
+      - number: 8
+        ordinal: 8
+        name: ROAD_OBSTRUCTION_ANIMAL_HERD
+      - number: 9
+        ordinal: 9
+        name: ROAD_OBSTRUCTION_NONE
+      - number: 10
+        ordinal: 10
+        name: ROAD_OBSTRUCTION_FLOODING
+  - enum: protobuf.covesa.vss.exterior.exterior.v1.RoadSurfaceCondition
     values:
       - number: 0
         ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
+        name: ROAD_SURFACE_CONDITION_UNKNOWN
       - number: 1
         ordinal: 1
-        name: DIMENSION1_DRIVER_SIDE
+        name: ROAD_SURFACE_CONDITION_DRY
       - number: 2
         ordinal: 2
-        name: DIMENSION1_PASSENGER_SIDE
-  - enum: protobuf.covesa.vss.exterior.trunk.v1.Dimension1
+        name: ROAD_SURFACE_CONDITION_WET
+      - number: 3
+        ordinal: 3
+        name: ROAD_SURFACE_CONDITION_SNOW
+      - number: 4
+        ordinal: 4
+        name: ROAD_SURFACE_CONDITION_ICE
+      - number: 5
+        ordinal: 5
+        name: ROAD_SURFACE_CONDITION_SLUSH
+      - number: 6
+        ordinal: 6
+        name: ROAD_SURFACE_CONDITION_WET_ICE
+      - number: 7
+        ordinal: 7
+        name: ROAD_SURFACE_CONDITION_LOOSE_GRAVEL
+  - enum: protobuf.covesa.vss.exterior.exterior.v1.RoadSurfaceContaminant
     values:
       - number: 0
         ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
+        name: ROAD_SURFACE_CONTAMINANT_UNKNOWN
       - number: 1
         ordinal: 1
-        name: DIMENSION1_FRONT
+        name: ROAD_SURFACE_CONTAMINANT_MUD
       - number: 2
         ordinal: 2
-        name: DIMENSION1_REAR
+        name: ROAD_SURFACE_CONTAMINANT_CHIPPINGS
+      - number: 3
+        ordinal: 3
+        name: ROAD_SURFACE_CONTAMINANT_OIL
+      - number: 4
+        ordinal: 4
+        name: ROAD_SURFACE_CONTAMINANT_FUEL
+      - number: 5
+        ordinal: 5
+        name: ROAD_SURFACE_CONTAMINANT_NONE
+  - enum: protobuf.covesa.vss.exterior.exterior.v1.VisibilityCondition
+    values:
+      - number: 0
+        ordinal: 0
+        name: VISIBILITY_CONDITION_UNKNOWN
+      - number: 1
+        ordinal: 1
+        name: VISIBILITY_CONDITION_CLEAR
+      - number: 2
+        ordinal: 2
+        name: VISIBILITY_CONDITION_MIST
+      - number: 3
+        ordinal: 3
+        name: VISIBILITY_CONDITION_LOW_HEAVY_RAIN
+      - number: 4
+        ordinal: 4
+        name: VISIBILITY_CONDITION_LOW_HEAVY_SNOW
+      - number: 5
+        ordinal: 5
+        name: VISIBILITY_CONDITION_LOW_SMOKE
+      - number: 6
+        ordinal: 6
+        name: VISIBILITY_CONDITION_LOW_FOG
+      - number: 7
+        ordinal: 7
+        name: VISIBILITY_CONDITION_LOW_SUN_GLARE
   - enum: protobuf.covesa.vss.exterior.trunk.v1.Switch
     values:
       - number: 0
@@ -7043,17 +7257,6 @@ enums:
       - number: 5
         ordinal: 5
         name: SWITCH_ONE_SHOT_OPEN
-  - enum: protobuf.covesa.vss.exterior.windshield.v1.InstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: INSTANCE_TAG_DIMENSION1_FRONT
-      - number: 2
-        ordinal: 2
-        name: INSTANCE_TAG_DIMENSION1_REAR
   - enum: protobuf.covesa.vss.exterior.windshield.v1.SystemMode
     values:
       - number: 0
@@ -7094,28 +7297,6 @@ enums:
       - number: 6
         ordinal: 6
         name: WIPING_MODE_RAIN_SENSOR
-  - enum: protobuf.covesa.vss.interior.ambient_light.v1.Dimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.interior.ambient_light.v1.Dimension2
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION2_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION2_DRIVER_SIDE
-      - number: 2
-        ordinal: 2
-        name: DIMENSION2_PASSENGER_SIDE
   - enum: protobuf.covesa.vss.interior.cabin.v1.CabinConvertibleState
     values:
       - number: 0
@@ -7123,33 +7304,22 @@ enums:
         name: CABIN_CONVERTIBLE_STATE_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: CABIN_CONVERTIBLE_STATE_CLOSED
+        name: CABIN_CONVERTIBLE_STATE_UNDEFINED
       - number: 2
         ordinal: 2
-        name: CABIN_CONVERTIBLE_STATE_OPEN
+        name: CABIN_CONVERTIBLE_STATE_CLOSED
       - number: 3
         ordinal: 3
-        name: CABIN_CONVERTIBLE_STATE_CLOSING
+        name: CABIN_CONVERTIBLE_STATE_OPEN
       - number: 4
         ordinal: 4
-        name: CABIN_CONVERTIBLE_STATE_OPENING
+        name: CABIN_CONVERTIBLE_STATE_CLOSING
       - number: 5
         ordinal: 5
+        name: CABIN_CONVERTIBLE_STATE_OPENING
+      - number: 6
+        ordinal: 6
         name: CABIN_CONVERTIBLE_STATE_STALLED
-  - enum: protobuf.covesa.vss.interior.cabin.v1.CabinDriverPosition
-    values:
-      - number: 0
-        ordinal: 0
-        name: CABIN_DRIVER_POSITION_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: CABIN_DRIVER_POSITION_LEFT
-      - number: 2
-        ordinal: 2
-        name: CABIN_DRIVER_POSITION_MIDDLE
-      - number: 3
-        ordinal: 3
-        name: CABIN_DRIVER_POSITION_RIGHT
   - enum: protobuf.covesa.vss.interior.cabin.v1.CabinRearShadeSwitch
     values:
       - number: 0
@@ -7573,6 +7743,20 @@ enums:
       - number: 5
         ordinal: 5
         name: SUNROOF_SHADE_SWITCH_ONE_SHOT_OPEN
+  - enum: protobuf.covesa.vss.interior.cabin.v1.VehicleCabinDriverPosition
+    values:
+      - number: 0
+        ordinal: 0
+        name: VEHICLE_CABIN_DRIVER_POSITION_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: VEHICLE_CABIN_DRIVER_POSITION_LEFT
+      - number: 2
+        ordinal: 2
+        name: VEHICLE_CABIN_DRIVER_POSITION_MIDDLE
+      - number: 3
+        ordinal: 3
+        name: VEHICLE_CABIN_DRIVER_POSITION_RIGHT
   - enum: protobuf.covesa.vss.interior.door.v1.DoorSwitch
     values:
       - number: 0
@@ -7593,28 +7777,6 @@ enums:
       - number: 5
         ordinal: 5
         name: DOOR_SWITCH_ONE_SHOT_OPEN
-  - enum: protobuf.covesa.vss.interior.door.v1.InstanceTagDimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: INSTANCE_TAG_DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: INSTANCE_TAG_DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: INSTANCE_TAG_DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.interior.door.v1.InstanceTagDimension2
-    values:
-      - number: 0
-        ordinal: 0
-        name: INSTANCE_TAG_DIMENSION2_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: INSTANCE_TAG_DIMENSION2_DRIVER_SIDE
-      - number: 2
-        ordinal: 2
-        name: INSTANCE_TAG_DIMENSION2_PASSENGER_SIDE
   - enum: protobuf.covesa.vss.interior.door.v1.ShadeSwitch
     values:
       - number: 0
@@ -7655,56 +7817,6 @@ enums:
       - number: 5
         ordinal: 5
         name: WINDOW_SWITCH_ONE_SHOT_OPEN
-  - enum: protobuf.covesa.vss.interior.occupant.v1.Dimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.interior.occupant.v1.Dimension2
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION2_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION2_DRIVER_SIDE
-      - number: 2
-        ordinal: 2
-        name: DIMENSION2_MIDDLE
-      - number: 3
-        ordinal: 3
-        name: DIMENSION2_PASSENGER_SIDE
-  - enum: protobuf.covesa.vss.interior.seat.v1.Dimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.interior.seat.v1.Dimension2
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION2_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION2_DRIVER_SIDE
-      - number: 2
-        ordinal: 2
-        name: DIMENSION2_MIDDLE
-      - number: 3
-        ordinal: 3
-        name: DIMENSION2_PASSENGER_SIDE
   - enum: protobuf.covesa.vss.interior.seat.v1.OccupancyState
     values:
       - number: 0
@@ -7730,34 +7842,6 @@ enums:
       - number: 2
         ordinal: 2
         name: STATE_OFF
-  - enum: protobuf.covesa.vss.interior.spotlight.v1.Dimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: DIMENSION1_ROW2
-      - number: 3
-        ordinal: 3
-        name: DIMENSION1_ROW3
-      - number: 4
-        ordinal: 4
-        name: DIMENSION1_ROW4
-  - enum: protobuf.covesa.vss.interior.spotlight.v1.Dimension2
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION2_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION2_DRIVER_SIDE
-      - number: 2
-        ordinal: 2
-        name: DIMENSION2_PASSENGER_SIDE
   - enum: protobuf.covesa.vss.interior.station.v1.AirDistribution
     values:
       - number: 0
@@ -7772,34 +7856,6 @@ enums:
       - number: 3
         ordinal: 3
         name: AIR_DISTRIBUTION_DOWN
-  - enum: protobuf.covesa.vss.interior.station.v1.Dimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: DIMENSION1_ROW2
-      - number: 3
-        ordinal: 3
-        name: DIMENSION1_ROW3
-      - number: 4
-        ordinal: 4
-        name: DIMENSION1_ROW4
-  - enum: protobuf.covesa.vss.interior.station.v1.Dimension2
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION2_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION2_DRIVER
-      - number: 2
-        ordinal: 2
-        name: DIMENSION2_PASSENGER
   - enum: protobuf.covesa.vss.location.current_location.v1.FixType
     values:
       - number: 0
@@ -7832,132 +7888,20 @@ enums:
       - number: 9
         ordinal: 9
         name: FIX_TYPE_THREE_D_SATELLITE_AND_GROUND_BASED_AUGMENTATION
-  - enum: protobuf.covesa.vss.motion.axle_wheel.v1.Dimension1
+  - enum: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.WinterState
     values:
       - number: 0
         ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
+        name: WINTER_STATE_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: DIMENSION1_LEFT
+        name: WINTER_STATE_UNKNOWN
       - number: 2
         ordinal: 2
-        name: DIMENSION1_RIGHT
-  - enum: protobuf.covesa.vss.motion.brake_axle.v1.Dimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.motion.brake_axle_wheel.v1.Dimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION1_LEFT
-      - number: 2
-        ordinal: 2
-        name: DIMENSION1_RIGHT
-  - enum: protobuf.covesa.vss.motion.chassis_axle.v1.Dimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.motion.electric_axle.v1.Dimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.motion.suspension_axle.v1.Dimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION1_ROW1
-      - number: 2
-        ordinal: 2
-        name: DIMENSION1_ROW2
-  - enum: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.Dimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION1_LEFT
-      - number: 2
-        ordinal: 2
-        name: DIMENSION1_RIGHT
-  - enum: protobuf.covesa.vss.platform.control_unit.v1.Dimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION1_CENTRAL
-      - number: 2
-        ordinal: 2
-        name: DIMENSION1_FRONT_LEFT
+        name: WINTER_STATE_NON_WINTER
       - number: 3
         ordinal: 3
-        name: DIMENSION1_FRONT_RIGHT
-      - number: 4
-        ordinal: 4
-        name: DIMENSION1_REAR_LEFT1
-      - number: 5
-        ordinal: 5
-        name: DIMENSION1_REAR_LEFT2
-      - number: 6
-        ordinal: 6
-        name: DIMENSION1_TRUNK
-  - enum: protobuf.covesa.vss.propulsion.charging_port.v1.Dimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION1_FRONT_LEFT
-      - number: 2
-        ordinal: 2
-        name: DIMENSION1_FRONT_MIDDLE
-      - number: 3
-        ordinal: 3
-        name: DIMENSION1_FRONT_RIGHT
-      - number: 4
-        ordinal: 4
-        name: DIMENSION1_REAR_LEFT
-      - number: 5
-        ordinal: 5
-        name: DIMENSION1_REAR_MIDDLE
-      - number: 6
-        ordinal: 6
-        name: DIMENSION1_REAR_RIGHT
-      - number: 7
-        ordinal: 7
-        name: DIMENSION1_ANY_POSITION
+        name: WINTER_STATE_WINTER
   - enum: protobuf.covesa.vss.propulsion.charging_port.v1.SupportedInletTypes
     values:
       - number: 0
@@ -7999,29 +7943,6 @@ enums:
       - number: 12
         ordinal: 12
         name: SUPPORTED_INLET_TYPES_OTHER
-  - enum: protobuf.covesa.vss.propulsion.electric_motor.v1.Dimension1
-    values:
-      - number: 0
-        ordinal: 0
-        name: DIMENSION1_UNSPECIFIED
-      - number: 1
-        ordinal: 1
-        name: DIMENSION1_FRONT
-      - number: 2
-        ordinal: 2
-        name: DIMENSION1_REAR
-      - number: 3
-        ordinal: 3
-        name: DIMENSION1_FRONT_LEFT
-      - number: 4
-        ordinal: 4
-        name: DIMENSION1_FRONT_RIGHT
-      - number: 5
-        ordinal: 5
-        name: DIMENSION1_REAR_LEFT
-      - number: 6
-        ordinal: 6
-        name: DIMENSION1_REAR_RIGHT
   - enum: protobuf.covesa.vss.propulsion.electric_motor.v1.Level
     values:
       - number: 0
@@ -8153,6 +8074,23 @@ enums:
       - number: 5
         ordinal: 5
         name: ENGINE_OIL_LEVEL_CRITICALLY_HIGH
+  - enum: protobuf.covesa.vss.propulsion.powertrain.v1.EngineOilPressureState
+    values:
+      - number: 0
+        ordinal: 0
+        name: ENGINE_OIL_PRESSURE_STATE_UNSPECIFIED
+      - number: 1
+        ordinal: 1
+        name: ENGINE_OIL_PRESSURE_STATE_NORMAL
+      - number: 2
+        ordinal: 2
+        name: ENGINE_OIL_PRESSURE_STATE_WARNING
+      - number: 3
+        ordinal: 3
+        name: ENGINE_OIL_PRESSURE_STATE_ALERT
+      - number: 4
+        ordinal: 4
+        name: ENGINE_OIL_PRESSURE_STATE_ERROR
   - enum: protobuf.covesa.vss.propulsion.powertrain.v1.FuelSystemHybridType
     values:
       - number: 0
@@ -8419,33 +8357,36 @@ enums:
         name: LOW_VOLTAGE_SYSTEM_STATE_UNSPECIFIED
       - number: 1
         ordinal: 1
-        name: LOW_VOLTAGE_SYSTEM_STATE_LOCK
+        name: LOW_VOLTAGE_SYSTEM_STATE_UNDEFINED
       - number: 2
         ordinal: 2
-        name: LOW_VOLTAGE_SYSTEM_STATE_OFF
+        name: LOW_VOLTAGE_SYSTEM_STATE_LOCK
       - number: 3
         ordinal: 3
-        name: LOW_VOLTAGE_SYSTEM_STATE_ACC
+        name: LOW_VOLTAGE_SYSTEM_STATE_OFF
       - number: 4
         ordinal: 4
-        name: LOW_VOLTAGE_SYSTEM_STATE_ON_VALUE
+        name: LOW_VOLTAGE_SYSTEM_STATE_ACC
       - number: 5
         ordinal: 5
+        name: LOW_VOLTAGE_SYSTEM_STATE_ON_VALUE
+      - number: 6
+        ordinal: 6
         name: LOW_VOLTAGE_SYSTEM_STATE_START
 services:
-  - service: protobuf.covesa.vdm.charging_point.v1.ChargingPoints
+  - service: protobuf.covesa.vdm.charging_points.v1.ChargingPointses
     methods:
-      - name: GetChargingPoint
+      - name: GetChargingPoints
         ordinal: 0
-      - name: ListChargingPoints
+      - name: ListChargingPointses
         ordinal: 1
-      - name: CreateChargingPoint
+      - name: CreateChargingPoints
         ordinal: 2
-      - name: UpdateChargingPoint
+      - name: UpdateChargingPoints
         ordinal: 3
-      - name: DeleteChargingPoint
+      - name: DeleteChargingPoints
         ordinal: 4
-      - name: UndeleteChargingPoint
+      - name: UndeleteChargingPoints
         ordinal: 5
   - service: protobuf.covesa.vdm.charging_session.v1.ChargingSessions
     methods:
@@ -8475,6 +8416,24 @@ services:
         ordinal: 4
       - name: UndeleteChargingStation
         ordinal: 5
+  - service: protobuf.covesa.vdm.home_address.v1.HomeAddresses
+    methods:
+      - name: GetHomeAddress
+        ordinal: 0
+      - name: UpdateHomeAddress
+        ordinal: 1
+  - service: protobuf.covesa.vdm.location.v1.Locations
+    methods:
+      - name: GetLocation
+        ordinal: 0
+      - name: UpdateLocation
+        ordinal: 1
+  - service: protobuf.covesa.vdm.name.v1.Names
+    methods:
+      - name: GetName
+        ordinal: 0
+      - name: UpdateName
+        ordinal: 1
   - service: protobuf.covesa.vdm.person.v1.People
     methods:
       - name: GetPerson
@@ -8509,6 +8468,12 @@ services:
         ordinal: 4
       - name: UndeleteObstacleDetection
         ordinal: 5
+  - service: protobuf.covesa.vss.assistance.safety.v1.Safeties
+    methods:
+      - name: GetSafety
+        ordinal: 0
+      - name: UpdateSafety
+        ordinal: 1
   - service: protobuf.covesa.vss.exterior.beam.v1.Beams
     methods:
       - name: GetBeam
@@ -8725,47 +8690,33 @@ services:
         ordinal: 0
       - name: UpdateAngularVelocity
         ordinal: 1
-  - service: protobuf.covesa.vss.motion.axle_wheel.v1.AxleWheels
-    methods:
-      - name: GetAxleWheel
-        ordinal: 0
-      - name: ListAxleWheels
-        ordinal: 1
-      - name: CreateAxleWheel
-        ordinal: 2
-      - name: UpdateAxleWheel
-        ordinal: 3
-      - name: DeleteAxleWheel
-        ordinal: 4
-      - name: UndeleteAxleWheel
-        ordinal: 5
   - service: protobuf.covesa.vss.motion.brake_axle.v1.BrakeAxles
     methods:
-      - name: GetBrakeAxle
+      - name: GetAxle
         ordinal: 0
       - name: ListBrakeAxles
         ordinal: 1
-      - name: CreateBrakeAxle
+      - name: CreateAxle
         ordinal: 2
-      - name: UpdateBrakeAxle
+      - name: UpdateAxle
         ordinal: 3
-      - name: DeleteBrakeAxle
+      - name: DeleteAxle
         ordinal: 4
-      - name: UndeleteBrakeAxle
+      - name: UndeleteAxle
         ordinal: 5
-  - service: protobuf.covesa.vss.motion.brake_axle_wheel.v1.BrakeAxleWheels
+  - service: protobuf.covesa.vss.motion.brake_axle_wheel.v1.Wheels
     methods:
-      - name: GetBrakeAxleWheel
+      - name: GetWheel
         ordinal: 0
-      - name: ListBrakeAxleWheels
+      - name: ListWheels
         ordinal: 1
-      - name: CreateBrakeAxleWheel
+      - name: CreateWheel
         ordinal: 2
-      - name: UpdateBrakeAxleWheel
+      - name: UpdateWheel
         ordinal: 3
-      - name: DeleteBrakeAxleWheel
+      - name: DeleteWheel
         ordinal: 4
-      - name: UndeleteBrakeAxleWheel
+      - name: UndeleteWheel
         ordinal: 5
   - service: protobuf.covesa.vss.motion.chassis.v1.ChassisSet
     methods:
@@ -8775,17 +8726,31 @@ services:
         ordinal: 1
   - service: protobuf.covesa.vss.motion.chassis_axle.v1.ChassisAxles
     methods:
-      - name: GetChassisAxle
+      - name: GetAxle
         ordinal: 0
       - name: ListChassisAxles
         ordinal: 1
-      - name: CreateChassisAxle
+      - name: CreateAxle
         ordinal: 2
-      - name: UpdateChassisAxle
+      - name: UpdateAxle
         ordinal: 3
-      - name: DeleteChassisAxle
+      - name: DeleteAxle
         ordinal: 4
-      - name: UndeleteChassisAxle
+      - name: UndeleteAxle
+        ordinal: 5
+  - service: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Wheels
+    methods:
+      - name: GetWheel
+        ordinal: 0
+      - name: ListWheels
+        ordinal: 1
+      - name: CreateWheel
+        ordinal: 2
+      - name: UpdateWheel
+        ordinal: 3
+      - name: DeleteWheel
+        ordinal: 4
+      - name: UndeleteWheel
         ordinal: 5
   - service: protobuf.covesa.vss.motion.electric_axle.v1.ElectricAxles
     methods:
@@ -8807,33 +8772,39 @@ services:
         ordinal: 0
       - name: UpdateMotionManagement
         ordinal: 1
+  - service: protobuf.covesa.vss.motion.orientation.v1.Orientations
+    methods:
+      - name: GetOrientation
+        ordinal: 0
+      - name: UpdateOrientation
+        ordinal: 1
   - service: protobuf.covesa.vss.motion.suspension_axle.v1.SuspensionAxles
     methods:
-      - name: GetSuspensionAxle
+      - name: GetAxle
         ordinal: 0
       - name: ListSuspensionAxles
         ordinal: 1
-      - name: CreateSuspensionAxle
+      - name: CreateAxle
         ordinal: 2
-      - name: UpdateSuspensionAxle
+      - name: UpdateAxle
         ordinal: 3
-      - name: DeleteSuspensionAxle
+      - name: DeleteAxle
         ordinal: 4
-      - name: UndeleteSuspensionAxle
+      - name: UndeleteAxle
         ordinal: 5
-  - service: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.SuspensionAxleWheels
+  - service: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.Wheels
     methods:
-      - name: GetSuspensionAxleWheel
+      - name: GetWheel
         ordinal: 0
-      - name: ListSuspensionAxleWheels
+      - name: ListWheels
         ordinal: 1
-      - name: CreateSuspensionAxleWheel
+      - name: CreateWheel
         ordinal: 2
-      - name: UpdateSuspensionAxleWheel
+      - name: UpdateWheel
         ordinal: 3
-      - name: DeleteSuspensionAxleWheel
+      - name: DeleteWheel
         ordinal: 4
-      - name: UndeleteSuspensionAxleWheel
+      - name: UndeleteWheel
         ordinal: 5
   - service: protobuf.covesa.vss.platform.connectivity.v1.ConnectivityService
     methods:

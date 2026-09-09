@@ -8,7 +8,6 @@ package emit
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
 
 	"github.com/the-protobuf-project/vdm/sync/catalog"
@@ -16,11 +15,11 @@ import (
 	"github.com/the-protobuf-project/vdm/sync/model"
 	"github.com/the-protobuf-project/vdm/sync/naming"
 	"github.com/the-protobuf-project/vdm/sync/plan"
-	"github.com/the-protobuf-project/vdm/sync/sdl"
+	"github.com/the-protobuf-project/vdm/sync/vspec"
 )
 
 // recordImports notes every file a planned field's type pulls in.
-func (e *Emitter) recordImports(pkg *model.Package, f *File, p plan.Field, src sdl.Field, fileOf map[string]string) {
+func (e *Emitter) recordImports(pkg *model.Package, f *File, p plan.Field, src *vspec.Node, fileOf map[string]string) {
 	for _, i := range p.Imports {
 		f.Imports[i] = true
 	}
@@ -34,9 +33,9 @@ func (e *Emitter) recordImports(pkg *model.Package, f *File, p plan.Field, src s
 	// promoted to another message -- a date string becoming a Date -- names a
 	// type the source field never mentioned. Resolve on the planned type,
 	// falling back to the source name.
-	dep, ok := fileOf[p.Type]
+	dep, ok := fileOf[src.FQN]
 	if !ok {
-		dep, ok = fileOf[src.Type.Name]
+		dep, ok = fileOf[p.Type]
 	}
 	if ok && dep != f.Base {
 		f.Imports[pkg.ImportPath(dep)] = true
@@ -44,8 +43,8 @@ func (e *Emitter) recordImports(pkg *model.Package, f *File, p plan.Field, src s
 }
 
 // renderField writes one field with its comment and annotations.
-func renderField(p plan.Field, num int, sb *strings.Builder) {
-	sb.WriteString(docBlock(describe.Field(p), "  "))
+func (e *Emitter) renderField(p plan.Field, num int, sb *strings.Builder) {
+	sb.WriteString(docBlock(describe.Field(p, e.symbol(p.Unit)), "  "))
 
 	prefix := "  "
 	if p.Repeated {
@@ -72,6 +71,12 @@ func fieldOptions(p plan.Field) []string {
 	}
 	opts = append(opts, p.Validate...)
 
+	// An association names the other resource, so tooling can follow it.
+	if p.Ref != "" {
+		opts = append(opts, "(google.api.resource_reference) = {type: \"vdm.covesa.org/"+
+			naming.Pascal(p.Ref)+"\"}")
+	}
+
 	if p.Element != "" {
 		inner := []string{"      element: " + p.Element}
 		if p.FQN != "" {
@@ -91,34 +96,18 @@ func fieldOptions(p plan.Field) []string {
 	return opts
 }
 
-// renderReference writes a field that names a resource in another package.
-func (e *Emitter) renderReference(owner *sdl.Def, src sdl.Field, other *model.Package, num int, sb *strings.Builder) {
-	name := naming.Snake(src.Name)
-	if r, ok := catalog.FieldRenames[owner.Name+"."+src.Name]; ok {
-		name = r
+// symbol renders a unit constant back as the symbol VSS writes, for comments.
+//
+// Read from the catalogue the specification ships rather than a table here,
+// so a comment and the Unit enum cannot disagree about what a unit is called.
+func (e *Emitter) symbol(constant string) string {
+	if constant == "" {
+		return ""
 	}
-	res := other.ResourceName()
-
-	doc := src.Doc
-	if strings.TrimSpace(doc) == "" {
-		doc = "The " + res + " this " + model.MessageName(owner.Name) + " refers to."
+	for symbol := range e.M.Units.Units {
+		if catalog.UnitConstant(symbol) == constant {
+			return symbol
+		}
 	}
-	doc += "\n\nThe resource name, \"" + other.Pattern + "\", not the " + res +
-		" itself: AIP-215 <https://aip.dev/215> forbids a field naming a message " +
-		"in another proto package. Resolve it with " + other.ServiceName() + ".Get" +
-		res + "."
-	sb.WriteString(docBlock(doc, "  "))
-
-	behavior := "OPTIONAL"
-	if src.Type.NonNull {
-		behavior = "REQUIRED"
-	}
-	sb.WriteString("  string " + name + " = " + strconv.Itoa(num) + " [\n")
-	sb.WriteString("    (google.api.field_behavior) = " + behavior + ",\n")
-	if src.Type.NonNull {
-		// A required association to a past event does not change afterwards.
-		sb.WriteString("    (google.api.field_behavior) = IMMUTABLE,\n")
-	}
-	sb.WriteString("    (google.api.resource_reference) = {type: \"vdm.covesa.org/" + res + "\"}\n")
-	sb.WriteString("  ];\n\n")
+	return ""
 }

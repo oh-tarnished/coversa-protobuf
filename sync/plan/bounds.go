@@ -13,7 +13,7 @@ import (
 
 	"github.com/the-protobuf-project/vdm/sync/catalog"
 	"github.com/the-protobuf-project/vdm/sync/naming"
-	"github.com/the-protobuf-project/vdm/sync/sdl"
+	"github.com/the-protobuf-project/vdm/sync/vspec"
 )
 
 // bounds intersects the width bound with any @range and emits one rule.
@@ -22,14 +22,12 @@ import (
 // cannot exceed 255 -- and once by an explicit @range. Protobuf accepts a
 // single rule per field and emitting two is a compile error, so the two are
 // intersected and the tighter bound on each side wins.
-func (p *Planner) bounds(f sdl.Field, out *Field) {
-	if r, ok := f.Directive("range"); ok {
-		if lo, has := r.Arg("min"); has {
-			out.NumLo = tighter(out.NumLo, lo, true)
-		}
-		if hi, has := r.Arg("max"); has {
-			out.NumHi = tighter(out.NumHi, hi, false)
-		}
+func (p *Planner) bounds(n *vspec.Node, out *Field) {
+	if n.Min != "" {
+		out.NumLo = tighter(out.NumLo, n.Min, true)
+	}
+	if n.Max != "" {
+		out.NumHi = tighter(out.NumHi, n.Max, false)
 	}
 	if !numericProto(out.Type) || (out.NumLo == "" && out.NumHi == "") {
 		return
@@ -111,11 +109,22 @@ func numLit(v, protoType string) string {
 // enumerants in the *package* rather than the enum. The suffix keeps the
 // result clear of the keywords a target reserves once it strips that prefix
 // back off again -- see catalog.EnumValueSuffix.
-func EnumValueName(prefix string, v sdl.EnumValue, index int) string {
-	// Where the source model opens with UNDEFINED, that value is the zero
-	// AIP-126 requires rather than a second spelling of it.
-	if index == 0 && v.Name == "UNDEFINED" {
-		return prefix + "_UNSPECIFIED"
+func EnumValueName(prefix, value string) string {
+	return prefix + "_" + naming.Screaming(value) + catalog.EnumValueSuffix(value)
+}
+
+// EnumValues returns a node's allowed values as name/number pairs.
+//
+// VSS states them two ways. `enum` carries the specification's own numbering
+// and is used as written; `allowed` is a bare list, which is numbered from
+// one so that zero stays free for the "unspecified" AIP-126 requires.
+func EnumValues(n *vspec.Node) []vspec.EnumEntry {
+	if len(n.Enum) > 0 {
+		return n.Enum
 	}
-	return prefix + "_" + naming.Screaming(v.Name) + catalog.EnumValueSuffix(v.Name)
+	out := make([]vspec.EnumEntry, 0, len(n.Allowed))
+	for i, name := range n.Allowed {
+		out = append(out, vspec.EnumEntry{Name: name, Number: i + 1})
+	}
+	return out
 }

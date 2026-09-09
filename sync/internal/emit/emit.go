@@ -25,7 +25,6 @@ import (
 
 	"github.com/the-protobuf-project/vdm/sync/model"
 	"github.com/the-protobuf-project/vdm/sync/plan"
-	"github.com/the-protobuf-project/vdm/sync/sdl"
 )
 
 // Emitter writes one model's packages.
@@ -45,12 +44,12 @@ func New(m *model.Model) *Emitter {
 // a value object promoted to its own package, an enum replaced by a scalar --
 // would otherwise leave its file behind, and a stale .proto still compiles and
 // still lints, so nothing would report it.
-func (e *Emitter) Generate(defs []sdl.Def, out string) (int, error) {
+func (e *Emitter) Generate(out string) (int, error) {
 	if err := os.RemoveAll(out); err != nil {
 		return 0, err
 	}
 
-	total, err := e.generateVocab(defs, out)
+	total, err := e.generateVocab(out)
 	if err != nil {
 		return 0, err
 	}

@@ -1,0 +1,43 @@
+name: Links
+
+# Checks that every URL in docs/references.md resolves.
+#
+# That file is the reason CLAUDE.md says to follow a link rather than work
+# from memory, so a dead entry in it sends a reader back to guessing -- which
+# is the failure the index exists to prevent.
+#
+# Its own workflow rather than a step in Lint, for the reason the others are
+# split: this is the one gate that depends on the public internet, so a
+# failure here means a link rotted, never that the schema is wrong.
+#
+# Weekly as well as on change, because a link rots without anyone touching the
+# repository.
+
+on:
+  pull_request:
+    paths:
+      - docs/references.md
+      - scripts/check-links.sh
+      - .github/workflows/links.yml
+  push:
+    branches: [main]
+    paths:
+      - docs/references.md
+      - scripts/check-links.sh
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  Links:
+    name: Reference Links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check every reference resolves
+        run: ./scripts/check-links.sh
