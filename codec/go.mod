@@ -12,8 +12,10 @@
 // any language do the same thing.
 module github.com/oh-tarnished/coversa-protobuf/codec
 
-go 1.24
+go 1.26
 
 require github.com/oh-tarnished/coversa-protobuf/sync v0.0.0
+
+require gopkg.in/yaml.v3 v3.0.1 // indirect
 
 replace github.com/oh-tarnished/coversa-protobuf/sync => ../sync

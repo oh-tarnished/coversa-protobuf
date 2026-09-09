@@ -21,9 +21,9 @@
 // repository root, a `go build` run *inside* gen/go resolves this workspace
 // and fails, because gen/go is not a member. CI and the justfile therefore
 // set GOWORK=off for that build; see .github/workflows/generate.yml.
-go 1.24
+go 1.26
 
 use (
-	./sync
 	./codec
+	./sync
 )

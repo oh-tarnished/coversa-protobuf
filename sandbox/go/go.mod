@@ -5,7 +5,7 @@
 // tell you whether a schema produces code that compiles.
 module github.com/oh-tarnished/coversa-protobuf/gen/go
 
-go 1.24
+go 1.26
 
 require (
 	buf.build/go/protovalidate v0.14.0
