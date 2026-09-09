@@ -10,7 +10,7 @@
 # gencode that wrote it: protoc-gen-python currently emits gencode 7.36, so a
 # 6.x runtime fails every module with a VersionError before a single
 # descriptor is built. Raise this when the plugin moves.
-protobuf>=7.36,<8
+protobuf>=7.36.1,<8
 
 # google.api and google.type come from here. The generated tree contains its
 # own copies -- the template generates with --include-imports, since generated
