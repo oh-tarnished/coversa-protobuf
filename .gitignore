@@ -1,11 +1,19 @@
 # Generated language code. Nothing here is committed; CI regenerates it.
 gen/
 
-# Schema emitted by buffers, and the exported proto trees it compiles
-# against. The ordinal ledger buffers.lock is NOT ignored -- it is the record
-# that field slots have not moved, and it must be committed.
-schema/
+# The exported proto trees the buffers CLI compiles against: copies of
+# googleapis, protovalidate and the well-known types, written by
+# scripts/export-protos.sh. Vendored dependencies, not output.
 build/
+
+# schema/ is NOT ignored. The .fbs and .capnp are the deliverable for a
+# consumer who wants FlatBuffers or Cap'n Proto without installing buf, the
+# buffers plugin and a protobuf toolchain first -- the same reason protobuf/
+# is committed rather than generated on demand. CI regenerates and diffs them,
+# so a committed file that drifts from the schema fails the build.
+#
+# The ordinal ledger buffers.lock is committed for a stronger reason: it is
+# the record that field slots have not moved.
 
 # Descriptor sets, built on demand by the lint and schema steps.
 *.binpb

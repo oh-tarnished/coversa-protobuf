@@ -26,7 +26,7 @@ option java_package = "io.github.ohtarnished.protobuf.covesa.vdm.location.v1";
 // Request message for Locations.GetLocation, AIP-131 <https://aip.dev/131>.
 message GetLocationRequest {
   // Name of the Location to retrieve,
-  // "chargingStations/{chargingStation}/location".
+  // "chargingStations/{charging_station}/location".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {type: "vdm.covesa.org/Location"}

@@ -16,14 +16,14 @@ package protobuf.covesa.vss.motion.brake_axle.v1;
 import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/protobuf/empty.proto";
-import "protobuf/covesa/vss/motion/brake_axle/v1/axle.proto";
+import "protobuf/covesa/vss/motion/brake_axle/v1/brake_axle.proto";
 import "protobuf/covesa/vss/motion/brake_axle/v1/messages.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ServiceProto";
 option java_package = "io.github.ohtarnished.protobuf.covesa.vss.motion.brake_axle.v1";
 
-// BrakeAxles manages the Axle branch of a vehicle.
+// BrakeAxles manages the BrakeAxle branch of a vehicle.
 //
 // A vehicle may hold several, so this is an ordinary collection with the
 // AIP-131..135 standard methods plus AIP-164 <https://aip.dev/164> undelete.
@@ -31,17 +31,17 @@ option java_package = "io.github.ohtarnished.protobuf.covesa.vss.motion.brake_ax
 // Reference: COVESA Vehicle Signal Specification.
 // https://covesa.github.io/vehicle_signal_specification/
 service BrakeAxles {
-  // Retrieves one Axle.
+  // Retrieves one BrakeAxle.
   //
   // GET /v1/{name=vehicles/*/brakeAxles/*}
   //
   // Safe and idempotent. Read the `etag` here and pass it back on update to
   // make the write conditional.
   //
-  // NOT_FOUND no such Axle
+  // NOT_FOUND no such BrakeAxle
   // INVALID_ARGUMENT name does not match the resource pattern
   // PERMISSION_DENIED caller may not read it
-  rpc GetAxle(GetAxleRequest) returns (Axle) {
+  rpc GetBrakeAxle(GetBrakeAxleRequest) returns (BrakeAxle) {
     option (google.api.http) = {get: "/v1/{name=vehicles/*/brakeAxles/*}"};
     option (google.api.method_signature) = "name";
   }
@@ -62,32 +62,32 @@ service BrakeAxles {
     option (google.api.method_signature) = "parent";
   }
 
-  // Creates a Axle.
+  // Creates a BrakeAxle.
   //
   // POST /v1/{parent=vehicles/*}/brakeAxles
-  // body: the Axle itself
+  // body: the BrakeAxle itself
   //
   // Server-assigned fields on the request body are ignored: `name`, `uid`,
   // `etag` and the server timestamps are set regardless of what is sent.
   //
-  // Not idempotent. Retrying after a timeout may create a second Axle;
-  // supply `axle_id` if the caller needs retry safety.
+  // Not idempotent. Retrying after a timeout may create a second BrakeAxle;
+  // supply `brake_axle_id` if the caller needs retry safety.
   //
   // ALREADY_EXISTS that id is taken
   // INVALID_ARGUMENT a field violates its buf.validate constraint
   // PERMISSION_DENIED caller may not create here
-  rpc CreateAxle(CreateAxleRequest) returns (Axle) {
+  rpc CreateBrakeAxle(CreateBrakeAxleRequest) returns (BrakeAxle) {
     option (google.api.http) = {
       post: "/v1/{parent=vehicles/*}/brakeAxles"
-      body: "axle"
+      body: "brake_axle"
     };
-    option (google.api.method_signature) = "parent,axle,axle_id";
+    option (google.api.method_signature) = "parent,brake_axle,brake_axle_id";
   }
 
-  // Updates a Axle.
+  // Updates a BrakeAxle.
   //
-  // PATCH /v1/{axle.name=vehicles/*/brakeAxles/*}
-  // body: the Axle itself
+  // PATCH /v1/{brake_axle.name=vehicles/*/brakeAxles/*}
+  // body: the BrakeAxle itself
   //
   // A partial update: only fields named in `update_mask` are written. An
   // empty mask writes every mutable field, which will clear anything the
@@ -100,48 +100,48 @@ service BrakeAxles {
   //
   // Idempotent. Pass the `etag` read from Get to make the write conditional.
   //
-  // NOT_FOUND no such Axle
+  // NOT_FOUND no such BrakeAxle
   // ABORTED etag does not match the stored resource
   // INVALID_ARGUMENT mask names an unknown, immutable or read-only field
   // PERMISSION_DENIED caller may not modify it
-  rpc UpdateAxle(UpdateAxleRequest) returns (Axle) {
+  rpc UpdateBrakeAxle(UpdateBrakeAxleRequest) returns (BrakeAxle) {
     option (google.api.http) = {
-      patch: "/v1/{axle.name=vehicles/*/brakeAxles/*}"
-      body: "axle"
+      patch: "/v1/{brake_axle.name=vehicles/*/brakeAxles/*}"
+      body: "brake_axle"
     };
-    option (google.api.method_signature) = "axle,update_mask";
+    option (google.api.method_signature) = "brake_axle,update_mask";
   }
 
-  // Deletes a Axle.
+  // Deletes a BrakeAxle.
   //
   // DELETE /v1/{name=vehicles/*/brakeAxles/*}
   //
-  // Soft delete: the Axle is marked deleted, disappears from List unless
-  // `show_deleted` is set, and is purged at `expire_time`. Recover it with
-  // UndeleteAxle before then.
+  // Soft delete: the BrakeAxle is marked deleted, disappears from List
+  // unless `show_deleted` is set, and is purged at `expire_time`. Recover it
+  // with UndeleteBrakeAxle before then.
   //
   // Idempotent in effect but not in reporting: a second delete returns
   // NOT_FOUND rather than succeeding silently.
   //
-  // NOT_FOUND no such Axle
+  // NOT_FOUND no such BrakeAxle
   // ABORTED etag does not match
   // PERMISSION_DENIED caller may not delete it
-  rpc DeleteAxle(DeleteAxleRequest) returns (google.protobuf.Empty) {
+  rpc DeleteBrakeAxle(DeleteBrakeAxleRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {delete: "/v1/{name=vehicles/*/brakeAxles/*}"};
     option (google.api.method_signature) = "name";
   }
 
-  // Restores a soft-deleted Axle.
+  // Restores a soft-deleted BrakeAxle.
   //
   // POST /v1/{name=vehicles/*/brakeAxles/*}:undelete
   //
-  // Valid only before `expire_time`; after that the Axle is gone and this
-  // returns NOT_FOUND. Clears `delete_time` and `expire_time`.
+  // Valid only before `expire_time`; after that the BrakeAxle is gone and
+  // this returns NOT_FOUND. Clears `delete_time` and `expire_time`.
   //
-  // NOT_FOUND no such Axle, or already purged
-  // ALREADY_EXISTS the Axle is not deleted
+  // NOT_FOUND no such BrakeAxle, or already purged
+  // ALREADY_EXISTS the BrakeAxle is not deleted
   // PERMISSION_DENIED caller may not restore it
-  rpc UndeleteAxle(UndeleteAxleRequest) returns (Axle) {
+  rpc UndeleteBrakeAxle(UndeleteBrakeAxleRequest) returns (BrakeAxle) {
     option (google.api.http) = {
       post: "/v1/{name=vehicles/*/brakeAxles/*}:undelete"
       body: "*"

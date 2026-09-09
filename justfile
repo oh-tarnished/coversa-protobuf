@@ -83,6 +83,12 @@ lint: spec aip test
     @just cap
 
 # Run the Google API linter over every proto. No config file, no disabled rule.
+#
+# api-linter exits 0 even when it reports problems -- it is a reporter, and
+# the CI action is what turns findings into a failure. A local recipe that
+# printed a table of violations and still succeeded is worse than no recipe:
+# `just ci` passed while CI failed on the same 16 findings. So the summary is
+# captured and a non-empty table is made the failure it already was.
 [doc("Run api-linter over protobuf/ (zero findings, no suppressions).")]
 aip:
     #!/usr/bin/env sh
@@ -90,7 +96,14 @@ aip:
     d=$(mktemp -d); trap 'rm -rf "$d"' EXIT
     buf build -o "$d/desc.binpb" --as-file-descriptor-set
     api-linter --descriptor-set-in "$d/desc.binpb" \
-        --output-format=summary $(find protobuf -name '*.proto')
+        --output-format=summary $(find protobuf -name '*.proto') | tee "$d/out"
+    # The summary prints a header row whether or not anything was found, so
+    # the test is for a data row: a line naming a rule.
+    if grep -q '| core::' "$d/out"; then
+        echo "api-linter reported violations above. Rule 1: fix the generator," >&2
+        echo "never the emitted file, and never except the rule." >&2
+        exit 1
+    fi
 
 # The 250-line cap, on files a person actually writes.
 #
@@ -142,10 +155,19 @@ schema:
     ./scripts/schema.sh
     ./scripts/compile-schema.sh
 
-# Fail if regenerating would move a field's target slot.
-[doc("Check the ordinal ledger against a fresh build.")]
-verify-schema:
+# Fail if regenerating would move a field's target slot, or if the committed
+# .fbs and .capnp are not what the current schema produces.
+#
+# Two checks, and they catch different things. The ledger catches a slot that
+# moved, which is a wire-format break. The diff catches a committed file that
+# no longer matches the .proto beside it -- which is what makes shipping the
+# schemas safe: a consumer reading schema/ is reading the current schema, not
+# whatever was emitted the last time someone remembered to run it.
+[doc("Check the ordinal ledger and the committed schema against a fresh build.")]
+verify-schema: schema
     buffers verify --config buffers.yaml
+    @git diff --exit-code -- schema/ \
+        || { echo "schema/ is stale — run 'just schema' and commit"; exit 1; }
 
 # Generate one language: `just lang go`, `just lang python`.
 #

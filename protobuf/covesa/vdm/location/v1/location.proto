@@ -30,7 +30,7 @@ option java_package = "io.github.ohtarnished.protobuf.covesa.vdm.location.v1";
 //
 // A singleton child resource of ChargingStation, AIP-156
 // <https://aip.dev/156>, named
-// "chargingStations/{chargingStation}/location". Its parent is a declared
+// "chargingStations/{charging_station}/location". Its parent is a declared
 // resource in protobuf.covesa.vdm.charging_station.v1, which is what makes
 // this pattern legal rather than a reference to a collection nothing can
 // create.
@@ -40,12 +40,12 @@ option java_package = "io.github.ohtarnished.protobuf.covesa.vdm.location.v1";
 message Location {
   option (google.api.resource) = {
     type: "vdm.covesa.org/Location"
-    pattern: "chargingStations/{chargingStation}/location"
+    pattern: "chargingStations/{charging_station}/location"
     singular: "location"
     plural: "locations"
   };
 
-  // Resource name, "chargingStations/{chargingStation}/location". Assigned
+  // Resource name, "chargingStations/{charging_station}/location". Assigned
   // by the server.
   string name = 1 [
     (google.api.field_behavior) = IDENTIFIER,

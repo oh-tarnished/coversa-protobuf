@@ -22,15 +22,19 @@ package model
 // and `Vehicle.MotionManagement.Brake.Axle` becomes `brake_axle`, while every
 // branch with an unambiguous name keeps it.
 //
-// The *message* keeps VSS's own term either way. `Axle` is the name in three
-// packages, which proto3 allows and which keeps the mapping into the other
-// target IDLs on the specification's vocabulary; only the directory is
-// qualified, because only the directory has to be unique.
+// The message follows the collection, because AIP-123 ties the two: a
+// resource's `singular` must be the lower camel case of its message name, so
+// a `chassisAxles` collection of `Axle` is a violation the linter reports
+// three times over. Where the collection is qualified the message is
+// `ChassisAxle`; where it is not, the message keeps VSS's own term. Provenance
+// is not lost either way -- the branch annotation still carries
+// `Vehicle.Chassis.Axle`, which is what a consumer joins on.
 //
 // The collection segment is left alone wherever the parent already separates
 // it. A wheel hangs beneath an axle that is now named, so
 // `chassisAxles/{chassis_axle}/wheels/{wheel}` identifies exactly one
-// resource and `chassisAxleWheels` would only restate the segment before it.
+// resource, `chassisAxleWheels` would only restate the segment before it, and
+// the message stays `Wheel`.
 
 import (
 	"strings"
@@ -88,6 +92,13 @@ func (m *Model) rebuildPatterns() {
 			name := leaf(p.Root.FQN)
 			if len(group) > 1 && p.qualified != "" {
 				name = p.qualified
+
+				// The node's Name is what the message is rendered from, and
+				// AIP-123 requires it to match the singular. FQN is the
+				// node's identity and is untouched, so every lookup, rename
+				// and annotation still resolves against the path VSS
+				// published.
+				p.Root.Name = naming.Pascal(name)
 			}
 			p.setNames(name)
 		}

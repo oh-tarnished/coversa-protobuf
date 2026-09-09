@@ -31,7 +31,7 @@ option java_package = "io.github.ohtarnished.protobuf.covesa.vss.motion.suspensi
 // Instanced: Left, Right. The axes together name one occurrence, which is
 // why each is a resource of its own rather than a repeated field.
 //
-// A child resource of Axle, named
+// A child resource of SuspensionAxle, named
 // "vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}". Its
 // parent is a declared resource in
 // protobuf.covesa.vss.motion.suspension_axle.v1, which is what makes this

@@ -28,19 +28,19 @@ option java_package = "io.github.ohtarnished.protobuf.covesa.vdm.charging_sessio
 //
 // VSS: ChargingSession.
 //
-// A root resource, named "chargingSessions/{chargingSession}".
+// A root resource, named "chargingSessions/{charging_session}".
 //
 // Reference: COVESA Vehicle Signal Specification.
 // https://covesa.github.io/vehicle_signal_specification/
 message ChargingSession {
   option (google.api.resource) = {
     type: "vdm.covesa.org/ChargingSession"
-    pattern: "chargingSessions/{chargingSession}"
+    pattern: "chargingSessions/{charging_session}"
     singular: "chargingSession"
     plural: "chargingSessions"
   };
 
-  // Resource name, "chargingSessions/{chargingSession}". Assigned by the
+  // Resource name, "chargingSessions/{charging_session}". Assigned by the
   // server.
   string name = 1 [
     (google.api.field_behavior) = IDENTIFIER,

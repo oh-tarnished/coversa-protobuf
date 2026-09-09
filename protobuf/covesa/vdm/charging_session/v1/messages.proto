@@ -27,7 +27,7 @@ option java_package = "io.github.ohtarnished.protobuf.covesa.vdm.charging_sessio
 // <https://aip.dev/131>.
 message GetChargingSessionRequest {
   // Name of the ChargingSession to retrieve,
-  // "chargingSessions/{chargingSession}".
+  // "chargingSessions/{charging_session}".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {type: "vdm.covesa.org/ChargingSession"}
@@ -101,7 +101,7 @@ message UpdateChargingSessionRequest {
 // <https://aip.dev/135>.
 message DeleteChargingSessionRequest {
   // Name of the ChargingSession to delete,
-  // "chargingSessions/{chargingSession}".
+  // "chargingSessions/{charging_session}".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {type: "vdm.covesa.org/ChargingSession"}
@@ -112,7 +112,7 @@ message DeleteChargingSessionRequest {
 // <https://aip.dev/164>.
 message UndeleteChargingSessionRequest {
   // Name of the soft-deleted ChargingSession to restore,
-  // "chargingSessions/{chargingSession}".
+  // "chargingSessions/{charging_session}".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference).type = "vdm.covesa.org/ChargingSession",

@@ -240,8 +240,8 @@ just ci
 ```
 
 which runs, in order: the spec pin check, `buf format --diff --exit-code`,
-`buf lint`, `buf build`, `api-linter`, the line cap, a regenerate-and-diff,
-the two schema targets, their compilers, and the ordinal ledger. Each is also
+`buf lint`, `buf build`, `api-linter`, the line cap, a regenerate-and-diff, the
+two schema targets, their compilers, the ordinal ledger and the `schema/` diff. Each is also
 a workflow under `.github/workflows/` -- read the steps there rather than
 trusting this list to stay current.
 

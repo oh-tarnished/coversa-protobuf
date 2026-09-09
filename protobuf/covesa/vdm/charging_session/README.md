@@ -1,7 +1,7 @@
 # ChargingSession
 
 **Package** `protobuf.covesa.vdm.charging_session.v1`  
-**Resource** `chargingSessions/{chargingSession}`  
+**Resource** `chargingSessions/{charging_session}`  
 **Shape** root collection — full CRUD plus undelete
 
 > [!IMPORTANT]

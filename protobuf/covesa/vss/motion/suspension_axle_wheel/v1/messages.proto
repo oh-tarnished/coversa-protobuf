@@ -35,7 +35,7 @@ message GetWheelRequest {
 
 // Request message for Wheels.ListWheels, AIP-132 <https://aip.dev/132>.
 message ListWheelsRequest {
-  // The Axle whose wheels to list,
+  // The SuspensionAxle whose wheels to list,
   // "vehicles/{vehicle}/suspensionAxles/{suspension_axle}".
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
@@ -72,7 +72,7 @@ message ListWheelsResponse {
 
 // Request message for Wheels.CreateWheel, AIP-133 <https://aip.dev/133>.
 message CreateWheelRequest {
-  // The Axle to create the Wheel under,
+  // The SuspensionAxle to create the Wheel under,
   // "vehicles/{vehicle}/suspensionAxles/{suspension_axle}".
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,

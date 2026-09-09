@@ -17,19 +17,20 @@ import "buf/validate/validate.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/protobuf/field_mask.proto";
-import "protobuf/covesa/vss/motion/chassis_axle/v1/axle.proto";
+import "protobuf/covesa/vss/motion/chassis_axle/v1/chassis_axle.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "MessagesProto";
 option java_package = "io.github.ohtarnished.protobuf.covesa.vss.motion.chassis_axle.v1";
 
-// Request message for ChassisAxles.GetAxle, AIP-131 <https://aip.dev/131>.
-message GetAxleRequest {
-  // Name of the Axle to retrieve,
+// Request message for ChassisAxles.GetChassisAxle, AIP-131
+// <https://aip.dev/131>.
+message GetChassisAxleRequest {
+  // Name of the ChassisAxle to retrieve,
   // "vehicles/{vehicle}/chassisAxles/{chassis_axle}".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {type: "vdm.covesa.org/Axle"}
+    (google.api.resource_reference) = {type: "vdm.covesa.org/ChassisAxle"}
   ];
 }
 
@@ -39,7 +40,7 @@ message ListChassisAxlesRequest {
   // The Vehicle whose chassisAxles to list, "vehicles/{vehicle}".
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {child_type: "vdm.covesa.org/Axle"}
+    (google.api.resource_reference) = {child_type: "vdm.covesa.org/ChassisAxle"}
   ];
 
   // Maximum chassisAxles to return. Defaults to 50, capped at 1000.
@@ -65,37 +66,37 @@ message ListChassisAxlesRequest {
 // <https://aip.dev/132>.
 message ListChassisAxlesResponse {
   // The chassisAxles on this page.
-  repeated Axle chassis_axles = 1;
+  repeated ChassisAxle chassis_axles = 1;
 
   // Token for the next page, empty when this is the last page.
   string next_page_token = 2;
 }
 
-// Request message for ChassisAxles.CreateAxle, AIP-133
+// Request message for ChassisAxles.CreateChassisAxle, AIP-133
 // <https://aip.dev/133>.
-message CreateAxleRequest {
-  // The Vehicle to create the Axle under, "vehicles/{vehicle}".
+message CreateChassisAxleRequest {
+  // The Vehicle to create the ChassisAxle under, "vehicles/{vehicle}".
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {child_type: "vdm.covesa.org/Axle"}
+    (google.api.resource_reference) = {child_type: "vdm.covesa.org/ChassisAxle"}
   ];
 
-  // The Axle to create.
-  Axle axle = 2 [
+  // The ChassisAxle to create.
+  ChassisAxle chassis_axle = 2 [
     (google.api.field_behavior) = REQUIRED,
     (buf.validate.field).required = true
   ];
 
   // Client-assigned id, becoming the last segment of the resource name. The
   // server generates one when empty.
-  string axle_id = 3 [(google.api.field_behavior) = OPTIONAL];
+  string chassis_axle_id = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Request message for ChassisAxles.UpdateAxle, AIP-134
+// Request message for ChassisAxles.UpdateChassisAxle, AIP-134
 // <https://aip.dev/134>.
-message UpdateAxleRequest {
-  // The Axle to update. Its name field identifies the resource.
-  Axle axle = 1 [
+message UpdateChassisAxleRequest {
+  // The ChassisAxle to update. Its name field identifies the resource.
+  ChassisAxle chassis_axle = 1 [
     (google.api.field_behavior) = REQUIRED,
     (buf.validate.field).required = true
   ];
@@ -108,25 +109,25 @@ message UpdateAxleRequest {
   google.protobuf.FieldMask update_mask = 2 [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Request message for ChassisAxles.DeleteAxle, AIP-135
+// Request message for ChassisAxles.DeleteChassisAxle, AIP-135
 // <https://aip.dev/135>.
-message DeleteAxleRequest {
-  // Name of the Axle to delete,
+message DeleteChassisAxleRequest {
+  // Name of the ChassisAxle to delete,
   // "vehicles/{vehicle}/chassisAxles/{chassis_axle}".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {type: "vdm.covesa.org/Axle"}
+    (google.api.resource_reference) = {type: "vdm.covesa.org/ChassisAxle"}
   ];
 }
 
-// Request message for ChassisAxles.UndeleteAxle, AIP-164
+// Request message for ChassisAxles.UndeleteChassisAxle, AIP-164
 // <https://aip.dev/164>.
-message UndeleteAxleRequest {
-  // Name of the soft-deleted Axle to restore,
+message UndeleteChassisAxleRequest {
+  // Name of the soft-deleted ChassisAxle to restore,
   // "vehicles/{vehicle}/chassisAxles/{chassis_axle}".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference).type = "vdm.covesa.org/Axle",
+    (google.api.resource_reference).type = "vdm.covesa.org/ChassisAxle",
     (buf.validate.field).string.pattern = "^vehicles/[^/]+/chassisAxles/[^/]+$"
   ];
 }

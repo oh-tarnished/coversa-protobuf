@@ -4001,7 +4001,7 @@ messages:
       - number: 2
         ordinal: 1
         name: update_mask
-  - message: protobuf.covesa.vss.motion.brake_axle.v1.Axle
+  - message: protobuf.covesa.vss.motion.brake_axle.v1.BrakeAxle
     fields:
       - number: 1
         ordinal: 0
@@ -4036,23 +4036,23 @@ messages:
       - number: 19
         ordinal: 18
         name: torque_distribution_friction_right_minimum
-  - message: protobuf.covesa.vss.motion.brake_axle.v1.CreateAxleRequest
+  - message: protobuf.covesa.vss.motion.brake_axle.v1.CreateBrakeAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: parent
       - number: 2
         ordinal: 1
-        name: axle
+        name: brake_axle
       - number: 3
         ordinal: 2
-        name: axle_id
-  - message: protobuf.covesa.vss.motion.brake_axle.v1.DeleteAxleRequest
+        name: brake_axle_id
+  - message: protobuf.covesa.vss.motion.brake_axle.v1.DeleteBrakeAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vss.motion.brake_axle.v1.GetAxleRequest
+  - message: protobuf.covesa.vss.motion.brake_axle.v1.GetBrakeAxleRequest
     fields:
       - number: 1
         ordinal: 0
@@ -4082,16 +4082,16 @@ messages:
       - number: 2
         ordinal: 1
         name: next_page_token
-  - message: protobuf.covesa.vss.motion.brake_axle.v1.UndeleteAxleRequest
+  - message: protobuf.covesa.vss.motion.brake_axle.v1.UndeleteBrakeAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vss.motion.brake_axle.v1.UpdateAxleRequest
+  - message: protobuf.covesa.vss.motion.brake_axle.v1.UpdateBrakeAxleRequest
     fields:
       - number: 1
         ordinal: 0
-        name: axle
+        name: brake_axle
       - number: 2
         ordinal: 1
         name: update_mask
@@ -4284,7 +4284,7 @@ messages:
       - number: 2
         ordinal: 1
         name: update_mask
-  - message: protobuf.covesa.vss.motion.chassis_axle.v1.Axle
+  - message: protobuf.covesa.vss.motion.chassis_axle.v1.ChassisAxle
     fields:
       - number: 1
         ordinal: 0
@@ -4340,23 +4340,23 @@ messages:
       - number: 26
         ordinal: 25
         name: torque
-  - message: protobuf.covesa.vss.motion.chassis_axle.v1.CreateAxleRequest
+  - message: protobuf.covesa.vss.motion.chassis_axle.v1.CreateChassisAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: parent
       - number: 2
         ordinal: 1
-        name: axle
+        name: chassis_axle
       - number: 3
         ordinal: 2
-        name: axle_id
-  - message: protobuf.covesa.vss.motion.chassis_axle.v1.DeleteAxleRequest
+        name: chassis_axle_id
+  - message: protobuf.covesa.vss.motion.chassis_axle.v1.DeleteChassisAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vss.motion.chassis_axle.v1.GetAxleRequest
+  - message: protobuf.covesa.vss.motion.chassis_axle.v1.GetChassisAxleRequest
     fields:
       - number: 1
         ordinal: 0
@@ -4386,16 +4386,16 @@ messages:
       - number: 2
         ordinal: 1
         name: next_page_token
-  - message: protobuf.covesa.vss.motion.chassis_axle.v1.UndeleteAxleRequest
+  - message: protobuf.covesa.vss.motion.chassis_axle.v1.UndeleteChassisAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vss.motion.chassis_axle.v1.UpdateAxleRequest
+  - message: protobuf.covesa.vss.motion.chassis_axle.v1.UpdateChassisAxleRequest
     fields:
       - number: 1
         ordinal: 0
-        name: axle
+        name: chassis_axle
       - number: 2
         ordinal: 1
         name: update_mask
@@ -4845,49 +4845,23 @@ messages:
       - number: 2
         ordinal: 1
         name: update_mask
-  - message: protobuf.covesa.vss.motion.suspension_axle.v1.Axle
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-      - number: 2
-        ordinal: 1
-        name: uid
-      - number: 3
-        ordinal: 2
-        name: etag
-      - number: 4
-        ordinal: 3
-        name: delete_time
-      - number: 5
-        ordinal: 4
-        name: expire_time
-      - number: 6
-        ordinal: 5
-        name: create_time
-      - number: 7
-        ordinal: 6
-        name: update_time
-      - number: 16
-        ordinal: 15
-        name: roll_torque
-  - message: protobuf.covesa.vss.motion.suspension_axle.v1.CreateAxleRequest
+  - message: protobuf.covesa.vss.motion.suspension_axle.v1.CreateSuspensionAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: parent
       - number: 2
         ordinal: 1
-        name: axle
+        name: suspension_axle
       - number: 3
         ordinal: 2
-        name: axle_id
-  - message: protobuf.covesa.vss.motion.suspension_axle.v1.DeleteAxleRequest
+        name: suspension_axle_id
+  - message: protobuf.covesa.vss.motion.suspension_axle.v1.DeleteSuspensionAxleRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vss.motion.suspension_axle.v1.GetAxleRequest
+  - message: protobuf.covesa.vss.motion.suspension_axle.v1.GetSuspensionAxleRequest
     fields:
       - number: 1
         ordinal: 0
@@ -4917,16 +4891,42 @@ messages:
       - number: 2
         ordinal: 1
         name: next_page_token
-  - message: protobuf.covesa.vss.motion.suspension_axle.v1.UndeleteAxleRequest
+  - message: protobuf.covesa.vss.motion.suspension_axle.v1.SuspensionAxle
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vss.motion.suspension_axle.v1.UpdateAxleRequest
+      - number: 2
+        ordinal: 1
+        name: uid
+      - number: 3
+        ordinal: 2
+        name: etag
+      - number: 4
+        ordinal: 3
+        name: delete_time
+      - number: 5
+        ordinal: 4
+        name: expire_time
+      - number: 6
+        ordinal: 5
+        name: create_time
+      - number: 7
+        ordinal: 6
+        name: update_time
+      - number: 16
+        ordinal: 15
+        name: roll_torque
+  - message: protobuf.covesa.vss.motion.suspension_axle.v1.UndeleteSuspensionAxleRequest
     fields:
       - number: 1
         ordinal: 0
-        name: axle
+        name: name
+  - message: protobuf.covesa.vss.motion.suspension_axle.v1.UpdateSuspensionAxleRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: suspension_axle
       - number: 2
         ordinal: 1
         name: update_mask
@@ -8692,17 +8692,17 @@ services:
         ordinal: 1
   - service: protobuf.covesa.vss.motion.brake_axle.v1.BrakeAxles
     methods:
-      - name: GetAxle
+      - name: GetBrakeAxle
         ordinal: 0
       - name: ListBrakeAxles
         ordinal: 1
-      - name: CreateAxle
+      - name: CreateBrakeAxle
         ordinal: 2
-      - name: UpdateAxle
+      - name: UpdateBrakeAxle
         ordinal: 3
-      - name: DeleteAxle
+      - name: DeleteBrakeAxle
         ordinal: 4
-      - name: UndeleteAxle
+      - name: UndeleteBrakeAxle
         ordinal: 5
   - service: protobuf.covesa.vss.motion.brake_axle_wheel.v1.Wheels
     methods:
@@ -8726,17 +8726,17 @@ services:
         ordinal: 1
   - service: protobuf.covesa.vss.motion.chassis_axle.v1.ChassisAxles
     methods:
-      - name: GetAxle
+      - name: GetChassisAxle
         ordinal: 0
       - name: ListChassisAxles
         ordinal: 1
-      - name: CreateAxle
+      - name: CreateChassisAxle
         ordinal: 2
-      - name: UpdateAxle
+      - name: UpdateChassisAxle
         ordinal: 3
-      - name: DeleteAxle
+      - name: DeleteChassisAxle
         ordinal: 4
-      - name: UndeleteAxle
+      - name: UndeleteChassisAxle
         ordinal: 5
   - service: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Wheels
     methods:
@@ -8780,17 +8780,17 @@ services:
         ordinal: 1
   - service: protobuf.covesa.vss.motion.suspension_axle.v1.SuspensionAxles
     methods:
-      - name: GetAxle
+      - name: GetSuspensionAxle
         ordinal: 0
       - name: ListSuspensionAxles
         ordinal: 1
-      - name: CreateAxle
+      - name: CreateSuspensionAxle
         ordinal: 2
-      - name: UpdateAxle
+      - name: UpdateSuspensionAxle
         ordinal: 3
-      - name: DeleteAxle
+      - name: DeleteSuspensionAxle
         ordinal: 4
-      - name: UndeleteAxle
+      - name: UndeleteSuspensionAxle
         ordinal: 5
   - service: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.Wheels
     methods:

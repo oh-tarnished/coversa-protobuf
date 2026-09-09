@@ -1,4 +1,4 @@
-# Axle
+# ChassisAxle
 
 **Package** `protobuf.covesa.vss.motion.chassis_axle.v1`  
 **Resource** `vehicles/{vehicle}/chassisAxles/{chassis_axle}`  
@@ -15,16 +15,16 @@ Axle signals
 
 | Method | Request | Response | Summary |
 | --- | --- | --- | --- |
-| `GetAxle` | `GetAxleRequest` | `Axle` | Retrieves one Axle. `GET /v1/{name=vehicles/*/chassisAxles/*}` |
+| `GetChassisAxle` | `GetChassisAxleRequest` | `ChassisAxle` | Retrieves one ChassisAxle. `GET /v1/{name=vehicles/*/chassisAxles/*}` |
 | `ListChassisAxles` | `ListChassisAxlesRequest` | `ListChassisAxlesResponse` | Lists them, paginated per [AIP-158](https://aip.dev/158). `GET /v1/{parent=vehicles/*}/chassisAxles` |
-| `CreateAxle` | `CreateAxleRequest` | `Axle` | Creates one. `POST /v1/{parent=vehicles/*}/chassisAxles` |
-| `UpdateAxle` | `UpdateAxleRequest` | `Axle` | Partial update; only an actuator is writable. `PATCH` |
-| `DeleteAxle` | `DeleteAxleRequest` | `google.protobuf.Empty` | Soft delete; recoverable until `expire_time`. `DELETE` |
-| `UndeleteAxle` | `UndeleteAxleRequest` | `Axle` | Restores a soft-deleted Axle. `POST …:undelete` |
+| `CreateChassisAxle` | `CreateChassisAxleRequest` | `ChassisAxle` | Creates one. `POST /v1/{parent=vehicles/*}/chassisAxles` |
+| `UpdateChassisAxle` | `UpdateChassisAxleRequest` | `ChassisAxle` | Partial update; only an actuator is writable. `PATCH` |
+| `DeleteChassisAxle` | `DeleteChassisAxleRequest` | `google.protobuf.Empty` | Soft delete; recoverable until `expire_time`. `DELETE` |
+| `UndeleteChassisAxle` | `UndeleteChassisAxleRequest` | `ChassisAxle` | Restores a soft-deleted ChassisAxle. `POST …:undelete` |
 
 ## Messages
 
-### `Axle`
+### `ChassisAxle`
 
 Axle signals
 

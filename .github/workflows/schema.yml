@@ -71,4 +71,16 @@ jobs:
             echo "A field was probably removed without a 'reserved' in its place."
             exit 1
           }
+
+      # schema/ is committed, so a consumer can take the .fbs or .capnp
+      # without installing buf, the buffers plugin and a protobuf toolchain.
+      # That only holds if what is committed is what the current .proto
+      # produces, which is what this compares.
+      - name: Verify Committed Schema
+        run: |
+          git diff --exit-code -- schema/ || {
+            echo "::error::schema/ is stale: it is not what the current protos produce."
+            echo "Run 'just schema' and commit the result."
+            exit 1
+          }
           echo "Every field slot is where the ledger says it is."

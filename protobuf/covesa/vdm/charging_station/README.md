@@ -1,7 +1,7 @@
 # ChargingStation
 
 **Package** `protobuf.covesa.vdm.charging_station.v1`  
-**Resource** `chargingStations/{chargingStation}`  
+**Resource** `chargingStations/{charging_station}`  
 **Shape** root collection — full CRUD plus undelete
 
 > [!IMPORTANT]

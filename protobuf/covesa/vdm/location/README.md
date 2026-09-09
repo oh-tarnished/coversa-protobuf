@@ -1,7 +1,7 @@
 # Location
 
 **Package** `protobuf.covesa.vdm.location.v1`  
-**Resource** `chargingStations/{chargingStation}/location`  
+**Resource** `chargingStations/{charging_station}/location`  
 **Shape** singleton — `Get` and `Update` only, per [AIP-156](https://aip.dev/156)
 
 > [!IMPORTANT]

@@ -530,7 +530,7 @@ flowchart TD
   G4["api-linter<br/>API design — zero violations"]
   G5["scripts/schema.sh<br/>emit .fbs and .capnp"]
   G6["scripts/compile-schema.sh<br/>flatc and capnp must accept it"]
-  G7["buffers.lock diff<br/>a field slot moved"]
+  G7["buffers.lock + schema/ diff<br/>a slot moved, or committed output drifted"]
   G8["build Go, Java, TS, Python<br/>code a consumer can compile"]
   G9["buf breaking<br/>against the base commit"]
   G10["scripts/check-links.sh<br/>a rotted reference"]
@@ -558,7 +558,7 @@ flowchart TD
 |---|---|
 | `lint` | spec pin, formatting, both linters, licence headers, line cap |
 | `sync` | `protobuf/` is exactly what the pinned spec produces |
-| `schema` | `.fbs` and `.capnp` emitted, compiled, and slot-stable |
+| `schema` | `.fbs` and `.capnp` emitted, compiled, slot-stable, and matching what is committed |
 | `generate` | four languages generated and built |
 | `breaking` | wire compatibility against the base commit |
 | `links` | every URL in the reference index still resolves |

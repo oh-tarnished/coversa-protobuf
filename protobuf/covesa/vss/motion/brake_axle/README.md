@@ -1,4 +1,4 @@
-# Axle
+# BrakeAxle
 
 **Package** `protobuf.covesa.vss.motion.brake_axle.v1`  
 **Resource** `vehicles/{vehicle}/brakeAxles/{brake_axle}`  
@@ -15,16 +15,16 @@ MotionManagement for brake actuation for a specific electric axle.
 
 | Method | Request | Response | Summary |
 | --- | --- | --- | --- |
-| `GetAxle` | `GetAxleRequest` | `Axle` | Retrieves one Axle. `GET /v1/{name=vehicles/*/brakeAxles/*}` |
+| `GetBrakeAxle` | `GetBrakeAxleRequest` | `BrakeAxle` | Retrieves one BrakeAxle. `GET /v1/{name=vehicles/*/brakeAxles/*}` |
 | `ListBrakeAxles` | `ListBrakeAxlesRequest` | `ListBrakeAxlesResponse` | Lists them, paginated per [AIP-158](https://aip.dev/158). `GET /v1/{parent=vehicles/*}/brakeAxles` |
-| `CreateAxle` | `CreateAxleRequest` | `Axle` | Creates one. `POST /v1/{parent=vehicles/*}/brakeAxles` |
-| `UpdateAxle` | `UpdateAxleRequest` | `Axle` | Partial update; only an actuator is writable. `PATCH` |
-| `DeleteAxle` | `DeleteAxleRequest` | `google.protobuf.Empty` | Soft delete; recoverable until `expire_time`. `DELETE` |
-| `UndeleteAxle` | `UndeleteAxleRequest` | `Axle` | Restores a soft-deleted Axle. `POST …:undelete` |
+| `CreateBrakeAxle` | `CreateBrakeAxleRequest` | `BrakeAxle` | Creates one. `POST /v1/{parent=vehicles/*}/brakeAxles` |
+| `UpdateBrakeAxle` | `UpdateBrakeAxleRequest` | `BrakeAxle` | Partial update; only an actuator is writable. `PATCH` |
+| `DeleteBrakeAxle` | `DeleteBrakeAxleRequest` | `google.protobuf.Empty` | Soft delete; recoverable until `expire_time`. `DELETE` |
+| `UndeleteBrakeAxle` | `UndeleteBrakeAxleRequest` | `BrakeAxle` | Restores a soft-deleted BrakeAxle. `POST …:undelete` |
 
 ## Messages
 
-### `Axle`
+### `BrakeAxle`
 
 MotionManagement for brake actuation for a specific electric axle.
 

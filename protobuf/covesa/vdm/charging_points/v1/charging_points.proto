@@ -31,7 +31,7 @@ option java_package = "io.github.ohtarnished.protobuf.covesa.vdm.charging_points
 // VSS: ChargingStation.ChargingPoints.
 //
 // A child resource of ChargingStation, named
-// "chargingStations/{chargingStation}/chargingPointses/{charging_points}".
+// "chargingStations/{charging_station}/chargingPointses/{charging_points}".
 // Its parent is a declared resource in
 // protobuf.covesa.vdm.charging_station.v1, which is what makes this pattern
 // legal rather than a reference to a collection nothing can create.
@@ -41,13 +41,13 @@ option java_package = "io.github.ohtarnished.protobuf.covesa.vdm.charging_points
 message ChargingPoints {
   option (google.api.resource) = {
     type: "vdm.covesa.org/ChargingPoints"
-    pattern: "chargingStations/{chargingStation}/chargingPointses/{charging_points}"
+    pattern: "chargingStations/{charging_station}/chargingPointses/{charging_points}"
     singular: "chargingPoints"
     plural: "chargingPointses"
   };
 
   // Resource name,
-  // "chargingStations/{chargingStation}/chargingPointses/{charging_points}".
+  // "chargingStations/{charging_station}/chargingPointses/{charging_points}".
   // Assigned by the server.
   string name = 1 [
     (google.api.field_behavior) = IDENTIFIER,

@@ -103,7 +103,7 @@ func newPackage(n *vspec.Node, parent *Package, fam Family, identifiable bool) *
 func (p *Package) setPattern() {
 	switch {
 	case p.NameParent == nil:
-		p.Pattern = p.Plural + "/{" + p.Singular + "}"
+		p.Pattern = p.Plural + "/{" + naming.Snake(p.Singular) + "}"
 	case p.IsList:
 		p.Pattern = p.NameParent.Pattern + "/" + p.Plural + "/{" + naming.Snake(p.Singular) + "}"
 	default:

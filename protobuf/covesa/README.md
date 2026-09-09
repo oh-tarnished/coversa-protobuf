@@ -31,16 +31,16 @@ erDiagram
   VEHICLE ||--|| CONNECTIVITY : "connectivity"
   VEHICLE ||--|| OTHER_SINGLETONS : "+13 more"
   VEHICLE ||--o{ AMBIENT_LIGHT : "ambientLights"
-  VEHICLE ||--o{ CHASSIS_AXLE : "chassisAxles"
-  VEHICLE ||--o{ SUSPENSION_AXLE : "suspensionAxles"
-  VEHICLE ||--o{ BRAKE_AXLE : "brakeAxles"
   VEHICLE ||--o{ BEAM : "beams"
+  VEHICLE ||--o{ BRAKE_AXLE : "brakeAxles"
   VEHICLE ||--o{ CHARGING_PORT : "chargingPorts"
+  VEHICLE ||--o{ CHASSIS_AXLE : "chassisAxles"
   VEHICLE ||--o{ CONTROL_UNIT : "controlUnits"
+  VEHICLE ||--o{ DIRECTION_INDICATOR : "directionIndicators"
   VEHICLE ||--o{ OTHER_COLLECTIONS : "+13 more"
+  BRAKE_AXLE ||--o{ BRAKE_AXLE_WHEEL : "wheels"
   CHASSIS_AXLE ||--o{ CHASSIS_AXLE_WHEEL : "wheels"
   SUSPENSION_AXLE ||--o{ SUSPENSION_AXLE_WHEEL : "wheels"
-  BRAKE_AXLE ||--o{ BRAKE_AXLE_WHEEL : "wheels"
   CHARGING_SESSION }o--|| PERSON : "customer"
   CHARGING_SESSION }o--|| VEHICLE : "vehicle"
 ```
@@ -136,15 +136,15 @@ flowchart LR
 | --- | --- | --- | --- |
 | `Acceleration` | `vehicles/{vehicle}/acceleration` | singleton | [acceleration](vss/motion/acceleration/README.md) |
 | `AngularVelocity` | `vehicles/{vehicle}/angularVelocity` | singleton | [angular_velocity](vss/motion/angular_velocity/README.md) |
-| `Axle` | `vehicles/{vehicle}/brakeAxles/{brake_axle}` | collection | [brake_axle](vss/motion/brake_axle/README.md) |
+| `BrakeAxle` | `vehicles/{vehicle}/brakeAxles/{brake_axle}` | collection | [brake_axle](vss/motion/brake_axle/README.md) |
 | `Wheel` | `vehicles/{vehicle}/brakeAxles/{brake_axle}/wheels/{wheel}` | collection | [brake_axle_wheel](vss/motion/brake_axle_wheel/README.md) |
 | `Chassis` | `vehicles/{vehicle}/chassis` | singleton | [chassis](vss/motion/chassis/README.md) |
-| `Axle` | `vehicles/{vehicle}/chassisAxles/{chassis_axle}` | collection | [chassis_axle](vss/motion/chassis_axle/README.md) |
+| `ChassisAxle` | `vehicles/{vehicle}/chassisAxles/{chassis_axle}` | collection | [chassis_axle](vss/motion/chassis_axle/README.md) |
 | `Wheel` | `vehicles/{vehicle}/chassisAxles/{chassis_axle}/wheels/{wheel}` | collection | [chassis_axle_wheel](vss/motion/chassis_axle_wheel/README.md) |
 | `ElectricAxle` | `vehicles/{vehicle}/electricAxles/{electric_axle}` | collection | [electric_axle](vss/motion/electric_axle/README.md) |
 | `MotionManagement` | `vehicles/{vehicle}/motionManagement` | singleton | [motion_management](vss/motion/motion_management/README.md) |
 | `Orientation` | `vehicles/{vehicle}/orientation` | singleton | [orientation](vss/motion/orientation/README.md) |
-| `Axle` | `vehicles/{vehicle}/suspensionAxles/{suspension_axle}` | collection | [suspension_axle](vss/motion/suspension_axle/README.md) |
+| `SuspensionAxle` | `vehicles/{vehicle}/suspensionAxles/{suspension_axle}` | collection | [suspension_axle](vss/motion/suspension_axle/README.md) |
 | `Wheel` | `vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}` | collection | [suspension_axle_wheel](vss/motion/suspension_axle_wheel/README.md) |
 
 ## Platform
@@ -171,11 +171,11 @@ flowchart LR
 
 | Resource | Name | Shape | Reference |
 | --- | --- | --- | --- |
-| `ChargingPoints` | `chargingStations/{chargingStation}/chargingPointses/{charging_points}` | collection | [charging_points](vdm/charging_points/README.md) |
-| `ChargingSession` | `chargingSessions/{chargingSession}` | collection | [charging_session](vdm/charging_session/README.md) |
-| `ChargingStation` | `chargingStations/{chargingStation}` | collection | [charging_station](vdm/charging_station/README.md) |
+| `ChargingPoints` | `chargingStations/{charging_station}/chargingPointses/{charging_points}` | collection | [charging_points](vdm/charging_points/README.md) |
+| `ChargingSession` | `chargingSessions/{charging_session}` | collection | [charging_session](vdm/charging_session/README.md) |
+| `ChargingStation` | `chargingStations/{charging_station}` | collection | [charging_station](vdm/charging_station/README.md) |
 | `HomeAddress` | `people/{person}/homeAddress` | singleton | [home_address](vdm/home_address/README.md) |
-| `Location` | `chargingStations/{chargingStation}/location` | singleton | [location](vdm/location/README.md) |
+| `Location` | `chargingStations/{charging_station}/location` | singleton | [location](vdm/location/README.md) |
 | `Name` | `people/{person}/name` | singleton | [name](vdm/name/README.md) |
 | `Person` | `people/{person}` | collection | [person](vdm/person/README.md) |
 

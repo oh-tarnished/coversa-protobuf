@@ -12,7 +12,7 @@
   "resources": {
     "protobuf.covesa.vdm.charging_points.v1.ChargingPoints": {
       "fqn": "ChargingStation.ChargingPoints",
-      "pattern": "chargingStations/{chargingStation}/chargingPointses/{charging_points}",
+      "pattern": "chargingStations/{charging_station}/chargingPointses/{charging_points}",
       "fields": {
         "instance_tag": {
           "fqn": "ChargingStation.ChargingPoints.InstanceTag",
@@ -79,7 +79,7 @@
     },
     "protobuf.covesa.vdm.charging_session.v1.ChargingSession": {
       "fqn": "ChargingSession",
-      "pattern": "chargingSessions/{chargingSession}",
+      "pattern": "chargingSessions/{charging_session}",
       "fields": {
         "charging_point": {
           "fqn": "ChargingSession.ChargingPoint",
@@ -105,7 +105,7 @@
     },
     "protobuf.covesa.vdm.charging_station.v1.ChargingStation": {
       "fqn": "ChargingStation",
-      "pattern": "chargingStations/{chargingStation}",
+      "pattern": "chargingStations/{charging_station}",
       "fields": {}
     },
     "protobuf.covesa.vdm.home_address.v1.HomeAddress": {
@@ -138,7 +138,7 @@
     },
     "protobuf.covesa.vdm.location.v1.Location": {
       "fqn": "ChargingStation.Location",
-      "pattern": "chargingStations/{chargingStation}/location",
+      "pattern": "chargingStations/{charging_station}/location",
       "fields": {
         "administrative_area": {
           "fqn": "ChargingStation.Location.State",
@@ -2913,7 +2913,7 @@
         }
       }
     },
-    "protobuf.covesa.vss.motion.brake_axle.v1.Axle": {
+    "protobuf.covesa.vss.motion.brake_axle.v1.BrakeAxle": {
       "fqn": "Vehicle.MotionManagement.Brake.Axle",
       "pattern": "vehicles/{vehicle}/brakeAxles/{brake_axle}",
       "instances": [
@@ -3101,7 +3101,7 @@
         }
       }
     },
-    "protobuf.covesa.vss.motion.chassis_axle.v1.Axle": {
+    "protobuf.covesa.vss.motion.chassis_axle.v1.ChassisAxle": {
       "fqn": "Vehicle.Chassis.Axle",
       "pattern": "vehicles/{vehicle}/chassisAxles/{chassis_axle}",
       "instances": [
@@ -3621,7 +3621,7 @@
         }
       }
     },
-    "protobuf.covesa.vss.motion.suspension_axle.v1.Axle": {
+    "protobuf.covesa.vss.motion.suspension_axle.v1.SuspensionAxle": {
       "fqn": "Vehicle.MotionManagement.Suspension.Axle",
       "pattern": "vehicles/{vehicle}/suspensionAxles/{suspension_axle}",
       "instances": [

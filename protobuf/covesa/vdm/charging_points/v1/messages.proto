@@ -27,7 +27,7 @@ option java_package = "io.github.ohtarnished.protobuf.covesa.vdm.charging_points
 // <https://aip.dev/131>.
 message GetChargingPointsRequest {
   // Name of the ChargingPoints to retrieve,
-  // "chargingStations/{chargingStation}/chargingPointses/{charging_points}".
+  // "chargingStations/{charging_station}/chargingPointses/{charging_points}".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {type: "vdm.covesa.org/ChargingPoints"}
@@ -38,7 +38,7 @@ message GetChargingPointsRequest {
 // <https://aip.dev/132>.
 message ListChargingPointsesRequest {
   // The ChargingStation whose chargingPointses to list,
-  // "chargingStations/{chargingStation}".
+  // "chargingStations/{charging_station}".
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {child_type: "vdm.covesa.org/ChargingPoints"}
@@ -77,7 +77,7 @@ message ListChargingPointsesResponse {
 // <https://aip.dev/133>.
 message CreateChargingPointsRequest {
   // The ChargingStation to create the ChargingPoints under,
-  // "chargingStations/{chargingStation}".
+  // "chargingStations/{charging_station}".
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {child_type: "vdm.covesa.org/ChargingPoints"}
@@ -115,7 +115,7 @@ message UpdateChargingPointsRequest {
 // <https://aip.dev/135>.
 message DeleteChargingPointsRequest {
   // Name of the ChargingPoints to delete,
-  // "chargingStations/{chargingStation}/chargingPointses/{charging_points}".
+  // "chargingStations/{charging_station}/chargingPointses/{charging_points}".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {type: "vdm.covesa.org/ChargingPoints"}
@@ -126,7 +126,7 @@ message DeleteChargingPointsRequest {
 // <https://aip.dev/164>.
 message UndeleteChargingPointsRequest {
   // Name of the soft-deleted ChargingPoints to restore,
-  // "chargingStations/{chargingStation}/chargingPointses/{charging_points}".
+  // "chargingStations/{charging_station}/chargingPointses/{charging_points}".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference).type = "vdm.covesa.org/ChargingPoints",

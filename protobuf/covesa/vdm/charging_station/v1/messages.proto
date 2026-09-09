@@ -27,7 +27,7 @@ option java_package = "io.github.ohtarnished.protobuf.covesa.vdm.charging_statio
 // <https://aip.dev/131>.
 message GetChargingStationRequest {
   // Name of the ChargingStation to retrieve,
-  // "chargingStations/{chargingStation}".
+  // "chargingStations/{charging_station}".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {type: "vdm.covesa.org/ChargingStation"}
@@ -101,7 +101,7 @@ message UpdateChargingStationRequest {
 // <https://aip.dev/135>.
 message DeleteChargingStationRequest {
   // Name of the ChargingStation to delete,
-  // "chargingStations/{chargingStation}".
+  // "chargingStations/{charging_station}".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {type: "vdm.covesa.org/ChargingStation"}
@@ -112,7 +112,7 @@ message DeleteChargingStationRequest {
 // <https://aip.dev/164>.
 message UndeleteChargingStationRequest {
   // Name of the soft-deleted ChargingStation to restore,
-  // "chargingStations/{chargingStation}".
+  // "chargingStations/{charging_station}".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference).type = "vdm.covesa.org/ChargingStation",
