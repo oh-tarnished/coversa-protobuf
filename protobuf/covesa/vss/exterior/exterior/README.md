@@ -4,7 +4,7 @@
 [![branch](https://img.shields.io/badge/branch-Vehicle.Exterior-1D4ED8)](https://covesa.github.io/vehicle_signal_specification/)
 [![shape](https://img.shields.io/badge/shape-singleton-2B3172)](https://aip.dev/156)
 [![RPCs](https://img.shields.io/badge/RPCs-2-555)](#methods)
-[![signals](https://img.shields.io/badge/signals-15-7A4A00)](#signals)
+[![signals](https://img.shields.io/badge/signals-14-7A4A00)](#signals)
 [![package](https://img.shields.io/badge/package-protobuf.covesa.vss.exterior.exterior.v1-444)](v1/)
 
 Information about exterior measured by vehicle.
@@ -111,15 +111,9 @@ The template above is the `pattern` this resource declares in its
 
 ## Signals
 
-22 fields: 7 AIP identity and lifecycle, 15 VSS signals. Field numbers 8–15 are reserved for identity fields a later revision may add, so adding one never renumbers a signal.
-
-### Writable — actuators
-
-The vehicle accepts these in an `update_mask`.
-
-| Field | Type | Unit | VSS | Description |
-| --- | --- | --- | --- | --- |
-| `air_quality` | `AirQuality` | — | `Vehicle.Exterior.AirQuality` | Signals describing the composition of the ambient air outside the vehicle. |
+21 fields: 7 AIP identity and lifecycle, 14 VSS signals. Field numbers 8–15
+are reserved for identity fields a later revision may add, so adding one never
+renumbers a signal.
 
 ### Read-only — sensors and attributes
 
@@ -153,6 +147,26 @@ silently ignored.
 | `etag` | `string` | pass back on update to make the write conditional, per [AIP-154](https://aip.dev/154) |
 | `create_time` `update_time` | `Timestamp` | when it was stored here |
 | `delete_time` `expire_time` | `Timestamp` | soft delete; recoverable until `expire_time` |
+
+</details>
+
+## Embedded messages
+
+1 message travels inside the exterior and has no name of their own. Address a
+field on one through its owner — `air_quality.<field>` — not directly.
+
+<details>
+<summary><code>AirQuality</code> — Signals describing the composition of the ambient air outside the vehicle.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `co2` | `double` | `ppm` | `Vehicle.Exterior.AirQuality.CO2` | Carbon dioxide (CO2) concentration. |
+| `no2` | `double` | `ppb` | `Vehicle.Exterior.AirQuality.NO2` | Nitrogen dioxide (NO2) concentration. |
+| `ozone` | `double` | `ppb` | `Vehicle.Exterior.AirQuality.Ozone` | Ozone (O3) concentration. |
+| `pm1` | `double` | `ug/m^3` | `Vehicle.Exterior.AirQuality.PM1` | Mass concentration of particulate matter with aerodynamic diameter of 1 micrometer or less (PM1.0). |
+| `pm10` | `double` | `ug/m^3` | `Vehicle.Exterior.AirQuality.PM10` | Mass concentration of particulate matter with aerodynamic diameter of 10 micrometers or less (PM10). |
+| `pm25` | `double` | `ug/m^3` | `Vehicle.Exterior.AirQuality.PM25` | Mass concentration of particulate matter with aerodynamic diameter of 2.5 micrometers or less (PM2.5). |
+| `tvoc` | `double` | `ppb` | `Vehicle.Exterior.AirQuality.TVOC` | Total volatile organic compounds (TVOC) concentration. |
 
 </details>
 

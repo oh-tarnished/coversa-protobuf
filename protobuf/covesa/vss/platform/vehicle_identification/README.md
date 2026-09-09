@@ -111,7 +111,9 @@ The template above is the `pattern` this resource declares in its
 
 ## Signals
 
-28 fields: 7 AIP identity and lifecycle, 21 VSS signals. Field numbers 8–15 are reserved for identity fields a later revision may add, so adding one never renumbers a signal.
+28 fields: 7 AIP identity and lifecycle, 21 VSS signals. Field numbers 8–15
+are reserved for identity fields a later revision may add, so adding one never
+renumbers a signal.
 
 ### Read-only — sensors and attributes
 
@@ -152,6 +154,23 @@ silently ignored.
 | `etag` | `string` | pass back on update to make the write conditional, per [AIP-154](https://aip.dev/154) |
 | `create_time` `update_time` | `Timestamp` | when it was stored here |
 | `delete_time` `expire_time` | `Timestamp` | soft delete; recoverable until `expire_time` |
+
+</details>
+
+## Embedded messages
+
+1 message travels inside the vehicleIdentification and has no name of their
+own. Address a field on one through its owner — `date.<field>` — not
+directly.
+
+<details>
+<summary><code>Date</code> — Date is a calendar date: a year, a month and a day.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `day` | `int32` | — | `Vehicle.VehicleIdentification.Date.Day` | Day of the month, valid for the year and month. |
+| `month` | `int32` | — | `Vehicle.VehicleIdentification.Date.Month` | Month of the year. |
+| `year` | `int32` | — | `Vehicle.VehicleIdentification.Date.Year` | Year of the date. |
 
 </details>
 

@@ -4,7 +4,7 @@
 [![branch](https://img.shields.io/badge/branch-Vehicle.Body.Windshield-1D4ED8)](https://covesa.github.io/vehicle_signal_specification/)
 [![shape](https://img.shields.io/badge/shape-collection-2B3172)](https://aip.dev/121)
 [![RPCs](https://img.shields.io/badge/RPCs-6-555)](#methods)
-[![signals](https://img.shields.io/badge/signals-3-7A4A00)](#signals)
+[![signals](https://img.shields.io/badge/signals-1-7A4A00)](#signals)
 [![package](https://img.shields.io/badge/package-protobuf.covesa.vss.exterior.windshield.v1-444)](v1/)
 
 Windshield signals.
@@ -116,7 +116,9 @@ The template above is the `pattern` this resource declares in its
 
 ## Signals
 
-10 fields: 7 AIP identity and lifecycle, 3 VSS signals. Field numbers 8–15 are reserved for identity fields a later revision may add, so adding one never renumbers a signal.
+8 fields: 7 AIP identity and lifecycle, 1 VSS signals. Field numbers 8–15
+are reserved for identity fields a later revision may add, so adding one never
+renumbers a signal.
 
 ### Writable — actuators
 
@@ -125,8 +127,6 @@ The vehicle accepts these in an `update_mask`.
 | Field | Type | Unit | VSS | Description |
 | --- | --- | --- | --- | --- |
 | `is_heating_on` | `bool` | — | `Vehicle.Body.Windshield.IsHeatingOn` | Windshield heater status. False - off, True - on. |
-| `washer_fluid` | `WasherFluid` | — | `Vehicle.Body.Windshield.WasherFluid` | Windshield washer fluid signals |
-| `wiping` | `Wiping` | — | `Vehicle.Body.Windshield.Wiping` | Windshield wiper signals. |
 
 <details>
 <summary>Identity and lifecycle — 7 fields every resource carries</summary>
@@ -138,6 +138,53 @@ The vehicle accepts these in an `update_mask`.
 | `etag` | `string` | pass back on update to make the write conditional, per [AIP-154](https://aip.dev/154) |
 | `create_time` `update_time` | `Timestamp` | when it was stored here |
 | `delete_time` `expire_time` | `Timestamp` | soft delete; recoverable until `expire_time` |
+
+</details>
+
+## Embedded messages
+
+3 messages travel inside the windshield and have no name of their own. Address
+a field on one through its owner — `wiping.<field>` — not directly.
+
+<details>
+<summary><code>Wiping</code> — Windshield wiper signals.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `intensity` | `int32` | — | `Vehicle.Body.Windshield.Wiping.Intensity` | Relative intensity/sensitivity for interval and rain sensor mode as requested by user/driver. Has no significance if Windshield.Wiping.Mode is OFF/SLOW/MEDIUM/FAST 0 - wipers inactive. 1 - minimum intensity (lowest frequency/sensitivity, longest interval). 2/3/4/... - higher intensity (higher frequency/sensitivity, shorter interval). Maximum value supported is vehicle specific. |
+| `is_wipers_worn` | `bool` | — | `Vehicle.Body.Windshield.Wiping.IsWipersWorn` | Wiper wear status. True = Worn, Replacement recommended or required. False = Not Worn. |
+| `mode` | [`WipingMode`](#wipingmode) | — | `Vehicle.Body.Windshield.Wiping.Mode` | Wiper mode requested by user/driver. INTERVAL indicates intermittent wiping, with fixed time interval between each wipe. RAIN_SENSOR indicates intermittent wiping based on rain intensity. |
+| `system` | `System` | — | `Vehicle.Body.Windshield.Wiping.System` | Signals to control behavior of wipers in detail. By default VSS expects only one instance. |
+| `wiper_wear` | `int32` | `percent` | `Vehicle.Body.Windshield.Wiping.WiperWear` | Wiper wear as percent. 0 = No Wear. 100 = Worn. Replacement required. Method for calculating or estimating wiper wear is vehicle specific. For windshields with multiple wipers the wear reported shall correspond to the most worn wiper. |
+
+</details>
+
+<details>
+<summary><code>System</code> — Signals to control behavior of wipers in detail. By default VSS expects only one instance.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `actual_position` | `double` | `degrees` | `Vehicle.Body.Windshield.Wiping.System.ActualPosition` | Actual position of main wiper blade for the wiper system relative to reference position. Location of reference position (0 degrees) and direction of positive/negative degrees is vehicle specific. |
+| `drive_current` | `double` | `A` | `Vehicle.Body.Windshield.Wiping.System.DriveCurrent` | Actual current used by wiper drive. |
+| `frequency` | `int32` | `cpm` | `Vehicle.Body.Windshield.Wiping.System.Frequency` | Wiping frequency/speed, measured in cycles per minute. The signal concerns the actual speed of the wiper blades when moving. Intervals/pauses are excluded, i.e. the value corresponds to the number of cycles that would be completed in 1 minute if wiping permanently over default range. |
+| `is_blocked` | `bool` | — | `Vehicle.Body.Windshield.Wiping.System.IsBlocked` | Indicates if wiper movement is blocked. True = Movement blocked. False = Movement not blocked. |
+| `is_ending_wipe_cycle` | `bool` | — | `Vehicle.Body.Windshield.Wiping.System.IsEndingWipeCycle` | Indicates if current wipe movement is completed or near completion. True = Movement is completed or near completion. Changes to RequestedPosition will be executed first after reaching previous RequestedPosition, if it has not already been reached. False = Movement is not near completion. Any change to RequestedPosition will be executed immediately. Change of direction may not be allowed. |
+| `is_overheated` | `bool` | — | `Vehicle.Body.Windshield.Wiping.System.IsOverheated` | Indicates if wiper system is overheated. True = Wiper system overheated. False = Wiper system not overheated. |
+| `is_position_reached` | `bool` | — | `Vehicle.Body.Windshield.Wiping.System.IsPositionReached` | Indicates if a requested position has been reached. IsPositionReached refers to the previous position in case the TargetPosition is updated while IsEndingWipeCycle=True. True = Current or Previous TargetPosition reached. False = Position not (yet) reached, or wipers have moved away from the reached position. |
+| `is_wiper_error` | `bool` | — | `Vehicle.Body.Windshield.Wiping.System.IsWiperError` | Indicates system failure. True if wiping is disabled due to system failure. |
+| `is_wiping` | `bool` | — | `Vehicle.Body.Windshield.Wiping.System.IsWiping` | Indicates wiper movement. True if wiper blades are moving. Change of direction shall be considered as IsWiping if wipers will continue to move directly after the change of direction. |
+| `mode` | [`SystemMode`](#systemmode) | — | `Vehicle.Body.Windshield.Wiping.System.Mode` | Requested mode of wiper system. STOP_HOLD means that the wipers shall move to position given by TargetPosition and then hold the position. WIPE means that wipers shall move to the position given by TargetPosition and then hold the position if no new TargetPosition is requested. PLANT_MODE means that wiping is disabled. Exact behavior is vehicle specific. EMERGENCY_STOP means that wiping shall be immediately stopped without holding the position. |
+| `target_position` | `double` | `degrees` | `Vehicle.Body.Windshield.Wiping.System.TargetPosition` | Requested position of main wiper blade for the wiper system relative to reference position. Location of reference position (0 degrees) and direction of positive/negative degrees is vehicle specific. System behavior when receiving TargetPosition depends on Mode and IsEndingWipeCycle. Supported values are vehicle specific and might be dynamically corrected. If IsEndingWipeCycle=True then wipers will complete current movement before actuating new TargetPosition. If IsEndingWipeCycle=False then wipers will directly change destination if the TargetPosition is changed. |
+
+</details>
+
+<details>
+<summary><code>WasherFluid</code> — Windshield washer fluid signals</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_level_low` | `bool` | — | `Vehicle.Body.Windshield.WasherFluid.IsLevelLow` | Low level indication for washer fluid. True = Level Low. False = Level OK. |
+| `level` | `int32` | `percent` | `Vehicle.Body.Windshield.WasherFluid.Level` | Washer fluid level as a percent. 0 = Empty. 100 = Full. |
 
 </details>
 

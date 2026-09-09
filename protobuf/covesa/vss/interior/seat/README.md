@@ -4,7 +4,7 @@
 [![branch](https://img.shields.io/badge/branch-Vehicle.Cabin.Seat-1D4ED8)](https://covesa.github.io/vehicle_signal_specification/)
 [![shape](https://img.shields.io/badge/shape-collection-2B3172)](https://aip.dev/121)
 [![RPCs](https://img.shields.io/badge/RPCs-6-555)](#methods)
-[![signals](https://img.shields.io/badge/signals-23-7A4A00)](#signals)
+[![signals](https://img.shields.io/badge/signals-17-7A4A00)](#signals)
 [![package](https://img.shields.io/badge/package-protobuf.covesa.vss.interior.seat.v1-444)](v1/)
 
 All seats.
@@ -159,7 +159,9 @@ The template above is the `pattern` this resource declares in its
 
 ## Signals
 
-30 fields: 7 AIP identity and lifecycle, 23 VSS signals. Field numbers 8–15 are reserved for identity fields a later revision may add, so adding one never renumbers a signal.
+24 fields: 7 AIP identity and lifecycle, 17 VSS signals. Field numbers 8–15
+are reserved for identity fields a later revision may add, so adding one never
+renumbers a signal.
 
 ### Writable — actuators
 
@@ -167,9 +169,6 @@ The vehicle accepts these in an `update_mask`.
 
 | Field | Type | Unit | VSS | Description |
 | --- | --- | --- | --- | --- |
-| `airbag` | `Airbag` | — | `Vehicle.Cabin.Seat.Airbag` | Airbag signals. |
-| `backrest` | `Backrest` | — | `Vehicle.Cabin.Seat.Backrest` | Describes signals related to the backrest of the seat. |
-| `headrest` | `Headrest` | — | `Vehicle.Cabin.Seat.Headrest` | Headrest settings. |
 | `heating_cooling` | `int32` | `percent` | `Vehicle.Cabin.Seat.HeatingCooling` | Heating or Cooling requsted for the Item. -100 = Maximum cooling, 0 = Heating/cooling deactivated, 100 = Maximum heating. |
 | `height` | `int32` | `mm` | `Vehicle.Cabin.Seat.Height` | Seat position on vehicle z-axis. Position is relative within available movable range of the seating. 0 = Lowermost position supported. |
 | `is_backward_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.IsBackwardSwitchEngaged` | Seat backward switch engaged. |
@@ -182,11 +181,8 @@ The vehicle accepts these in an `update_mask`.
 | `is_tilt_forward_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.IsTiltForwardSwitchEngaged` | Tilt forward switch engaged. |
 | `is_up_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.IsUpSwitchEngaged` | Seat up switch engaged. |
 | `is_warmer_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.IsWarmerSwitchEngaged` | Warmer switch for Seat heater. |
-| `massage` | `Massage` | — | `Vehicle.Cabin.Seat.Massage` | Massage related information for the seat. |
-| `neck_scarf` | `NeckScarf` | — | `Vehicle.Cabin.Seat.NeckScarf` | NeckScarf settings. |
 | `position` | `int32` | `mm` | `Vehicle.Cabin.Seat.Position` | Seat position on vehicle x-axis. Position is relative to the frontmost position supported by the seat. 0 = Frontmost position supported. |
 | `seat_belt_height` | `int32` | `mm` | `Vehicle.Cabin.Seat.SeatBeltHeight` | Seat belt position on vehicle z-axis. Position is relative within available movable range of the seat belt. 0 = Lowermost position supported. |
-| `seating` | `Seating` | — | `Vehicle.Cabin.Seat.Seating` | Describes signals related to the seat bottom of the seat. |
 | `tilt` | `double` | `degrees` | `Vehicle.Cabin.Seat.Tilt` | Tilting of seat (seating and backrest) relative to vehicle x-axis. 0 = seat bottom is flat, seat bottom and vehicle x-axis are parallel. Positive degrees = seat tilted backwards, seat x-axis tilted upward, seat z-axis is tilted backward. |
 
 ### Read-only — sensors and attributes
@@ -209,6 +205,99 @@ silently ignored.
 | `etag` | `string` | pass back on update to make the write conditional, per [AIP-154](https://aip.dev/154) |
 | `create_time` `update_time` | `Timestamp` | when it was stored here |
 | `delete_time` `expire_time` | `Timestamp` | soft delete; recoverable until `expire_time` |
+
+</details>
+
+## Embedded messages
+
+6 messages travel inside the seat and have no name of their own. Address a
+field on one through its owner — `massage.<field>` — not directly.
+
+<details>
+<summary><code>Massage</code> — Massage related information for the seat.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `activation` | [`State`](#state) | — | `Vehicle.Cabin.Seat.Massage.Status` | Massage status. |
+| `is_available` | `bool` | — | `Vehicle.Cabin.Seat.Massage.IsAvailable` | True if the seat have the massage capability |
+| `level` | `int32` | `percent` | `Vehicle.Cabin.Seat.Massage.Level` | Seat massage level. 0 = off. 100 = max massage. |
+| `supported_types` | `repeated string` | — | `Vehicle.Cabin.Seat.Massage.SupportedTypes` | Type of massage. |
+| `type_active` | `string` | — | `Vehicle.Cabin.Seat.Massage.TypeActive` | Type of massage active. |
+
+</details>
+
+<details>
+<summary><code>Backrest</code> — Describes signals related to the backrest of the seat.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `bottom_lumbar_support` | `double` | `percent` | `Vehicle.Cabin.Seat.Backrest.BottomLumbarSupport` | Bottom lumbar support (in/out position). 0 = Innermost position. 100 = Outermost position. |
+| `heating_cooling` | `int32` | `percent` | `Vehicle.Cabin.Seat.Backrest.HeatingCooling` | Heating or Cooling requsted for the Item. -100 = Maximum cooling, 0 = Heating/cooling deactivated, 100 = Maximum heating. |
+| `is_less_lumbar_support_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.Backrest.IsLessLumbarSupportSwitchEngaged` | Is switch for less lumbar support engaged. |
+| `is_less_side_bolster_support_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.Backrest.IsLessSideBolsterSupportSwitchEngaged` | Is switch for less side bolster support engaged. |
+| `is_lumbar_down_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.Backrest.IsLumbarDownSwitchEngaged` | Lumbar down switch engaged. |
+| `is_lumbar_up_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.Backrest.IsLumbarUpSwitchEngaged` | Lumbar up switch engaged. |
+| `is_more_lumbar_support_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.Backrest.IsMoreLumbarSupportSwitchEngaged` | Is switch for more lumbar support engaged. |
+| `is_more_side_bolster_support_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.Backrest.IsMoreSideBolsterSupportSwitchEngaged` | Is switch for more side bolster support engaged. |
+| `is_recline_backward_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.Backrest.IsReclineBackwardSwitchEngaged` | Backrest recline backward switch engaged. |
+| `is_recline_forward_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.Backrest.IsReclineForwardSwitchEngaged` | Backrest recline forward switch engaged. |
+| `lumbar_height` | `int32` | `mm` | `Vehicle.Cabin.Seat.Backrest.LumbarHeight` | Height of lumbar support. Position is relative within available movable range of the lumbar support. 0 = Lowermost position supported. |
+| `lumbar_support` | `double` | `percent` | `Vehicle.Cabin.Seat.Backrest.LumbarSupport` | Lumbar support (in/out position). 0 = Innermost position. 100 = Outermost position. |
+| `mid_lumbar_support` | `double` | `percent` | `Vehicle.Cabin.Seat.Backrest.MidLumbarSupport` | Mid lumbar support (in/out position). 0 = Innermost position. 100 = Outermost position. |
+| `recline` | `double` | `degrees` | `Vehicle.Cabin.Seat.Backrest.Recline` | Backrest recline compared to seat z-axis (seat vertical axis). 0 degrees = Upright/Vertical backrest. Negative degrees for forward recline. Positive degrees for backward recline. |
+| `side_bolster_support` | `double` | `percent` | `Vehicle.Cabin.Seat.Backrest.SideBolsterSupport` | Side bolster support. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
+| `side_bolster_support_left` | `double` | `percent` | `Vehicle.Cabin.Seat.Backrest.SideBolsterSupportLeft` | Side bolster support left. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
+| `side_bolster_support_right` | `double` | `percent` | `Vehicle.Cabin.Seat.Backrest.SideBolsterSupportRight` | Side bolster support right. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
+| `top_lumbar_support` | `double` | `percent` | `Vehicle.Cabin.Seat.Backrest.TopLumbarSupport` | Top lumbar support (in/out position). 0 = Innermost position. 100 = Outermost position. |
+| `upper_shoulder_support` | `double` | `percent` | `Vehicle.Cabin.Seat.Backrest.UpperShoulderSupport` | Upper shoulder support. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
+
+</details>
+
+<details>
+<summary><code>Seating</code> — Describes signals related to the seat bottom of the seat.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `heating_cooling` | `int32` | `percent` | `Vehicle.Cabin.Seat.Seating.HeatingCooling` | Heating or Cooling requsted for the Item. -100 = Maximum cooling, 0 = Heating/cooling deactivated, 100 = Maximum heating. |
+| `is_backward_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.Seating.IsBackwardSwitchEngaged` | Is switch to decrease seating length engaged. |
+| `is_forward_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.Seating.IsForwardSwitchEngaged` | Is switch to increase seating length engaged. |
+| `length` | `int32` | `mm` | `Vehicle.Cabin.Seat.Seating.Length` | Length adjustment of seating. 0 = Adjustable part of seating in rearmost position (Shortest length of seating). |
+| `side_bolster_support_left` | `double` | `percent` | `Vehicle.Cabin.Seat.Seating.SideBolsterSupportLeft` | Seat bottom side bolster support left. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
+| `side_bolster_support_right` | `double` | `percent` | `Vehicle.Cabin.Seat.Seating.SideBolsterSupportRight` | Seat bottom side bolster support right. 0 = Minimum support (widest side bolster setting). 100 = Maximum support. |
+
+</details>
+
+<details>
+<summary><code>Headrest</code> — Headrest settings.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `angle` | `double` | `degrees` | `Vehicle.Cabin.Seat.Headrest.Angle` | Headrest angle, relative to backrest, 0 degrees if parallel to backrest, Positive degrees = tilted forward. |
+| `height` | `int32` | `mm` | `Vehicle.Cabin.Seat.Headrest.Height` | Position of headrest relative to movable range of the head rest. 0 = Bottommost position supported. |
+| `is_backward_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.Headrest.IsBackwardSwitchEngaged` | Headrest backward switch engaged. |
+| `is_down_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.Headrest.IsDownSwitchEngaged` | Headrest down switch engaged. |
+| `is_forward_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.Headrest.IsForwardSwitchEngaged` | Headrest forward switch engaged. |
+| `is_up_switch_engaged` | `bool` | — | `Vehicle.Cabin.Seat.Headrest.IsUpSwitchEngaged` | Headrest up switch engaged. |
+
+</details>
+
+<details>
+<summary><code>Airbag</code> — Airbag signals.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_deployed` | `bool` | — | `Vehicle.Cabin.Seat.Airbag.IsDeployed` | Airbag deployment status. True = Airbag deployed. False = Airbag not deployed. |
+| `is_enabled` | `bool` | — | `Vehicle.Cabin.Seat.Airbag.IsEnabled` | Airbag enabled status. True = Airbag enabled. False = Airbag not enabled. |
+
+</details>
+
+<details>
+<summary><code>NeckScarf</code> — NeckScarf settings.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `fan_speed` | `int32` | `percent` | `Vehicle.Cabin.Seat.NeckScarf.FanSpeed` | Speed of the fan. |
+| `heating_cooling` | `int32` | `percent` | `Vehicle.Cabin.Seat.NeckScarf.HeatingCooling` | Heating or Cooling requsted for the Item. -100 = Maximum cooling, 0 = Heating/cooling deactivated, 100 = Maximum heating. |
 
 </details>
 

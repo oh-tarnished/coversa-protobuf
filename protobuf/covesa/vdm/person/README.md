@@ -99,7 +99,9 @@ The template above is the `pattern` this resource declares in its
 
 ## Signals
 
-9 fields: 7 AIP identity and lifecycle, 2 VSS signals. Field numbers 8–15 are reserved for identity fields a later revision may add, so adding one never renumbers a signal.
+9 fields: 7 AIP identity and lifecycle, 2 VSS signals. Field numbers 8–15
+are reserved for identity fields a later revision may add, so adding one never
+renumbers a signal.
 
 ### Writable — actuators
 

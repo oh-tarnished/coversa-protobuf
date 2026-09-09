@@ -4,7 +4,7 @@
 [![branch](https://img.shields.io/badge/branch-Vehicle.Powertrain.ElectricMotor-1D4ED8)](https://covesa.github.io/vehicle_signal_specification/)
 [![shape](https://img.shields.io/badge/shape-collection-2B3172)](https://aip.dev/121)
 [![RPCs](https://img.shields.io/badge/RPCs-6-555)](#methods)
-[![signals](https://img.shields.io/badge/signals-11-7A4A00)](#signals)
+[![signals](https://img.shields.io/badge/signals-10-7A4A00)](#signals)
 [![package](https://img.shields.io/badge/package-protobuf.covesa.vss.propulsion.electric__motor.v1-444)](v1/)
 
 Electric Motor specific data.
@@ -120,15 +120,9 @@ The template above is the `pattern` this resource declares in its
 
 ## Signals
 
-18 fields: 7 AIP identity and lifecycle, 11 VSS signals. Field numbers 8–15 are reserved for identity fields a later revision may add, so adding one never renumbers a signal.
-
-### Writable — actuators
-
-The vehicle accepts these in an `update_mask`.
-
-| Field | Type | Unit | VSS | Description |
-| --- | --- | --- | --- | --- |
-| `engine_coolant` | `EngineCoolant` | — | `Vehicle.Powertrain.ElectricMotor.EngineCoolant` | Signals related to the engine coolant (if applicable). |
+17 fields: 7 AIP identity and lifecycle, 10 VSS signals. Field numbers 8–15
+are reserved for identity fields a later revision may add, so adding one never
+renumbers a signal.
 
 ### Read-only — sensors and attributes
 
@@ -158,6 +152,24 @@ silently ignored.
 | `etag` | `string` | pass back on update to make the write conditional, per [AIP-154](https://aip.dev/154) |
 | `create_time` `update_time` | `Timestamp` | when it was stored here |
 | `delete_time` `expire_time` | `Timestamp` | soft delete; recoverable until `expire_time` |
+
+</details>
+
+## Embedded messages
+
+1 message travels inside the electricMotor and has no name of their own.
+Address a field on one through its owner — `engine_coolant.<field>` — not
+directly.
+
+<details>
+<summary><code>EngineCoolant</code> — Signals related to the engine coolant (if applicable).</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `capacity` | `double` | `l` | `Vehicle.Powertrain.ElectricMotor.EngineCoolant.Capacity` | Engine coolant capacity in liters. |
+| `level` | [`Level`](#level) | — | `Vehicle.Powertrain.ElectricMotor.EngineCoolant.Level` | Engine coolant level. |
+| `life_remaining` | `int32` | `s` | `Vehicle.Powertrain.ElectricMotor.EngineCoolant.LifeRemaining` | Remaining engine coolant life in seconds. Negative values can be used to indicate that lifetime has been exceeded. |
+| `temperature` | `double` | `Celsius` | `Vehicle.Powertrain.ElectricMotor.EngineCoolant.Temperature` | Engine coolant temperature. |
 
 </details>
 

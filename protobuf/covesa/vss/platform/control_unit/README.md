@@ -4,7 +4,7 @@
 [![branch](https://img.shields.io/badge/branch-Vehicle.ControlUnit-1D4ED8)](https://covesa.github.io/vehicle_signal_specification/)
 [![shape](https://img.shields.io/badge/shape-collection-2B3172)](https://aip.dev/121)
 [![RPCs](https://img.shields.io/badge/RPCs-6-555)](#methods)
-[![signals](https://img.shields.io/badge/signals-2-7A4A00)](#signals)
+[![signals](https://img.shields.io/badge/signals-1-7A4A00)](#signals)
 [![package](https://img.shields.io/badge/package-protobuf.covesa.vss.platform.control__unit.v1-444)](v1/)
 
 Root of the control unit branch
@@ -117,15 +117,9 @@ The template above is the `pattern` this resource declares in its
 
 ## Signals
 
-9 fields: 7 AIP identity and lifecycle, 2 VSS signals. Field numbers 8–15 are reserved for identity fields a later revision may add, so adding one never renumbers a signal.
-
-### Writable — actuators
-
-The vehicle accepts these in an `update_mask`.
-
-| Field | Type | Unit | VSS | Description |
-| --- | --- | --- | --- | --- |
-| `health` | `Health` | — | `Vehicle.ControlUnit.Health` | Health attributes and signals |
+8 fields: 7 AIP identity and lifecycle, 1 VSS signals. Field numbers 8–15
+are reserved for identity fields a later revision may add, so adding one never
+renumbers a signal.
 
 ### Read-only — sensors and attributes
 
@@ -146,6 +140,84 @@ silently ignored.
 | `etag` | `string` | pass back on update to make the write conditional, per [AIP-154](https://aip.dev/154) |
 | `create_time` `update_time` | `Timestamp` | when it was stored here |
 | `delete_time` `expire_time` | `Timestamp` | soft delete; recoverable until `expire_time` |
+
+</details>
+
+## Embedded messages
+
+7 messages travel inside the controlUnit and have no name of their own.
+Address a field on one through its owner — `health.<field>` — not
+directly.
+
+<details>
+<summary><code>Health</code> — Health attributes and signals</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `network` | `Network` | — | `Vehicle.ControlUnit.Health.Network` | Network attributes and signals |
+| `resources` | `Resources` | — | `Vehicle.ControlUnit.Health.Resources` | Resources attributes and signals |
+| `sw_supervision` | `SwSupervision` | — | `Vehicle.ControlUnit.Health.SWSupervision` | SW supervision attributes and signals |
+
+</details>
+
+<details>
+<summary><code>Network</code> — Network attributes and signals</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `can` | `Can` | — | `Vehicle.ControlUnit.Health.Network.CAN` | CAN network attributes and signals |
+| `eth` | `Eth` | — | `Vehicle.ControlUnit.Health.Network.ETH` | Ethernet network attributes and signals |
+
+</details>
+
+<details>
+<summary><code>Can</code> — CAN network attributes and signals</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_network_ok` | `bool` | — | `Vehicle.ControlUnit.Health.Network.CAN.IsNetworkOK` | Network status. True = No network problems detected. False = Network problems detected. |
+
+</details>
+
+<details>
+<summary><code>Eth</code> — Ethernet network attributes and signals</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_network_ok` | `bool` | — | `Vehicle.ControlUnit.Health.Network.ETH.IsNetworkOK` | Network status. True = No network problems detected. False = Network problems detected. |
+
+</details>
+
+<details>
+<summary><code>Resources</code> — Resources attributes and signals</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `power` | `double` | `W` | `Vehicle.ControlUnit.Health.Resources.Power` | Power consumption |
+| `temperature` | `double` | `Celsius` | `Vehicle.ControlUnit.Health.Resources.Temperature` | Instance temperature |
+| `utilization` | `Utilization` | — | `Vehicle.ControlUnit.Health.Resources.Utilization` | Resources utilization branch |
+
+</details>
+
+<details>
+<summary><code>Utilization</code> — Resources utilization branch</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `cpu` | `double` | `percent` | `Vehicle.ControlUnit.Health.Resources.Utilization.CPU` | CPU utilization |
+| `memory` | `double` | `percent` | `Vehicle.ControlUnit.Health.Resources.Utilization.Memory` | Memory utilization |
+
+</details>
+
+<details>
+<summary><code>SwSupervision</code> — SW supervision attributes and signals</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_alive_triggered` | `bool` | — | `Vehicle.ControlUnit.Health.SWSupervision.IsAliveTriggered` | Whether the alive supervision was triggered |
+| `is_deadline_triggered` | `bool` | — | `Vehicle.ControlUnit.Health.SWSupervision.IsDeadlineTriggered` | Whether the deadline supervision was triggered |
+| `is_logical_triggered` | `bool` | — | `Vehicle.ControlUnit.Health.SWSupervision.IsLogicalTriggered` | Whether the logical supervision was triggered |
+| `is_watchdog_triggered` | `bool` | — | `Vehicle.ControlUnit.Health.SWSupervision.IsWatchdogTriggered` | Whether the watchdog deadline was triggered |
 
 </details>
 

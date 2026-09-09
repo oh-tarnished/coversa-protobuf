@@ -4,7 +4,7 @@
 [![branch](https://img.shields.io/badge/branch-Vehicle.Body-1D4ED8)](https://covesa.github.io/vehicle_signal_specification/)
 [![shape](https://img.shields.io/badge/shape-singleton-2B3172)](https://aip.dev/156)
 [![RPCs](https://img.shields.io/badge/RPCs-2-555)](#methods)
-[![signals](https://img.shields.io/badge/signals-8-7A4A00)](#signals)
+[![signals](https://img.shields.io/badge/signals-4-7A4A00)](#signals)
 [![package](https://img.shields.io/badge/package-protobuf.covesa.vss.exterior.body.v1-444)](v1/)
 
 All body components.
@@ -156,7 +156,9 @@ The template above is the `pattern` this resource declares in its
 
 ## Signals
 
-15 fields: 7 AIP identity and lifecycle, 8 VSS signals. Field numbers 8–15 are reserved for identity fields a later revision may add, so adding one never renumbers a signal.
+11 fields: 7 AIP identity and lifecycle, 4 VSS signals. Field numbers 8–15
+are reserved for identity fields a later revision may add, so adding one never
+renumbers a signal.
 
 ### Writable — actuators
 
@@ -164,12 +166,8 @@ The vehicle accepts these in an `update_mask`.
 
 | Field | Type | Unit | VSS | Description |
 | --- | --- | --- | --- | --- |
-| `hood` | `Hood` | — | `Vehicle.Body.Hood` | Hood status. Start position for Hood is Closed. |
-| `horn` | `Horn` | — | `Vehicle.Body.Horn` | Horn signals. |
 | `is_auto_power_optimize` | `bool` | — | `Vehicle.Body.IsAutoPowerOptimize` | Auto Power Optimization Flag When set to 'true', the system enables automatic power optimization, dynamically adjusting the power optimization level based on runtime conditions or features managed by the OEM. When set to 'false', manual control of the power optimization level is allowed. |
-| `lights` | `Lights` | — | `Vehicle.Body.Lights` | Exterior lights. |
 | `power_optimize_level` | `int32` | — | `Vehicle.Body.PowerOptimizeLevel` | Power optimization level for this branch/subsystem. A higher number indicates more aggressive power optimization. Level 0 indicates that all functionality is enabled, no power optimization enabled. Level 10 indicates most aggressive power optimization mode, only essential functionality enabled. |
-| `raindetection` | `Raindetection` | — | `Vehicle.Body.Raindetection` | Rain sensor signals. |
 | `rear_main_spoiler_position` | `double` | `percent` | `Vehicle.Body.RearMainSpoilerPosition` | Rear spoiler position, 0% = Spoiler fully stowed. 100% = Spoiler fully exposed. |
 
 ### Read-only — sensors and attributes
@@ -191,6 +189,116 @@ silently ignored.
 | `etag` | `string` | pass back on update to make the write conditional, per [AIP-154](https://aip.dev/154) |
 | `create_time` `update_time` | `Timestamp` | when it was stored here |
 | `delete_time` `expire_time` | `Timestamp` | soft delete; recoverable until `expire_time` |
+
+</details>
+
+## Embedded messages
+
+10 messages travel inside the body and have no name of their own. Address a
+field on one through its owner — `hood.<field>` — not directly.
+
+<details>
+<summary><code>Hood</code> — Hood status. Start position for Hood is Closed.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_open` | `bool` | — | `Vehicle.Body.Hood.IsOpen` | Is item open or closed? True = Fully or partially open. False = Fully closed. |
+| `position` | `int32` | `percent` | `Vehicle.Body.Hood.Position` | Item position. 0 = Start position 100 = End position. |
+| `switch_control` | [`Switch`](#switch) | — | `Vehicle.Body.Hood.Switch` | Switch controlling sliding action such as window, sunroof, or blind. |
+
+</details>
+
+<details>
+<summary><code>Horn</code> — Horn signals.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_active` | `bool` | — | `Vehicle.Body.Horn.IsActive` | Horn active or inactive. True = Active. False = Inactive. |
+
+</details>
+
+<details>
+<summary><code>Raindetection</code> — Rain sensor signals.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `intensity` | `int32` | `percent` | `Vehicle.Body.Raindetection.Intensity` | Rain intensity. 0 = Dry, No Rain. 100 = Covered. |
+
+</details>
+
+<details>
+<summary><code>Lights</code> — Exterior lights.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `backup` | `Backup` | — | `Vehicle.Body.Lights.Backup` | Backup lights. |
+| `brake` | `Brake` | — | `Vehicle.Body.Lights.Brake` | Brake lights. |
+| `hazard` | `Hazard` | — | `Vehicle.Body.Lights.Hazard` | Hazard lights. |
+| `is_high_beam_switch_on` | `bool` | — | `Vehicle.Body.Lights.IsHighBeamSwitchOn` | Status of the high beam switch. True = high beam enabled. False = high beam not enabled. |
+| `license_plate` | `LicensePlate` | — | `Vehicle.Body.Lights.LicensePlate` | License plate lights. |
+| `light_switch` | [`LightSwitch`](#lightswitch) | — | `Vehicle.Body.Lights.LightSwitch` | Status of the vehicle main light switch. |
+| `parking` | `Parking` | — | `Vehicle.Body.Lights.Parking` | Parking lights. |
+| `running` | `Running` | — | `Vehicle.Body.Lights.Running` | Daytime running lights (DRL). |
+
+</details>
+
+<details>
+<summary><code>Running</code> — Daytime running lights (DRL).</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_defect` | `bool` | — | `Vehicle.Body.Lights.Running.IsDefect` | Indicates if light is defect. True = Light is defect. False = Light has no defect. |
+| `is_on` | `bool` | — | `Vehicle.Body.Lights.Running.IsOn` | Indicates if light is on or off. True = On. False = Off. |
+
+</details>
+
+<details>
+<summary><code>Backup</code> — Backup lights.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_defect` | `bool` | — | `Vehicle.Body.Lights.Backup.IsDefect` | Indicates if light is defect. True = Light is defect. False = Light has no defect. |
+| `is_on` | `bool` | — | `Vehicle.Body.Lights.Backup.IsOn` | Indicates if light is on or off. True = On. False = Off. |
+
+</details>
+
+<details>
+<summary><code>Parking</code> — Parking lights.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_defect` | `bool` | — | `Vehicle.Body.Lights.Parking.IsDefect` | Indicates if light is defect. True = Light is defect. False = Light has no defect. |
+| `is_on` | `bool` | — | `Vehicle.Body.Lights.Parking.IsOn` | Indicates if light is on or off. True = On. False = Off. |
+
+</details>
+
+<details>
+<summary><code>LicensePlate</code> — License plate lights.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_defect` | `bool` | — | `Vehicle.Body.Lights.LicensePlate.IsDefect` | Indicates if light is defect. True = Light is defect. False = Light has no defect. |
+| `is_on` | `bool` | — | `Vehicle.Body.Lights.LicensePlate.IsOn` | Indicates if light is on or off. True = On. False = Off. |
+
+</details>
+
+<details>
+<summary><code>Brake</code> — Brake lights.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_active` | [`IsActive`](#isactive) | — | `Vehicle.Body.Lights.Brake.IsActive` | Indicates if break-light is active. INACTIVE means lights are off. ACTIVE means lights are on. ADAPTIVE means that break-light is indicating emergency-breaking. |
+| `is_defect` | `bool` | — | `Vehicle.Body.Lights.Brake.IsDefect` | Indicates if light is defect. True = Light is defect. False = Light has no defect. |
+
+</details>
+
+<details>
+<summary><code>Hazard</code> — Hazard lights.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_defect` | `bool` | — | `Vehicle.Body.Lights.Hazard.IsDefect` | Indicates if light is defect. True = Light is defect. False = Light has no defect. |
+| `is_signaling` | `bool` | — | `Vehicle.Body.Lights.Hazard.IsSignaling` | Indicates if light is signaling or off. True = signaling. False = Off. |
 
 </details>
 

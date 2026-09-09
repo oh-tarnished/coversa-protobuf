@@ -4,7 +4,7 @@
 [![branch](https://img.shields.io/badge/branch-Vehicle.Chassis-1D4ED8)](https://covesa.github.io/vehicle_signal_specification/)
 [![shape](https://img.shields.io/badge/shape-singleton-2B3172)](https://aip.dev/156)
 [![RPCs](https://img.shields.io/badge/RPCs-2-555)](#methods)
-[![signals](https://img.shields.io/badge/signals-6-7A4A00)](#signals)
+[![signals](https://img.shields.io/badge/signals-2-7A4A00)](#signals)
 [![package](https://img.shields.io/badge/package-protobuf.covesa.vss.motion.chassis.v1-444)](v1/)
 
 All data concerning steering, suspension, wheels, and brakes.
@@ -111,18 +111,9 @@ The template above is the `pattern` this resource declares in its
 
 ## Signals
 
-13 fields: 7 AIP identity and lifecycle, 6 VSS signals. Field numbers 8–15 are reserved for identity fields a later revision may add, so adding one never renumbers a signal.
-
-### Writable — actuators
-
-The vehicle accepts these in an `update_mask`.
-
-| Field | Type | Unit | VSS | Description |
-| --- | --- | --- | --- | --- |
-| `accelerator` | `Accelerator` | — | `Vehicle.Chassis.Accelerator` | Accelerator signals |
-| `brake` | `Brake` | — | `Vehicle.Chassis.Brake` | Brake system signals |
-| `parking_brake` | `ParkingBrake` | — | `Vehicle.Chassis.ParkingBrake` | Parking brake signals |
-| `steering_wheel` | `SteeringWheel` | — | `Vehicle.Chassis.SteeringWheel` | Steering wheel signals |
+9 fields: 7 AIP identity and lifecycle, 2 VSS signals. Field numbers 8–15
+are reserved for identity fields a later revision may add, so adding one never
+renumbers a signal.
 
 ### Read-only — sensors and attributes
 
@@ -144,6 +135,52 @@ silently ignored.
 | `etag` | `string` | pass back on update to make the write conditional, per [AIP-154](https://aip.dev/154) |
 | `create_time` `update_time` | `Timestamp` | when it was stored here |
 | `delete_time` `expire_time` | `Timestamp` | soft delete; recoverable until `expire_time` |
+
+</details>
+
+## Embedded messages
+
+4 messages travel inside the chassis and have no name of their own. Address a
+field on one through its owner — `parking_brake.<field>` — not directly.
+
+<details>
+<summary><code>ParkingBrake</code> — Parking brake signals</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_auto_apply_enabled` | `bool` | — | `Vehicle.Chassis.ParkingBrake.IsAutoApplyEnabled` | Indicates if parking brake will be automatically engaged when the vehicle engine is turned off. |
+| `is_engaged` | `bool` | — | `Vehicle.Chassis.ParkingBrake.IsEngaged` | Parking brake status. True = Parking Brake is Engaged. False = Parking Brake is not Engaged. |
+
+</details>
+
+<details>
+<summary><code>SteeringWheel</code> — Steering wheel signals</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `angle` | `int32` | `degrees` | `Vehicle.Chassis.SteeringWheel.Angle` | Steering wheel angle. Positive = degrees to the left. Negative = degrees to the right. |
+| `extension` | `int32` | `percent` | `Vehicle.Chassis.SteeringWheel.Extension` | Steering wheel column extension from dashboard. 0 = Closest to dashboard. 100 = Furthest from dashboard. |
+| `heating_cooling` | `int32` | `percent` | `Vehicle.Chassis.SteeringWheel.HeatingCooling` | Heating or Cooling requsted for the Item. -100 = Maximum cooling, 0 = Heating/cooling deactivated, 100 = Maximum heating. |
+| `tilt` | `int32` | `percent` | `Vehicle.Chassis.SteeringWheel.Tilt` | Steering wheel column tilt. 0 = Lowest position. 100 = Highest position. |
+
+</details>
+
+<details>
+<summary><code>Accelerator</code> — Accelerator signals</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `pedal_position` | `int32` | `percent` | `Vehicle.Chassis.Accelerator.PedalPosition` | Accelerator pedal position as percent. 0 = Not depressed. 100 = Fully depressed. |
+
+</details>
+
+<details>
+<summary><code>Brake</code> — Brake system signals</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_driver_emergency_braking_detected` | `bool` | — | `Vehicle.Chassis.Brake.IsDriverEmergencyBrakingDetected` | Indicates if emergency braking initiated by driver is detected. True = Emergency braking detected. False = Emergency braking not detected. |
+| `pedal_position` | `int32` | `percent` | `Vehicle.Chassis.Brake.PedalPosition` | Brake pedal position as percent. 0 = Not depressed. 100 = Fully depressed. |
 
 </details>
 

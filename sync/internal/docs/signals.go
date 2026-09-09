@@ -19,6 +19,7 @@ import (
 
 	"github.com/oh-tarnished/coversa-protobuf/sync/describe"
 	"github.com/oh-tarnished/coversa-protobuf/sync/model"
+	"github.com/oh-tarnished/coversa-protobuf/sync/naming"
 	"github.com/oh-tarnished/coversa-protobuf/sync/plan"
 	"github.com/oh-tarnished/coversa-protobuf/sync/vspec"
 )
@@ -35,10 +36,11 @@ func (g *Generator) signals(pkg *model.Package, sb *strings.Builder) {
 	}
 
 	sb.WriteString("## Signals\n\n")
-	fmt.Fprintf(sb, "%d fields: %d AIP identity and lifecycle, %d VSS signals. Field "+
-		"numbers 8–15 are reserved for identity fields a later revision may add, so "+
-		"adding one never renumbers a signal.\n\n",
-		aipFieldCount+len(writable)+len(readonly), aipFieldCount, len(writable)+len(readonly))
+	fmt.Fprintf(sb, "%s\n\n", wrap(fmt.Sprintf(
+		"%d fields: %d AIP identity and lifecycle, %d VSS signals. Field numbers 8–15 "+
+			"are reserved for identity fields a later revision may add, so adding one "+
+			"never renumbers a signal.",
+		aipFieldCount+len(writable)+len(readonly), aipFieldCount, len(writable)+len(readonly))))
 
 	if len(writable) > 0 {
 		sb.WriteString("### Writable — actuators\n\n")
@@ -52,6 +54,53 @@ func (g *Generator) signals(pkg *model.Package, sb *strings.Builder) {
 		g.signalTable(readonly, sb)
 	}
 	g.aipTable(pkg, sb)
+	g.embedded(pkg, sb)
+}
+
+// embedded documents the messages that travel inside the resource.
+//
+// Collapsed, one per message. They are not separately addressable -- an
+// embedded message has no resource name and arrives inside its owner -- so
+// listing their fields alongside the resource's own would suggest a caller
+// can write `lumbar_height` directly, when the path is
+// `backrest.lumbar_height` on the owning resource.
+func (g *Generator) embedded(pkg *model.Package, sb *strings.Builder) {
+	types := embeddedTypes(pkg)
+	if len(types) == 0 {
+		return
+	}
+
+	sb.WriteString("## Embedded messages\n\n")
+	fmt.Fprintf(sb, "%s\n\n", wrap(fmt.Sprintf(
+		"%d %s inside the %s and %s no name of their own. Address a field on one "+
+			"through its owner — `%s.<field>` — not directly.",
+		len(types), plural(len(types), "message travels", "messages travel"),
+		pkg.Singular, plural(len(types), "has", "have"),
+		naming.Snake(types[0].Name))))
+
+	for _, t := range types {
+		fmt.Fprintf(sb, "<details>\n<summary><code>%s</code> — %s</summary>\n\n",
+			model.MessageName(t.Name), cell(describe.Message(model.MessageName(t.Name), t)))
+
+		var group []exampleSignal
+		for _, c := range t.Children {
+			if c.Kind == vspec.KindBranch && c.Ref == "" && !pkg.Holds(c.FQN) {
+				continue
+			}
+			p, err := g.Planner.Field(t, c, false)
+			if err != nil {
+				continue
+			}
+			group = append(group, exampleSignal{field: p, node: c})
+		}
+		if len(group) == 0 {
+			sb.WriteString("_No fields of its own._\n\n</details>\n\n")
+			continue
+		}
+		sortSignals(group)
+		g.signalTable(group, sb)
+		sb.WriteString("</details>\n\n")
+	}
 }
 
 // signalTable writes one group of signals.
@@ -112,6 +161,12 @@ func (g *Generator) signalSplit(pkg *model.Package) (writable, readonly []exampl
 		}
 		p, err := g.Planner.Field(pkg.Root, c, true)
 		if err != nil {
+			continue
+		}
+		// A branch is an embedded message, documented in its own section: it
+		// is not a signal, and calling it an actuator would say a caller can
+		// set it with an update mask.
+		if c.Kind == vspec.KindBranch && c.Ref == "" {
 			continue
 		}
 		s := exampleSignal{field: p, node: c}

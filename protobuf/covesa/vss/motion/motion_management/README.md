@@ -4,7 +4,7 @@
 [![branch](https://img.shields.io/badge/branch-Vehicle.MotionManagement-1D4ED8)](https://covesa.github.io/vehicle_signal_specification/)
 [![shape](https://img.shields.io/badge/shape-singleton-2B3172)](https://aip.dev/156)
 [![RPCs](https://img.shields.io/badge/RPCs-2-555)](#methods)
-[![signals](https://img.shields.io/badge/signals-3-7A4A00)](#signals)
+[![signals](https://img.shields.io/badge/signals-0-7A4A00)](#signals)
 [![package](https://img.shields.io/badge/package-protobuf.covesa.vss.motion.motion__management.v1-444)](v1/)
 
 Motion Management Information.
@@ -85,33 +85,6 @@ t.parse("vehicles/wvwzzz1jz3w000001/motionManagement")
 
 The template above is the `pattern` this resource declares in its
 `google.api.resource` annotation, so the two cannot drift.
-
-## Signals
-
-10 fields: 7 AIP identity and lifecycle, 3 VSS signals. Field numbers 8–15 are reserved for identity fields a later revision may add, so adding one never renumbers a signal.
-
-### Writable — actuators
-
-The vehicle accepts these in an `update_mask`.
-
-| Field | Type | Unit | VSS | Description |
-| --- | --- | --- | --- | --- |
-| `brake` | `Brake` | — | `Vehicle.MotionManagement.Brake` | MotionManagement related to braking (both frictions brakes and contribution from electric axles). |
-| `steering` | `Steering` | — | `Vehicle.MotionManagement.Steering` | MotionManagement related to steering. |
-| `suspension` | `Suspension` | — | `Vehicle.MotionManagement.Suspension` | MotionManagement related to suspension. |
-
-<details>
-<summary>Identity and lifecycle — 7 fields every resource carries</summary>
-
-| Field | Type | Notes |
-| --- | --- | --- |
-| `name` | `string` | `vehicles/{vehicle}/motionManagement`, server-assigned |
-| `uid` | `string` | server-assigned UUID4, per [AIP-148](https://aip.dev/148) |
-| `etag` | `string` | pass back on update to make the write conditional, per [AIP-154](https://aip.dev/154) |
-| `create_time` `update_time` | `Timestamp` | when it was stored here |
-| `delete_time` `expire_time` | `Timestamp` | soft delete; recoverable until `expire_time` |
-
-</details>
 
 ## Methods
 

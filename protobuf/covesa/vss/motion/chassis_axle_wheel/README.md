@@ -4,7 +4,7 @@
 [![branch](https://img.shields.io/badge/branch-Vehicle.Chassis.Axle.Wheel-1D4ED8)](https://covesa.github.io/vehicle_signal_specification/)
 [![shape](https://img.shields.io/badge/shape-collection-2B3172)](https://aip.dev/121)
 [![RPCs](https://img.shields.io/badge/RPCs-6-555)](#methods)
-[![signals](https://img.shields.io/badge/signals-5-7A4A00)](#signals)
+[![signals](https://img.shields.io/badge/signals-3-7A4A00)](#signals)
 [![package](https://img.shields.io/badge/package-protobuf.covesa.vss.motion.chassis__axle__wheel.v1-444)](v1/)
 
 Wheel signals for axle
@@ -115,16 +115,9 @@ The template above is the `pattern` this resource declares in its
 
 ## Signals
 
-12 fields: 7 AIP identity and lifecycle, 5 VSS signals. Field numbers 8–15 are reserved for identity fields a later revision may add, so adding one never renumbers a signal.
-
-### Writable — actuators
-
-The vehicle accepts these in an `update_mask`.
-
-| Field | Type | Unit | VSS | Description |
-| --- | --- | --- | --- | --- |
-| `brake` | `Brake` | — | `Vehicle.Chassis.Axle.Wheel.Brake` | Brake signals for wheel |
-| `tire` | `Tire` | — | `Vehicle.Chassis.Axle.Wheel.Tire` | Tire signals for wheel. |
+10 fields: 7 AIP identity and lifecycle, 3 VSS signals. Field numbers 8–15
+are reserved for identity fields a later revision may add, so adding one never
+renumbers a signal.
 
 ### Read-only — sensors and attributes
 
@@ -147,6 +140,37 @@ silently ignored.
 | `etag` | `string` | pass back on update to make the write conditional, per [AIP-154](https://aip.dev/154) |
 | `create_time` `update_time` | `Timestamp` | when it was stored here |
 | `delete_time` `expire_time` | `Timestamp` | soft delete; recoverable until `expire_time` |
+
+</details>
+
+## Embedded messages
+
+2 messages travel inside the wheel and have no name of their own. Address a
+field on one through its owner — `brake.<field>` — not directly.
+
+<details>
+<summary><code>Brake</code> — Brake signals for wheel</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `fluid_level` | `int32` | `percent` | `Vehicle.Chassis.Axle.Wheel.Brake.FluidLevel` | Brake fluid level as percent. 0 = Empty. 100 = Full. |
+| `is_brakes_worn` | `bool` | — | `Vehicle.Chassis.Axle.Wheel.Brake.IsBrakesWorn` | Brake pad wear status. True = Worn. False = Not Worn. |
+| `is_fluid_level_low` | `bool` | — | `Vehicle.Chassis.Axle.Wheel.Brake.IsFluidLevelLow` | Brake fluid level status. True = Brake fluid level low. False = Brake fluid level OK. |
+| `pad_wear` | `int32` | `percent` | `Vehicle.Chassis.Axle.Wheel.Brake.PadWear` | Brake pad wear as percent. 0 = No Wear. 100 = Worn. |
+
+</details>
+
+<details>
+<summary><code>Tire</code> — Tire signals for wheel.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `air_temperature` | `double` | `Celsius` | `Vehicle.Chassis.Axle.Wheel.Tire.AirTemperature` | Air temperature inside the tire in Celsius. |
+| `is_pressure_low` | `bool` | — | `Vehicle.Chassis.Axle.Wheel.Tire.IsPressureLow` | Tire Pressure Status. True = Low tire pressure. False = Good tire pressure. |
+| `pressure` | `int32` | `kPa` | `Vehicle.Chassis.Axle.Wheel.Tire.Pressure` | Tire pressure in kilo-Pascal. |
+| `rubber_temperature` | `double` | `Celsius` | `Vehicle.Chassis.Axle.Wheel.Tire.RubberTemperature` | Rubber temperature of the tire in Celsius. |
+| `temperature` | `double` | `Celsius` | `Vehicle.Chassis.Axle.Wheel.Tire.Temperature` | Tire temperature in Celsius. |
+| `winter_status` | [`WinterState`](#winterstate) | — | `Vehicle.Chassis.Axle.Wheel.Tire.WinterStatus` | Winter (cold-weather / snow) capability class of the tire currently fitted to this wheel. |
 
 </details>
 

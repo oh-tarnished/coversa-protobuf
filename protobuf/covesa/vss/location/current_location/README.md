@@ -4,7 +4,7 @@
 [![branch](https://img.shields.io/badge/branch-Vehicle.CurrentLocation-1D4ED8)](https://covesa.github.io/vehicle_signal_specification/)
 [![shape](https://img.shields.io/badge/shape-singleton-2B3172)](https://aip.dev/156)
 [![RPCs](https://img.shields.io/badge/RPCs-2-555)](#methods)
-[![signals](https://img.shields.io/badge/signals-8-7A4A00)](#signals)
+[![signals](https://img.shields.io/badge/signals-7-7A4A00)](#signals)
 [![package](https://img.shields.io/badge/package-protobuf.covesa.vss.location.current__location.v1-444)](v1/)
 
 The current latitude and longitude of the vehicle.
@@ -113,15 +113,9 @@ The template above is the `pattern` this resource declares in its
 
 ## Signals
 
-15 fields: 7 AIP identity and lifecycle, 8 VSS signals. Field numbers 8–15 are reserved for identity fields a later revision may add, so adding one never renumbers a signal.
-
-### Writable — actuators
-
-The vehicle accepts these in an `update_mask`.
-
-| Field | Type | Unit | VSS | Description |
-| --- | --- | --- | --- | --- |
-| `gnss_receiver` | `GnssReceiver` | — | `Vehicle.CurrentLocation.GNSSReceiver` | Information on the GNSS receiver used for determining current location. |
+14 fields: 7 AIP identity and lifecycle, 7 VSS signals. Field numbers 8–15
+are reserved for identity fields a later revision may add, so adding one never
+renumbers a signal.
 
 ### Read-only — sensors and attributes
 
@@ -148,6 +142,33 @@ silently ignored.
 | `etag` | `string` | pass back on update to make the write conditional, per [AIP-154](https://aip.dev/154) |
 | `create_time` `update_time` | `Timestamp` | when it was stored here |
 | `delete_time` `expire_time` | `Timestamp` | soft delete; recoverable until `expire_time` |
+
+</details>
+
+## Embedded messages
+
+2 messages travel inside the currentLocation and have no name of their own.
+Address a field on one through its owner — `gnss_receiver.<field>` — not
+directly.
+
+<details>
+<summary><code>GnssReceiver</code> — Information on the GNSS receiver used for determining current location.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `fix_type` | [`FixType`](#fixtype) | — | `Vehicle.CurrentLocation.GNSSReceiver.FixType` | Fix status of GNSS receiver. |
+| `mounting_position` | `MountingPosition` | — | `Vehicle.CurrentLocation.GNSSReceiver.MountingPosition` | Mounting position of GNSS receiver antenna relative to vehicle coordinate system. Axis definitions according to ISO 8855. Origin at center of (first) rear axle. |
+
+</details>
+
+<details>
+<summary><code>MountingPosition</code> — Mounting position of GNSS receiver antenna relative to vehicle coordinate system. Axis definitions according to ISO 8855. Origin at center of (first) rear axle.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `x` | `int32` | `mm` | `Vehicle.CurrentLocation.GNSSReceiver.MountingPosition.X` | Mounting position of GNSS receiver antenna relative to vehicle coordinate system. Axis definitions according to ISO 8855. Origin at center of (first) rear axle. Positive values = forward of rear axle. Negative values = backward of rear axle. |
+| `y` | `int32` | `mm` | `Vehicle.CurrentLocation.GNSSReceiver.MountingPosition.Y` | Mounting position of GNSS receiver antenna relative to vehicle coordinate system. Axis definitions according to ISO 8855. Origin at center of (first) rear axle. Positive values = left of origin. Negative values = right of origin. Left/Right is as seen from driver perspective, i.e. by a person looking forward. |
+| `z` | `int32` | `mm` | `Vehicle.CurrentLocation.GNSSReceiver.MountingPosition.Z` | Mounting position of GNSS receiver on Z-axis. Axis definitions according to ISO 8855. Origin at center of (first) rear axle. Positive values = above center of rear axle. Negative values = below center of rear axle. |
 
 </details>
 

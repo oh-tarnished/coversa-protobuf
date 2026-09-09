@@ -4,7 +4,7 @@
 [![branch](https://img.shields.io/badge/branch-Vehicle.Cabin.Door-1D4ED8)](https://covesa.github.io/vehicle_signal_specification/)
 [![shape](https://img.shields.io/badge/shape-collection-2B3172)](https://aip.dev/121)
 [![RPCs](https://img.shields.io/badge/RPCs-6-555)](#methods)
-[![signals](https://img.shields.io/badge/signals-7-7A4A00)](#signals)
+[![signals](https://img.shields.io/badge/signals-5-7A4A00)](#signals)
 [![package](https://img.shields.io/badge/package-protobuf.covesa.vss.interior.door.v1-444)](v1/)
 
 All doors, including windows and switches.
@@ -151,7 +151,9 @@ The template above is the `pattern` this resource declares in its
 
 ## Signals
 
-14 fields: 7 AIP identity and lifecycle, 7 VSS signals. Field numbers 8–15 are reserved for identity fields a later revision may add, so adding one never renumbers a signal.
+12 fields: 7 AIP identity and lifecycle, 5 VSS signals. Field numbers 8–15
+are reserved for identity fields a later revision may add, so adding one never
+renumbers a signal.
 
 ### Writable — actuators
 
@@ -162,9 +164,7 @@ The vehicle accepts these in an `update_mask`.
 | `is_locked` | `bool` | — | `Vehicle.Cabin.Door.IsLocked` | Is item locked or unlocked. True = Locked. False = Unlocked. |
 | `is_open` | `bool` | — | `Vehicle.Cabin.Door.IsOpen` | Is item open or closed? True = Fully or partially open. False = Fully closed. |
 | `position` | `int32` | `percent` | `Vehicle.Cabin.Door.Position` | Item position. 0 = Start position 100 = End position. |
-| `shade` | `Shade` | — | `Vehicle.Cabin.Door.Shade` | Side window shade. Open = Retracted, Closed = Deployed. Start position for Shade is Open/Retracted. |
 | `switch_control` | [`DoorSwitch`](#doorswitch) | — | `Vehicle.Cabin.Door.Switch` | Switch controlling sliding action such as window, sunroof, or blind. |
-| `window` | `Window` | — | `Vehicle.Cabin.Door.Window` | Door window status. Start position for Window is Closed. |
 
 ### Read-only — sensors and attributes
 
@@ -185,6 +185,33 @@ silently ignored.
 | `etag` | `string` | pass back on update to make the write conditional, per [AIP-154](https://aip.dev/154) |
 | `create_time` `update_time` | `Timestamp` | when it was stored here |
 | `delete_time` `expire_time` | `Timestamp` | soft delete; recoverable until `expire_time` |
+
+</details>
+
+## Embedded messages
+
+2 messages travel inside the door and have no name of their own. Address a
+field on one through its owner — `window.<field>` — not directly.
+
+<details>
+<summary><code>Window</code> — Door window status. Start position for Window is Closed.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_open` | `bool` | — | `Vehicle.Cabin.Door.Window.IsOpen` | Is item open or closed? True = Fully or partially open. False = Fully closed. |
+| `position` | `int32` | `percent` | `Vehicle.Cabin.Door.Window.Position` | Item position. 0 = Start position 100 = End position. |
+| `switch_control` | [`WindowSwitch`](#windowswitch) | — | `Vehicle.Cabin.Door.Window.Switch` | Switch controlling sliding action such as window, sunroof, or blind. |
+
+</details>
+
+<details>
+<summary><code>Shade</code> — Side window shade. Open = Retracted, Closed = Deployed. Start position for Shade is Open/Retracted.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_open` | `bool` | — | `Vehicle.Cabin.Door.Shade.IsOpen` | Is item open or closed? True = Fully or partially open. False = Fully closed. |
+| `position` | `int32` | `percent` | `Vehicle.Cabin.Door.Shade.Position` | Item position. 0 = Start position 100 = End position. |
+| `switch_control` | [`ShadeSwitch`](#shadeswitch) | — | `Vehicle.Cabin.Door.Shade.Switch` | Switch controlling sliding action such as window, sunroof, or blind. |
 
 </details>
 

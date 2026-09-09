@@ -4,7 +4,7 @@
 [![branch](https://img.shields.io/badge/branch-Vehicle.ADAS-1D4ED8)](https://covesa.github.io/vehicle_signal_specification/)
 [![shape](https://img.shields.io/badge/shape-singleton-2B3172)](https://aip.dev/156)
 [![RPCs](https://img.shields.io/badge/RPCs-2-555)](#methods)
-[![signals](https://img.shields.io/badge/signals-12-7A4A00)](#signals)
+[![signals](https://img.shields.io/badge/signals-4-7A4A00)](#signals)
 [![package](https://img.shields.io/badge/package-protobuf.covesa.vss.assistance.adas.v1-444)](v1/)
 
 All Advanced Driver Assist Systems data.
@@ -154,7 +154,9 @@ The template above is the `pattern` this resource declares in its
 
 ## Signals
 
-19 fields: 7 AIP identity and lifecycle, 12 VSS signals. Field numbers 8–15 are reserved for identity fields a later revision may add, so adding one never renumbers a signal.
+11 fields: 7 AIP identity and lifecycle, 4 VSS signals. Field numbers 8–15
+are reserved for identity fields a later revision may add, so adding one never
+renumbers a signal.
 
 ### Writable — actuators
 
@@ -162,16 +164,8 @@ The vehicle accepts these in an `update_mask`.
 
 | Field | Type | Unit | VSS | Description |
 | --- | --- | --- | --- | --- |
-| `abs` | `Abs` | — | `Vehicle.ADAS.ABS` | Antilock Braking System signals. |
-| `cruise_control` | `CruiseControl` | — | `Vehicle.ADAS.CruiseControl` | Signals from Cruise Control system. |
-| `dms` | `Dms` | — | `Vehicle.ADAS.DMS` | Driver Monitoring System signals. |
-| `eba` | `Eba` | — | `Vehicle.ADAS.EBA` | Emergency Brake Assist (EBA) System signals. |
-| `ebd` | `Ebd` | — | `Vehicle.ADAS.EBD` | Electronic Brakeforce Distribution (EBD) System signals. |
-| `esc` | `Esc` | — | `Vehicle.ADAS.ESC` | Electronic Stability Control System signals. |
 | `is_auto_power_optimize` | `bool` | — | `Vehicle.ADAS.IsAutoPowerOptimize` | Auto Power Optimization Flag When set to 'true', the system enables automatic power optimization, dynamically adjusting the power optimization level based on runtime conditions or features managed by the OEM. When set to 'false', manual control of the power optimization level is allowed. |
-| `lane_departure_detection` | `LaneDepartureDetection` | — | `Vehicle.ADAS.LaneDepartureDetection` | Signals from Lane Departure Detection System. |
 | `power_optimize_level` | `int32` | — | `Vehicle.ADAS.PowerOptimizeLevel` | Power optimization level for this branch/subsystem. A higher number indicates more aggressive power optimization. Level 0 indicates that all functionality is enabled, no power optimization enabled. Level 10 indicates most aggressive power optimization mode, only essential functionality enabled. |
-| `tcs` | `Tcs` | — | `Vehicle.ADAS.TCS` | Traction Control System signals. |
 
 ### Read-only — sensors and attributes
 
@@ -193,6 +187,116 @@ silently ignored.
 | `etag` | `string` | pass back on update to make the write conditional, per [AIP-154](https://aip.dev/154) |
 | `create_time` `update_time` | `Timestamp` | when it was stored here |
 | `delete_time` `expire_time` | `Timestamp` | soft delete; recoverable until `expire_time` |
+
+</details>
+
+## Embedded messages
+
+9 messages travel inside the adas and have no name of their own. Address a
+field on one through its owner — `cruise_control.<field>` — not directly.
+
+<details>
+<summary><code>CruiseControl</code> — Signals from Cruise Control system.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `adaptive_distance_set` | `double` | `m` | `Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet` | Distance in meters to keep from lead vehicle |
+| `adaptive_interval_set` | `int32` | — | `Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet` | Follow distance setting, commonly 1-5 with 1 being closest. |
+| `is_active` | `bool` | — | `Vehicle.ADAS.CruiseControl.IsActive` | Indicates if cruise control system is active (i.e. actively controls speed). True = Active. False = Inactive. |
+| `is_adaptive` | `bool` | — | `Vehicle.ADAS.CruiseControl.IsAdaptive` | Indicates if cruise control system is adaptive (i.e. actively controls speed). |
+| `is_enabled` | `bool` | — | `Vehicle.ADAS.CruiseControl.IsEnabled` | Indicates if cruise control system is enabled (e.g. ready to receive configurations and settings) True = Enabled. False = Disabled. |
+| `is_error` | `bool` | — | `Vehicle.ADAS.CruiseControl.IsError` | Indicates if cruise control system incurred an error condition. True = Error. False = No Error. |
+| `speed_set` | `double` | `km/h` | `Vehicle.ADAS.CruiseControl.SpeedSet` | Set cruise control speed in kilometers per hour. |
+
+</details>
+
+<details>
+<summary><code>LaneDepartureDetection</code> — Signals from Lane Departure Detection System.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_enabled` | `bool` | — | `Vehicle.ADAS.LaneDepartureDetection.IsEnabled` | Indicates if lane departure detection system is enabled. True = Enabled. False = Disabled. |
+| `is_error` | `bool` | — | `Vehicle.ADAS.LaneDepartureDetection.IsError` | Indicates if lane departure system incurred an error condition. True = Error. False = No Error. |
+| `is_warning` | `bool` | — | `Vehicle.ADAS.LaneDepartureDetection.IsWarning` | Indicates if lane departure detection registered a lane departure. |
+
+</details>
+
+<details>
+<summary><code>Abs</code> — Antilock Braking System signals.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_enabled` | `bool` | — | `Vehicle.ADAS.ABS.IsEnabled` | Indicates if ABS is enabled. True = Enabled. False = Disabled. |
+| `is_engaged` | `bool` | — | `Vehicle.ADAS.ABS.IsEngaged` | Indicates if ABS is currently regulating brake pressure. True = Engaged. False = Not Engaged. |
+| `is_error` | `bool` | — | `Vehicle.ADAS.ABS.IsError` | Indicates if ABS incurred an error condition. True = Error. False = No Error. |
+
+</details>
+
+<details>
+<summary><code>Tcs</code> — Traction Control System signals.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_enabled` | `bool` | — | `Vehicle.ADAS.TCS.IsEnabled` | Indicates if TCS is enabled. True = Enabled. False = Disabled. |
+| `is_engaged` | `bool` | — | `Vehicle.ADAS.TCS.IsEngaged` | Indicates if TCS is currently regulating traction. True = Engaged. False = Not Engaged. |
+| `is_error` | `bool` | — | `Vehicle.ADAS.TCS.IsError` | Indicates if TCS incurred an error condition. True = Error. False = No Error. |
+
+</details>
+
+<details>
+<summary><code>Esc</code> — Electronic Stability Control System signals.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_enabled` | `bool` | — | `Vehicle.ADAS.ESC.IsEnabled` | Indicates if ESC is enabled. True = Enabled. False = Disabled. |
+| `is_engaged` | `bool` | — | `Vehicle.ADAS.ESC.IsEngaged` | Indicates if ESC is currently regulating vehicle stability. True = Engaged. False = Not Engaged. |
+| `is_error` | `bool` | — | `Vehicle.ADAS.ESC.IsError` | Indicates if ESC incurred an error condition. True = Error. False = No Error. |
+| `is_strong_cross_wind_detected` | `bool` | — | `Vehicle.ADAS.ESC.IsStrongCrossWindDetected` | Indicates if the ESC system is detecting strong cross winds. True = Strong cross winds detected. False = No strong cross winds detected. |
+| `road_friction` | `RoadFriction` | — | `Vehicle.ADAS.ESC.RoadFriction` | Road friction values reported by the ESC system. |
+
+</details>
+
+<details>
+<summary><code>RoadFriction</code> — Road friction values reported by the ESC system.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `lower_bound` | `double` | `percent` | `Vehicle.ADAS.ESC.RoadFriction.LowerBound` | Lower bound road friction, as calculated by the ESC system. 5% possibility that road friction is below this value. 0 = no friction, 100 = maximum friction. |
+| `most_probable` | `double` | `percent` | `Vehicle.ADAS.ESC.RoadFriction.MostProbable` | Most probable road friction, as calculated by the ESC system. Exact meaning of most probable is implementation specific. 0 = no friction, 100 = maximum friction. |
+| `upper_bound` | `double` | `percent` | `Vehicle.ADAS.ESC.RoadFriction.UpperBound` | Upper bound road friction, as calculated by the ESC system. 95% possibility that road friction is below this value. 0 = no friction, 100 = maximum friction. |
+
+</details>
+
+<details>
+<summary><code>Ebd</code> — Electronic Brakeforce Distribution (EBD) System signals.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_enabled` | `bool` | — | `Vehicle.ADAS.EBD.IsEnabled` | Indicates if EBD is enabled. True = Enabled. False = Disabled. |
+| `is_engaged` | `bool` | — | `Vehicle.ADAS.EBD.IsEngaged` | Indicates if EBD is currently regulating vehicle brakeforce distribution. True = Engaged. False = Not Engaged. |
+| `is_error` | `bool` | — | `Vehicle.ADAS.EBD.IsError` | Indicates if EBD incurred an error condition. True = Error. False = No Error. |
+
+</details>
+
+<details>
+<summary><code>Eba</code> — Emergency Brake Assist (EBA) System signals.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_enabled` | `bool` | — | `Vehicle.ADAS.EBA.IsEnabled` | Indicates if EBA is enabled. True = Enabled. False = Disabled. |
+| `is_engaged` | `bool` | — | `Vehicle.ADAS.EBA.IsEngaged` | Indicates if EBA is currently regulating brake pressure. True = Engaged. False = Not Engaged. |
+| `is_error` | `bool` | — | `Vehicle.ADAS.EBA.IsError` | Indicates if EBA incurred an error condition. True = Error. False = No Error. |
+
+</details>
+
+<details>
+<summary><code>Dms</code> — Driver Monitoring System signals.</summary>
+
+| Field | Type | Unit | VSS | Description |
+| --- | --- | --- | --- | --- |
+| `is_enabled` | `bool` | — | `Vehicle.ADAS.DMS.IsEnabled` | Indicates if DMS is enabled. True = Enabled. False = Disabled. |
+| `is_error` | `bool` | — | `Vehicle.ADAS.DMS.IsError` | Indicates if DMS incurred an error condition. True = Error. False = No Error. |
+| `is_warning` | `bool` | — | `Vehicle.ADAS.DMS.IsWarning` | Indicates if DMS has registered a driver alert condition. |
 
 </details>
 
