@@ -13,59 +13,67 @@
 using Cxx = import "/capnp/c++.capnp";
 $Cxx.namespace("protobuf::covesa::vss::motion::suspension_axle_wheel::v1");
 
-using Wheel = import "/protobuf/covesa/vss/motion/suspension_axle_wheel/v1/wheel.capnp";
+using SuspensionAxleWheel = import "/protobuf/covesa/vss/motion/suspension_axle_wheel/v1/suspension_axle_wheel.capnp";
 
-# Request message for Wheels.GetWheel, AIP-131 <https://aip.dev/131>.
-struct GetWheelRequest @0x8e767b15e706877c {
-  # Name of the Wheel to retrieve,
+# Request message for SuspensionAxleWheels.GetSuspensionAxleWheel, AIP-131
+# <https://aip.dev/131>.
+struct GetSuspensionAxleWheelRequest @0xe2fbaffb3ee8a1db {
+  # Name of the SuspensionAxleWheel to retrieve,
   # "vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}".
   # REQUIRED (AIP-203); Cap'n Proto cannot enforce it.
   name @0 :Text;
 }
 
-# Request message for Wheels.ListWheels, AIP-132 <https://aip.dev/132>.
-struct ListWheelsRequest @0x9bcaedeecd0f153d {
-  # The SuspensionAxle whose wheels to list,
+# Request message for SuspensionAxleWheels.ListSuspensionAxleWheels, AIP-132
+# <https://aip.dev/132>.
+struct ListSuspensionAxleWheelsRequest @0xbb70ebb49b21bd9b {
+  # The SuspensionAxle whose suspensionAxleWheels to list,
   # "vehicles/{vehicle}/suspensionAxles/{suspension_axle}".
   # REQUIRED (AIP-203); Cap'n Proto cannot enforce it.
   parent @0 :Text;
-  # Maximum wheels to return. Defaults to 50, capped at 1000.
+  # Maximum suspensionAxleWheels to return. Defaults to 50, capped at 1000.
   pageSize @1 :Int32;
-  # Page token from a previous ListWheelsResponse.next_page_token.
+  # Page token from a previous
+  # ListSuspensionAxleWheelsResponse.next_page_token.
   pageToken @2 :Text;
   # Filter expression, AIP-160 <https://aip.dev/160>.
   filter @3 :Text;
-  # Include soft-deleted wheels. AIP-164 <https://aip.dev/164>.
+  # Include soft-deleted suspensionAxleWheels. AIP-164
+  # <https://aip.dev/164>.
   showDeleted @4 :Bool;
 }
 
-# Response message for Wheels.ListWheels, AIP-132 <https://aip.dev/132>.
-struct ListWheelsResponse @0xb6c6a2e35262ad54 {
-  # The wheels on this page.
-  wheels @0 :List(Wheel.Wheel);
+# Response message for SuspensionAxleWheels.ListSuspensionAxleWheels,
+# AIP-132 <https://aip.dev/132>.
+struct ListSuspensionAxleWheelsResponse @0xf4c4103bcf188b47 {
+  # The suspensionAxleWheels on this page.
+  suspensionAxleWheels @0 :List(SuspensionAxleWheel.SuspensionAxleWheel);
   # Token for the next page, empty when this is the last page.
   nextPageToken @1 :Text;
 }
 
-# Request message for Wheels.CreateWheel, AIP-133 <https://aip.dev/133>.
-struct CreateWheelRequest @0xe781240edd827135 {
-  # The SuspensionAxle to create the Wheel under,
+# Request message for SuspensionAxleWheels.CreateSuspensionAxleWheel,
+# AIP-133 <https://aip.dev/133>.
+struct CreateSuspensionAxleWheelRequest @0xd0393a37893bf504 {
+  # The SuspensionAxle to create the SuspensionAxleWheel under,
   # "vehicles/{vehicle}/suspensionAxles/{suspension_axle}".
   # REQUIRED (AIP-203); Cap'n Proto cannot enforce it.
   parent @0 :Text;
-  # The Wheel to create.
+  # The SuspensionAxleWheel to create.
   # REQUIRED (AIP-203); Cap'n Proto cannot enforce it.
-  wheel @1 :Wheel.Wheel;
+  suspensionAxleWheel @1 :SuspensionAxleWheel.SuspensionAxleWheel;
   # Client-assigned id, becoming the last segment of the resource name. The
   # server generates one when empty.
-  wheelId @2 :Text;
+  suspensionAxleWheelId @2 :Text;
 }
 
-# Request message for Wheels.UpdateWheel, AIP-134 <https://aip.dev/134>.
-struct UpdateWheelRequest @0xcf498545b7ea98f9 {
-  # The Wheel to update. Its name field identifies the resource.
+# Request message for SuspensionAxleWheels.UpdateSuspensionAxleWheel,
+# AIP-134 <https://aip.dev/134>.
+struct UpdateSuspensionAxleWheelRequest @0xf1a883d752792ac9 {
+  # The SuspensionAxleWheel to update. Its name field identifies the
+  # resource.
   # REQUIRED (AIP-203); Cap'n Proto cannot enforce it.
-  wheel @0 :Wheel.Wheel;
+  suspensionAxleWheel @0 :SuspensionAxleWheel.SuspensionAxleWheel;
   # Fields to update. An empty mask updates all mutable fields.
   #
   # Only an actuator is writable. A sensor or attribute named in the mask is
@@ -74,17 +82,19 @@ struct UpdateWheelRequest @0xcf498545b7ea98f9 {
   updateMask @1 :List(Text);
 }
 
-# Request message for Wheels.DeleteWheel, AIP-135 <https://aip.dev/135>.
-struct DeleteWheelRequest @0xa484941d63a70393 {
-  # Name of the Wheel to delete,
+# Request message for SuspensionAxleWheels.DeleteSuspensionAxleWheel,
+# AIP-135 <https://aip.dev/135>.
+struct DeleteSuspensionAxleWheelRequest @0x85b4d467dcae45cb {
+  # Name of the SuspensionAxleWheel to delete,
   # "vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}".
   # REQUIRED (AIP-203); Cap'n Proto cannot enforce it.
   name @0 :Text;
 }
 
-# Request message for Wheels.UndeleteWheel, AIP-164 <https://aip.dev/164>.
-struct UndeleteWheelRequest @0x9a9855e283958140 {
-  # Name of the soft-deleted Wheel to restore,
+# Request message for SuspensionAxleWheels.UndeleteSuspensionAxleWheel,
+# AIP-164 <https://aip.dev/164>.
+struct UndeleteSuspensionAxleWheelRequest @0x9babf8bfa07161e3 {
+  # Name of the soft-deleted SuspensionAxleWheel to restore,
   # "vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}".
   # REQUIRED (AIP-203); Cap'n Proto cannot enforce it.
   name @0 :Text;

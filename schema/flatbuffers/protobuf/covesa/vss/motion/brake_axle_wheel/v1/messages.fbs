@@ -8,56 +8,61 @@
 // field slots below are recorded in buffers.lock; edit the .proto, not this file
 //
 // https://github.com/the-protobuf-project/buffers
-include "protobuf/covesa/vss/motion/brake_axle_wheel/v1/wheel.fbs";
+include "protobuf/covesa/vss/motion/brake_axle_wheel/v1/brake_axle_wheel.fbs";
 
 namespace protobuf.covesa.vss.motion.brake_axle_wheel.v1;
 
-/// Request message for Wheels.GetWheel, AIP-131 <https://aip.dev/131>.
-table GetWheelRequest {
-  /// Name of the Wheel to retrieve,
+/// Request message for BrakeAxleWheels.GetBrakeAxleWheel, AIP-131
+/// <https://aip.dev/131>.
+table GetBrakeAxleWheelRequest {
+  /// Name of the BrakeAxleWheel to retrieve,
   /// "vehicles/{vehicle}/brakeAxles/{brake_axle}/wheels/{wheel}".
   name:string (id: 0, required);
 }
 
-/// Request message for Wheels.ListWheels, AIP-132 <https://aip.dev/132>.
-table ListWheelsRequest {
-  /// The BrakeAxle whose wheels to list,
+/// Request message for BrakeAxleWheels.ListBrakeAxleWheels, AIP-132
+/// <https://aip.dev/132>.
+table ListBrakeAxleWheelsRequest {
+  /// The BrakeAxle whose brakeAxleWheels to list,
   /// "vehicles/{vehicle}/brakeAxles/{brake_axle}".
   parent:string (id: 0, required);
-  /// Maximum wheels to return. Defaults to 50, capped at 1000.
+  /// Maximum brakeAxleWheels to return. Defaults to 50, capped at 1000.
   page_size:int (id: 1);
-  /// Page token from a previous ListWheelsResponse.next_page_token.
+  /// Page token from a previous ListBrakeAxleWheelsResponse.next_page_token.
   page_token:string (id: 2);
   /// Filter expression, AIP-160 <https://aip.dev/160>.
   filter:string (id: 3);
-  /// Include soft-deleted wheels. AIP-164 <https://aip.dev/164>.
+  /// Include soft-deleted brakeAxleWheels. AIP-164 <https://aip.dev/164>.
   show_deleted:bool (id: 4);
 }
 
-/// Response message for Wheels.ListWheels, AIP-132 <https://aip.dev/132>.
-table ListWheelsResponse {
-  /// The wheels on this page.
-  wheels:[Wheel] (id: 0);
+/// Response message for BrakeAxleWheels.ListBrakeAxleWheels, AIP-132
+/// <https://aip.dev/132>.
+table ListBrakeAxleWheelsResponse {
+  /// The brakeAxleWheels on this page.
+  brake_axle_wheels:[BrakeAxleWheel] (id: 0);
   /// Token for the next page, empty when this is the last page.
   next_page_token:string (id: 1);
 }
 
-/// Request message for Wheels.CreateWheel, AIP-133 <https://aip.dev/133>.
-table CreateWheelRequest {
-  /// The BrakeAxle to create the Wheel under,
+/// Request message for BrakeAxleWheels.CreateBrakeAxleWheel, AIP-133
+/// <https://aip.dev/133>.
+table CreateBrakeAxleWheelRequest {
+  /// The BrakeAxle to create the BrakeAxleWheel under,
   /// "vehicles/{vehicle}/brakeAxles/{brake_axle}".
   parent:string (id: 0, required);
-  /// The Wheel to create.
-  wheel:Wheel (id: 1, required);
+  /// The BrakeAxleWheel to create.
+  brake_axle_wheel:BrakeAxleWheel (id: 1, required);
   /// Client-assigned id, becoming the last segment of the resource name. The
   /// server generates one when empty.
-  wheel_id:string (id: 2);
+  brake_axle_wheel_id:string (id: 2);
 }
 
-/// Request message for Wheels.UpdateWheel, AIP-134 <https://aip.dev/134>.
-table UpdateWheelRequest {
-  /// The Wheel to update. Its name field identifies the resource.
-  wheel:Wheel (id: 0, required);
+/// Request message for BrakeAxleWheels.UpdateBrakeAxleWheel, AIP-134
+/// <https://aip.dev/134>.
+table UpdateBrakeAxleWheelRequest {
+  /// The BrakeAxleWheel to update. Its name field identifies the resource.
+  brake_axle_wheel:BrakeAxleWheel (id: 0, required);
   /// Fields to update. An empty mask updates all mutable fields.
   ///
   /// Only an actuator is writable. A sensor or attribute named in the mask is
@@ -66,16 +71,18 @@ table UpdateWheelRequest {
   update_mask:[string] (id: 1);
 }
 
-/// Request message for Wheels.DeleteWheel, AIP-135 <https://aip.dev/135>.
-table DeleteWheelRequest {
-  /// Name of the Wheel to delete,
+/// Request message for BrakeAxleWheels.DeleteBrakeAxleWheel, AIP-135
+/// <https://aip.dev/135>.
+table DeleteBrakeAxleWheelRequest {
+  /// Name of the BrakeAxleWheel to delete,
   /// "vehicles/{vehicle}/brakeAxles/{brake_axle}/wheels/{wheel}".
   name:string (id: 0, required);
 }
 
-/// Request message for Wheels.UndeleteWheel, AIP-164 <https://aip.dev/164>.
-table UndeleteWheelRequest {
-  /// Name of the soft-deleted Wheel to restore,
+/// Request message for BrakeAxleWheels.UndeleteBrakeAxleWheel, AIP-164
+/// <https://aip.dev/164>.
+table UndeleteBrakeAxleWheelRequest {
+  /// Name of the soft-deleted BrakeAxleWheel to restore,
   /// "vehicles/{vehicle}/brakeAxles/{brake_axle}/wheels/{wheel}".
   name:string (id: 0, required);
 }

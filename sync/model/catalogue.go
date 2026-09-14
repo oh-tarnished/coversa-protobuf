@@ -80,6 +80,11 @@ func (m *Model) checkUnique() error {
 	}{
 		{"proto package", func(p *Package) string { return p.ProtoPackage() }},
 		{"resource pattern", func(p *Package) string { return p.Pattern }},
+		// A resource type is flat across the API where a pattern is scoped by
+		// its parent, so the two can disagree: three `Wheel` packages held
+		// three distinct patterns and one type between them, leaving every
+		// `resource_reference` to it ambiguous. Nothing else can see that.
+		{"resource type", func(p *Package) string { return p.ResourceName() }},
 	} {
 		seen := map[string]*Package{}
 		for _, p := range m.Packages {

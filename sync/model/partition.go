@@ -84,6 +84,7 @@ func newPackage(n *vspec.Node, parent *Package, fam Family, identifiable bool) *
 		Family: fam, Domain: domain,
 		Name: naming.Snake(n.Name), Dir: naming.Snake(n.Name),
 		Root: n, Singular: singular, Plural: naming.Pluralise(singular),
+		ID: singular, Segment: naming.Pluralise(singular),
 		IsList: identifiable, Parent: parent,
 	}
 	pkg.setPattern()
@@ -103,13 +104,13 @@ func newPackage(n *vspec.Node, parent *Package, fam Family, identifiable bool) *
 func (p *Package) setPattern() {
 	switch {
 	case p.NameParent == nil:
-		p.Pattern = p.Plural + "/{" + naming.Snake(p.Singular) + "}"
+		p.Pattern = p.Segment + "/{" + naming.Snake(p.ID) + "}"
 	case p.IsList:
-		p.Pattern = p.NameParent.Pattern + "/" + p.Plural + "/{" + naming.Snake(p.Singular) + "}"
+		p.Pattern = p.NameParent.Pattern + "/" + p.Segment + "/{" + naming.Snake(p.ID) + "}"
 	default:
 		// The parent holds exactly one, so it is a singleton, AIP-156: its
 		// name has no id segment.
-		p.Pattern = p.NameParent.Pattern + "/" + p.Singular
+		p.Pattern = p.NameParent.Pattern + "/" + p.ID
 	}
 }
 

@@ -21,7 +21,7 @@ import "google/protobuf/timestamp.proto";
 import "protobuf/covesa/vss/annotations/v1/annotations.proto";
 
 option java_multiple_files = true;
-option java_outer_classname = "WheelProto";
+option java_outer_classname = "BrakeAxleWheelProto";
 option java_package = "io.github.ohtarnished.protobuf.covesa.vss.motion.brake_axle_wheel.v1";
 
 // MotionManagement signals for a specific wheel.
@@ -39,12 +39,12 @@ option java_package = "io.github.ohtarnished.protobuf.covesa.vss.motion.brake_ax
 //
 // Reference: COVESA Vehicle Signal Specification.
 // https://covesa.github.io/vehicle_signal_specification/
-message Wheel {
+message BrakeAxleWheel {
   option (google.api.resource) = {
-    type: "vdm.covesa.org/Wheel"
+    type: "vdm.covesa.org/BrakeAxleWheel"
     pattern: "vehicles/{vehicle}/brakeAxles/{brake_axle}/wheels/{wheel}"
-    singular: "wheel"
-    plural: "wheels"
+    singular: "brakeAxleWheel"
+    plural: "brakeAxleWheels"
   };
 
   // Resource name,

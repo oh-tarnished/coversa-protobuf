@@ -2949,7 +2949,7 @@
         }
       }
     },
-    "protobuf.covesa.vss.motion.brake_axle_wheel.v1.Wheel": {
+    "protobuf.covesa.vss.motion.brake_axle_wheel.v1.BrakeAxleWheel": {
       "fqn": "Vehicle.MotionManagement.Brake.Axle.Wheel",
       "pattern": "vehicles/{vehicle}/brakeAxles/{brake_axle}/wheels/{wheel}",
       "instances": [
@@ -3202,6 +3202,46 @@
         }
       }
     },
+    "protobuf.covesa.vss.motion.chassis_axle_wheel.v1.ChassisAxleWheel": {
+      "fqn": "Vehicle.Chassis.Axle.Wheel",
+      "pattern": "vehicles/{vehicle}/chassisAxles/{chassis_axle}/wheels/{wheel}",
+      "instances": [
+        [
+          "Left",
+          "Right"
+        ]
+      ],
+      "fields": {
+        "angular_speed": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.AngularSpeed",
+          "element": "sensor",
+          "unit": "degrees/s",
+          "quantity": "angular-speed"
+        },
+        "brake": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Brake",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Brake"
+        },
+        "speed": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Speed",
+          "element": "sensor",
+          "unit": "km/h",
+          "quantity": "velocity"
+        },
+        "tire": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Tire",
+          "element": "branch",
+          "message": "protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Tire"
+        },
+        "torque": {
+          "fqn": "Vehicle.Chassis.Axle.Wheel.Torque",
+          "element": "sensor",
+          "unit": "Nm",
+          "quantity": "torque"
+        }
+      }
+    },
     "protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Tire": {
       "fqn": "Vehicle.Chassis.Axle.Wheel.Tire",
       "fields": {
@@ -3242,46 +3282,6 @@
             "WINTER_STATE_UNKNOWN": "UNKNOWN",
             "WINTER_STATE_WINTER": "WINTER"
           }
-        }
-      }
-    },
-    "protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Wheel": {
-      "fqn": "Vehicle.Chassis.Axle.Wheel",
-      "pattern": "vehicles/{vehicle}/chassisAxles/{chassis_axle}/wheels/{wheel}",
-      "instances": [
-        [
-          "Left",
-          "Right"
-        ]
-      ],
-      "fields": {
-        "angular_speed": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.AngularSpeed",
-          "element": "sensor",
-          "unit": "degrees/s",
-          "quantity": "angular-speed"
-        },
-        "brake": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Brake",
-          "element": "branch",
-          "message": "protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Brake"
-        },
-        "speed": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Speed",
-          "element": "sensor",
-          "unit": "km/h",
-          "quantity": "velocity"
-        },
-        "tire": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Tire",
-          "element": "branch",
-          "message": "protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Tire"
-        },
-        "torque": {
-          "fqn": "Vehicle.Chassis.Axle.Wheel.Torque",
-          "element": "sensor",
-          "unit": "Nm",
-          "quantity": "torque"
         }
       }
     },
@@ -3639,7 +3639,7 @@
         }
       }
     },
-    "protobuf.covesa.vss.motion.suspension_axle_wheel.v1.Wheel": {
+    "protobuf.covesa.vss.motion.suspension_axle_wheel.v1.SuspensionAxleWheel": {
       "fqn": "Vehicle.MotionManagement.Suspension.Axle.Wheel",
       "pattern": "vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}",
       "instances": [

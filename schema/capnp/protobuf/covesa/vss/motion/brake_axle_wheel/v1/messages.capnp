@@ -13,59 +13,64 @@
 using Cxx = import "/capnp/c++.capnp";
 $Cxx.namespace("protobuf::covesa::vss::motion::brake_axle_wheel::v1");
 
-using Wheel = import "/protobuf/covesa/vss/motion/brake_axle_wheel/v1/wheel.capnp";
+using BrakeAxleWheel = import "/protobuf/covesa/vss/motion/brake_axle_wheel/v1/brake_axle_wheel.capnp";
 
-# Request message for Wheels.GetWheel, AIP-131 <https://aip.dev/131>.
-struct GetWheelRequest @0x9e59c4b75fd2e03d {
-  # Name of the Wheel to retrieve,
+# Request message for BrakeAxleWheels.GetBrakeAxleWheel, AIP-131
+# <https://aip.dev/131>.
+struct GetBrakeAxleWheelRequest @0xef2a7b850861b4b3 {
+  # Name of the BrakeAxleWheel to retrieve,
   # "vehicles/{vehicle}/brakeAxles/{brake_axle}/wheels/{wheel}".
   # REQUIRED (AIP-203); Cap'n Proto cannot enforce it.
   name @0 :Text;
 }
 
-# Request message for Wheels.ListWheels, AIP-132 <https://aip.dev/132>.
-struct ListWheelsRequest @0xd35ef28ed1473b7b {
-  # The BrakeAxle whose wheels to list,
+# Request message for BrakeAxleWheels.ListBrakeAxleWheels, AIP-132
+# <https://aip.dev/132>.
+struct ListBrakeAxleWheelsRequest @0xa53f0262f8b2af10 {
+  # The BrakeAxle whose brakeAxleWheels to list,
   # "vehicles/{vehicle}/brakeAxles/{brake_axle}".
   # REQUIRED (AIP-203); Cap'n Proto cannot enforce it.
   parent @0 :Text;
-  # Maximum wheels to return. Defaults to 50, capped at 1000.
+  # Maximum brakeAxleWheels to return. Defaults to 50, capped at 1000.
   pageSize @1 :Int32;
-  # Page token from a previous ListWheelsResponse.next_page_token.
+  # Page token from a previous ListBrakeAxleWheelsResponse.next_page_token.
   pageToken @2 :Text;
   # Filter expression, AIP-160 <https://aip.dev/160>.
   filter @3 :Text;
-  # Include soft-deleted wheels. AIP-164 <https://aip.dev/164>.
+  # Include soft-deleted brakeAxleWheels. AIP-164 <https://aip.dev/164>.
   showDeleted @4 :Bool;
 }
 
-# Response message for Wheels.ListWheels, AIP-132 <https://aip.dev/132>.
-struct ListWheelsResponse @0xad7fd90f0db2998d {
-  # The wheels on this page.
-  wheels @0 :List(Wheel.Wheel);
+# Response message for BrakeAxleWheels.ListBrakeAxleWheels, AIP-132
+# <https://aip.dev/132>.
+struct ListBrakeAxleWheelsResponse @0xab192d3823e70b7f {
+  # The brakeAxleWheels on this page.
+  brakeAxleWheels @0 :List(BrakeAxleWheel.BrakeAxleWheel);
   # Token for the next page, empty when this is the last page.
   nextPageToken @1 :Text;
 }
 
-# Request message for Wheels.CreateWheel, AIP-133 <https://aip.dev/133>.
-struct CreateWheelRequest @0x89f53f7ca1345993 {
-  # The BrakeAxle to create the Wheel under,
+# Request message for BrakeAxleWheels.CreateBrakeAxleWheel, AIP-133
+# <https://aip.dev/133>.
+struct CreateBrakeAxleWheelRequest @0xa65ec43287490148 {
+  # The BrakeAxle to create the BrakeAxleWheel under,
   # "vehicles/{vehicle}/brakeAxles/{brake_axle}".
   # REQUIRED (AIP-203); Cap'n Proto cannot enforce it.
   parent @0 :Text;
-  # The Wheel to create.
+  # The BrakeAxleWheel to create.
   # REQUIRED (AIP-203); Cap'n Proto cannot enforce it.
-  wheel @1 :Wheel.Wheel;
+  brakeAxleWheel @1 :BrakeAxleWheel.BrakeAxleWheel;
   # Client-assigned id, becoming the last segment of the resource name. The
   # server generates one when empty.
-  wheelId @2 :Text;
+  brakeAxleWheelId @2 :Text;
 }
 
-# Request message for Wheels.UpdateWheel, AIP-134 <https://aip.dev/134>.
-struct UpdateWheelRequest @0x85e38ec2b67ae401 {
-  # The Wheel to update. Its name field identifies the resource.
+# Request message for BrakeAxleWheels.UpdateBrakeAxleWheel, AIP-134
+# <https://aip.dev/134>.
+struct UpdateBrakeAxleWheelRequest @0xe9635a9c57ce9b16 {
+  # The BrakeAxleWheel to update. Its name field identifies the resource.
   # REQUIRED (AIP-203); Cap'n Proto cannot enforce it.
-  wheel @0 :Wheel.Wheel;
+  brakeAxleWheel @0 :BrakeAxleWheel.BrakeAxleWheel;
   # Fields to update. An empty mask updates all mutable fields.
   #
   # Only an actuator is writable. A sensor or attribute named in the mask is
@@ -74,17 +79,19 @@ struct UpdateWheelRequest @0x85e38ec2b67ae401 {
   updateMask @1 :List(Text);
 }
 
-# Request message for Wheels.DeleteWheel, AIP-135 <https://aip.dev/135>.
-struct DeleteWheelRequest @0xb525ce5c61d596d4 {
-  # Name of the Wheel to delete,
+# Request message for BrakeAxleWheels.DeleteBrakeAxleWheel, AIP-135
+# <https://aip.dev/135>.
+struct DeleteBrakeAxleWheelRequest @0xe3fbe5e86946fc78 {
+  # Name of the BrakeAxleWheel to delete,
   # "vehicles/{vehicle}/brakeAxles/{brake_axle}/wheels/{wheel}".
   # REQUIRED (AIP-203); Cap'n Proto cannot enforce it.
   name @0 :Text;
 }
 
-# Request message for Wheels.UndeleteWheel, AIP-164 <https://aip.dev/164>.
-struct UndeleteWheelRequest @0xbe0d09af3a610e87 {
-  # Name of the soft-deleted Wheel to restore,
+# Request message for BrakeAxleWheels.UndeleteBrakeAxleWheel, AIP-164
+# <https://aip.dev/164>.
+struct UndeleteBrakeAxleWheelRequest @0x872cf0a696a95ab5 {
+  # Name of the soft-deleted BrakeAxleWheel to restore,
   # "vehicles/{vehicle}/brakeAxles/{brake_axle}/wheels/{wheel}".
   # REQUIRED (AIP-203); Cap'n Proto cannot enforce it.
   name @0 :Text;

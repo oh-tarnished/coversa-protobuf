@@ -4095,66 +4095,7 @@ messages:
       - number: 2
         ordinal: 1
         name: update_mask
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.CreateWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: parent
-      - number: 2
-        ordinal: 1
-        name: wheel
-      - number: 3
-        ordinal: 2
-        name: wheel_id
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.DeleteWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.GetWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.ListWheelsRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: parent
-      - number: 2
-        ordinal: 1
-        name: page_size
-      - number: 3
-        ordinal: 2
-        name: page_token
-      - number: 4
-        ordinal: 3
-        name: filter
-      - number: 5
-        ordinal: 4
-        name: show_deleted
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.ListWheelsResponse
-    fields:
-      - number: 1
-        ordinal: 0
-        name: wheels
-      - number: 2
-        ordinal: 1
-        name: next_page_token
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.UndeleteWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.UpdateWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: wheel
-      - number: 2
-        ordinal: 1
-        name: update_mask
-  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.Wheel
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.BrakeAxleWheel
     fields:
       - number: 1
         ordinal: 0
@@ -4195,6 +4136,65 @@ messages:
       - number: 21
         ordinal: 20
         name: omega_lower
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.CreateBrakeAxleWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: parent
+      - number: 2
+        ordinal: 1
+        name: brake_axle_wheel
+      - number: 3
+        ordinal: 2
+        name: brake_axle_wheel_id
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.DeleteBrakeAxleWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.GetBrakeAxleWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.ListBrakeAxleWheelsRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: parent
+      - number: 2
+        ordinal: 1
+        name: page_size
+      - number: 3
+        ordinal: 2
+        name: page_token
+      - number: 4
+        ordinal: 3
+        name: filter
+      - number: 5
+        ordinal: 4
+        name: show_deleted
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.ListBrakeAxleWheelsResponse
+    fields:
+      - number: 1
+        ordinal: 0
+        name: brake_axle_wheels
+      - number: 2
+        ordinal: 1
+        name: next_page_token
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.UndeleteBrakeAxleWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.motion.brake_axle_wheel.v1.UpdateBrakeAxleWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: brake_axle_wheel
+      - number: 2
+        ordinal: 1
+        name: update_mask
   - message: protobuf.covesa.vss.motion.chassis.v1.Accelerator
     fields:
       - number: 1
@@ -4413,86 +4413,7 @@ messages:
       - number: 4
         ordinal: 3
         name: is_brakes_worn
-  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.CreateWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: parent
-      - number: 2
-        ordinal: 1
-        name: wheel
-      - number: 3
-        ordinal: 2
-        name: wheel_id
-  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.DeleteWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.GetWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.ListWheelsRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: parent
-      - number: 2
-        ordinal: 1
-        name: page_size
-      - number: 3
-        ordinal: 2
-        name: page_token
-      - number: 4
-        ordinal: 3
-        name: filter
-      - number: 5
-        ordinal: 4
-        name: show_deleted
-  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.ListWheelsResponse
-    fields:
-      - number: 1
-        ordinal: 0
-        name: wheels
-      - number: 2
-        ordinal: 1
-        name: next_page_token
-  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Tire
-    fields:
-      - number: 1
-        ordinal: 0
-        name: pressure
-      - number: 2
-        ordinal: 1
-        name: is_pressure_low
-      - number: 3
-        ordinal: 2
-        name: temperature
-      - number: 4
-        ordinal: 3
-        name: rubber_temperature
-      - number: 5
-        ordinal: 4
-        name: air_temperature
-      - number: 6
-        ordinal: 5
-        name: winter_status
-  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.UndeleteWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.UpdateWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: wheel
-      - number: 2
-        ordinal: 1
-        name: update_mask
-  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Wheel
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.ChassisAxleWheel
     fields:
       - number: 1
         ordinal: 0
@@ -4530,6 +4451,85 @@ messages:
       - number: 20
         ordinal: 19
         name: torque
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.CreateChassisAxleWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: parent
+      - number: 2
+        ordinal: 1
+        name: chassis_axle_wheel
+      - number: 3
+        ordinal: 2
+        name: chassis_axle_wheel_id
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.DeleteChassisAxleWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.GetChassisAxleWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.ListChassisAxleWheelsRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: parent
+      - number: 2
+        ordinal: 1
+        name: page_size
+      - number: 3
+        ordinal: 2
+        name: page_token
+      - number: 4
+        ordinal: 3
+        name: filter
+      - number: 5
+        ordinal: 4
+        name: show_deleted
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.ListChassisAxleWheelsResponse
+    fields:
+      - number: 1
+        ordinal: 0
+        name: chassis_axle_wheels
+      - number: 2
+        ordinal: 1
+        name: next_page_token
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Tire
+    fields:
+      - number: 1
+        ordinal: 0
+        name: pressure
+      - number: 2
+        ordinal: 1
+        name: is_pressure_low
+      - number: 3
+        ordinal: 2
+        name: temperature
+      - number: 4
+        ordinal: 3
+        name: rubber_temperature
+      - number: 5
+        ordinal: 4
+        name: air_temperature
+      - number: 6
+        ordinal: 5
+        name: winter_status
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.UndeleteChassisAxleWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.UpdateChassisAxleWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: chassis_axle_wheel
+      - number: 2
+        ordinal: 1
+        name: update_mask
   - message: protobuf.covesa.vss.motion.electric_axle.v1.CreateElectricAxleRequest
     fields:
       - number: 1
@@ -4930,28 +4930,28 @@ messages:
       - number: 2
         ordinal: 1
         name: update_mask
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.CreateWheelRequest
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.CreateSuspensionAxleWheelRequest
     fields:
       - number: 1
         ordinal: 0
         name: parent
       - number: 2
         ordinal: 1
-        name: wheel
+        name: suspension_axle_wheel
       - number: 3
         ordinal: 2
-        name: wheel_id
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.DeleteWheelRequest
+        name: suspension_axle_wheel_id
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.DeleteSuspensionAxleWheelRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.GetWheelRequest
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.GetSuspensionAxleWheelRequest
     fields:
       - number: 1
         ordinal: 0
         name: name
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.ListWheelsRequest
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.ListSuspensionAxleWheelsRequest
     fields:
       - number: 1
         ordinal: 0
@@ -4968,28 +4968,15 @@ messages:
       - number: 5
         ordinal: 4
         name: show_deleted
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.ListWheelsResponse
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.ListSuspensionAxleWheelsResponse
     fields:
       - number: 1
         ordinal: 0
-        name: wheels
+        name: suspension_axle_wheels
       - number: 2
         ordinal: 1
         name: next_page_token
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.UndeleteWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: name
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.UpdateWheelRequest
-    fields:
-      - number: 1
-        ordinal: 0
-        name: wheel
-      - number: 2
-        ordinal: 1
-        name: update_mask
-  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.Wheel
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.SuspensionAxleWheel
     fields:
       - number: 1
         ordinal: 0
@@ -5024,6 +5011,19 @@ messages:
       - number: 19
         ordinal: 18
         name: damping_force
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.UndeleteSuspensionAxleWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: name
+  - message: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.UpdateSuspensionAxleWheelRequest
+    fields:
+      - number: 1
+        ordinal: 0
+        name: suspension_axle_wheel
+      - number: 2
+        ordinal: 1
+        name: update_mask
   - message: protobuf.covesa.vss.platform.connectivity.v1.Connectivity
     fields:
       - number: 1
@@ -8704,19 +8704,19 @@ services:
         ordinal: 4
       - name: UndeleteBrakeAxle
         ordinal: 5
-  - service: protobuf.covesa.vss.motion.brake_axle_wheel.v1.Wheels
+  - service: protobuf.covesa.vss.motion.brake_axle_wheel.v1.BrakeAxleWheels
     methods:
-      - name: GetWheel
+      - name: GetBrakeAxleWheel
         ordinal: 0
-      - name: ListWheels
+      - name: ListBrakeAxleWheels
         ordinal: 1
-      - name: CreateWheel
+      - name: CreateBrakeAxleWheel
         ordinal: 2
-      - name: UpdateWheel
+      - name: UpdateBrakeAxleWheel
         ordinal: 3
-      - name: DeleteWheel
+      - name: DeleteBrakeAxleWheel
         ordinal: 4
-      - name: UndeleteWheel
+      - name: UndeleteBrakeAxleWheel
         ordinal: 5
   - service: protobuf.covesa.vss.motion.chassis.v1.ChassisSet
     methods:
@@ -8738,19 +8738,19 @@ services:
         ordinal: 4
       - name: UndeleteChassisAxle
         ordinal: 5
-  - service: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.Wheels
+  - service: protobuf.covesa.vss.motion.chassis_axle_wheel.v1.ChassisAxleWheels
     methods:
-      - name: GetWheel
+      - name: GetChassisAxleWheel
         ordinal: 0
-      - name: ListWheels
+      - name: ListChassisAxleWheels
         ordinal: 1
-      - name: CreateWheel
+      - name: CreateChassisAxleWheel
         ordinal: 2
-      - name: UpdateWheel
+      - name: UpdateChassisAxleWheel
         ordinal: 3
-      - name: DeleteWheel
+      - name: DeleteChassisAxleWheel
         ordinal: 4
-      - name: UndeleteWheel
+      - name: UndeleteChassisAxleWheel
         ordinal: 5
   - service: protobuf.covesa.vss.motion.electric_axle.v1.ElectricAxles
     methods:
@@ -8792,19 +8792,19 @@ services:
         ordinal: 4
       - name: UndeleteSuspensionAxle
         ordinal: 5
-  - service: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.Wheels
+  - service: protobuf.covesa.vss.motion.suspension_axle_wheel.v1.SuspensionAxleWheels
     methods:
-      - name: GetWheel
+      - name: GetSuspensionAxleWheel
         ordinal: 0
-      - name: ListWheels
+      - name: ListSuspensionAxleWheels
         ordinal: 1
-      - name: CreateWheel
+      - name: CreateSuspensionAxleWheel
         ordinal: 2
-      - name: UpdateWheel
+      - name: UpdateSuspensionAxleWheel
         ordinal: 3
-      - name: DeleteWheel
+      - name: DeleteSuspensionAxleWheel
         ordinal: 4
-      - name: UndeleteWheel
+      - name: UndeleteSuspensionAxleWheel
         ordinal: 5
   - service: protobuf.covesa.vss.platform.connectivity.v1.ConnectivityService
     methods:

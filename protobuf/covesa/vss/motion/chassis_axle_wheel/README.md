@@ -1,4 +1,4 @@
-# Wheel
+# ChassisAxleWheel
 
 [![VSS](https://img.shields.io/badge/VSS-2026--09--02-0B6B5B)](https://github.com/COVESA/vehicle_signal_specification)
 [![branch](https://img.shields.io/badge/branch-Vehicle.Chassis.Axle.Wheel-1D4ED8)](https://covesa.github.io/vehicle_signal_specification/)
@@ -18,7 +18,7 @@ vehicles/{vehicle}/chassisAxles/{chassis_axle}/wheels/{wheel}
 ```mermaid
 flowchart LR
   P["ChassisAxle<br/><code>vehicles/{vehicle}/chassisAxles/{chassis_axle}</code>"]
-  R["Wheel<br/><code>…/wheels/{wheel}</code>"]
+  R["ChassisAxleWheel<br/><code>…/wheels/{wheel}</code>"]
   E0["Brake"]
   E1["Tire"]
 
@@ -33,15 +33,15 @@ flowchart LR
 ```
 
 The 2 blue-grey boxes are **embedded messages**, not resources. They have no
-name of their own and travel with the wheel.
+name of their own and travel with the chassisAxleWheel.
 
 ## Example
 
-A wheel as this API returns it:
+A chassisAxleWheel as this API returns it:
 
 ```json
 {
-  "name": "vehicles/wvwzzz1jz3w000001/chassisAxles/{chassis_axle}/wheels/wheel-ah8aegez7txhnj9j",
+  "name": "vehicles/wvwzzz1jz3w000001/chassisAxles/{chassis_axle}/wheels/{wheel}",
   "uid": "b3f1c2de-4a5b-4c6d-8e9f-0a1b2c3d4e5f",
   "angularSpeed": 88.5,
   "speed": 88.5,
@@ -68,8 +68,8 @@ reverses all three.
 
 ## Resource names
 
-Every wheel is addressed by a name that alternates collection and identifier,
-per [AIP-122](https://aip.dev/122):
+Every chassisAxleWheel is addressed by a name that alternates collection and
+identifier, per [AIP-122](https://aip.dev/122):
 
 ```mermaid
 packet
@@ -83,10 +83,10 @@ packet
 54: "/"
 55-60: "wheels"
 61: "/"
-62-83: "wheel-ah8aegez7txhnj9j"
+62-68: "{wheel}"
 ```
 
-84 characters, alternating, which is what [AIP-123](https://aip.dev/123)
+69 characters, alternating, which is what [AIP-123](https://aip.dev/123)
 requires. An identifier is 80 random bits in Crockford base32, prefixed with
 the resource's singular so the name opens with a letter — the randomness
 half of a ULID with the timestamp half removed, because a ULID's leading
@@ -100,14 +100,14 @@ implements AIP-122 templates in Go, Python, Rust, TypeScript, Swift and C:
 
 ```go
 t := resourcename.ResourceTemplate("vehicles/{vehicle}/chassisAxles/{chassis_axle}/wheels/{wheel}")
-t.Parse("vehicles/wvwzzz1jz3w000001/chassisAxles/{chassis_axle}/wheels/wheel-ah8aegez7txhnj9j")
-// map[vehicle:wvwzzz1jz3w000001 chassisAxle:chassisAxle-qktg089h0p2s4zq0 wheel:wheel-ah8aegez7txhnj9j]
+t.Parse("vehicles/wvwzzz1jz3w000001/chassisAxles/{chassis_axle}/wheels/{wheel}")
+// map[vehicle:wvwzzz1jz3w000001 chassisAxle:chassisAxle-qktg089h0p2s4zq0 chassisAxleWheel:chassisAxleWheel-ah8aegez7txhnj9j]
 ```
 
 ```python
 t = resourcename.ResourceTemplate("vehicles/{vehicle}/chassisAxles/{chassis_axle}/wheels/{wheel}")
-t.parse("vehicles/wvwzzz1jz3w000001/chassisAxles/{chassis_axle}/wheels/wheel-ah8aegez7txhnj9j")
-# {'vehicle': 'wvwzzz1jz3w000001', 'chassisAxle': 'chassisAxle-qktg089h0p2s4zq0', 'wheel': 'wheel-ah8aegez7txhnj9j'}
+t.parse("vehicles/wvwzzz1jz3w000001/chassisAxles/{chassis_axle}/wheels/{wheel}")
+# {'vehicle': 'wvwzzz1jz3w000001', 'chassisAxle': 'chassisAxle-qktg089h0p2s4zq0', 'chassisAxleWheel': 'chassisAxleWheel-ah8aegez7txhnj9j'}
 ```
 
 The template above is the `pattern` this resource declares in its
@@ -145,8 +145,8 @@ silently ignored.
 
 ## Embedded messages
 
-2 messages travel inside the wheel and have no name of their own. Address a
-field on one through its owner — `brake.<field>` — not directly.
+2 messages travel inside the chassisAxleWheel and have no name of their own.
+Address a field on one through its owner — `brake.<field>` — not directly.
 
 <details>
 <summary><code>Brake</code> — Brake signals for wheel</summary>
@@ -174,7 +174,7 @@ field on one through its owner — `brake.<field>` — not directly.
 
 </details>
 
-## Which wheel
+## Which chassisAxleWheel
 
 ```mermaid
 flowchart LR
@@ -182,10 +182,11 @@ flowchart LR
   A1["Right"]
 ```
 
-VSS expands this branch across Left, Right, so the combination names one wheel
-— which is what makes it a resource rather than a repeated field. The axes
-are recorded in [`codec/manifest.json`](../../../../../codec/manifest.json),
-which is the only thing that says how to map an id back to a VSS path.
+VSS expands this branch across Left, Right, so the combination names one
+chassisAxleWheel — which is what makes it a resource rather than a repeated
+field. The axes are recorded in
+[`codec/manifest.json`](../../../../../codec/manifest.json), which is the only
+thing that says how to map an id back to a VSS path.
 
 ## Methods
 
@@ -202,15 +203,15 @@ stateDiagram-v2
 
 ```http
 GET    /v1/{name=vehicles/*/chassisAxles/*/wheels/*}
-PATCH  /v1/{wheel.name=vehicles/*/chassisAxles/*/wheels/*}
+PATCH  /v1/{chassisAxleWheel.name=vehicles/*/chassisAxles/*/wheels/*}
 GET    /v1/{parent=vehicles/*/chassisAxles/*}/wheels
 POST   /v1/{parent=vehicles/*/chassisAxles/*}/wheels
 DELETE /v1/{name=vehicles/*/chassisAxles/*/wheels/*}
 POST   /v1/{name=vehicles/*/chassisAxles/*/wheels/*}:undelete
 ```
 
-A deleted wheel is still returned by `Get` and hidden from `List` unless
-`show_deleted` is set — which is what makes `Undelete` meaningful.
+A deleted chassisAxleWheel is still returned by `Get` and hidden from `List`
+unless `show_deleted` is set — which is what makes `Undelete` meaningful.
 
 ## Enums
 
@@ -225,4 +226,4 @@ this wheel.
 ---
 
 <sub>Generated by `just docs` from COVESA VSS `2026-09-02` (`cd4bc50`) and VDM `2026-07-24` (`36bc939`). Do not edit by hand.<br>
-Source: [`wheel.proto`](v1/wheel.proto) · [`service.proto`](v1/service.proto) · [`messages.proto`](v1/messages.proto)</sub>
+Source: [`chassis_axle_wheel.proto`](v1/chassis_axle_wheel.proto) · [`service.proto`](v1/service.proto) · [`messages.proto`](v1/messages.proto)</sub>

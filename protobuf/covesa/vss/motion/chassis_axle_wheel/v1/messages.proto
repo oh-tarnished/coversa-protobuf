@@ -17,32 +17,34 @@ import "buf/validate/validate.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/protobuf/field_mask.proto";
-import "protobuf/covesa/vss/motion/chassis_axle_wheel/v1/wheel.proto";
+import "protobuf/covesa/vss/motion/chassis_axle_wheel/v1/chassis_axle_wheel.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "MessagesProto";
 option java_package = "io.github.ohtarnished.protobuf.covesa.vss.motion.chassis_axle_wheel.v1";
 
-// Request message for Wheels.GetWheel, AIP-131 <https://aip.dev/131>.
-message GetWheelRequest {
-  // Name of the Wheel to retrieve,
+// Request message for ChassisAxleWheels.GetChassisAxleWheel, AIP-131
+// <https://aip.dev/131>.
+message GetChassisAxleWheelRequest {
+  // Name of the ChassisAxleWheel to retrieve,
   // "vehicles/{vehicle}/chassisAxles/{chassis_axle}/wheels/{wheel}".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {type: "vdm.covesa.org/Wheel"}
+    (google.api.resource_reference) = {type: "vdm.covesa.org/ChassisAxleWheel"}
   ];
 }
 
-// Request message for Wheels.ListWheels, AIP-132 <https://aip.dev/132>.
-message ListWheelsRequest {
-  // The ChassisAxle whose wheels to list,
+// Request message for ChassisAxleWheels.ListChassisAxleWheels, AIP-132
+// <https://aip.dev/132>.
+message ListChassisAxleWheelsRequest {
+  // The ChassisAxle whose chassisAxleWheels to list,
   // "vehicles/{vehicle}/chassisAxles/{chassis_axle}".
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {child_type: "vdm.covesa.org/Wheel"}
+    (google.api.resource_reference) = {child_type: "vdm.covesa.org/ChassisAxleWheel"}
   ];
 
-  // Maximum wheels to return. Defaults to 50, capped at 1000.
+  // Maximum chassisAxleWheels to return. Defaults to 50, capped at 1000.
   int32 page_size = 2 [
     (google.api.field_behavior) = OPTIONAL,
     (buf.validate.field).int32 = {
@@ -51,49 +53,53 @@ message ListWheelsRequest {
     }
   ];
 
-  // Page token from a previous ListWheelsResponse.next_page_token.
+  // Page token from a previous
+  // ListChassisAxleWheelsResponse.next_page_token.
   string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
 
   // Filter expression, AIP-160 <https://aip.dev/160>.
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
-  // Include soft-deleted wheels. AIP-164 <https://aip.dev/164>.
+  // Include soft-deleted chassisAxleWheels. AIP-164 <https://aip.dev/164>.
   bool show_deleted = 5 [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Response message for Wheels.ListWheels, AIP-132 <https://aip.dev/132>.
-message ListWheelsResponse {
-  // The wheels on this page.
-  repeated Wheel wheels = 1;
+// Response message for ChassisAxleWheels.ListChassisAxleWheels, AIP-132
+// <https://aip.dev/132>.
+message ListChassisAxleWheelsResponse {
+  // The chassisAxleWheels on this page.
+  repeated ChassisAxleWheel chassis_axle_wheels = 1;
 
   // Token for the next page, empty when this is the last page.
   string next_page_token = 2;
 }
 
-// Request message for Wheels.CreateWheel, AIP-133 <https://aip.dev/133>.
-message CreateWheelRequest {
-  // The ChassisAxle to create the Wheel under,
+// Request message for ChassisAxleWheels.CreateChassisAxleWheel, AIP-133
+// <https://aip.dev/133>.
+message CreateChassisAxleWheelRequest {
+  // The ChassisAxle to create the ChassisAxleWheel under,
   // "vehicles/{vehicle}/chassisAxles/{chassis_axle}".
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {child_type: "vdm.covesa.org/Wheel"}
+    (google.api.resource_reference) = {child_type: "vdm.covesa.org/ChassisAxleWheel"}
   ];
 
-  // The Wheel to create.
-  Wheel wheel = 2 [
+  // The ChassisAxleWheel to create.
+  ChassisAxleWheel chassis_axle_wheel = 2 [
     (google.api.field_behavior) = REQUIRED,
     (buf.validate.field).required = true
   ];
 
   // Client-assigned id, becoming the last segment of the resource name. The
   // server generates one when empty.
-  string wheel_id = 3 [(google.api.field_behavior) = OPTIONAL];
+  string chassis_axle_wheel_id = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Request message for Wheels.UpdateWheel, AIP-134 <https://aip.dev/134>.
-message UpdateWheelRequest {
-  // The Wheel to update. Its name field identifies the resource.
-  Wheel wheel = 1 [
+// Request message for ChassisAxleWheels.UpdateChassisAxleWheel, AIP-134
+// <https://aip.dev/134>.
+message UpdateChassisAxleWheelRequest {
+  // The ChassisAxleWheel to update. Its name field identifies the resource.
+  ChassisAxleWheel chassis_axle_wheel = 1 [
     (google.api.field_behavior) = REQUIRED,
     (buf.validate.field).required = true
   ];
@@ -106,23 +112,25 @@ message UpdateWheelRequest {
   google.protobuf.FieldMask update_mask = 2 [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Request message for Wheels.DeleteWheel, AIP-135 <https://aip.dev/135>.
-message DeleteWheelRequest {
-  // Name of the Wheel to delete,
+// Request message for ChassisAxleWheels.DeleteChassisAxleWheel, AIP-135
+// <https://aip.dev/135>.
+message DeleteChassisAxleWheelRequest {
+  // Name of the ChassisAxleWheel to delete,
   // "vehicles/{vehicle}/chassisAxles/{chassis_axle}/wheels/{wheel}".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {type: "vdm.covesa.org/Wheel"}
+    (google.api.resource_reference) = {type: "vdm.covesa.org/ChassisAxleWheel"}
   ];
 }
 
-// Request message for Wheels.UndeleteWheel, AIP-164 <https://aip.dev/164>.
-message UndeleteWheelRequest {
-  // Name of the soft-deleted Wheel to restore,
+// Request message for ChassisAxleWheels.UndeleteChassisAxleWheel, AIP-164
+// <https://aip.dev/164>.
+message UndeleteChassisAxleWheelRequest {
+  // Name of the soft-deleted ChassisAxleWheel to restore,
   // "vehicles/{vehicle}/chassisAxles/{chassis_axle}/wheels/{wheel}".
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference).type = "vdm.covesa.org/Wheel",
+    (google.api.resource_reference).type = "vdm.covesa.org/ChassisAxleWheel",
     (buf.validate.field).string.pattern = "^vehicles/[^/]+/chassisAxles/[^/]+/wheels/[^/]+$"
   ];
 }

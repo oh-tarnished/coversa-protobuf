@@ -19,7 +19,7 @@ vehicles/{vehicle}/brakeAxles/{brake_axle}
 flowchart LR
   P["Vehicle<br/><code>vehicles/{vehicle}</code>"]
   R["BrakeAxle<br/><code>…/brakeAxles/{brake_axle}</code>"]
-  C0["Wheel<br/><code>…/wheels/{wheel}</code>"]
+  C0["BrakeAxleWheel<br/><code>…/wheels/{wheel}</code>"]
 
   P -->|"many, each identified"| R
   R -->|"many, each identified"| C0
