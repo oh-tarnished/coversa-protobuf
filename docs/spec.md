@@ -119,6 +119,7 @@ And what the generator makes of them:
 
 | Revision | Change |
 |---|---|
+| vss `2026-09-02`, vdm `2026-07-24` — *no pin moved* | The three wheel resources are renamed. A resource type is unique within an API per [AIP-123](https://aip.dev/123), and all three declared `vdm.covesa.org/Wheel`, named their message `Wheel` and their service `Wheels`, so every `resource_reference` to that type named three resources at once. They are now `BrakeAxleWheel`, `ChassisAxleWheel` and `SuspensionAxleWheel`, with the services, RPCs and request messages following. **Resource names and REST URLs are unchanged** — `.../chassisAxles/{chassis_axle}/wheels/{wheel}` is [AIP-122](https://aip.dev/122)'s nested-collection form and stays short — and no field number or target-IDL slot moved, so stored data and encoded payloads are unaffected. A consumer reacts by renaming the generated types it imports. See [`decisions.md`](decisions.md). |
 | vss `2026-09-02`, vdm `2026-07-24` | VSS read directly from `.vspec`. Recovers 181 comments, the numbered enums, the defaults and the patterns the GraphQL translation dropped. Adds the `Orientation` and `Safety` branches, which that translation never exposed. Instance-tag messages are gone: an instanced branch is a resource addressed by its own name, so `Vehicle.Cabin.Seat.Row1.DriverSide` is `vehicles/{v}/seats/{seat}` rather than a `dimension1` field. |
 | vdm `2026-07-24` | First generated schema, from VDM's GraphQL SDL alone. |
 

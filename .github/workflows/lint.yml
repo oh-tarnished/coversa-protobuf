@@ -72,6 +72,13 @@ jobs:
           ignore-comment-disables: true
           output-format: github
           fail-on-error: true
+          # Pinned because the action defaults to `latest`, and api-linter
+          # v2.4.0 (2026-09-10) ships a single `api-linter.tar.gz` where every
+          # release through v2.3.1 shipped per-platform assets. The action
+          # builds the old URL and gets a 404, so `latest` broke this job on
+          # main the moment 2.4.0 was published. Unpin once the action handles
+          # the new asset name -- 2.4.0 adds an AIP-190 rule this repo wants.
+          version: "2.3.1"
 
       # Apache-2.0 requires no per-file notice, but a file that quietly loses
       # one is how a repository ends up ambiguously licensed.
