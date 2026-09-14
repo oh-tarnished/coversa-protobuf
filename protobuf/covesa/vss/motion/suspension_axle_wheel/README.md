@@ -1,4 +1,4 @@
-# Wheel
+# SuspensionAxleWheel
 
 [![VSS](https://img.shields.io/badge/VSS-2026--09--02-0B6B5B)](https://github.com/COVESA/vehicle_signal_specification)
 [![branch](https://img.shields.io/badge/branch-Vehicle.MotionManagement.Suspension.Axle.Wheel-1D4ED8)](https://covesa.github.io/vehicle_signal_specification/)
@@ -18,7 +18,7 @@ vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}
 ```mermaid
 flowchart LR
   P["SuspensionAxle<br/><code>vehicles/{vehicle}/suspensionAxles/{suspension_axle}</code>"]
-  R["Wheel<br/><code>…/wheels/{wheel}</code>"]
+  R["SuspensionAxleWheel<br/><code>…/wheels/{wheel}</code>"]
 
   P -->|"many, each identified"| R
 
@@ -29,11 +29,11 @@ flowchart LR
 
 ## Example
 
-A wheel as this API returns it:
+A suspensionAxleWheel as this API returns it:
 
 ```json
 {
-  "name": "vehicles/wvwzzz1jz3w000001/suspensionAxles/{suspension_axle}/wheels/wheel-prza36g0k81eez2w",
+  "name": "vehicles/wvwzzz1jz3w000001/suspensionAxles/{suspension_axle}/wheels/{wheel}",
   "uid": "b3f1c2de-4a5b-4c6d-8e9f-0a1b2c3d4e5f",
   "dampingForceTarget": 42,
   "dampingRateTarget": 33,
@@ -60,12 +60,12 @@ constants drop to the spelling VSS writes, and the AIP fields — `name`,
 `uid` — fall away, because VSS declares no signal for them. `codec.FromVSS`
 reverses all three.
 
-Writing to a wheel, and the one thing that will fail:
+Writing to a suspensionAxleWheel, and the one thing that will fail:
 
 ```mermaid
 sequenceDiagram
   participant C as Client
-  participant A as Wheels
+  participant A as SuspensionAxleWheels
   participant V as Vehicle
 
   Note over C,V: damping_force_target is an actuator — the API is the source
@@ -80,7 +80,7 @@ sequenceDiagram
 ```
 
 ```http
-PATCH /v1/vehicles/wvwzzz1jz3w000001/suspensionAxles/{suspension_axle}/wheels/wheel-prza36g0k81eez2w?updateMask=dampingForceTarget
+PATCH /v1/vehicles/wvwzzz1jz3w000001/suspensionAxles/{suspension_axle}/wheels/{wheel}?updateMask=dampingForceTarget
 { "dampingForceTarget": 42 }
 ```
 
@@ -91,8 +91,8 @@ believed it had written the value finds out immediately.
 
 ## Resource names
 
-Every wheel is addressed by a name that alternates collection and identifier,
-per [AIP-122](https://aip.dev/122):
+Every suspensionAxleWheel is addressed by a name that alternates collection
+and identifier, per [AIP-122](https://aip.dev/122):
 
 ```mermaid
 packet
@@ -106,10 +106,10 @@ packet
 60: "/"
 61-66: "wheels"
 67: "/"
-68-89: "wheel-prza36g0k81eez2w"
+68-74: "{wheel}"
 ```
 
-90 characters, alternating, which is what [AIP-123](https://aip.dev/123)
+75 characters, alternating, which is what [AIP-123](https://aip.dev/123)
 requires. An identifier is 80 random bits in Crockford base32, prefixed with
 the resource's singular so the name opens with a letter — the randomness
 half of a ULID with the timestamp half removed, because a ULID's leading
@@ -123,14 +123,14 @@ implements AIP-122 templates in Go, Python, Rust, TypeScript, Swift and C:
 
 ```go
 t := resourcename.ResourceTemplate("vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}")
-t.Parse("vehicles/wvwzzz1jz3w000001/suspensionAxles/{suspension_axle}/wheels/wheel-prza36g0k81eez2w")
-// map[vehicle:wvwzzz1jz3w000001 suspensionAxle:suspensionAxle-bnfckq28mrrrjw6x wheel:wheel-prza36g0k81eez2w]
+t.Parse("vehicles/wvwzzz1jz3w000001/suspensionAxles/{suspension_axle}/wheels/{wheel}")
+// map[vehicle:wvwzzz1jz3w000001 suspensionAxle:suspensionAxle-bnfckq28mrrrjw6x suspensionAxleWheel:suspensionAxleWheel-prza36g0k81eez2w]
 ```
 
 ```python
 t = resourcename.ResourceTemplate("vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}")
-t.parse("vehicles/wvwzzz1jz3w000001/suspensionAxles/{suspension_axle}/wheels/wheel-prza36g0k81eez2w")
-# {'vehicle': 'wvwzzz1jz3w000001', 'suspensionAxle': 'suspensionAxle-bnfckq28mrrrjw6x', 'wheel': 'wheel-prza36g0k81eez2w'}
+t.parse("vehicles/wvwzzz1jz3w000001/suspensionAxles/{suspension_axle}/wheels/{wheel}")
+# {'vehicle': 'wvwzzz1jz3w000001', 'suspensionAxle': 'suspensionAxle-bnfckq28mrrrjw6x', 'suspensionAxleWheel': 'suspensionAxleWheel-prza36g0k81eez2w'}
 ```
 
 The template above is the `pattern` this resource declares in its
@@ -174,7 +174,7 @@ silently ignored.
 
 </details>
 
-## Which wheel
+## Which suspensionAxleWheel
 
 ```mermaid
 flowchart LR
@@ -182,10 +182,11 @@ flowchart LR
   A1["Right"]
 ```
 
-VSS expands this branch across Left, Right, so the combination names one wheel
-— which is what makes it a resource rather than a repeated field. The axes
-are recorded in [`codec/manifest.json`](../../../../../codec/manifest.json),
-which is the only thing that says how to map an id back to a VSS path.
+VSS expands this branch across Left, Right, so the combination names one
+suspensionAxleWheel — which is what makes it a resource rather than a
+repeated field. The axes are recorded in
+[`codec/manifest.json`](../../../../../codec/manifest.json), which is the only
+thing that says how to map an id back to a VSS path.
 
 ## Methods
 
@@ -202,17 +203,18 @@ stateDiagram-v2
 
 ```http
 GET    /v1/{name=vehicles/*/suspensionAxles/*/wheels/*}
-PATCH  /v1/{wheel.name=vehicles/*/suspensionAxles/*/wheels/*}
+PATCH  /v1/{suspensionAxleWheel.name=vehicles/*/suspensionAxles/*/wheels/*}
 GET    /v1/{parent=vehicles/*/suspensionAxles/*}/wheels
 POST   /v1/{parent=vehicles/*/suspensionAxles/*}/wheels
 DELETE /v1/{name=vehicles/*/suspensionAxles/*/wheels/*}
 POST   /v1/{name=vehicles/*/suspensionAxles/*/wheels/*}:undelete
 ```
 
-A deleted wheel is still returned by `Get` and hidden from `List` unless
-`show_deleted` is set — which is what makes `Undelete` meaningful.
+A deleted suspensionAxleWheel is still returned by `Get` and hidden from
+`List` unless `show_deleted` is set — which is what makes `Undelete`
+meaningful.
 
 ---
 
 <sub>Generated by `just docs` from COVESA VSS `2026-09-02` (`cd4bc50`) and VDM `2026-07-24` (`36bc939`). Do not edit by hand.<br>
-Source: [`wheel.proto`](v1/wheel.proto) · [`service.proto`](v1/service.proto) · [`messages.proto`](v1/messages.proto)</sub>
+Source: [`suspension_axle_wheel.proto`](v1/suspension_axle_wheel.proto) · [`service.proto`](v1/service.proto) · [`messages.proto`](v1/messages.proto)</sub>

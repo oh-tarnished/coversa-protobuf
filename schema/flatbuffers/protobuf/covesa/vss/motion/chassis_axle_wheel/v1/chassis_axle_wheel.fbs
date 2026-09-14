@@ -2,34 +2,36 @@
 // versions:
 // 	protoc-gen-buffers dev
 // 	protoc (unknown)
-// source: protobuf/covesa/vss/motion/suspension_axle_wheel/v1/wheel.proto
+// source: protobuf/covesa/vss/motion/chassis_axle_wheel/v1/chassis_axle_wheel.proto
 //
 // target: flatbuffers
 // field slots below are recorded in buffers.lock; edit the .proto, not this file
 //
 // https://github.com/the-protobuf-project/buffers
 include "buffers/wellknown.fbs";
+include "protobuf/covesa/vss/motion/chassis_axle_wheel/v1/brake.fbs";
+include "protobuf/covesa/vss/motion/chassis_axle_wheel/v1/tire.fbs";
 
-namespace protobuf.covesa.vss.motion.suspension_axle_wheel.v1;
+namespace protobuf.covesa.vss.motion.chassis_axle_wheel.v1;
 
-/// MotionManagement signals for a specific wheel.
+/// Wheel signals for axle
 ///
-/// VSS: Vehicle.MotionManagement.Suspension.Axle.Wheel.
+/// VSS: Vehicle.Chassis.Axle.Wheel.
 ///
 /// Instanced: Left, Right. The axes together name one occurrence, which is
 /// why each is a resource of its own rather than a repeated field.
 ///
-/// A child resource of SuspensionAxle, named
-/// "vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}". Its
+/// A child resource of ChassisAxle, named
+/// "vehicles/{vehicle}/chassisAxles/{chassis_axle}/wheels/{wheel}". Its
 /// parent is a declared resource in
-/// protobuf.covesa.vss.motion.suspension_axle.v1, which is what makes this
+/// protobuf.covesa.vss.motion.chassis_axle.v1, which is what makes this
 /// pattern legal rather than a reference to a collection nothing can create.
 ///
 /// Reference: COVESA Vehicle Signal Specification.
 /// https://covesa.github.io/vehicle_signal_specification/
-table Wheel {
+table ChassisAxleWheel {
   /// Resource name,
-  /// "vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}".
+  /// "vehicles/{vehicle}/chassisAxles/{chassis_axle}/wheels/{wheel}".
   /// Assigned by the server.
   name:string (id: 0);
   /// Server-assigned unique id.
@@ -63,38 +65,31 @@ table Wheel {
   __slot_13:byte (id: 13, deprecated);
   /// proto field 15 was removed and reserved
   __slot_14:byte (id: 14, deprecated);
-  /// Damping rate request at given wheel. 0% = lowest possible damping rate
-  /// 100% = highest possible damping rate
+  /// Brake signals for wheel
   ///
-  /// Alternative signal to DampingForceTarget.
+  /// VSS: Vehicle.Chassis.Axle.Wheel.Brake.
+  brake:Brake (id: 15);
+  /// Tire signals for wheel.
   ///
-  /// Unit: percent. VSS:
-  /// Vehicle.MotionManagement.Suspension.Axle.Wheel.DampingRateTarget
-  /// (actuator).
-  damping_rate_target:int (id: 15);
-  /// Actuated damping rate at given wheel. 0% = lowest possible damping rate
-  /// 100% = highest possible damping rate
+  /// VSS: Vehicle.Chassis.Axle.Wheel.Tire.
+  tire:Tire (id: 16);
+  /// Linear speed of a vehicle's wheel.
   ///
-  /// Alternative signal to DampingForce.
+  /// Unit: km/h. VSS: Vehicle.Chassis.Axle.Wheel.Speed (sensor).
+  speed:double (id: 17);
+  /// Angular (Rotational) speed of a vehicle's wheel.
   ///
-  /// Unit: percent. VSS:
-  /// Vehicle.MotionManagement.Suspension.Axle.Wheel.DampingRate (sensor).
-  damping_rate:int (id: 16);
-  /// Damping force request at given wheel. Signal orientation according
-  /// ISO8855, meaning positive force is pointing upwards.
+  /// Positive if wheel is trying to drive vehicle forward. Negative if wheel
+  /// is trying to drive vehicle backward.
   ///
-  /// Alternative signal to DampingRateTarget.
+  /// Unit: degrees/s. VSS: Vehicle.Chassis.Axle.Wheel.AngularSpeed (sensor).
+  angular_speed:double (id: 18);
+  /// Torque provided by drivetrain, excluding torque provided by friction
+  /// brakes. Negative values indicate regen mode.
   ///
-  /// Unit: N. VSS:
-  /// Vehicle.MotionManagement.Suspension.Axle.Wheel.DampingForceTarget
-  /// (actuator).
-  damping_force_target:int (id: 17);
-  /// Actuated damping force at given wheel. Signal orientation according
-  /// ISO8855, meaning positive force is pointing upwards.
+  /// This is typically the torque provided by the differential, or by a motor
+  /// dedicated for this wheel, after reduction gear if present.
   ///
-  /// Alternative signal to DampingRate.
-  ///
-  /// Unit: N. VSS:
-  /// Vehicle.MotionManagement.Suspension.Axle.Wheel.DampingForce (sensor).
-  damping_force:int (id: 18);
+  /// Unit: Nm. VSS: Vehicle.Chassis.Axle.Wheel.Torque (sensor).
+  torque:int (id: 19);
 }

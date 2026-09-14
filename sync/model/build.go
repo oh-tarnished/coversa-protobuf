@@ -65,8 +65,9 @@ func (m *Model) buildRoot(root *vspec.Node, fam Family) error {
 		Name:   naming.Snake(root.Name), Dir: naming.Snake(root.Name),
 		Root: root, Types: []*vspec.Node{root},
 		Singular: singular, Plural: naming.Pluralise(singular),
+		ID: singular, Segment: naming.Pluralise(singular),
 	}
-	pkg.Pattern = pkg.Plural + "/{" + pkg.Singular + "}"
+	pkg.Pattern = pkg.Segment + "/{" + pkg.ID + "}"
 	m.Packages = append(m.Packages, pkg)
 
 	claimed := map[string]bool{root.FQN: true}

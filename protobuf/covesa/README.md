@@ -37,9 +37,9 @@ erDiagram
   VEHICLE ||--o{ CONTROL_UNIT : "controlUnits"
   VEHICLE ||--o{ DIRECTION_INDICATOR : "directionIndicators"
   VEHICLE ||--o{ OTHER_COLLECTIONS : "+13 more"
-  BRAKE_AXLE ||--o{ BRAKE_AXLE_WHEEL : "wheels"
-  CHASSIS_AXLE ||--o{ CHASSIS_AXLE_WHEEL : "wheels"
-  SUSPENSION_AXLE ||--o{ SUSPENSION_AXLE_WHEEL : "wheels"
+  BRAKE_AXLE ||--o{ BRAKE_AXLE_WHEEL : "brakeAxleWheels"
+  CHASSIS_AXLE ||--o{ CHASSIS_AXLE_WHEEL : "chassisAxleWheels"
+  SUSPENSION_AXLE ||--o{ SUSPENSION_AXLE_WHEEL : "suspensionAxleWheels"
   CHARGING_SESSION }o--|| PERSON : "customer"
   CHARGING_SESSION }o--|| VEHICLE : "vehicle"
 ```
@@ -136,15 +136,15 @@ flowchart LR
 | `Acceleration` | `vehicles/{vehicle}/acceleration` | singleton | [acceleration](vss/motion/acceleration/README.md) |
 | `AngularVelocity` | `vehicles/{vehicle}/angularVelocity` | singleton | [angular_velocity](vss/motion/angular_velocity/README.md) |
 | `BrakeAxle` | `vehicles/{vehicle}/brakeAxles/{brake_axle}` | collection | [brake_axle](vss/motion/brake_axle/README.md) |
-| `Wheel` | `vehicles/{vehicle}/brakeAxles/{brake_axle}/wheels/{wheel}` | collection | [brake_axle_wheel](vss/motion/brake_axle_wheel/README.md) |
+| `BrakeAxleWheel` | `vehicles/{vehicle}/brakeAxles/{brake_axle}/wheels/{wheel}` | collection | [brake_axle_wheel](vss/motion/brake_axle_wheel/README.md) |
 | `Chassis` | `vehicles/{vehicle}/chassis` | singleton | [chassis](vss/motion/chassis/README.md) |
 | `ChassisAxle` | `vehicles/{vehicle}/chassisAxles/{chassis_axle}` | collection | [chassis_axle](vss/motion/chassis_axle/README.md) |
-| `Wheel` | `vehicles/{vehicle}/chassisAxles/{chassis_axle}/wheels/{wheel}` | collection | [chassis_axle_wheel](vss/motion/chassis_axle_wheel/README.md) |
+| `ChassisAxleWheel` | `vehicles/{vehicle}/chassisAxles/{chassis_axle}/wheels/{wheel}` | collection | [chassis_axle_wheel](vss/motion/chassis_axle_wheel/README.md) |
 | `ElectricAxle` | `vehicles/{vehicle}/electricAxles/{electric_axle}` | collection | [electric_axle](vss/motion/electric_axle/README.md) |
 | `MotionManagement` | `vehicles/{vehicle}/motionManagement` | singleton | [motion_management](vss/motion/motion_management/README.md) |
 | `Orientation` | `vehicles/{vehicle}/orientation` | singleton | [orientation](vss/motion/orientation/README.md) |
 | `SuspensionAxle` | `vehicles/{vehicle}/suspensionAxles/{suspension_axle}` | collection | [suspension_axle](vss/motion/suspension_axle/README.md) |
-| `Wheel` | `vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}` | collection | [suspension_axle_wheel](vss/motion/suspension_axle_wheel/README.md) |
+| `SuspensionAxleWheel` | `vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}` | collection | [suspension_axle_wheel](vss/motion/suspension_axle_wheel/README.md) |
 
 ## Platform
 

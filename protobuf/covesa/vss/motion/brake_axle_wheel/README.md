@@ -1,4 +1,4 @@
-# Wheel
+# BrakeAxleWheel
 
 [![VSS](https://img.shields.io/badge/VSS-2026--09--02-0B6B5B)](https://github.com/COVESA/vehicle_signal_specification)
 [![branch](https://img.shields.io/badge/branch-Vehicle.MotionManagement.Brake.Axle.Wheel-1D4ED8)](https://covesa.github.io/vehicle_signal_specification/)
@@ -18,7 +18,7 @@ vehicles/{vehicle}/brakeAxles/{brake_axle}/wheels/{wheel}
 ```mermaid
 flowchart LR
   P["BrakeAxle<br/><code>vehicles/{vehicle}/brakeAxles/{brake_axle}</code>"]
-  R["Wheel<br/><code>…/wheels/{wheel}</code>"]
+  R["BrakeAxleWheel<br/><code>…/wheels/{wheel}</code>"]
 
   P -->|"many, each identified"| R
 
@@ -29,11 +29,11 @@ flowchart LR
 
 ## Example
 
-A wheel as this API returns it:
+A brakeAxleWheel as this API returns it:
 
 ```json
 {
-  "name": "vehicles/wvwzzz1jz3w000001/brakeAxles/{brake_axle}/wheels/wheel-85app4pfdh1ch02a",
+  "name": "vehicles/wvwzzz1jz3w000001/brakeAxles/{brake_axle}/wheels/{wheel}",
   "uid": "b3f1c2de-4a5b-4c6d-8e9f-0a1b2c3d4e5f",
   "omegaLower": 42,
   "omegaUpper": 42,
@@ -62,12 +62,12 @@ constants drop to the spelling VSS writes, and the AIP fields — `name`,
 `uid` — fall away, because VSS declares no signal for them. `codec.FromVSS`
 reverses all three.
 
-Writing to a wheel, and the one thing that will fail:
+Writing to a brakeAxleWheel, and the one thing that will fail:
 
 ```mermaid
 sequenceDiagram
   participant C as Client
-  participant A as Wheels
+  participant A as BrakeAxleWheels
   participant V as Vehicle
 
   Note over C,V: omega_lower is an actuator — the API is the source
@@ -82,7 +82,7 @@ sequenceDiagram
 ```
 
 ```http
-PATCH /v1/vehicles/wvwzzz1jz3w000001/brakeAxles/{brake_axle}/wheels/wheel-85app4pfdh1ch02a?updateMask=omegaLower
+PATCH /v1/vehicles/wvwzzz1jz3w000001/brakeAxles/{brake_axle}/wheels/{wheel}?updateMask=omegaLower
 { "omegaLower": 42 }
 ```
 
@@ -93,8 +93,8 @@ written the value finds out immediately.
 
 ## Resource names
 
-Every wheel is addressed by a name that alternates collection and identifier,
-per [AIP-122](https://aip.dev/122):
+Every brakeAxleWheel is addressed by a name that alternates collection and
+identifier, per [AIP-122](https://aip.dev/122):
 
 ```mermaid
 packet
@@ -108,10 +108,10 @@ packet
 50: "/"
 51-56: "wheels"
 57: "/"
-58-79: "wheel-85app4pfdh1ch02a"
+58-64: "{wheel}"
 ```
 
-80 characters, alternating, which is what [AIP-123](https://aip.dev/123)
+65 characters, alternating, which is what [AIP-123](https://aip.dev/123)
 requires. An identifier is 80 random bits in Crockford base32, prefixed with
 the resource's singular so the name opens with a letter — the randomness
 half of a ULID with the timestamp half removed, because a ULID's leading
@@ -125,14 +125,14 @@ implements AIP-122 templates in Go, Python, Rust, TypeScript, Swift and C:
 
 ```go
 t := resourcename.ResourceTemplate("vehicles/{vehicle}/brakeAxles/{brake_axle}/wheels/{wheel}")
-t.Parse("vehicles/wvwzzz1jz3w000001/brakeAxles/{brake_axle}/wheels/wheel-85app4pfdh1ch02a")
-// map[vehicle:wvwzzz1jz3w000001 brakeAxle:brakeAxle-dnv07zgkexvqgcrf wheel:wheel-85app4pfdh1ch02a]
+t.Parse("vehicles/wvwzzz1jz3w000001/brakeAxles/{brake_axle}/wheels/{wheel}")
+// map[vehicle:wvwzzz1jz3w000001 brakeAxle:brakeAxle-dnv07zgkexvqgcrf brakeAxleWheel:brakeAxleWheel-85app4pfdh1ch02a]
 ```
 
 ```python
 t = resourcename.ResourceTemplate("vehicles/{vehicle}/brakeAxles/{brake_axle}/wheels/{wheel}")
-t.parse("vehicles/wvwzzz1jz3w000001/brakeAxles/{brake_axle}/wheels/wheel-85app4pfdh1ch02a")
-# {'vehicle': 'wvwzzz1jz3w000001', 'brakeAxle': 'brakeAxle-dnv07zgkexvqgcrf', 'wheel': 'wheel-85app4pfdh1ch02a'}
+t.parse("vehicles/wvwzzz1jz3w000001/brakeAxles/{brake_axle}/wheels/{wheel}")
+# {'vehicle': 'wvwzzz1jz3w000001', 'brakeAxle': 'brakeAxle-dnv07zgkexvqgcrf', 'brakeAxleWheel': 'brakeAxleWheel-85app4pfdh1ch02a'}
 ```
 
 The template above is the `pattern` this resource declares in its
@@ -178,7 +178,7 @@ silently ignored.
 
 </details>
 
-## Which wheel
+## Which brakeAxleWheel
 
 ```mermaid
 flowchart LR
@@ -186,10 +186,11 @@ flowchart LR
   A1["Right"]
 ```
 
-VSS expands this branch across Left, Right, so the combination names one wheel
-— which is what makes it a resource rather than a repeated field. The axes
-are recorded in [`codec/manifest.json`](../../../../../codec/manifest.json),
-which is the only thing that says how to map an id back to a VSS path.
+VSS expands this branch across Left, Right, so the combination names one
+brakeAxleWheel — which is what makes it a resource rather than a repeated
+field. The axes are recorded in
+[`codec/manifest.json`](../../../../../codec/manifest.json), which is the only
+thing that says how to map an id back to a VSS path.
 
 ## Methods
 
@@ -206,17 +207,17 @@ stateDiagram-v2
 
 ```http
 GET    /v1/{name=vehicles/*/brakeAxles/*/wheels/*}
-PATCH  /v1/{wheel.name=vehicles/*/brakeAxles/*/wheels/*}
+PATCH  /v1/{brakeAxleWheel.name=vehicles/*/brakeAxles/*/wheels/*}
 GET    /v1/{parent=vehicles/*/brakeAxles/*}/wheels
 POST   /v1/{parent=vehicles/*/brakeAxles/*}/wheels
 DELETE /v1/{name=vehicles/*/brakeAxles/*/wheels/*}
 POST   /v1/{name=vehicles/*/brakeAxles/*/wheels/*}:undelete
 ```
 
-A deleted wheel is still returned by `Get` and hidden from `List` unless
-`show_deleted` is set — which is what makes `Undelete` meaningful.
+A deleted brakeAxleWheel is still returned by `Get` and hidden from `List`
+unless `show_deleted` is set — which is what makes `Undelete` meaningful.
 
 ---
 
 <sub>Generated by `just docs` from COVESA VSS `2026-09-02` (`cd4bc50`) and VDM `2026-07-24` (`36bc939`). Do not edit by hand.<br>
-Source: [`wheel.proto`](v1/wheel.proto) · [`service.proto`](v1/service.proto) · [`messages.proto`](v1/messages.proto)</sub>
+Source: [`brake_axle_wheel.proto`](v1/brake_axle_wheel.proto) · [`service.proto`](v1/service.proto) · [`messages.proto`](v1/messages.proto)</sub>

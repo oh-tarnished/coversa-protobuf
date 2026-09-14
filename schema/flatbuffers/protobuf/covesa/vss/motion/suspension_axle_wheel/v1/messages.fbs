@@ -8,56 +8,64 @@
 // field slots below are recorded in buffers.lock; edit the .proto, not this file
 //
 // https://github.com/the-protobuf-project/buffers
-include "protobuf/covesa/vss/motion/suspension_axle_wheel/v1/wheel.fbs";
+include "protobuf/covesa/vss/motion/suspension_axle_wheel/v1/suspension_axle_wheel.fbs";
 
 namespace protobuf.covesa.vss.motion.suspension_axle_wheel.v1;
 
-/// Request message for Wheels.GetWheel, AIP-131 <https://aip.dev/131>.
-table GetWheelRequest {
-  /// Name of the Wheel to retrieve,
+/// Request message for SuspensionAxleWheels.GetSuspensionAxleWheel, AIP-131
+/// <https://aip.dev/131>.
+table GetSuspensionAxleWheelRequest {
+  /// Name of the SuspensionAxleWheel to retrieve,
   /// "vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}".
   name:string (id: 0, required);
 }
 
-/// Request message for Wheels.ListWheels, AIP-132 <https://aip.dev/132>.
-table ListWheelsRequest {
-  /// The SuspensionAxle whose wheels to list,
+/// Request message for SuspensionAxleWheels.ListSuspensionAxleWheels, AIP-132
+/// <https://aip.dev/132>.
+table ListSuspensionAxleWheelsRequest {
+  /// The SuspensionAxle whose suspensionAxleWheels to list,
   /// "vehicles/{vehicle}/suspensionAxles/{suspension_axle}".
   parent:string (id: 0, required);
-  /// Maximum wheels to return. Defaults to 50, capped at 1000.
+  /// Maximum suspensionAxleWheels to return. Defaults to 50, capped at 1000.
   page_size:int (id: 1);
-  /// Page token from a previous ListWheelsResponse.next_page_token.
+  /// Page token from a previous
+  /// ListSuspensionAxleWheelsResponse.next_page_token.
   page_token:string (id: 2);
   /// Filter expression, AIP-160 <https://aip.dev/160>.
   filter:string (id: 3);
-  /// Include soft-deleted wheels. AIP-164 <https://aip.dev/164>.
+  /// Include soft-deleted suspensionAxleWheels. AIP-164
+  /// <https://aip.dev/164>.
   show_deleted:bool (id: 4);
 }
 
-/// Response message for Wheels.ListWheels, AIP-132 <https://aip.dev/132>.
-table ListWheelsResponse {
-  /// The wheels on this page.
-  wheels:[Wheel] (id: 0);
+/// Response message for SuspensionAxleWheels.ListSuspensionAxleWheels,
+/// AIP-132 <https://aip.dev/132>.
+table ListSuspensionAxleWheelsResponse {
+  /// The suspensionAxleWheels on this page.
+  suspension_axle_wheels:[SuspensionAxleWheel] (id: 0);
   /// Token for the next page, empty when this is the last page.
   next_page_token:string (id: 1);
 }
 
-/// Request message for Wheels.CreateWheel, AIP-133 <https://aip.dev/133>.
-table CreateWheelRequest {
-  /// The SuspensionAxle to create the Wheel under,
+/// Request message for SuspensionAxleWheels.CreateSuspensionAxleWheel,
+/// AIP-133 <https://aip.dev/133>.
+table CreateSuspensionAxleWheelRequest {
+  /// The SuspensionAxle to create the SuspensionAxleWheel under,
   /// "vehicles/{vehicle}/suspensionAxles/{suspension_axle}".
   parent:string (id: 0, required);
-  /// The Wheel to create.
-  wheel:Wheel (id: 1, required);
+  /// The SuspensionAxleWheel to create.
+  suspension_axle_wheel:SuspensionAxleWheel (id: 1, required);
   /// Client-assigned id, becoming the last segment of the resource name. The
   /// server generates one when empty.
-  wheel_id:string (id: 2);
+  suspension_axle_wheel_id:string (id: 2);
 }
 
-/// Request message for Wheels.UpdateWheel, AIP-134 <https://aip.dev/134>.
-table UpdateWheelRequest {
-  /// The Wheel to update. Its name field identifies the resource.
-  wheel:Wheel (id: 0, required);
+/// Request message for SuspensionAxleWheels.UpdateSuspensionAxleWheel,
+/// AIP-134 <https://aip.dev/134>.
+table UpdateSuspensionAxleWheelRequest {
+  /// The SuspensionAxleWheel to update. Its name field identifies the
+  /// resource.
+  suspension_axle_wheel:SuspensionAxleWheel (id: 0, required);
   /// Fields to update. An empty mask updates all mutable fields.
   ///
   /// Only an actuator is writable. A sensor or attribute named in the mask is
@@ -66,16 +74,18 @@ table UpdateWheelRequest {
   update_mask:[string] (id: 1);
 }
 
-/// Request message for Wheels.DeleteWheel, AIP-135 <https://aip.dev/135>.
-table DeleteWheelRequest {
-  /// Name of the Wheel to delete,
+/// Request message for SuspensionAxleWheels.DeleteSuspensionAxleWheel,
+/// AIP-135 <https://aip.dev/135>.
+table DeleteSuspensionAxleWheelRequest {
+  /// Name of the SuspensionAxleWheel to delete,
   /// "vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}".
   name:string (id: 0, required);
 }
 
-/// Request message for Wheels.UndeleteWheel, AIP-164 <https://aip.dev/164>.
-table UndeleteWheelRequest {
-  /// Name of the soft-deleted Wheel to restore,
+/// Request message for SuspensionAxleWheels.UndeleteSuspensionAxleWheel,
+/// AIP-164 <https://aip.dev/164>.
+table UndeleteSuspensionAxleWheelRequest {
+  /// Name of the soft-deleted SuspensionAxleWheel to restore,
   /// "vehicles/{vehicle}/suspensionAxles/{suspension_axle}/wheels/{wheel}".
   name:string (id: 0, required);
 }

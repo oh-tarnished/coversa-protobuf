@@ -13,31 +13,31 @@
 using Cxx = import "/capnp/c++.capnp";
 $Cxx.namespace("protobuf::covesa::vss::motion::brake_axle_wheel::v1");
 
+using BrakeAxleWheel = import "/protobuf/covesa/vss/motion/brake_axle_wheel/v1/brake_axle_wheel.capnp";
 using Messages = import "/protobuf/covesa/vss/motion/brake_axle_wheel/v1/messages.capnp";
-using Wheel = import "/protobuf/covesa/vss/motion/brake_axle_wheel/v1/wheel.capnp";
 
-# Wheels manages the Wheel branch of a vehicle.
+# BrakeAxleWheels manages the BrakeAxleWheel branch of a vehicle.
 #
 # A vehicle may hold several, so this is an ordinary collection with the
 # AIP-131..135 standard methods plus AIP-164 <https://aip.dev/164> undelete.
 #
 # Reference: COVESA Vehicle Signal Specification.
 # https://covesa.github.io/vehicle_signal_specification/
-interface Wheels @0xfebd4a7c55f11192 {
-  # Retrieves one Wheel.
+interface BrakeAxleWheels @0x84937a39cebda7d0 {
+  # Retrieves one BrakeAxleWheel.
   #
   # GET /v1/{name=vehicles/*/brakeAxles/*/wheels/*}
   #
   # Safe and idempotent. Read the `etag` here and pass it back on update to
   # make the write conditional.
   #
-  # NOT_FOUND no such Wheel
+  # NOT_FOUND no such BrakeAxleWheel
   # INVALID_ARGUMENT name does not match the resource pattern
   # PERMISSION_DENIED caller may not read it
   # AIP-131 standard method.
-  getWheel @0 (request :Messages.GetWheelRequest) -> (response :Wheel.Wheel);
+  getBrakeAxleWheel @0 (request :Messages.GetBrakeAxleWheelRequest) -> (response :BrakeAxleWheel.BrakeAxleWheel);
 
-  # Lists the wheels of one vehicle.
+  # Lists the brakeAxleWheels of one vehicle.
   #
   # GET /v1/{parent=vehicles/*/brakeAxles/*}/wheels
   #
@@ -49,29 +49,30 @@ interface Wheels @0xfebd4a7c55f11192 {
   # INVALID_ARGUMENT malformed filter, or page_size out of range
   # PERMISSION_DENIED caller may not list this collection
   # AIP-132 standard method.
-  listWheels @1 (request :Messages.ListWheelsRequest) -> (response :Messages.ListWheelsResponse);
+  listBrakeAxleWheels @1 (request :Messages.ListBrakeAxleWheelsRequest) -> (response :Messages.ListBrakeAxleWheelsResponse);
 
-  # Creates a Wheel.
+  # Creates a BrakeAxleWheel.
   #
   # POST /v1/{parent=vehicles/*/brakeAxles/*}/wheels
-  # body: the Wheel itself
+  # body: the BrakeAxleWheel itself
   #
   # Server-assigned fields on the request body are ignored: `name`, `uid`,
   # `etag` and the server timestamps are set regardless of what is sent.
   #
-  # Not idempotent. Retrying after a timeout may create a second Wheel;
-  # supply `wheel_id` if the caller needs retry safety.
+  # Not idempotent. Retrying after a timeout may create a second
+  # BrakeAxleWheel; supply `brake_axle_wheel_id` if the caller needs retry
+  # safety.
   #
   # ALREADY_EXISTS that id is taken
   # INVALID_ARGUMENT a field violates its buf.validate constraint
   # PERMISSION_DENIED caller may not create here
   # AIP-133 standard method.
-  createWheel @2 (request :Messages.CreateWheelRequest) -> (response :Wheel.Wheel);
+  createBrakeAxleWheel @2 (request :Messages.CreateBrakeAxleWheelRequest) -> (response :BrakeAxleWheel.BrakeAxleWheel);
 
-  # Updates a Wheel.
+  # Updates a BrakeAxleWheel.
   #
-  # PATCH /v1/{wheel.name=vehicles/*/brakeAxles/*/wheels/*}
-  # body: the Wheel itself
+  # PATCH /v1/{brake_axle_wheel.name=vehicles/*/brakeAxles/*/wheels/*}
+  # body: the BrakeAxleWheel itself
   #
   # A partial update: only fields named in `update_mask` are written. An
   # empty mask writes every mutable field, which will clear anything the
@@ -84,40 +85,40 @@ interface Wheels @0xfebd4a7c55f11192 {
   #
   # Idempotent. Pass the `etag` read from Get to make the write conditional.
   #
-  # NOT_FOUND no such Wheel
+  # NOT_FOUND no such BrakeAxleWheel
   # ABORTED etag does not match the stored resource
   # INVALID_ARGUMENT mask names an unknown, immutable or read-only field
   # PERMISSION_DENIED caller may not modify it
   # AIP-134 standard method.
-  updateWheel @3 (request :Messages.UpdateWheelRequest) -> (response :Wheel.Wheel);
+  updateBrakeAxleWheel @3 (request :Messages.UpdateBrakeAxleWheelRequest) -> (response :BrakeAxleWheel.BrakeAxleWheel);
 
-  # Deletes a Wheel.
+  # Deletes a BrakeAxleWheel.
   #
   # DELETE /v1/{name=vehicles/*/brakeAxles/*/wheels/*}
   #
-  # Soft delete: the Wheel is marked deleted, disappears from List unless
-  # `show_deleted` is set, and is purged at `expire_time`. Recover it with
-  # UndeleteWheel before then.
+  # Soft delete: the BrakeAxleWheel is marked deleted, disappears from List
+  # unless `show_deleted` is set, and is purged at `expire_time`. Recover it
+  # with UndeleteBrakeAxleWheel before then.
   #
   # Idempotent in effect but not in reporting: a second delete returns
   # NOT_FOUND rather than succeeding silently.
   #
-  # NOT_FOUND no such Wheel
+  # NOT_FOUND no such BrakeAxleWheel
   # ABORTED etag does not match
   # PERMISSION_DENIED caller may not delete it
   # AIP-135 standard method.
-  deleteWheel @4 (request :Messages.DeleteWheelRequest) -> ();
+  deleteBrakeAxleWheel @4 (request :Messages.DeleteBrakeAxleWheelRequest) -> ();
 
-  # Restores a soft-deleted Wheel.
+  # Restores a soft-deleted BrakeAxleWheel.
   #
   # POST /v1/{name=vehicles/*/brakeAxles/*/wheels/*}:undelete
   #
-  # Valid only before `expire_time`; after that the Wheel is gone and this
-  # returns NOT_FOUND. Clears `delete_time` and `expire_time`.
+  # Valid only before `expire_time`; after that the BrakeAxleWheel is gone
+  # and this returns NOT_FOUND. Clears `delete_time` and `expire_time`.
   #
-  # NOT_FOUND no such Wheel, or already purged
-  # ALREADY_EXISTS the Wheel is not deleted
+  # NOT_FOUND no such BrakeAxleWheel, or already purged
+  # ALREADY_EXISTS the BrakeAxleWheel is not deleted
   # PERMISSION_DENIED caller may not restore it
   # AIP-164 standard method.
-  undeleteWheel @5 (request :Messages.UndeleteWheelRequest) -> (response :Wheel.Wheel);
+  undeleteBrakeAxleWheel @5 (request :Messages.UndeleteBrakeAxleWheelRequest) -> (response :BrakeAxleWheel.BrakeAxleWheel);
 }

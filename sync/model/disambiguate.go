@@ -22,19 +22,29 @@ package model
 // and `Vehicle.MotionManagement.Brake.Axle` becomes `brake_axle`, while every
 // branch with an unambiguous name keeps it.
 //
-// The message follows the collection, because AIP-123 ties the two: a
-// resource's `singular` must be the lower camel case of its message name, so
-// a `chassisAxles` collection of `Axle` is a violation the linter reports
-// three times over. Where the collection is qualified the message is
-// `ChassisAxle`; where it is not, the message keeps VSS's own term. Provenance
-// is not lost either way -- the branch annotation still carries
+// The message follows the qualification, because AIP-123 ties it to the type:
+// a resource's `singular` must be the lower camel case of its message name, so
+// a `chassisAxles` collection of `Axle` is a violation the linter reports three
+// times over. Provenance is not lost -- the branch annotation still carries
 // `Vehicle.Chassis.Axle`, which is what a consumer joins on.
 //
 // The collection segment is left alone wherever the parent already separates
 // it. A wheel hangs beneath an axle that is now named, so
 // `chassisAxles/{chassis_axle}/wheels/{wheel}` identifies exactly one
-// resource, `chassisAxleWheels` would only restate the segment before it, and
-// the message stays `Wheel`.
+// resource and `chassisAxleWheels` would only restate the segment before it.
+// That is AIP-122's nested collections, and AIP-123 exempts it from the rule
+// that a collection segment matches the plural.
+//
+// The *type* takes the qualification anyway, because the two namespaces are
+// not the same shape. A collection segment is scoped by the segment before
+// it; a resource type is flat across the API, and AIP-123 requires it unique
+// within one. Leaving the three wheels as `vdm.covesa.org/Wheel` made every
+// `resource_reference` naming that type ambiguous between three resources
+// that share no field -- a brake wheel carries torque limits, a chassis wheel
+// a tire, a suspension wheel a damping rate -- and named all three services
+// `Wheels`. So `ChassisAxleWheel` is addressed at `.../wheels/{wheel}`,
+// exactly as `merchantapi.googleapis.com/AccountIssue` is addressed at
+// `accounts/{account}/issues/{issue}`.
 
 import (
 	"strings"
@@ -90,17 +100,27 @@ func (m *Model) rebuildPatterns() {
 	for _, group := range siblings {
 		for _, p := range group {
 			name := leaf(p.Root.FQN)
-			if len(group) > 1 && p.qualified != "" {
-				name = p.qualified
 
-				// The node's Name is what the message is rendered from, and
-				// AIP-123 requires it to match the singular. FQN is the
-				// node's identity and is untouched, so every lookup, rename
-				// and annotation still resolves against the path VSS
-				// published.
+			// The path axis: qualified only where a sibling sharing this leaf
+			// hangs beneath the same parent, since anywhere else the segment
+			// before it already separates the two.
+			segment := name
+			if len(group) > 1 && p.qualified != "" {
+				segment = p.qualified
+			}
+
+			// The type axis: qualified wherever the package was, because a
+			// type name is unique across the API or it is ambiguous.
+			//
+			// The node's Name is what the message is rendered from, and
+			// AIP-123 requires it to match the singular. FQN is the node's
+			// identity and is untouched, so every lookup, rename and
+			// annotation still resolves against the path VSS published.
+			if p.qualified != "" {
+				name = p.qualified
 				p.Root.Name = naming.Pascal(name)
 			}
-			p.setNames(name)
+			p.setNames(name, segment)
 		}
 	}
 
@@ -148,9 +168,14 @@ func nameAt(parts []string, depth int) string {
 	return naming.Snake(strings.Join(parts, "_"))
 }
 
-// setNames gives a package the singular and plural its resource name is built
-// from. Snake case in, since both the leaf and the qualified name are.
-func (p *Package) setNames(name string) {
-	p.Singular = naming.LowerCamel(name)
+// setNames gives a package the two name axes: the AIP singular and plural,
+// which follow the resource type, and the collection and identifier segments,
+// which follow the path. They differ only for a nested collection.
+//
+// Snake case in on both, since the leaf and the qualified name are.
+func (p *Package) setNames(typeName, segment string) {
+	p.Singular = naming.LowerCamel(typeName)
 	p.Plural = naming.Pluralise(p.Singular)
+	p.ID = naming.LowerCamel(segment)
+	p.Segment = naming.Pluralise(p.ID)
 }

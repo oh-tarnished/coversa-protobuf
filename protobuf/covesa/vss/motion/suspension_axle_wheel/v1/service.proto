@@ -17,36 +17,36 @@ import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/protobuf/empty.proto";
 import "protobuf/covesa/vss/motion/suspension_axle_wheel/v1/messages.proto";
-import "protobuf/covesa/vss/motion/suspension_axle_wheel/v1/wheel.proto";
+import "protobuf/covesa/vss/motion/suspension_axle_wheel/v1/suspension_axle_wheel.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "ServiceProto";
 option java_package = "io.github.ohtarnished.protobuf.covesa.vss.motion.suspension_axle_wheel.v1";
 
-// Wheels manages the Wheel branch of a vehicle.
+// SuspensionAxleWheels manages the SuspensionAxleWheel branch of a vehicle.
 //
 // A vehicle may hold several, so this is an ordinary collection with the
 // AIP-131..135 standard methods plus AIP-164 <https://aip.dev/164> undelete.
 //
 // Reference: COVESA Vehicle Signal Specification.
 // https://covesa.github.io/vehicle_signal_specification/
-service Wheels {
-  // Retrieves one Wheel.
+service SuspensionAxleWheels {
+  // Retrieves one SuspensionAxleWheel.
   //
   // GET /v1/{name=vehicles/*/suspensionAxles/*/wheels/*}
   //
   // Safe and idempotent. Read the `etag` here and pass it back on update to
   // make the write conditional.
   //
-  // NOT_FOUND no such Wheel
+  // NOT_FOUND no such SuspensionAxleWheel
   // INVALID_ARGUMENT name does not match the resource pattern
   // PERMISSION_DENIED caller may not read it
-  rpc GetWheel(GetWheelRequest) returns (Wheel) {
+  rpc GetSuspensionAxleWheel(GetSuspensionAxleWheelRequest) returns (SuspensionAxleWheel) {
     option (google.api.http) = {get: "/v1/{name=vehicles/*/suspensionAxles/*/wheels/*}"};
     option (google.api.method_signature) = "name";
   }
 
-  // Lists the wheels of one vehicle.
+  // Lists the suspensionAxleWheels of one vehicle.
   //
   // GET /v1/{parent=vehicles/*/suspensionAxles/*}/wheels
   //
@@ -57,37 +57,39 @@ service Wheels {
   //
   // INVALID_ARGUMENT malformed filter, or page_size out of range
   // PERMISSION_DENIED caller may not list this collection
-  rpc ListWheels(ListWheelsRequest) returns (ListWheelsResponse) {
+  rpc ListSuspensionAxleWheels(ListSuspensionAxleWheelsRequest) returns (ListSuspensionAxleWheelsResponse) {
     option (google.api.http) = {get: "/v1/{parent=vehicles/*/suspensionAxles/*}/wheels"};
     option (google.api.method_signature) = "parent";
   }
 
-  // Creates a Wheel.
+  // Creates a SuspensionAxleWheel.
   //
   // POST /v1/{parent=vehicles/*/suspensionAxles/*}/wheels
-  // body: the Wheel itself
+  // body: the SuspensionAxleWheel itself
   //
   // Server-assigned fields on the request body are ignored: `name`, `uid`,
   // `etag` and the server timestamps are set regardless of what is sent.
   //
-  // Not idempotent. Retrying after a timeout may create a second Wheel;
-  // supply `wheel_id` if the caller needs retry safety.
+  // Not idempotent. Retrying after a timeout may create a second
+  // SuspensionAxleWheel; supply `suspension_axle_wheel_id` if the caller
+  // needs retry safety.
   //
   // ALREADY_EXISTS that id is taken
   // INVALID_ARGUMENT a field violates its buf.validate constraint
   // PERMISSION_DENIED caller may not create here
-  rpc CreateWheel(CreateWheelRequest) returns (Wheel) {
+  rpc CreateSuspensionAxleWheel(CreateSuspensionAxleWheelRequest) returns (SuspensionAxleWheel) {
     option (google.api.http) = {
       post: "/v1/{parent=vehicles/*/suspensionAxles/*}/wheels"
-      body: "wheel"
+      body: "suspension_axle_wheel"
     };
-    option (google.api.method_signature) = "parent,wheel,wheel_id";
+    option (google.api.method_signature) = "parent,suspension_axle_wheel,suspension_axle_wheel_id";
   }
 
-  // Updates a Wheel.
+  // Updates a SuspensionAxleWheel.
   //
-  // PATCH /v1/{wheel.name=vehicles/*/suspensionAxles/*/wheels/*}
-  // body: the Wheel itself
+  // PATCH
+  // /v1/{suspension_axle_wheel.name=vehicles/*/suspensionAxles/*/wheels/*}
+  // body: the SuspensionAxleWheel itself
   //
   // A partial update: only fields named in `update_mask` are written. An
   // empty mask writes every mutable field, which will clear anything the
@@ -100,48 +102,48 @@ service Wheels {
   //
   // Idempotent. Pass the `etag` read from Get to make the write conditional.
   //
-  // NOT_FOUND no such Wheel
+  // NOT_FOUND no such SuspensionAxleWheel
   // ABORTED etag does not match the stored resource
   // INVALID_ARGUMENT mask names an unknown, immutable or read-only field
   // PERMISSION_DENIED caller may not modify it
-  rpc UpdateWheel(UpdateWheelRequest) returns (Wheel) {
+  rpc UpdateSuspensionAxleWheel(UpdateSuspensionAxleWheelRequest) returns (SuspensionAxleWheel) {
     option (google.api.http) = {
-      patch: "/v1/{wheel.name=vehicles/*/suspensionAxles/*/wheels/*}"
-      body: "wheel"
+      patch: "/v1/{suspension_axle_wheel.name=vehicles/*/suspensionAxles/*/wheels/*}"
+      body: "suspension_axle_wheel"
     };
-    option (google.api.method_signature) = "wheel,update_mask";
+    option (google.api.method_signature) = "suspension_axle_wheel,update_mask";
   }
 
-  // Deletes a Wheel.
+  // Deletes a SuspensionAxleWheel.
   //
   // DELETE /v1/{name=vehicles/*/suspensionAxles/*/wheels/*}
   //
-  // Soft delete: the Wheel is marked deleted, disappears from List unless
-  // `show_deleted` is set, and is purged at `expire_time`. Recover it with
-  // UndeleteWheel before then.
+  // Soft delete: the SuspensionAxleWheel is marked deleted, disappears from
+  // List unless `show_deleted` is set, and is purged at `expire_time`.
+  // Recover it with UndeleteSuspensionAxleWheel before then.
   //
   // Idempotent in effect but not in reporting: a second delete returns
   // NOT_FOUND rather than succeeding silently.
   //
-  // NOT_FOUND no such Wheel
+  // NOT_FOUND no such SuspensionAxleWheel
   // ABORTED etag does not match
   // PERMISSION_DENIED caller may not delete it
-  rpc DeleteWheel(DeleteWheelRequest) returns (google.protobuf.Empty) {
+  rpc DeleteSuspensionAxleWheel(DeleteSuspensionAxleWheelRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {delete: "/v1/{name=vehicles/*/suspensionAxles/*/wheels/*}"};
     option (google.api.method_signature) = "name";
   }
 
-  // Restores a soft-deleted Wheel.
+  // Restores a soft-deleted SuspensionAxleWheel.
   //
   // POST /v1/{name=vehicles/*/suspensionAxles/*/wheels/*}:undelete
   //
-  // Valid only before `expire_time`; after that the Wheel is gone and this
-  // returns NOT_FOUND. Clears `delete_time` and `expire_time`.
+  // Valid only before `expire_time`; after that the SuspensionAxleWheel is
+  // gone and this returns NOT_FOUND. Clears `delete_time` and `expire_time`.
   //
-  // NOT_FOUND no such Wheel, or already purged
-  // ALREADY_EXISTS the Wheel is not deleted
+  // NOT_FOUND no such SuspensionAxleWheel, or already purged
+  // ALREADY_EXISTS the SuspensionAxleWheel is not deleted
   // PERMISSION_DENIED caller may not restore it
-  rpc UndeleteWheel(UndeleteWheelRequest) returns (Wheel) {
+  rpc UndeleteSuspensionAxleWheel(UndeleteSuspensionAxleWheelRequest) returns (SuspensionAxleWheel) {
     option (google.api.http) = {
       post: "/v1/{name=vehicles/*/suspensionAxles/*/wheels/*}:undelete"
       body: "*"

@@ -75,10 +75,22 @@ type Package struct {
 	Root  *vspec.Node   // the branch that is this package's resource
 	Types []*vspec.Node // every message in the package, Root first
 
+	// Singular and Plural are the AIP-123 singular and plural, derived from
+	// the resource *type*. They carry the qualification where a leaf name is
+	// shared, so `chassisAxleWheel` rather than `wheel`.
 	Singular string // AIP singular, e.g. "cabin"
 	Plural   string // AIP plural, e.g. "cabins"
-	Pattern  string // resource name pattern
-	IsList   bool   // the parent holds many of this branch
+
+	// Segment and ID are the path axis: the collection identifier and the
+	// identifier segment written into the resource name and the REST URL.
+	// They stay unqualified where a parent segment already separates them --
+	// AIP-122's nested collections -- so a chassisAxleWheel is addressed at
+	// `chassisAxles/{chassis_axle}/wheels/{wheel}`. See disambiguate.go.
+	Segment string // collection identifier, e.g. "wheels"
+	ID      string // identifier segment, e.g. "wheel"
+
+	Pattern string // resource name pattern
+	IsList  bool   // the parent holds many of this branch
 
 	// Parent is the resource this one hangs beneath, nil at a root.
 	Parent *Package

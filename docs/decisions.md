@@ -133,54 +133,7 @@ The input is a generated, regular corpus. A parser that quietly accepts an
 unfamiliar shape produces a schema that is wrong in a way no linter catches,
 which is the failure mode this whole repository is arranged to prevent.
 
-## Two submodules, and the other two COVESA specifications are not among them
-
-COVESA publishes three repositories with `spec` in the name. Only one of them
-is a source this generator can read.
-
-| Repository | What it holds | Here |
-|---|---|---|
-| `vehicle_signal_specification` | the vehicle tree, in `.vspec` | submodule `vss` |
-| `vehicle-information-service-specification` | VISS, an access protocol, as HTML prose | no |
-| `commercial-vehicle-information-specifications` | CVIS, `.vspec` trees for bus, truck and trailer | not yet |
-
-`vdm` is the second submodule and matches none of those searches, because
-what it contributes is not a specification of the vehicle: it is the GraphQL
-SDL for what COVESA models *outside* it -- people, charging stations,
-sessions. Two submodules, two different jobs, neither substitutable for the
-other.
-
-**VISS is not a data model.** `spec/` is three HTML documents describing how a
-client reads and writes VSS data over HTTP and WebSocket -- request framing,
-subscriptions, payload encoding. It defines no types. It is a *consumer* of
-VSS, in the same position as this repository, and vendoring it would give the
-generator nothing to parse. It belongs in `references.md`, which is where it
-is.
-
-**CVIS is a real `.vspec` corpus, and still cannot be added as it stands.**
-`spec/trees/` holds root files for Bus, Truck, Trailer and Driver in exactly
-the format `sync/vspec` already parses. Three things block it:
-
-- It vendors its own `Vehicle/Car/VehicleSignalSpecification.vspec`, a fork of
-  the upstream root that has fallen behind it -- no `ElectricMotor`
-  instances, no `RangeExtender`, no `Safety`, and an `OBD` branch upstream no
-  longer has there. Adding it produces two `Vehicle` trees of different
-  vintages, and nothing in the pipeline would report which one a message came
-  from.
-- Its trees are not readable on their own. A truck is the car tree plus an
-  overlay that `vspecPreprocessor.py` generates from a JSON configuration;
-  the `.vspec` files without that step describe no particular vehicle.
-  `sync` has no overlay support, and rule 15 says it refuses rather than
-  guesses.
-- It is `0.1-dev`, with no dated release a pin could name -- and rule 9 wants
-  a revision a consumer can place.
-
-When it is taken, it is taken as a fourth `<spec>` segment --
-`protobuf/covesa/cvis/...` -- reading the Bus, Truck and Trailer roots only,
-with the Car fork ignored in favour of the pinned VSS one. Not as a
-replacement for `vss`.
-
-## A branch named twice is qualified by its path, and the message is not
+## A branch named twice is qualified by its path, and the URL is not
 
 VSS names a branch for what it is, not for where it sits, so `Axle` occurs
 three times: under `Chassis`, under `MotionManagement.Brake` and under
@@ -197,26 +150,52 @@ reported it — valid protobuf, zero lint findings, four services simply absent.
 
 Each package now takes the shortest trailing run of its path that is unique,
 the same rule the enum names already use: `chassis_axle`, `brake_axle`,
-`suspension_axle`. Two things are deliberately *not* qualified:
+`suspension_axle`.
 
-- **The message.** `Axle` is the message name in all three packages. proto3
-  scopes a message in its package, so nothing collides, and the mapping into
-  every other target IDL stays on the specification's own vocabulary.
-- **A collection segment whose parent already separates it.** The three wheels
-  hang off three different axles, so `chassisAxles/{chassis_axle}/wheels/{wheel}`
-  names exactly one resource and `chassisAxleWheels` would only restate the
-  segment before it. Ambiguity is tested structurally — does a package sharing
-  my leaf hang beneath my parent? — rather than by comparing pattern strings,
-  so the answer does not depend on the order the tree was walked in.
+The qualification runs on **two axes that do not agree**, and conflating them
+is what produced the second bug below.
+
+- **The type axis** — the message, the `type:`, the `singular` and `plural`,
+  the service and its RPCs — is qualified wherever the package is. A resource
+  type is flat across the API and [AIP-123](https://aip.dev/123) requires it
+  unique within one, so nothing above it can separate two that share a name.
+- **The path axis** — the collection segment, the id segment, the REST URL —
+  is qualified only where a package sharing its leaf hangs beneath the *same*
+  parent. The three wheels hang off three different axles, so
+  `chassisAxles/{chassis_axle}/wheels/{wheel}` names exactly one resource and
+  `chassisAxleWheels` would only restate the segment before it. That is
+  [AIP-122](https://aip.dev/122)'s nested collections, which AIP-123 exempts
+  from the rule that a collection segment matches the plural. Ambiguity is
+  tested structurally — does a package sharing my leaf hang beneath my parent?
+  — rather than by comparing pattern strings, so the answer does not depend on
+  the order the tree was walked in.
+
+The two axes were one decision until they were separated, and the three wheels
+were the case that showed why they cannot be. Their parents differ, so the
+path axis correctly left them all `wheels` — and the type axis followed,
+leaving three distinct resources sharing the type `vdm.covesa.org/Wheel`,
+three messages named `Wheel` and three services named `Wheels`. They share no
+field: a brake wheel carries torque limits, a chassis wheel a tire and a
+speed, a suspension wheel a damping rate. Fifteen `resource_reference` options
+named that type and none of them could say which resource they meant.
+
+`ChassisAxleWheel` is now addressed at
+`.../chassisAxles/{chassis_axle}/wheels/{wheel}`, exactly as
+`merchantapi.googleapis.com/AccountIssue` is addressed at
+`accounts/{account}/issues/{issue}` — qualified type, short URL.
 
 The cost is the one the enum names carry too: a shortest-unique name is not
 stable against additions. A new `Axle` elsewhere in the tree renames the
 existing three. `buf breaking` fails on it and `just survey` shows it first,
 so it cannot ship silently.
 
-`model.checkUnique` asserts afterwards that no two packages share a directory
-or a resource name. It is a rule-15 check rather than a test: the failure it
-catches produces output that every linter and every compiler accepts.
+`model.checkUnique` asserts afterwards that no two packages share a proto
+package, a resource pattern **or a resource type**. It is a rule-15 check
+rather than a test: the failure it catches produces output that every linter
+and every compiler accepts. The type key is the one that was missing, and it
+is why the `Wheel` collision survived `just ci` — 270 files, zero api-linter
+violations, both target compilers clean, and three resources answering to one
+name.
 
 ## Both target compilers run, and `buf build` does not replace them
 

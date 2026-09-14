@@ -43,6 +43,53 @@ That stamp is the point of dating them. "Which specifications is this schema
 from?" is answerable from any single `.proto` a consumer happens to be
 holding, without access to this repository's git history.
 
+## Two submodules, and the other two COVESA specifications are not among them
+
+COVESA publishes three repositories with `spec` in the name. Only one of them
+is a source this generator can read.
+
+| Repository | What it holds | Here |
+|---|---|---|
+| `vehicle_signal_specification` | the vehicle tree, in `.vspec` | submodule `vss` |
+| `vehicle-information-service-specification` | VISS, an access protocol, as HTML prose | no |
+| `commercial-vehicle-information-specifications` | CVIS, `.vspec` trees for bus, truck and trailer | not yet |
+
+`vdm` is the second submodule and matches none of those searches, because
+what it contributes is not a specification of the vehicle: it is the GraphQL
+SDL for what COVESA models *outside* it -- people, charging stations,
+sessions. Two submodules, two different jobs, neither substitutable for the
+other.
+
+**VISS is not a data model.** `spec/` is three HTML documents describing how a
+client reads and writes VSS data over HTTP and WebSocket -- request framing,
+subscriptions, payload encoding. It defines no types. It is a *consumer* of
+VSS, in the same position as this repository, and vendoring it would give the
+generator nothing to parse. It belongs in `references.md`, which is where it
+is.
+
+**CVIS is a real `.vspec` corpus, and still cannot be added as it stands.**
+`spec/trees/` holds root files for Bus, Truck, Trailer and Driver in exactly
+the format `sync/vspec` already parses. Three things block it:
+
+- It vendors its own `Vehicle/Car/VehicleSignalSpecification.vspec`, a fork of
+  the upstream root that has fallen behind it -- no `ElectricMotor`
+  instances, no `RangeExtender`, no `Safety`, and an `OBD` branch upstream no
+  longer has there. Adding it produces two `Vehicle` trees of different
+  vintages, and nothing in the pipeline would report which one a message came
+  from.
+- Its trees are not readable on their own. A truck is the car tree plus an
+  overlay that `vspecPreprocessor.py` generates from a JSON configuration;
+  the `.vspec` files without that step describe no particular vehicle.
+  `sync` has no overlay support, and rule 15 says it refuses rather than
+  guesses.
+- It is `0.1-dev`, with no dated release a pin could name -- and rule 9 wants
+  a revision a consumer can place.
+
+When it is taken, it is taken as a fourth `<spec>` segment --
+`protobuf/covesa/cvis/...` -- reading the Bus, Truck and Trailer roots only,
+with the Car fork ignored in favour of the pinned VSS one. Not as a
+replacement for `vss`.
+
 ## Current
 
 | | Revision | Commit |

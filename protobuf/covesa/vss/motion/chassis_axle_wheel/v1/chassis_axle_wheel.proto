@@ -23,7 +23,7 @@ import "protobuf/covesa/vss/motion/chassis_axle_wheel/v1/brake.proto";
 import "protobuf/covesa/vss/motion/chassis_axle_wheel/v1/tire.proto";
 
 option java_multiple_files = true;
-option java_outer_classname = "WheelProto";
+option java_outer_classname = "ChassisAxleWheelProto";
 option java_package = "io.github.ohtarnished.protobuf.covesa.vss.motion.chassis_axle_wheel.v1";
 
 // Wheel signals for axle
@@ -41,12 +41,12 @@ option java_package = "io.github.ohtarnished.protobuf.covesa.vss.motion.chassis_
 //
 // Reference: COVESA Vehicle Signal Specification.
 // https://covesa.github.io/vehicle_signal_specification/
-message Wheel {
+message ChassisAxleWheel {
   option (google.api.resource) = {
-    type: "vdm.covesa.org/Wheel"
+    type: "vdm.covesa.org/ChassisAxleWheel"
     pattern: "vehicles/{vehicle}/chassisAxles/{chassis_axle}/wheels/{wheel}"
-    singular: "wheel"
-    plural: "wheels"
+    singular: "chassisAxleWheel"
+    plural: "chassisAxleWheels"
   };
 
   // Resource name,

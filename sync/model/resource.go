@@ -68,9 +68,9 @@ func (p *Package) HTTPPath() string {
 // its parent, whose name becomes the `parent` variable.
 func (p *Package) CollectionPath() string {
 	if p.TopLevel() {
-		return "/v1/" + p.Plural
+		return "/v1/" + p.Segment
 	}
-	return "/v1/{parent=" + patternToPath(p.NameParent.Pattern) + "}/" + p.Plural
+	return "/v1/{parent=" + patternToPath(p.NameParent.Pattern) + "}/" + p.Segment
 }
 
 // ParentName is the message name of the resource this one's name hangs
