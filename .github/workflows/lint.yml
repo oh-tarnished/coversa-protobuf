@@ -65,7 +65,7 @@ jobs:
       # enforces CLAUDE.md rule 1: no rule may be disabled, including by an
       # inline comment inside a proto.
       - name: Lint API Design
-        uses: the-protobuf-project/setup-google-api-linter@v1.0.0
+        uses: the-protobuf-project/setup-google-api-linter@v1.1.0
         with:
           paths: protobuf/**/*.proto
           buf: true
