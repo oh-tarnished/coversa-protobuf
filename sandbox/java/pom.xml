@@ -45,7 +45,7 @@
     <dependency>
       <groupId>com.google.api.grpc</groupId>
       <artifactId>proto-google-common-protos</artifactId>
-      <version>2.77.0</version>
+      <version>2.78.0</version>
     </dependency>
 
     <!-- The service stubs. protoc-gen-grpc-java emits io.grpc.stub and
