@@ -26,7 +26,7 @@
     <!-- Nothing here is packaged or published; compile is the whole gate. -->
     <maven.install.skip>true</maven.install.skip>
     <maven.deploy.skip>true</maven.deploy.skip>
-    <grpc.version>1.84.0</grpc.version>
+    <grpc.version>1.84.2</grpc.version>
   </properties>
 
   <dependencies>
